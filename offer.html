@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Détail de l'Offre - IPTV Pro</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo-images">
+      <img class="main-logo" 
+           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739378524/iptv_transparent_kazzld.png" 
+           alt="Logo IPTV Smarters Pro">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="index.html#abonnements">Abonnements</a></li>
+        <li><a href="tutoriel.html">Tutoriel</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><span class="cart" id="cart-count">Panier (0)</span></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="offer-detail">
+      <h2 id="offer-title"></h2>
+      <div class="offer-price" id="offer-price"></div>
+      <p id="offer-description"></p>
+      <button id="add-to-cart" class="btn">Ajouter au panier</button>
+      <a href="index.html" class="btn">Retour à l'accueil</a>
+    </section>
+  </main>
+  
+  <script>
+    // Récupérer les paramètres de l'URL
+    const params = new URLSearchParams(window.location.search);
+    const product = params.get('product');
+    const price = params.get('price');
+    
+    // Affichage du contenu de l'offre
+    document.getElementById('offer-title').textContent = product;
+    document.getElementById('offer-price').textContent = "Prix: €" + parseFloat(price).toFixed(2) + " / mois";
+    document.getElementById('offer-description').textContent = "Détail complet pour " + product + " : Ce pack offre un accès à une sélection variée de chaînes HD, sportives, cinématographiques et de divertissement. Profitez d'une interface intuitive, d'une qualité d'image exceptionnelle et d'un support client dédié pour une expérience IPTV sans pareil.";
+    
+    // Mettre à jour le compteur du panier à partir de localStorage
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || {};
+      let totalItems = 0;
+      for (let prod in cart) {
+        totalItems += cart[prod].quantity;
+      }
+      document.getElementById('cart-count').textContent = `Panier (${totalItems})`;
+    }
+    
+    updateCartCount();
+    
+    // Ajouter le produit au panier (via localStorage)
+    document.getElementById('add-to-cart').addEventListener('click', function() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || {};
+      if (cart[product]) {
+        cart[product].quantity++;
+      } else {
+        cart[product] = { price: parseFloat(price), quantity: 1 };
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      alert(product + " ajouté au panier !");
+      // Optionnel: rediriger vers index.html
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
