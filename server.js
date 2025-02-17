@@ -5,7 +5,10 @@ const express = require('express');
 const app = express();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+// Sert les fichiers statiques dans le dossier public
 app.use(express.static('public'));
+
+// Pour traiter le JSON standard dans les autres routes
 app.use(express.json());
 
 // Endpoint pour fournir la clé publique côté client (optionnel)
@@ -38,6 +41,34 @@ app.post('/create-checkout-session', async (req, res) => {
     console.error(error);
     res.status(500).send(error.toString());
   }
+});
+
+// Endpoint pour gérer les webhooks Stripe (suivi des paiements)
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET; // Ajoute cette variable dans ton fichier .env
+app.post('/webhook', express.raw({ type: 'application/json' }), (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.error('Webhook signature verification failed.', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  // Gère les événements souhaités
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const session = event.data.object;
+      console.log('Paiement réussi pour la session:', session.id);
+      // Ici, ajoute ton code pour mettre à jour ta base de données ou notifier un administrateur
+      break;
+    // Tu peux ajouter d'autres cas selon tes besoins
+    default:
+      console.log(`Événement non géré: ${event.type}`);
+  }
+
+  res.json({ received: true });
 });
 
 // Utilise le port défini par Heroku ou 3000 en local
