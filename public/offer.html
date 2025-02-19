@@ -2,34 +2,80 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paiement - IPTV Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paiement Sécurisé - IPTV Pro</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
   <!-- Inclusion du SDK PayPal avec ton Client ID -->
   <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
-  <link rel="stylesheet" href="styles.css">
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #141414;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .payment-container {
+      background: #1f1f1f;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    .payment-container h1 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: #ff8c8c;
+    }
+    .payment-container p {
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
     .email-form {
       margin: 20px 0;
       text-align: left;
     }
     .email-form label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       font-size: 1rem;
     }
     .email-form input {
       width: 100%;
-      padding: 10px;
-      font-size: 1rem;
-      border: none;
+      padding: 12px;
       border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    #paypal-button-container {
+      margin-top: 20px;
+    }
+    .btn-return {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #6c5498;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .btn-return:hover {
+      background: #7f66b5;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Paiement PayPal</h1>
-    <p>Procédez au paiement sécurisé de votre abonnement.</p>
+  <div class="payment-container">
+    <h1>Paiement Sécurisé</h1>
+    <p>Veuillez saisir votre adresse email puis procéder au paiement sécurisé de votre abonnement.</p>
     
     <!-- Formulaire pour récupérer l'adresse email du client -->
     <div class="email-form">
@@ -40,11 +86,10 @@
     <!-- Conteneur pour le bouton PayPal -->
     <div id="paypal-button-container"></div>
     
-    <a href="index.html" class="btn">Retour à l'accueil</a>
+    <a href="index.html" class="btn-return">Retour à l'accueil</a>
   </div>
 
   <script>
-    // Récupérer les paramètres depuis l'URL (price et product)
     const params = new URLSearchParams(window.location.search);
     const price = params.get('price') || '10.00';
     const product = params.get('product') || 'Offre';
@@ -62,8 +107,8 @@
         return actions.order.capture().then(function(details) {
           const clientEmail = emailInput.value;
           const orderId = data.orderID;
-          
-          // Envoyer un email au marchand
+
+          // Envoi d'un email au marchand via ton backend
           fetch('/api/send-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -72,8 +117,8 @@
           .then(response => response.json())
           .then(result => console.log('Email envoyé au marchand:', result))
           .catch(error => console.error('Erreur lors de l\'envoi de l\'email au marchand:', error));
-          
-          // Envoyer un email de confirmation au client
+
+          // Envoi d'un email de confirmation au client via ton backend
           fetch('/api/send-confirmation', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -82,7 +127,7 @@
           .then(response => response.json())
           .then(result => console.log('Email de confirmation envoyé au client:', result))
           .catch(error => console.error('Erreur lors de l\'envoi de l\'email de confirmation:', error));
-          
+
           alert('Transaction complétée par ' + details.payer.name.given_name + ' !');
           window.location.href = 'index.html';
         });
