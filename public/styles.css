@@ -1,4 +1,4 @@
-/* Corps global */
+/* Global */
 html, body {
   margin: 0;
   padding: 0;
@@ -48,7 +48,7 @@ html, body {
   font-size: 1.2rem;
 }
 
-/* FILMS & SÉRIES */
+/* FILMS & SÉRIES (Slider) */
 .films-slider-section {
   background: linear-gradient(to bottom, #000, #4B0082);
   padding: 60px 30px;
@@ -66,7 +66,8 @@ html, body {
 }
 .slide-track {
   display: flex;
-  animation: scroll 40s linear infinite;
+  animation: scroll 20s linear infinite;
+  width: 200%; /* pour la duplication */
 }
 .slide {
   width: 180px;
@@ -74,17 +75,13 @@ html, body {
 }
 @keyframes scroll {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  100% { transform: translateX(-50%); }
 }
 
 /* OFFRES */
 .offers-section {
   padding: 50px 30px;
   text-align: center;
-}
-.offers-section h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
 }
 .offers-grid {
   display: grid;
@@ -110,12 +107,9 @@ html, body {
   margin-bottom: 8px;
   color: #ff8c8c;
 }
-.offer-card .duration,
 .offer-card .price {
   font-size: 1.1rem;
   margin-bottom: 10px;
-}
-.offer-card .price {
   font-weight: 700;
   color: #ff8c8c;
 }
@@ -141,16 +135,6 @@ html, body {
 }
 .offer-card .btn:hover {
   background: #7f66b5;
-}
-
-/* Containers pour about.html, faq.html, contact.html */
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  background: #1f1f1f;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 /* FOOTER */
