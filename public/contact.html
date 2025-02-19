@@ -3,365 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IPTV Pro - Abonnements IPTV</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <title>Contact - IPTV Pro</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    /* Réinitialisation globale */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Roboto', sans-serif;
-      background: #1c1c1e; /* Fond homogène pour toute la page */
-      color: #fff;
-      filter: brightness(0.95);
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    /* Header avec hauteur fixée à 75px */
-    header {
-      position: relative;
-      height: 75px;
-      background: linear-gradient(to right, #000000 45%, #4B0082 100%);
-      overflow: visible;
-    }
-    /* Conteneur pour le menu, aligné à droite */
-    .nav-container {
-      height: 75px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 20px;
-    }
-    /* Positionnement absolu du logo et des logos secondaires */
-    .logo-images {
-      position: absolute;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    /* Le logo principal conserve sa taille */
-    .logo-images img.main-logo {
-      height: 150px;
-      margin: 0;
-    }
-    /* Logos secondaires */
-    .logo-images img.secondary {
-      height: 30px;
-      filter: contrast(1.3) brightness(1.1);
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-    nav ul li {
-      margin-left: 20px;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-    }
-    nav ul li a:hover {
-      color: #ddd;
-    }
-    .content-wrapper {
-      flex: 1;
-    }
-    .background-top {
-      position: relative;
-      height: 50vh;
-      background: url('https://raw.githubusercontent.com/bosta95/mon-image2/main/lourd.webp') no-repeat center center;
-      background-size: cover;
-    }
-    /* Overlay adouci */
-    .background-top .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    .background-top .content {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      text-align: center;
+    /* Styles pour le formulaire de contact */
+    .contact-form {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #1b162f;
       padding: 20px;
-      padding-top: 2cm;
-    }
-    .background-top .content h1 {
-      font-size: 3em;
-      font-weight: bold;
-      margin: 0.3em 0;
-      line-height: 1.2;
-      color: #fff;
-    }
-    .background-top .content p.description {
-      font-size: 1.2em;
-      margin: 0.5em 0;
-      max-width: 80%;
-      color: #fff;
-    }
-    .offers-section {
-      padding: 40px 20px;
-      background: #1c1c1e; /* Même fond que la page */
-      margin: 0.5cm auto 20px;
-      max-width: 1400px;
       border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .contact-form h2 {
       text-align: center;
-    }
-    .offers-section h2 {
-      font-size: 2.5rem;
       margin-bottom: 20px;
-      color: #fff;
     }
-    .products {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 20px;
-      overflow-x: auto;
-      justify-content: center;
-    }
-    /* Cartes d'offres avec contours subtils */
-    .product-card {
-      flex: 0 0 300px;
-      background: #1c1c1e;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .product-card:hover {
-      transform: scale(1.01);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
-    .product-card img {
-      width: 100%;
+    .contact-form label {
       display: block;
+      margin-bottom: 5px;
     }
-    .product-info {
-      padding: 20px;
-      text-align: center;
-    }
-    .product-info h3 {
-      font-size: 1.7rem;
-      margin-bottom: 10px;
-      font-weight: bold;
-      color: #4B0082;
-    }
-    .product-info p {
-      font-size: 1.1rem;
-      color: #fff;
-      margin-bottom: 15px;
-    }
-    .price {
-      font-size: 1.4rem;
-      color: #e74c3c;
-      font-weight: 500;
-      margin-bottom: 15px;
-    }
-    .btn {
-      display: inline-block;
-      background: #4B0082;
-      color: #fff;
-      padding: 10px 25px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s ease;
-    }
-    .btn:hover {
-      background: #350066;
-    }
-    .films-section {
-      padding: 40px 20px;
-      background: #1c1c1e; /* Même fond homogène */
-      margin: 20px auto;
-      max-width: 1200px;
-      border-radius: 8px;
-      text-align: center;
-    }
-    .films-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #4B0082;
-      text-decoration: underline;
-      text-decoration-color: #4B0082;
-    }
-    .films-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: nowrap;
-      width: max-content;
-    }
-    .films-container img {
-      max-width: 150px;
+    .contact-form input,
+    .contact-form textarea {
       width: 100%;
-    }
-    .extra-content {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: 20px auto;
-      text-align: center;
-    }
-    .extra-content h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    .extra-content p {
-      font-size: 1rem;
-      line-height: 1.6;
+      padding: 10px;
       margin-bottom: 15px;
+      border: none;
+      border-radius: 4px;
     }
-    footer .nav-container {
-      flex-direction: column;
+    .contact-form button {
+      background: #6c5498;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .contact-form button:hover {
+      background: #7f66b5;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav-container">
-      <nav>
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="index.html#abonnements">Abonnements</a></li>
-          <li><a href="tutoriel.html">Tutoriel</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+  <!-- HEADER (même que sur index.html pour la cohérence) -->
+  <header class="header-container">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" alt="IPTV Pro Logo" />
     </div>
-    <div class="logo-images">
-      <!-- Logo principal en haute qualité via Cloudinary -->
-      <img class="main-logo" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739378524/iptv_transparent_kazzld.png" 
-           alt="Logo IPTV Smarters">
-      <!-- Logos secondaires optimisés -->
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367195/xxx_no_bg_ndcnl0.png" 
-           alt="Logo 1">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739367195/disneychannel.jpg_no_bg_nmbycw.png" 
-           alt="Logo Disney Channel">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367194/chassepeche.jpg_no_bg_cw0uur.png" 
-           alt="Logo Chasse Pêche">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367194/seasons_no_bg_lpddcx.png" 
-           alt="Logo Seasons">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367194/beinsports.jpg_no_bg_bzn6lq.png" 
-           alt="Logo Bein Sports">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367704/bresh_no_bg_mvq3ui.png" 
-           alt="Logo Bresh">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367704/Capture_no_bg_ixtnoc.png" 
-           alt="Logo Capture">
-      <img class="secondary" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739367704/dazn_no_bg_sn9oyo.png" 
-           alt="Logo DAZN">
-    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#abonnements">Offres</a></li>
+        <li><a href="#films">Films & Séries</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><span class="cart" id="cart-count">Panier (0)</span></li>
+      </ul>
+    </nav>
   </header>
-  
-  <div class="content-wrapper">
-    <div class="background-top">
-      <div class="overlay"></div>
-      <div class="content">
-        <!-- Texte remanié pour rester harmonieux avec le design -->
-        <h1 class="heading-white">IPTV Smarters Pro – L'expérience télévisuelle réinventée</h1>
-        <p class="description">
-          Abonnement dès 10€ pour accéder à plus de 50 000 chaînes et à une sélection premium de films et séries.
-        </p>
-      </div>
-    </div>
-    
-    <section class="offers-section" id="abonnements">
-      <h2>Nos Offres</h2>
-      <div class="products">
-        <div class="product-card">
-          <img src="offer1.jpg" alt="">
-          <div class="product-info">
-            <h3>Abonnement de Base</h3>
-            <p>Accès à plus de 100 chaînes HD, idéal pour débuter.</p>
-            <div class="price">€9.99 / mois</div>
-            <a href="#" class="btn">Choisir</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="offer2.jpg" alt="">
-          <div class="product-info">
-            <h3>Abonnement Premium</h3>
-            <p>Accès complet à plus de 200 chaînes, incluant sport et cinéma.</p>
-            <div class="price">€19.99 / mois</div>
-            <a href="#" class="btn">Choisir</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="offer3.jpg" alt="">
-          <div class="product-info">
-            <h3>Abonnement Deluxe</h3>
-            <p>Profitez de contenus exclusifs et d’un service premium.</p>
-            <div class="price">€29.99 / mois</div>
-            <a href="#" class="btn">Choisir</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="offer4.jpg" alt="">
-          <div class="product-info">
-            <h3>Abonnement Ultime</h3>
-            <p>Le nec plus ultra pour une expérience IPTV inégalée.</p>
-            <div class="price">€39.99 / mois</div>
-            <a href="#" class="btn">Choisir</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="films-section">
-      <h2>Films et Séries Populaires</h2>
-      <div class="films-container">
-        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739228198/films2_i3gbly.png" alt="Film 2">
-        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739228198/films1_cqypoc.png" alt="Film 1">
-        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739228198/films0_kjkv85.png" alt="Film 0">
-        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739228198/films3_x8y6ow.png" alt="Film 3">
-        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739228198/miniature_de_films_tsdasy.png" alt="Miniature Films">
-      </div>
-    </section>
-    
-    <section class="extra-content">
-      <h2>Autres Personnalisations</h2>
-      <p>Ajoutez ici d'autres contenus ou fonctionnalités pour enrichir votre site.</p>
-    </section>
+
+  <!-- FORMULAIRE DE CONTACT -->
+  <div class="contact-form">
+    <h2>Contactez-nous</h2>
+    <!-- Action mailto : ouvre le client de messagerie de l'utilisateur -->
+    <form action="mailto:bosta958@hotmail.fr" method="post" enctype="text/plain">
+      <label for="name">Nom :</label>
+      <input type="text" id="name" name="name" placeholder="Votre nom" required>
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" rows="6" placeholder="Votre message" required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
   </div>
-  
+
+  <!-- FOOTER -->
   <footer>
-    <div class="nav-container">
-      <p>&copy; 2025 IPTV Pro. Tous droits réservés.</p>
-    </div>
+    <p>&copy; 2025 IPTV Pro. Tous droits réservés.</p>
   </footer>
 </body>
 </html>

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IPTV Pro - Abonnements et Films & Séries</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- Inclusion de Stripe.js -->
-  <script src="https://js.stripe.com/v3/"></script>
+  <!-- Inclusion du SDK PayPal avec ton Client ID (pour usage éventuel sur offer.html) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
 </head>
 <body>
 
@@ -91,7 +91,10 @@
           <li>Free & Weekly Updates</li>
           <li>Netflix / Disney+ / Apple+</li>
         </ul>
-        <a class="btn checkout" data-product="Premium IPTV (3 mois)" data-price="9.99" href="#">Commander</a>
+        <a class="btn" data-product="Premium IPTV (3 mois)" data-price="9.99"
+           href="offer.html?product=Premium+IPTV+3+mois&price=9.99">
+          Commander
+        </a>
       </article>
 
       <!-- OFFRE 2 : 6 MOIS -->
@@ -108,7 +111,10 @@
           <li>Free & Weekly Updates</li>
           <li>Netflix / Disney+ / Apple+</li>
         </ul>
-        <a class="btn checkout" data-product="Premium IPTV (6 mois)" data-price="19.99" href="#">Commander</a>
+        <a class="btn" data-product="Premium IPTV (6 mois)" data-price="19.99"
+           href="offer.html?product=Premium+IPTV+6+mois&price=19.99">
+          Commander
+        </a>
       </article>
 
       <!-- OFFRE 3 : 12 MOIS -->
@@ -125,7 +131,10 @@
           <li>Free & Weekly Updates</li>
           <li>Netflix / Disney+ / Apple+</li>
         </ul>
-        <a class="btn checkout" data-product="Premium IPTV (12 mois)" data-price="29.99" href="#">Commander</a>
+        <a class="btn" data-product="Premium IPTV (12 mois)" data-price="29.99"
+           href="offer.html?product=Premium+IPTV+12+mois&price=29.99">
+          Commander
+        </a>
       </article>
 
       <!-- OFFRE 4 : 2 ECRANS -->
@@ -142,7 +151,10 @@
           <li>Free & Weekly Updates</li>
           <li>Netflix / Disney+ / Apple+</li>
         </ul>
-        <a class="btn checkout" data-product="Premium IPTV (2 ecrans)" data-price="59.99" href="#">Commander</a>
+        <a class="btn" data-product="Premium IPTV (2 ecrans)" data-price="59.99"
+           href="offer.html?product=Premium+IPTV+2+ecrans&price=59.99">
+          Commander
+        </a>
       </article>
 
       <!-- OFFRE 5 : 3 ECRANS -->
@@ -159,7 +171,10 @@
           <li>Free & Weekly Updates</li>
           <li>Netflix / Disney+ / Apple+</li>
         </ul>
-        <a class="btn checkout" data-product="Premium IPTV (3 ecrans)" data-price="79.99" href="#">Commander</a>
+        <a class="btn" data-product="Premium IPTV (3 ecrans)" data-price="79.99"
+           href="offer.html?product=Premium+IPTV+3+ecrans&price=79.99">
+          Commander
+        </a>
       </article>
 
       <!-- OFFRE 6 : 4 ECRANS -->
@@ -176,7 +191,10 @@
           <li>Free & Weekly Updates</li>
           <li>Netflix / Disney+ / Apple+</li>
         </ul>
-        <a class="btn checkout" data-product="Premium IPTV (4 ecrans)" data-price="99.99" href="#">Commander</a>
+        <a class="btn" data-product="Premium IPTV (4 ecrans)" data-price="99.99"
+           href="offer.html?product=Premium+IPTV+4+ecrans&price=99.99">
+          Commander
+        </a>
       </article>
 
     </div>
@@ -187,33 +205,5 @@
     <p>&copy; 2025 IPTV Pro. Tous droits réservés.</p>
   </footer>
 
-  <!-- Script pour Stripe Checkout -->
-  <script>
-    // Remplacez par votre clé publique Stripe
-    const stripe = Stripe('pk_test_51QtDQzCk6Tg1hZyeFEIrtu2z0t4jWBRwF4xl7AlDflD6m9eW73fqLd69TCA6mEdhnIqqimzEoiXM5xzLes1VmmPQ00iryJLbM5');
-
-    // Ajoute un écouteur d'événement sur chaque bouton "Commander"
-    document.querySelectorAll('.btn.checkout').forEach(button => {
-      button.addEventListener('click', async (e) => {
-        e.preventDefault();
-        const product = button.getAttribute('data-product');
-        const price = button.getAttribute('data-price');
-
-        // Appel à votre endpoint serveur pour créer une session de paiement
-        const response = await fetch('/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ product, price })
-        });
-
-        const session = await response.json();
-        // Redirection vers la page de paiement Stripe
-        const result = await stripe.redirectToCheckout({ sessionId: session.id });
-        if(result.error) {
-          alert(result.error.message);
-        }
-      });
-    });
-  </script>
 </body>
 </html>

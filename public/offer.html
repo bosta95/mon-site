@@ -3,75 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Détail de l'Offre - IPTV Pro</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Paiement - IPTV Pro</title>
+  <!-- Inclusion du SDK PayPal avec ton Client ID -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header>
-    <div class="logo-images">
-      <img class="main-logo" 
-           src="https://res.cloudinary.com/dwcz1jp7j/image/upload/dpr_auto,q_auto:best,f_auto/v1739378524/iptv_transparent_kazzld.png" 
-           alt="Logo IPTV Smarters Pro">
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="index.html#abonnements">Abonnements</a></li>
-        <li><a href="tutoriel.html">Tutoriel</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><span class="cart" id="cart-count">Panier (0)</span></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <main>
-    <section class="offer-detail">
-      <h2 id="offer-title"></h2>
-      <div class="offer-price" id="offer-price"></div>
-      <p id="offer-description"></p>
-      <button id="add-to-cart" class="btn">Ajouter au panier</button>
-      <a href="index.html" class="btn">Retour à l'accueil</a>
-    </section>
-  </main>
-  
-  <script>
-    // Récupérer les paramètres de l'URL
-    const params = new URLSearchParams(window.location.search);
-    const product = params.get('product');
-    const price = params.get('price');
-    
-    // Affichage du contenu de l'offre
-    document.getElementById('offer-title').textContent = product;
-    document.getElementById('offer-price').textContent = "Prix: €" + parseFloat(price).toFixed(2) + " / mois";
-    document.getElementById('offer-description').textContent = "Détail complet pour " + product + " : Ce pack offre un accès à une sélection variée de chaînes HD, sportives, cinématographiques et de divertissement. Profitez d'une interface intuitive, d'une qualité d'image exceptionnelle et d'un support client dédié pour une expérience IPTV sans pareil.";
-    
-    // Mettre à jour le compteur du panier à partir de localStorage
-    function updateCartCount() {
-      let cart = JSON.parse(localStorage.getItem('cart')) || {};
-      let totalItems = 0;
-      for (let prod in cart) {
-        totalItems += cart[prod].quantity;
-      }
-      document.getElementById('cart-count').textContent = `Panier (${totalItems})`;
+  <style>
+    /* Réinitialisation */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
-    updateCartCount();
+    body {
+      background: #141414;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
     
-    // Ajouter le produit au panier (via localStorage)
-    document.getElementById('add-to-cart').addEventListener('click', function() {
-      let cart = JSON.parse(localStorage.getItem('cart')) || {};
-      if (cart[product]) {
-        cart[product].quantity++;
-      } else {
-        cart[product] = { price: parseFloat(price), quantity: 1 };
+    .container {
+      max-width: 500px;
+      width: 100%;
+      background: #1f1f1f;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .logo {
+      width: 100px;
+      margin: 0 auto 20px;
+    }
+    
+    .logo img {
+      width: 100%;
+      display: block;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #ff8c8c;
+    }
+    
+    p {
+      font-size: 1rem;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+    
+    #paypal-button-container {
+      margin-top: 20px;
+    }
+    
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
       }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-      alert(product + " ajouté au panier !");
-      // Optionnel: rediriger vers index.html
-      window.location.href = "index.html";
-    });
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" alt="IPTV Pro Logo">
+    </div>
+    <h1>Paiement PayPal</h1>
+    <p>Procédez au paiement sécurisé de votre abonnement.</p>
+    <div id="paypal-button-container"></div>
+  </div>
+
+  <script>
+    // Récupérer le montant depuis l'URL (paramètre "price"), valeur par défaut : 10.00€
+    const params = new URLSearchParams(window.location.search);
+    const price = params.get('price') || '10.00';
+
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: price
+                  }
+              }]
+          });
+      },
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              alert('Transaction complétée par ' + details.payer.name.given_name + '!');
+              // Redirection vers la page d'accueil ou une page de confirmation
+              window.location.href = 'index.html';
+          });
+      },
+      onError: function(err) {
+          console.error(err);
+          alert('Une erreur est survenue lors du paiement.');
+      }
+    }).render('#paypal-button-container');
   </script>
 </body>
 </html>

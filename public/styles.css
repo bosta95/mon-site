@@ -162,3 +162,14 @@ footer {
   0% { transform: translateX(0); }
   100% { transform: translateX(calc(-1 * (180px + 20px) * 13)); }
 }
+
+/* SECTION PAIEMENT (PAYPAL) */
+.checkout-section {
+  padding: 50px 30px;
+  text-align: center;
+}
+.checkout-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
