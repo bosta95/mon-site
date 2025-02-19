@@ -16,15 +16,15 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route API pour envoyer l'e-mail de commande
+// Route API pour envoyer l'e-mail au marchand
 app.post('/api/send-email', async (req, res) => {
   const { clientEmail, orderId, product, price } = req.body;
 
-  // Configure le transport SMTP
+  // Configure le transport SMTP (utilise les variables d'environnement)
   let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,       // ex: smtp.gmail.com
-    port: process.env.SMTP_PORT,       // ex: 587
-    secure: false,                     // false pour le port 587
+    host: process.env.SMTP_HOST,       // Pour Hotmail: smtp-mail.outlook.com
+    port: process.env.SMTP_PORT,       // Pour Hotmail: 587
+    secure: false,                     // false pour le port 587 (STARTTLS)
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS
@@ -33,7 +33,7 @@ app.post('/api/send-email', async (req, res) => {
 
   let mailOptions = {
     from: `"IPTV Pro" <${process.env.SMTP_USER}>`,
-    to: process.env.MERCHANT_EMAIL,     // Ton e-mail marchand
+    to: process.env.MERCHANT_EMAIL,     // Adresse où tu souhaites recevoir la commande
     subject: `Nouvelle commande pour ${product}`,
     text: `Nouvelle commande reçue :
 Client Email: ${clientEmail}
@@ -52,15 +52,56 @@ Veuillez envoyer le code IPTV au client.`,
 
   try {
     let info = await transporter.sendMail(mailOptions);
-    console.log("Message envoyé : %s", info.messageId);
-    res.status(200).json({ message: 'Email envoyé avec succès' });
+    console.log("Email envoyé au marchand : %s", info.messageId);
+    res.status(200).json({ message: 'Email envoyé avec succès au marchand' });
   } catch (error) {
-    console.error("Erreur lors de l'envoi de l'email :", error);
-    res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email' });
+    console.error("Erreur lors de l'envoi de l'email au marchand :", error);
+    res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email au marchand' });
   }
 });
 
-// Démarrer le serveur sur le port fourni par Heroku ou 3000 en local
+// Route API pour envoyer un email de confirmation au client
+app.post('/api/send-confirmation', async (req, res) => {
+  const { clientEmail } = req.body;
+
+  let transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  });
+
+  let mailOptions = {
+    from: `"IPTV Pro" <${process.env.SMTP_USER}>`,
+    to: clientEmail,
+    subject: "Confirmation de votre paiement - IPTV Pro",
+    text: `Bonjour,
+
+Votre paiement a été validé.
+Vos identifiants pour accéder au service IPTV vous seront envoyés dans moins d'une heure.
+
+Merci de votre confiance,
+L'équipe IPTV Pro`,
+    html: `<p>Bonjour,</p>
+<p>Votre paiement a été validé.</p>
+<p>Vos identifiants pour accéder au service IPTV vous seront envoyés dans moins d'une heure.</p>
+<p>Merci de votre confiance,<br>L'équipe IPTV Pro</p>`
+  };
+
+  try {
+    let info = await transporter.sendMail(mailOptions);
+    console.log("Email de confirmation envoyé au client : %s", info.messageId);
+    res.status(200).json({ message: 'Email de confirmation envoyé avec succès' });
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de l'email de confirmation :", error);
+    res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email de confirmation' });
+  }
+});
+
+// Démarrage du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port ${PORT}`);

@@ -52,36 +52,44 @@
 
     paypal.Buttons({
       createOrder: function(data, actions) {
-          return actions.order.create({
-              purchase_units: [{
-                  amount: { value: price }
-              }]
-          });
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: price }
+          }]
+        });
       },
       onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-              const clientEmail = emailInput.value;
-              const orderId = data.orderID;
-              
-              // Envoie des informations au backend pour envoyer un e-mail
-              fetch('/api/send-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ clientEmail, orderId, product, price })
-              })
-              .then(response => response.json())
-              .then(result => {
-                console.log('Email envoyé au marchand:', result);
-              })
-              .catch(error => console.error('Erreur lors de l\'envoi de l\'email:', error));
-
-              alert('Transaction complétée par ' + details.payer.name.given_name + ' !');
-              window.location.href = 'index.html';
-          });
+        return actions.order.capture().then(function(details) {
+          const clientEmail = emailInput.value;
+          const orderId = data.orderID;
+          
+          // Envoyer un email au marchand
+          fetch('/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ clientEmail, orderId, product, price })
+          })
+          .then(response => response.json())
+          .then(result => console.log('Email envoyé au marchand:', result))
+          .catch(error => console.error('Erreur lors de l\'envoi de l\'email au marchand:', error));
+          
+          // Envoyer un email de confirmation au client
+          fetch('/api/send-confirmation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ clientEmail })
+          })
+          .then(response => response.json())
+          .then(result => console.log('Email de confirmation envoyé au client:', result))
+          .catch(error => console.error('Erreur lors de l\'envoi de l\'email de confirmation:', error));
+          
+          alert('Transaction complétée par ' + details.payer.name.given_name + ' !');
+          window.location.href = 'index.html';
+        });
       },
       onError: function(err) {
-          console.error(err);
-          alert('Une erreur est survenue lors du paiement.');
+        console.error(err);
+        alert('Une erreur est survenue lors du paiement.');
       }
     }).render('#paypal-button-container');
   </script>
