@@ -9,66 +9,36 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
   <style>
     /* Réinitialisation */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      background: #141414;
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #141414; font-family: 'Roboto', sans-serif; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
     .container {
       max-width: 500px;
       width: 100%;
       background: #1f1f1f;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       padding: 30px;
       text-align: center;
     }
-    
-    .logo {
-      width: 100px;
-      margin: 0 auto 20px;
-    }
-    
-    .logo img {
-      width: 100%;
-      display: block;
-    }
-    
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #ff8c8c;
-    }
-    
-    p {
-      font-size: 1rem;
-      margin-bottom: 30px;
-      color: #ccc;
-    }
-    
-    #paypal-button-container {
+    .logo { width: 100px; margin: 0 auto 20px; }
+    .logo img { width: 100%; display: block; }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; color: #ff8c8c; }
+    p { font-size: 1rem; margin-bottom: 30px; color: #ccc; }
+    #paypal-button-container { margin-top: 20px; }
+    .btn {
+      display: inline-block;
+      background: #6c5498;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
       margin-top: 20px;
+      transition: background 0.3s;
     }
-    
+    .btn:hover { background: #7f66b5; }
     @media screen and (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 0.9rem;
-      }
+      h1 { font-size: 2rem; }
+      p { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -80,6 +50,7 @@
     <h1>Paiement PayPal</h1>
     <p>Procédez au paiement sécurisé de votre abonnement.</p>
     <div id="paypal-button-container"></div>
+    <a href="index.html" class="btn">Retour à l'accueil</a>
   </div>
 
   <script>
@@ -91,16 +62,13 @@
       createOrder: function(data, actions) {
           return actions.order.create({
               purchase_units: [{
-                  amount: {
-                      value: price
-                  }
+                  amount: { value: price }
               }]
           });
       },
       onApprove: function(data, actions) {
           return actions.order.capture().then(function(details) {
               alert('Transaction complétée par ' + details.payer.name.given_name + '!');
-              // Redirection vers la page d'accueil ou une page de confirmation
               window.location.href = 'index.html';
           });
       },

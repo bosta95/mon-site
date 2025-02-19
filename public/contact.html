@@ -4,85 +4,94 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact - IPTV Pro</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
   <style>
-    /* Styles pour le formulaire de contact */
-    .contact-form {
-      max-width: 600px;
-      margin: 50px auto;
-      background: #1b162f;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    /* Réinitialisation */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .contact-form h2 {
+    body {
+      background: #141414;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    h1 {
       text-align: center;
       margin-bottom: 20px;
+      color: #ff8c8c;
     }
-    .contact-form label {
-      display: block;
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
       margin-bottom: 5px;
+      font-size: 1.1rem;
     }
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
+    input[type="text"],
+    input[type="email"],
+    textarea {
       padding: 10px;
       margin-bottom: 15px;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
+      font-size: 1rem;
     }
-    .contact-form button {
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    .btn {
+      display: inline-block;
       background: #6c5498;
       color: #fff;
-      border: none;
       padding: 10px 20px;
-      border-radius: 4px;
+      border-radius: 6px;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.3s;
+      border: none;
       cursor: pointer;
+      font-size: 1rem;
     }
-    .contact-form button:hover {
+    .btn:hover {
       background: #7f66b5;
+    }
+    .return {
+      margin-top: 20px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <!-- HEADER (même que sur index.html pour la cohérence) -->
-  <header class="header-container">
-    <div class="logo">
-      <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" alt="IPTV Pro Logo" />
-    </div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="#abonnements">Offres</a></li>
-        <li><a href="#films">Films & Séries</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><span class="cart" id="cart-count">Panier (0)</span></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- FORMULAIRE DE CONTACT -->
-  <div class="contact-form">
-    <h2>Contactez-nous</h2>
-    <!-- Action mailto : ouvre le client de messagerie de l'utilisateur -->
-    <form action="mailto:bosta958@hotmail.fr" method="post" enctype="text/plain">
+  <div class="container">
+    <h1>Contactez-nous</h1>
+    <form action="mailto:contact@iptvpro.com" method="post" enctype="text/plain">
       <label for="name">Nom :</label>
-      <input type="text" id="name" name="name" placeholder="Votre nom" required>
-
+      <input type="text" id="name" name="name" required>
+      
       <label for="email">Email :</label>
-      <input type="email" id="email" name="email" placeholder="Votre email" required>
-
+      <input type="email" id="email" name="email" required>
+      
       <label for="message">Message :</label>
-      <textarea id="message" name="message" rows="6" placeholder="Votre message" required></textarea>
-
-      <button type="submit">Envoyer</button>
+      <textarea id="message" name="message" required></textarea>
+      
+      <button type="submit" class="btn">Envoyer</button>
     </form>
+    <div class="return">
+      <a href="index.html" class="btn">Retour à l'accueil</a>
+    </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 IPTV Pro. Tous droits réservés.</p>
-  </footer>
 </body>
 </html>
