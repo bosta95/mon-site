@@ -29,7 +29,7 @@ html, body {
   font-weight: 500;
 }
 
-/* Slider et sections */
+/* Sections spécifiques */
 .hero-section {
   text-align: center;
   padding: 40px 20px;
@@ -51,6 +51,7 @@ html, body {
   margin-bottom: 30px;
 }
 
+/* Slider */
 .slider {
   overflow: hidden;
   position: relative;
