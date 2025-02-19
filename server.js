@@ -16,14 +16,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route API pour envoyer l'e-mail au marchand
+// Route API pour envoyer l'e-mail de commande au marchand
 app.post('/api/send-email', async (req, res) => {
   const { clientEmail, orderId, product, price } = req.body;
 
-  // Configure le transport SMTP (utilise les variables d'environnement)
+  // Configure le transport SMTP avec les variables d'environnement
   let transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,       // Pour Hotmail: smtp-mail.outlook.com
-    port: process.env.SMTP_PORT,       // Pour Hotmail: 587
+    host: process.env.SMTP_HOST,       // Pour SendGrid: smtp.sendgrid.net
+    port: process.env.SMTP_PORT,       // 587
     secure: false,                     // false pour le port 587 (STARTTLS)
     auth: {
       user: process.env.SMTP_USER,
@@ -33,7 +33,7 @@ app.post('/api/send-email', async (req, res) => {
 
   let mailOptions = {
     from: `"IPTV Pro" <${process.env.SMTP_USER}>`,
-    to: process.env.MERCHANT_EMAIL,     // Adresse où tu souhaites recevoir la commande
+    to: process.env.MERCHANT_EMAIL,
     subject: `Nouvelle commande pour ${product}`,
     text: `Nouvelle commande reçue :
 Client Email: ${clientEmail}
@@ -98,6 +98,45 @@ L'équipe IPTV Pro`,
   } catch (error) {
     console.error("Erreur lors de l'envoi de l'email de confirmation :", error);
     res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email de confirmation' });
+  }
+});
+
+// Route API pour traiter le formulaire de contact
+app.post('/api/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  let transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  });
+
+  let mailOptions = {
+    from: `"IPTV Pro Contact" <${process.env.SMTP_USER}>`,
+    to: process.env.MERCHANT_EMAIL,
+    subject: `Nouveau message de contact de ${name}`,
+    text: `Vous avez reçu un nouveau message via le formulaire de contact.
+    
+Nom: ${name}
+Email: ${email}
+Message: ${message}`,
+    html: `<p>Vous avez reçu un nouveau message via le formulaire de contact :</p>
+           <p><strong>Nom:</strong> ${name}</p>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Message:</strong> ${message}</p>`
+  };
+
+  try {
+    let info = await transporter.sendMail(mailOptions);
+    console.log("Email de contact envoyé: %s", info.messageId);
+    res.status(200).json({ message: "Email envoyé avec succès" });
+  } catch (error) {
+    console.error("Erreur lors de l'envoi de l'email de contact :", error);
+    res.status(500).json({ message: "Erreur lors de l'envoi de l'email de contact" });
   }
 });
 
