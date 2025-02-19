@@ -6,47 +6,10 @@
   <title>Paiement - IPTV Pro</title>
   <!-- Inclusion du SDK PayPal avec ton Client ID -->
   <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-  <style>
-    /* Réinitialisation */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #141414; font-family: 'Roboto', sans-serif; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-    .container {
-      max-width: 500px;
-      width: 100%;
-      background: #1f1f1f;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      padding: 30px;
-      text-align: center;
-    }
-    .logo { width: 100px; margin: 0 auto 20px; }
-    .logo img { width: 100%; display: block; }
-    h1 { font-size: 2.5rem; margin-bottom: 10px; color: #ff8c8c; }
-    p { font-size: 1rem; margin-bottom: 30px; color: #ccc; }
-    #paypal-button-container { margin-top: 20px; }
-    .btn {
-      display: inline-block;
-      background: #6c5498;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      margin-top: 20px;
-      transition: background 0.3s;
-    }
-    .btn:hover { background: #7f66b5; }
-    @media screen and (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      p { font-size: 0.9rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <div class="logo">
-      <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" alt="IPTV Pro Logo">
-    </div>
     <h1>Paiement PayPal</h1>
     <p>Procédez au paiement sécurisé de votre abonnement.</p>
     <div id="paypal-button-container"></div>
@@ -54,7 +17,7 @@
   </div>
 
   <script>
-    // Récupérer le montant depuis l'URL (paramètre "price"), valeur par défaut : 10.00€
+    // Récupérer le montant depuis l'URL (paramètre "price")
     const params = new URLSearchParams(window.location.search);
     const price = params.get('price') || '10.00';
 

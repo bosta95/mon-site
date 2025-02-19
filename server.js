@@ -1,17 +1,17 @@
-// server.js - Version sans Stripe
-require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const app = express();
 
-// Sert les fichiers statiques dans le dossier public
-app.use(express.static('public'));
-app.use(express.json());
+// Servir les fichiers statiques depuis le dossier courant
+app.use(express.static(__dirname));
 
-// Endpoint de test pour les paiements (à remplacer plus tard)
-app.post('/payment-placeholder', (req, res) => {
-  res.json({ message: "Système de paiement en cours de mise à jour." });
+// Retourner index.html pour la route racine
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Utilise le port défini par Heroku ou 3000 en local
+// Démarrer le serveur sur le port fourni par Heroku ou 3000 en local
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+});
