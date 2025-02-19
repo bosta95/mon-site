@@ -75,7 +75,7 @@ app.post('/api/send-confirmation', async (req, res) => {
   });
 
   let mailOptions = {
-    from: `"IPTV Pro" <${process.env.SMTP_USER}>`,
+    from: `"IPTV Pro" <bosta95845@gmail.com>`,
     to: clientEmail,
     subject: "Confirmation de votre paiement - IPTV Pro",
     text: `Bonjour,
