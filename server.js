@@ -2,12 +2,12 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Servir les fichiers statiques depuis le dossier courant
-app.use(express.static(__dirname));
+// Servir les fichiers statiques depuis le dossier "public"
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Retourner index.html pour la route racine
+// Rediriger la route racine vers index.html dans "public"
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Démarrer le serveur sur le port fourni par Heroku ou 3000 en local
