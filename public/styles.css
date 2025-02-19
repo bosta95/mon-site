@@ -29,7 +29,7 @@ html, body {
   font-weight: 500;
 }
 
-/* Sections spécifiques */
+/* HERO SECTION */
 .hero-section {
   text-align: center;
   padding: 40px 20px;
@@ -41,6 +41,7 @@ html, body {
   font-size: 1.2rem;
 }
 
+/* FILMS & SÉRIES */
 .films-slider-section {
   background: linear-gradient(to bottom, #000, #4B0082);
   padding: 60px 30px;
@@ -50,8 +51,6 @@ html, body {
   font-size: 2rem;
   margin-bottom: 30px;
 }
-
-/* Slider */
 .slider {
   overflow: hidden;
   position: relative;
@@ -147,7 +146,7 @@ html, body {
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-/* Footer */
+/* FOOTER */
 footer {
   background: #111;
   padding: 15px;

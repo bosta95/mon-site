@@ -7,19 +7,48 @@
   <!-- Inclusion du SDK PayPal avec ton Client ID -->
   <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .email-form {
+      margin: 20px 0;
+      text-align: left;
+    }
+    .email-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+    .email-form input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Paiement PayPal</h1>
     <p>Procédez au paiement sécurisé de votre abonnement.</p>
+    
+    <!-- Formulaire pour récupérer l'adresse email du client -->
+    <div class="email-form">
+      <label for="client-email">Votre adresse email :</label>
+      <input type="email" id="client-email" placeholder="exemple@domaine.com" required>
+    </div>
+    
+    <!-- Conteneur pour le bouton PayPal -->
     <div id="paypal-button-container"></div>
+    
     <a href="index.html" class="btn">Retour à l'accueil</a>
   </div>
 
   <script>
-    // Récupérer le montant depuis l'URL (paramètre "price")
+    // Récupérer les paramètres depuis l'URL (price et product)
     const params = new URLSearchParams(window.location.search);
     const price = params.get('price') || '10.00';
+    const product = params.get('product') || 'Offre';
+    const emailInput = document.getElementById('client-email');
 
     paypal.Buttons({
       createOrder: function(data, actions) {
@@ -31,7 +60,22 @@
       },
       onApprove: function(data, actions) {
           return actions.order.capture().then(function(details) {
-              alert('Transaction complétée par ' + details.payer.name.given_name + '!');
+              const clientEmail = emailInput.value;
+              const orderId = data.orderID;
+              
+              // Envoie des informations au backend pour envoyer un e-mail
+              fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ clientEmail, orderId, product, price })
+              })
+              .then(response => response.json())
+              .then(result => {
+                console.log('Email envoyé au marchand:', result);
+              })
+              .catch(error => console.error('Erreur lors de l\'envoi de l\'email:', error));
+
+              alert('Transaction complétée par ' + details.payer.name.given_name + ' !');
               window.location.href = 'index.html';
           });
       },
