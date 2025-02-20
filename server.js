@@ -37,28 +37,37 @@ function createTransporter() {
   });
 }
 
-// Route API pour envoyer l'e-mail au marchand
+/* ============================================
+   ROUTE: Envoi d'un email au marchand
+   (Tu reçois les infos de commande : orderId, clientEmail, produit, prix)
+   ============================================ */
 app.post('/api/send-email', async (req, res) => {
   const { clientEmail, orderId, product, price } = req.body;
-
   let transporter = createTransporter();
 
   let mailOptions = {
     from: `"IPTV Pro" <${process.env.SMTP_USER}>`,
-    to: process.env.MERCHANT_EMAIL,     // Adresse où tu souhaites recevoir les commandes
-    subject: `Nouvelle commande pour ${product}`,
+    to: process.env.MERCHANT_EMAIL, // Ton adresse (ex: contact@iptvsmarterpros.com)
+    subject: `Nouvelle commande #${orderId} pour ${product}`,
     text: `Nouvelle commande reçue :
-Client Email: ${clientEmail}
 Order ID: ${orderId}
+Client Email: ${clientEmail}
 Produit: ${product}
 Prix: ${price}€
-Veuillez envoyer le code IPTV au client.`,
-    html: `<p>Nouvelle commande reçue :</p>
-<p><strong>Client Email:</strong> ${clientEmail}</p>
-<p><strong>Order ID:</strong> ${orderId}</p>
-<p><strong>Produit:</strong> ${product}</p>
-<p><strong>Prix:</strong> ${price}€</p>
-<p>Veuillez envoyer le code IPTV au client.</p>`
+
+Veuillez traiter cette commande et envoyer le code IPTV au client.`,
+    html: `
+      <div style="font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px;">
+        <div style="max-width:600px; margin:0 auto; background:#fff; padding:30px; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
+          <h2 style="color:#4B0082;">Nouvelle commande reçue</h2>
+          <p><strong>Order ID:</strong> ${orderId}</p>
+          <p><strong>Client Email:</strong> ${clientEmail}</p>
+          <p><strong>Produit:</strong> ${product}</p>
+          <p><strong>Prix:</strong> ${price}€</p>
+          <p>Veuillez traiter cette commande et envoyer le code IPTV au client.</p>
+        </div>
+      </div>
+    `
   };
 
   try {
@@ -71,10 +80,12 @@ Veuillez envoyer le code IPTV au client.`,
   }
 });
 
-// Route API pour envoyer un email de confirmation au client
+/* ============================================
+   ROUTE: Envoi d'un email de confirmation au client
+   (Message professionnel avec logo, style sombre, etc.)
+   ============================================ */
 app.post('/api/send-confirmation', async (req, res) => {
   const { clientEmail } = req.body;
-
   let transporter = createTransporter();
 
   let mailOptions = {
@@ -84,14 +95,33 @@ app.post('/api/send-confirmation', async (req, res) => {
     text: `Bonjour,
 
 Votre paiement a été validé.
-Vos identifiants pour accéder au service IPTV vous seront envoyés dans moins d'une heure.
-
+Vos identifiants pour accéder au service IPTV vous seront envoyés prochainement.
 Merci de votre confiance,
 L'équipe IPTV Pro`,
-    html: `<p>Bonjour,</p>
-<p>Votre paiement a été validé.</p>
-<p>Vos identifiants pour accéder au service IPTV vous seront envoyés dans moins d'une heure.</p>
-<p>Merci de votre confiance,<br>L'équipe IPTV Pro</p>`
+    html: `
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <title>Confirmation de paiement</title>
+      </head>
+      <body style="margin:0; padding:0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background:#1a1a1a; color:#f1f1f1;">
+        <div style="max-width:600px; margin:50px auto; background:#2e2e2e; padding:40px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.5); text-align:center;">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" alt="Logo IPTV Pro" style="width:150px; margin-bottom:30px;">
+          <h1 style="margin:0; font-size:2.5em; color:#ff8c8c;">Merci pour votre paiement !</h1>
+          <p style="font-size:1.1em; line-height:1.6; margin:20px 0;">
+            Votre paiement a été validé avec succès.<br>
+            Vos identifiants pour accéder au service IPTV vous seront envoyés très prochainement.
+          </p>
+          <p style="font-size:1.1em; line-height:1.6; margin:20px 0;">
+            Nous vous remercions de votre confiance et vous invitons à consulter notre site pour découvrir nos offres exclusives.
+          </p>
+          <a href="https://www.iptvsmarterpros.com" style="display:inline-block; text-decoration:none; background:#ff8c8c; color:#1a1a1a; padding:15px 30px; border-radius:30px; font-weight:bold; transition:background 0.3s, transform 0.3s;">Retour à l'accueil</a>
+          <div style="font-size:0.8em; color:#888; margin-top:30px;">© 2025 IPTV Pro. Tous droits réservés.</div>
+        </div>
+      </body>
+      </html>
+    `
   };
 
   try {
@@ -104,15 +134,16 @@ L'équipe IPTV Pro`,
   }
 });
 
-// Route API pour le formulaire de contact qui envoie un email à ta boîte mail
+/* ============================================
+   ROUTE: Envoi d'un email pour le formulaire de contact
+   ============================================ */
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
-
   let transporter = createTransporter();
 
   let mailOptions = {
     from: `"IPTV Pro Contact" <${process.env.SMTP_USER}>`,
-    to: process.env.MERCHANT_EMAIL,  // Utilise la variable d'environnement
+    to: process.env.MERCHANT_EMAIL,  // Utilise la variable d'environnement (ex: contact@iptvsmarterpros.com)
     subject: `Nouveau message de contact de ${name}`,
     text: `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`,
     html: `<p><strong>Nom:</strong> ${name}</p>
