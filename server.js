@@ -112,7 +112,7 @@ app.post('/api/contact', async (req, res) => {
 
   let mailOptions = {
     from: `"IPTV Pro Contact" <${process.env.SMTP_USER}>`,
-    to: "bosta95845@gmail.com",         // Ton adresse de réception
+    to: process.env.MERCHANT_EMAIL,  // Utilise la variable d'environnement
     subject: `Nouveau message de contact de ${name}`,
     text: `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`,
     html: `<p><strong>Nom:</strong> ${name}</p>
