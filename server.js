@@ -38,8 +38,8 @@ function createTransporter() {
 }
 
 /* ============================================
-   ROUTE: Envoi d'un email au marchand
-   (Tu reçois les infos de commande : orderId, clientEmail, produit, prix)
+   ROUTE: Envoi d'un email au marchand (pour toi)
+   Contient les infos de commande : orderId, clientEmail, produit, prix
    ============================================ */
 app.post('/api/send-email', async (req, res) => {
   const { clientEmail, orderId, product, price } = req.body;
@@ -82,7 +82,7 @@ Veuillez traiter cette commande et envoyer le code IPTV au client.`,
 
 /* ============================================
    ROUTE: Envoi d'un email de confirmation au client
-   (Message professionnel avec logo, style sombre, etc.)
+   (Email professionnel avec design sombre, logo, etc.)
    ============================================ */
 app.post('/api/send-confirmation', async (req, res) => {
   const { clientEmail } = req.body;
