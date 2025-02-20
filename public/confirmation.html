@@ -3,39 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Confirmation de paiement - IPTV Pro</title>
+  
+  <!-- SEO : Titre, Description, Keywords, Canonical -->
+  <title>Confirmation de paiement - IPTV Pro | Expérience Streaming Inoubliable</title>
+  <meta name="description" content="Votre paiement a été validé avec succès ! Plongez dans l'univers IPTV Pro et profitez d'un streaming premium avec plus de 22 000 chaînes, films et séries. Vos identifiants vous seront envoyés sous peu.">
+  <meta name="keywords" content="IPTV, confirmation de paiement, streaming premium, abonnement IPTV, chaînes TV, films, séries, télévision en ligne, expérience de streaming, IPTV Pro">
+  <link rel="canonical" href="https://www.iptvsmarterpros.com/confirmation.html">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Confirmation de paiement - IPTV Pro">
+  <meta property="og:description" content="Merci pour votre paiement ! Préparez-vous à vivre une expérience de streaming premium avec plus de 22 000 chaînes, films et séries de haute qualité.">
+  <meta property="og:image" content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png">
+  <meta property="og:url" content="https://www.iptvsmarterpros.com/confirmation.html">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Confirmation de paiement - IPTV Pro">
+  <meta name="twitter:description" content="Votre paiement a été validé avec succès. Découvrez l'univers IPTV Pro et profitez d'un streaming premium inoubliable.">
+  <meta name="twitter:image" content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png">
+  
   <style>
     body {
-      background: #1a1a1a;
       margin: 0;
       padding: 0;
+      background: linear-gradient(135deg, #1a1a1a, #333);
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       color: #f1f1f1;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
     }
     .container {
-      max-width: 600px;
+      max-width: 700px;
       width: 90%;
       background: #2e2e2e;
       border-radius: 10px;
       padding: 40px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
       text-align: center;
     }
     .logo {
-      width: 150px;
+      width: 180px;
       margin-bottom: 30px;
+      animation: fadeIn 2s ease-in-out;
     }
     h1 {
-      margin: 0;
-      font-size: 2.5em;
+      font-size: 2.8em;
       color: #ff8c8c;
+      margin-bottom: 20px;
     }
     p {
-      font-size: 1.1em;
+      font-size: 1.2em;
       line-height: 1.6;
       margin: 20px 0;
     }
@@ -50,12 +70,16 @@
     }
     .btn:hover {
       background: #e67e7e;
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
     .footer {
-      font-size: 0.8em;
-      color: #888;
+      font-size: 0.9em;
+      color: #aaa;
       margin-top: 30px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
@@ -63,11 +87,10 @@
   <div class="container">
     <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" alt="Logo IPTV Pro" class="logo">
     <h1>Merci pour votre paiement !</h1>
-    <p>Votre paiement a été validé avec succès.<br>
-       Vos identifiants pour accéder au service IPTV vous seront envoyés par email très prochainement.</p>
-    <p>Nous vous remercions de votre confiance.<br>
-       En attendant, découvrez nos offres exclusives sur notre site.</p>
-    <a href="https://www.iptvsmarterpros.com" class="btn">Retour à l'accueil</a>
+    <p>Votre paiement a été validé avec succès. Vous êtes sur le point de découvrir une expérience de streaming premium unique.</p>
+    <p>Vos identifiants pour accéder à notre service IPTV vous seront envoyés par email très prochainement.<br>
+       En attendant, explorez notre univers magique où plus de <strong>22 000 chaînes, films et séries</strong> vous attendent.</p>
+    <a href="https://www.iptvsmarterpros.com" class="btn">Découvrir nos offres</a>
     <div class="footer">© 2025 IPTV Pro. Tous droits réservés.</div>
   </div>
 </body>

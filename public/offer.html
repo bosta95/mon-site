@@ -2,11 +2,31 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paiement Sécurisé - IPTV Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- SEO : Titre, Description, Mots-clés, Canonical -->
+  <title>Paiement Sécurisé - IPTV Pro | Abonnements IPTV & Streaming Premium</title>
+  <meta name="description" content="Procédez au paiement sécurisé de votre abonnement IPTV Pro pour accéder à un streaming premium avec plus de 22 000 chaînes, films et séries en haute définition.">
+  <meta name="keywords" content="IPTV, paiement sécurisé, abonnement IPTV, streaming premium, chaînes TV, films, séries, télévision en ligne, streaming HD, IPTV Pro">
+  <link rel="canonical" href="https://www.iptvsmarterpros.com/offer.html">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Paiement Sécurisé - IPTV Pro | Abonnements IPTV & Streaming Premium">
+  <meta property="og:description" content="Accédez à un streaming premium et à des abonnements IPTV sécurisés avec IPTV Pro. Procédez au paiement sécurisé et profitez de plus de 22 000 chaînes, films et séries en haute définition.">
+  <meta property="og:image" content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png">
+  <meta property="og:url" content="https://www.iptvsmarterpros.com/offer.html">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paiement Sécurisé - IPTV Pro | Abonnements IPTV & Streaming Premium">
+  <meta name="twitter:description" content="Accédez à un streaming premium et à des abonnements IPTV sécurisés avec IPTV Pro. Procédez au paiement sécurisé et profitez de plus de 22 000 chaînes, films et séries en HD.">
+  <meta name="twitter:image" content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png">
+  
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-  <!-- Inclusion du SDK PayPal avec ton Client ID -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
+  
+  <!-- Styles CSS -->
   <style>
     body {
       margin: 0;
@@ -54,11 +74,14 @@
       background: #7f66b5;
     }
   </style>
+  
+  <!-- Inclusion du SDK PayPal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
 </head>
 <body>
   <div class="payment-container">
     <h1>Paiement Sécurisé</h1>
-    <p>Procédez au paiement sécurisé de votre abonnement.</p>
+    <p>Procédez au paiement sécurisé de votre abonnement IPTV Pro pour accéder à un streaming premium avec plus de 22 000 chaînes, films et séries en haute définition.</p>
     
     <!-- Conteneur pour le bouton PayPal -->
     <div id="paypal-button-container"></div>
@@ -89,7 +112,7 @@
           const clientEmail = details.payer.email_address;
           const orderId = data.orderID;
 
-          // Envoyer un email au marchand
+          // Envoyer un email au marchand avec les informations de commande
           fetch('/api/send-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

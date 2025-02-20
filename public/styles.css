@@ -1,4 +1,7 @@
 /* Global */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 html, body {
   margin: 0;
   padding: 0;
@@ -31,6 +34,7 @@ html, body {
 
 /* HERO SECTION */
 .hero-section {
+  position: relative; /* Nécessaire pour positionner l'overlay */
   height: 40vh;
   background: url("https://raw.githubusercontent.com/bosta95/mon-image2/refs/heads/main/fond.webp") no-repeat center center;
   background-size: cover;
@@ -40,6 +44,21 @@ html, body {
   justify-content: center;
   text-align: center;
   gap: 10px;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Overlay noir à 30% d'opacité */
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-section * {
+  position: relative;
+  z-index: 2;
 }
 .hero-section h1 {
   font-size: 3rem;
