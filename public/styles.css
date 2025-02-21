@@ -30,7 +30,7 @@ html, body {
 }
 
 .logo img {
-  height: 100px; /* Augmentez la taille du logo principal */
+  height: 100px; /* Taille du logo principal */
 }
 
 .header-icons {
@@ -41,7 +41,7 @@ html, body {
 
 /* Ajustement des images additionnelles */
 .header-icons img {
-  height: 50px; /* Ajustez la hauteur selon vos préférences */
+  height: 50px; /* Taille des images additionnelles (ajustez cette valeur selon vos préférences) */
 }
 
 /* Navigation */
