@@ -1,23 +1,32 @@
 const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
 
+// Forcer la redirection vers HTTPS uniquement en production
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(`https://${req.get('Host')}${req.url}`);
+    }
+    next();
+  });
+}
+
+// Activer la compression pour toutes les réponses
+app.use(compression());
+
 // Pour recevoir du JSON dans les requêtes POST
 app.use(express.json());
 
-// Sert les fichiers statiques depuis le dossier "public"
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Middleware pour forcer la redirection vers HTTPS (si besoin)
-app.use((req, res, next) => {
-  if (req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(`https://${req.get('Host')}${req.url}`);
-  }
-  next();
-});
+// Servir les fichiers statiques depuis le dossier "public" avec mise en cache
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1y',
+  etag: false
+}));
 
 // Route racine pour servir index.html
 app.get('/', (req, res) => {
