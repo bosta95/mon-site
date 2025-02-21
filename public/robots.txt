@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Allow: /image/upload/
+Sitemap: https://www.iptvsmarterpros.com/sitemap.xml
