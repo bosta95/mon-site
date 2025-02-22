@@ -4,16 +4,10 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<!-- Optimized Sitemap -->
 
 <url>
   <loc>https://www.iptvsmarterpros.com/</loc>
-  <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-
-<url>
-  <loc>https://www.iptvsmarterpros.com/robots.txt</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
   <priority>1.00</priority>
 </url>
@@ -48,45 +42,37 @@
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
+
+<!-- Offres IPTV optimisées avec URLs SEO-friendly -->
 <url>
-  <loc>https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+3+mois&amp;price=9.99</loc>
+  <loc>https://www.iptvsmarterpros.com/offre/premium-iptv-3-mois/</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 </url>
 <url>
-  <loc>https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+6+mois&amp;price=19.99</loc>
+  <loc>https://www.iptvsmarterpros.com/offre/premium-iptv-6-mois/</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 </url>
 <url>
-  <loc>https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+12+mois&amp;price=29.99</loc>
+  <loc>https://www.iptvsmarterpros.com/offre/premium-iptv-12-mois/</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 </url>
 <url>
-  <loc>https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+2+%C3%A9crans&amp;price=59.99</loc>
+  <loc>https://www.iptvsmarterpros.com/offre/premium-iptv-2-ecrans/</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 </url>
 <url>
-  <loc>https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+3+%C3%A9crans&amp;price=79.99</loc>
+  <loc>https://www.iptvsmarterpros.com/offre/premium-iptv-3-ecrans/</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 </url>
 <url>
-  <loc>https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+4+%C3%A9crans&amp;price=99.99</loc>
+  <loc>https://www.iptvsmarterpros.com/offre/premium-iptv-4-ecrans/</loc>
   <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.iptvsmarterpros.com/conditions.html</loc>
-  <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.iptvsmarterpros.com/privacy.html</loc>
-  <lastmod>2025-02-20T21:54:03+00:00</lastmod>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 </url>
 
 </urlset>

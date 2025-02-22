@@ -1,4 +1,29 @@
 User-agent: *
-Allow: /
+Disallow: /admin/
+Disallow: /wp-login.php
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /search?q=
+Disallow: /*?utm_source=
+Disallow: /*?ref=
+
 Allow: /image/upload/
+Allow: /wp-content/uploads/
+Allow: /wp-includes/js/
+Allow: /wp-content/themes/
+
+# Empêche certains robots indésirables d’accéder au site
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Ajout d'un délai entre les requêtes des robots (utile si ton site est lent)
+Crawl-delay: 10
+
+# Sitemap du site
 Sitemap: https://www.iptvsmarterpros.com/sitemap.xml
