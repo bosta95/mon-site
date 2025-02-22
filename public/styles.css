@@ -36,12 +36,13 @@ html, body {
 .header-icons {
   display: flex;
   align-items: center;
-  gap: 10px; /* Espace entre les images additionnelles */
+  gap: 20px; /* Espace entre les images additionnelles */
 }
 
 /* Ajustement des images additionnelles */
 .header-icons img {
-  height: 50px; /* Taille des images additionnelles (ajustez cette valeur selon vos préférences) */
+  height: 30px; /* Taille des images additionnelles sur desktop */
+  width: auto;
 }
 
 /* Navigation */
@@ -210,4 +211,22 @@ footer {
 }
 .btn-footer:hover {
   background: #e67e7e;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .logo img {
+    height: 80px; /* Logo légèrement réduit sur mobile */
+  }
+  .header-icons img {
+    height: 30px; /* Images additionnelles plus petites sur mobile */
+  }
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
