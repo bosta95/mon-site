@@ -33,6 +33,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Route explicite pour tutoriel.html (optionnelle, car il est servi statiquement)
+app.get('/tutoriel.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tutoriel.html'));
+});
+
 // Fonction utilitaire pour créer le transporteur Nodemailer
 function createTransporter() {
   return nodemailer.createTransport({
@@ -152,7 +157,7 @@ app.post('/api/contact', async (req, res) => {
 
   let mailOptions = {
     from: `"IPTV Pro Contact" <${process.env.SMTP_USER}>`,
-    to: process.env.MERCHANT_EMAIL,  // Utilise la variable d'environnement (ex: contact@iptvsmarterpros.com)
+    to: process.env.MERCHANT_EMAIL,
     subject: `Nouveau message de contact de ${name}`,
     text: `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`,
     html: `<p><strong>Nom:</strong> ${name}</p>
