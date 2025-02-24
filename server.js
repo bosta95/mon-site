@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
-// Forcer la redirection vers HTTPS uniquement en production
+// Forcer HTTPS uniquement en production (évite les boucles infinies)
 if (process.env.NODE_ENV === 'production') {
   app.use((req, res, next) => {
     if (req.headers['x-forwarded-proto'] !== 'https') {
@@ -28,12 +28,17 @@ app.use(express.static(path.join(__dirname, 'public'), {
   etag: false
 }));
 
-// Route racine pour servir index.html
+// Redirection pour /favicon.ico
+app.get('/favicon.ico', (req, res) => {
+  res.redirect('/favicon.svg');
+});
+
+// Route principale pour servir index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route explicite pour tutoriel.html (optionnelle, car il est servi statiquement)
+// Route explicite pour tutoriel.html (optionnelle)
 app.get('/tutoriel.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tutoriel.html'));
 });
@@ -47,20 +52,18 @@ app.get('/robots.txt', (req, res) => {
 // Fonction utilitaire pour créer le transporteur Nodemailer
 function createTransporter() {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,       // ex: mail.privateemail.com
-    port: process.env.SMTP_PORT,       // ex: 465 ou 587
+    host: process.env.SMTP_HOST,       // Ex: mail.privateemail.com
+    port: process.env.SMTP_PORT,       // Ex: 465 ou 587
     secure: process.env.SMTP_PORT == 465, // true si port 465, sinon false
     auth: {
-      user: process.env.SMTP_USER,     // ex: contact@iptvsmarterpros.com
+      user: process.env.SMTP_USER,     // Ex: contact@iptvsmarterpros.com
       pass: process.env.SMTP_PASS
     }
   });
 }
 
-// (Les routes d'email et de contact restent inchangées)
-
-// Démarrage du serveur
+// Démarrage du serveur avec le bon port Heroku
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
+  console.log(`✅ Serveur démarré sur le port ${PORT}`);
 });
