@@ -4,36 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-P7X5R88Q');</script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Titre et Meta Description SEO -->
-  <title>Contact - IPTV Pro | Support et Assistance pour Streaming Premium</title>
-  <meta name="description" content="Contactez IPTV Pro pour toute question sur nos abonnements IPTV, streaming premium, et accès à plus de 22 000 chaînes, films et séries en haute définition. Notre support est là pour vous aider.">
-  <meta name="keywords" content="IPTV, contact IPTV, support IPTV, assistance streaming, abonnement IPTV, streaming premium, chaînes TV, films, séries, télévision en ligne, IPTV Pro">
-  <link rel="canonical" href="https://www.iptvsmarterpros.com/contact.html">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:title" content="Contact - IPTV Pro | Support et Assistance pour Streaming Premium">
-  <meta property="og:description" content="Vous avez une question ou besoin d'assistance ? Contactez IPTV Pro, le leader du streaming premium et de l'abonnement IPTV, pour bénéficier d'un support dédié.">
-  <meta property="og:image" content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp">
-  <meta property="og:url" content="https://www.iptvsmarterpros.com/contact.html">
-  <meta property="og:type" content="website">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Contact - IPTV Pro | Support et Assistance pour Streaming Premium">
-  <meta name="twitter:description" content="Contactez IPTV Pro pour toute question sur nos abonnements IPTV et streaming premium. Nous sommes là pour vous offrir un support personnalisé et vous garantir une expérience de divertissement exceptionnelle.">
-  <meta name="twitter:image" content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp">
-  
+  <title>Contact - IPTV Pro</title>
   <link rel="stylesheet" href="styles.css">
+
   <style>
-    /* Styles spécifiques pour la page Contact */
     .contact-container {
       max-width: 600px;
       margin: 40px auto;
@@ -48,54 +22,48 @@
       color: #ff8c8c;
       font-size: 2.8rem;
     }
-    .contact-container form {
-      display: flex;
-      flex-direction: column;
-    }
-    .contact-container label {
-      margin-bottom: 5px;
-      font-size: 1.1rem;
-      color: #ccc;
-    }
-    .contact-container input[type="text"],
-    .contact-container input[type="email"],
+    .contact-container input,
     .contact-container textarea {
+      width: 100%;
       padding: 10px;
       margin-bottom: 15px;
-      border: none;
       border-radius: 5px;
+      border: none;
       font-size: 1rem;
-    }
-    .contact-container textarea {
-      resize: vertical;
-      min-height: 150px;
     }
     .contact-container .btn {
       background: #6c5498;
-      color: #fff;
-      padding: 10px 20px;
+      color: white;
+      padding: 10px;
       border-radius: 6px;
-      text-decoration: none;
-      text-align: center;
-      transition: background 0.3s;
-      border: none;
       cursor: pointer;
       font-size: 1rem;
+      border: none;
     }
     .contact-container .btn:hover {
       background: #7f66b5;
     }
     .contact-container .return {
-      margin-top: 20px;
       text-align: center;
+      margin-top: 20px;
+    }
+    .message-success, .message-error {
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 15px;
+      display: none;
+    }
+    .message-success {
+      color: green;
+    }
+    .message-error {
+      color: red;
     }
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7X5R88Q"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
   <div class="contact-container">
     <h1>Contactez-nous</h1>
@@ -111,6 +79,10 @@
 
       <button type="submit" class="btn">Envoyer</button>
     </form>
+
+    <p id="success-message" class="message-success">Votre message a été envoyé avec succès !</p>
+    <p id="error-message" class="message-error">Une erreur est survenue. Veuillez réessayer.</p>
+
     <div class="return">
       <a href="index.html" class="btn">Retour à l'accueil</a>
     </div>
@@ -132,12 +104,18 @@
       })
       .then(response => response.json())
       .then(data => {
-        alert('Votre message a été envoyé avec succès !');
-        document.getElementById('contact-form').reset();
+        if (data.success) {
+          document.getElementById('success-message').style.display = 'block';
+          document.getElementById('error-message').style.display = 'none';
+          document.getElementById('contact-form').reset();
+        } else {
+          document.getElementById('error-message').style.display = 'block';
+          document.getElementById('success-message').style.display = 'none';
+        }
       })
       .catch(error => {
-        console.error('Erreur lors de l\'envoi:', error);
-        alert('Une erreur est survenue lors de l\'envoi de votre message.');
+        console.error('Erreur:', error);
+        document.getElementById('error-message').style.display = 'block';
       });
     });
   </script>
