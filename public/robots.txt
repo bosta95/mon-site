@@ -6,24 +6,21 @@ Disallow: /checkout/
 Disallow: /search?q=
 Disallow: /*?utm_source=
 Disallow: /*?ref=
-
 Allow: /image/upload/
 Allow: /wp-content/uploads/
 Allow: /wp-includes/js/
 Allow: /wp-content/themes/
 
-# Empêche certains robots indésirables d’accéder au site
+# Empêche certains robots indésirables
 User-agent: MJ12bot
 Disallow: /
-
 User-agent: SemrushBot
 Disallow: /
-
 User-agent: AhrefsBot
 Disallow: /
 
-# Ajout d'un délai entre les requêtes des robots (utile si ton site est lent)
+# Délai d'exploration pour éviter une surcharge
 Crawl-delay: 10
 
-# Sitemap du site
+# Sitemap pour une meilleure indexation
 Sitemap: https://www.iptvsmarterpros.com/sitemap.xml

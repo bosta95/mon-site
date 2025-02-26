@@ -1,201 +1,185 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>IPTV Pro - Abonnements IPTV, Films & Séries en Streaming</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-
-  <!-- Lien vers le fichier CSS externe -->
-  <link rel="stylesheet" href="styles.css">
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Meilleur Abonnement IPTV - +10 000 Chaînes &amp; VOD HD | IPTV Smarter Pros</title>
+<!-- Favicon -->
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<!-- Lien vers le fichier CSS externe -->
+<link href="styles.css" rel="stylesheet"/>
+<meta content="Obtenez le meilleur abonnement IPTV avec +10 000 chaînes HD, films et séries en VOD. Qualité stable et fiable. Profitez d’une offre exclusive !" name="description"/></head>
 <body>
-  <!-- HEADER -->
-  <header class="header-container">
-    <div class="header-left">
-      <div class="logo">
-        <!-- Logo principal depuis le dossier images -->
-        <img width="500" height="300" src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
-      </div>
-      <div class="header-icons">
-        <!-- 8 Images additionnelles dans l'ordre souhaité -->
-        <img width="500" height="300" src="images/image3.svg" alt="image 1">
-        <img width="500" height="300" src="images/image2.svg" alt="image 2">
-        <img width="500" height="300" src="images/image1.svg" alt="image 3">
-        <img width="500" height="300" src="images/image4.svg" alt="image 4">
-        <img width="500" height="300" src="images/image5.svg" alt="image 5">
-        <img width="500" height="300" src="images/image6.svg" alt="image 6">
-        <img width="500" height="300" src="images/image7.svg" alt="image 7">
-        <img width="500" height="300" src="images/image8.svg" alt="image 8">
-      </div>
-    </div>
-
-    <!-- BOUTON MENU BURGER (S'AFFICHE UNIQUEMENT EN MOBILE) -->
-    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-
-    <nav id="mainNav">
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="about.html">À propos</a></li>
-        <li><a href="tutoriel.html">Tutoriel</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="blog.html">Blog</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section class="hero-section">
-    <h1>IPTVSMARTERPROS</h1>
-    <p>Expérience de streaming immersive, dès 10€.</p>
-  </section>
-
-  <!-- FILMS & SÉRIES (SLIDER) -->
-  <section class="films-slider-section" id="films">
-    <h2>Films et Séries Populaires</h2>
-    <div class="slider">
-      <div class="slide-track">
-        <!-- Exemples d'images du slider hébergées sur Cloudinary -->
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" alt="Image 1" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" alt="Image 2" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" alt="Image 3" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" alt="Image 4" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" alt="Image 5" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" alt="Image 6" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" alt="Image 7" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" alt="Image 8" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" alt="Image 9" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" alt="Image 10" width="200" height="300">
-        <!-- Répétition pour l'effet de boucle -->
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" alt="Image 1" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" alt="Image 2" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" alt="Image 3" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" alt="Image 4" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" alt="Image 5" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" alt="Image 6" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" alt="Image 7" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" alt="Image 8" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" alt="Image 9" width="200" height="300">
-        <img width="500" height="300" class="slide" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" alt="Image 10" width="200" height="300">
-      </div>
-    </div>
-  </section>
-
-  <!-- OFFRES -->
-  <section class="offers-section">
-    <h2>Nos Offres</h2>
-    <div class="offers-grid">
-      <!-- Offre 1 : 3 Mois -->
-      <div class="offer-card">
-        <h3>Premium IPTV - 3 Mois</h3>
-        <p class="price">9.99€</p>
-        <ul class="benefits">
-          <li>+22 000 Chaînes</li>
-          <li>+50 000 Films & Séries</li>
-          <li>4K / FHD/HD/SD</li>
-          <li>+18 activé HD</li>
-          <li>Compatible tous appareils</li>
-          <li>Free & Weekly Updates</li>
-          <li>Netflix / Disney+ / Apple+</li>
-        </ul>
-        <a class="btn" href="offer.html?product=Premium+IPTV+3+mois&price=9.99">Commander</a>
-      </div>
-      <!-- Offre 2 : 6 Mois -->
-      <div class="offer-card">
-        <h3>Premium IPTV - 6 Mois</h3>
-        <p class="price">19.99€</p>
-        <ul class="benefits">
-          <li>+22 000 Chaînes</li>
-          <li>+50 000 Films & Séries</li>
-          <li>4K / FHD/HD/SD</li>
-          <li>+18 activé HD</li>
-          <li>Compatible tous appareils</li>
-          <li>Free & Weekly Updates</li>
-          <li>Netflix / Disney+ / Apple+</li>
-        </ul>
-        <a class="btn" href="offer.html?product=Premium+IPTV+6+mois&price=19.99">Commander</a>
-      </div>
-      <!-- Offre 3 : 12 Mois -->
-      <div class="offer-card">
-        <h3>Premium IPTV - 12 Mois</h3>
-        <p class="price">29.99€</p>
-        <ul class="benefits">
-          <li>+22 000 Chaînes</li>
-          <li>+50 000 Films & Séries</li>
-          <li>4K / FHD/HD/SD</li>
-          <li>+18 activé HD</li>
-          <li>Compatible tous appareils</li>
-          <li>Free & Weekly Updates</li>
-          <li>Netflix / Disney+ / Apple+</li>
-        </ul>
-        <a class="btn" href="offer.html?product=Premium+IPTV+12+mois&price=29.99">Commander</a>
-      </div>
-      <!-- Offre 4 : 2 Écrans -->
-      <div class="offer-card">
-        <h3>Premium IPTV - 2 Écrans</h3>
-        <p class="price">59.99€</p>
-        <ul class="benefits">
-          <li>+22 000 Chaînes</li>
-          <li>+50 000 Films & Séries</li>
-          <li>4K / FHD/HD/SD</li>
-          <li>+18 activé HD</li>
-          <li>Compatible tous appareils</li>
-          <li>Free & Weekly Updates</li>
-          <li>Netflix / Disney+ / Apple+</li>
-        </ul>
-        <a class="btn" href="offer.html?product=Premium+IPTV+2+écrans&price=59.99">Commander</a>
-      </div>
-      <!-- Offre 5 : 3 Écrans -->
-      <div class="offer-card">
-        <h3>Premium IPTV - 3 Écrans</h3>
-        <p class="price">79.99€</p>
-        <ul class="benefits">
-          <li>+22 000 Chaînes</li>
-          <li>+50 000 Films & Séries</li>
-          <li>4K / FHD/HD/SD</li>
-          <li>+18 activé HD</li>
-          <li>Compatible tous appareils</li>
-          <li>Free & Weekly Updates</li>
-          <li>Netflix / Disney+ / Apple+</li>
-        </ul>
-        <a class="btn" href="offer.html?product=Premium+IPTV+3+écrans&price=79.99">Commander</a>
-      </div>
-      <!-- Offre 6 : 4 Écrans -->
-      <div class="offer-card">
-        <h3>Premium IPTV - 4 Écrans</h3>
-        <p class="price">99.99€</p>
-        <ul class="benefits">
-          <li>+22 000 Chaînes</li>
-          <li>+50 000 Films & Séries</li>
-          <li>4K / FHD/HD/SD</li>
-          <li>+18 activé HD</li>
-          <li>Compatible tous appareils</li>
-          <li>Free & Weekly Updates</li>
-          <li>Netflix / Disney+ / Apple+</li>
-        </ul>
-        <a class="btn" href="offer.html?product=Premium+IPTV+4+écrans&price=99.99">Commander</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 IPTV Pro - Tous droits réservés.</p>
-    <p>
-      <a href="conditions.html" class="btn-footer">Conditions Générales</a>
-      <a href="privacy.html" class="btn-footer">Politique de Confidentialité</a>
-      <a href="tutoriel.html" class="btn-footer">Tutoriel</a>
-    </p>
-  </footer>
-
-  <!-- SCRIPT POUR LE MENU BURGER -->
-  <script>
-    function toggleMenu() {
-      document.getElementById('mainNav').classList.toggle('show');
-    }
-  </script>
+<!-- HEADER -->
+<header class="header-container">
+<div class="header-left">
+<div class="logo">
+<!-- Logo principal depuis le dossier images -->
+<img alt="IPTV Pro Logo" height="300" src="images/IPTV_glpgxi.svg" width="500"/>
+</div>
+<div class="header-icons">
+<!-- 8 Images additionnelles dans l'ordre souhaité -->
+<img alt="image 1" height="300" src="images/image3.svg" width="500"/>
+<img alt="image 2" height="300" src="images/image2.svg" width="500"/>
+<img alt="image 3" height="300" src="images/image1.svg" width="500"/>
+<img alt="image 4" height="300" src="images/image4.svg" width="500"/>
+<img alt="image 5" height="300" src="images/image5.svg" width="500"/>
+<img alt="image 6" height="300" src="images/image6.svg" width="500"/>
+<img alt="image 7" height="300" src="images/image7.svg" width="500"/>
+<img alt="image 8" height="300" src="images/image8.svg" width="500"/>
+</div>
+</div>
+<nav>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="about.html">À propos</a></li>
+<li><a href="tutoriel.html">Tutoriel</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</nav>
+</header>
+<!-- HERO SECTION -->
+<section class="hero-section">
+<h1>Meilleur Abonnement IPTV - +10 000 Chaînes en HD &amp; VOD</h1>
+<p>Expérience de streaming immersive, dès 10€.</p>
+</section>
+<!-- FILMS & SÉRIES (SLIDER) -->
+<section class="films-slider-section" id="films">
+<h2>Regardez vos Films et Séries IPTV en Qualité HD</h2>
+<div class="slider">
+<div class="slide-track">
+<!-- Exemples d'images du slider hébergées sur Cloudinary -->
+<img alt="Image 1" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" width="200"/>
+<img alt="Image 2" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" width="200"/>
+<img alt="Image 3" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" width="200"/>
+<img alt="Image 4" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" width="200"/>
+<img alt="Image 5" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" width="200"/>
+<img alt="Image 6" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" width="200"/>
+<img alt="Image 7" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" width="200"/>
+<img alt="Image 8" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" width="200"/>
+<img alt="Image 9" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" width="200"/>
+<img alt="Image 10" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" width="200"/>
+<!-- Répétition pour l'effet de boucle -->
+<img alt="Image 1" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" width="200"/>
+<img alt="Image 2" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" width="200"/>
+<img alt="Image 3" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" width="200"/>
+<img alt="Image 4" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" width="200"/>
+<img alt="Image 5" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" width="200"/>
+<img alt="Image 6" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" width="200"/>
+<img alt="Image 7" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" width="200"/>
+<img alt="Image 8" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" width="200"/>
+<img alt="Image 9" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" width="200"/>
+<img alt="Image 10" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" width="200"/>
+</div>
+</div>
+</section>
+<!-- OFFRES -->
+<section class="offers-section">
+<h2>Nos Offres Abonnement IPTV Stables et Fiables</h2>
+<div class="offers-grid">
+<!-- Offre 1 : 3 Mois -->
+<div class="offer-card">
+<h3>Abonnement IPTV Premium - 3 Mois (HD &amp; Stable)</h3>
+<p class="price">9.99€</p>
+<ul class="benefits">
+<li>+22 000 Chaînes</li>
+<li>+50 000 Films &amp; Séries</li>
+<li>4K / FHD/HD/SD</li>
+<li>+18 activé HD</li>
+<li>Compatible tous appareils</li>
+<li>Free &amp; Weekly Updates</li>
+<li>Netflix / Disney+ / Apple+</li>
+</ul>
+<a class="btn" href="offer.html?product=Premium+IPTV+3+mois&amp;price=9.99">Commander</a>
+</div>
+<!-- Offre 2 : 6 Mois -->
+<div class="offer-card">
+<h3>Abonnement IPTV Premium - 6 Mois (Qualité Ultra HD)</h3>
+<p class="price">19.99€</p>
+<ul class="benefits">
+<li>+22 000 Chaînes</li>
+<li>+50 000 Films &amp; Séries</li>
+<li>4K / FHD/HD/SD</li>
+<li>+18 activé HD</li>
+<li>Compatible tous appareils</li>
+<li>Free &amp; Weekly Updates</li>
+<li>Netflix / Disney+ / Apple+</li>
+</ul>
+<a class="btn" href="offer.html?product=Premium+IPTV+6+mois&amp;price=19.99">Commander</a>
+</div>
+<!-- Offre 3 : 12 Mois -->
+<div class="offer-card">
+<h3>Abonnement IPTV Premium - 12 Mois (Le Meilleur Rapport Qualité/Prix)</h3>
+<p class="price">29.99€</p>
+<ul class="benefits">
+<li>+22 000 Chaînes</li>
+<li>+50 000 Films &amp; Séries</li>
+<li>4K / FHD/HD/SD</li>
+<li>+18 activé HD</li>
+<li>Compatible tous appareils</li>
+<li>Free &amp; Weekly Updates</li>
+<li>Netflix / Disney+ / Apple+</li>
+</ul>
+<a class="btn" href="offer.html?product=Premium+IPTV+12+mois&amp;price=29.99">Commander</a>
+</div>
+<!-- Offre 4 : 2 Écrans -->
+<div class="offer-card">
+<h3>Abonnement IPTV - 2 Écrans Simultanés</h3>
+<p class="price">59.99€</p>
+<ul class="benefits">
+<li>+22 000 Chaînes</li>
+<li>+50 000 Films &amp; Séries</li>
+<li>4K / FHD/HD/SD</li>
+<li>+18 activé HD</li>
+<li>Compatible tous appareils</li>
+<li>Free &amp; Weekly Updates</li>
+<li>Netflix / Disney+ / Apple+</li>
+</ul>
+<a class="btn" href="offer.html?product=Premium+IPTV+2+écrans&amp;price=59.99">Commander</a>
+</div>
+<!-- Offre 5 : 3 Écrans -->
+<div class="offer-card">
+<h3>Abonnement IPTV - 3 Écrans Multi-Utilisateurs</h3>
+<p class="price">79.99€</p>
+<ul class="benefits">
+<li>+22 000 Chaînes</li>
+<li>+50 000 Films &amp; Séries</li>
+<li>4K / FHD/HD/SD</li>
+<li>+18 activé HD</li>
+<li>Compatible tous appareils</li>
+<li>Free &amp; Weekly Updates</li>
+<li>Netflix / Disney+ / Apple+</li>
+</ul>
+<a class="btn" href="offer.html?product=Premium+IPTV+3+écrans&amp;price=79.99">Commander</a>
+</div>
+<!-- Offre 6 : 4 Écrans -->
+<div class="offer-card">
+<h3>Abonnement IPTV - 4 Écrans Ultra Haute Définition</h3>
+<p class="price">99.99€</p>
+<ul class="benefits">
+<li>+22 000 Chaînes</li>
+<li>+50 000 Films &amp; Séries</li>
+<li>4K / FHD/HD/SD</li>
+<li>+18 activé HD</li>
+<li>Compatible tous appareils</li>
+<li>Free &amp; Weekly Updates</li>
+<li>Netflix / Disney+ / Apple+</li>
+</ul>
+<a class="btn" href="offer.html?product=Premium+IPTV+4+écrans&amp;price=99.99">Commander</a>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer>
+<p>© 2025 IPTV Pro - Tous droits réservés.</p>
+<p>
+<a class="btn-footer" href="conditions.html">Conditions Générales</a>
+<a class="btn-footer" href="privacy.html">Politique de Confidentialité</a>
+<a class="btn-footer" href="tutoriel.html">Tutoriel</a>
+</p>
+</footer>
 </body>
 </html>
