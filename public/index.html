@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <!-- BOUTON MENU BURGER (NE S'AFFICHE QU'EN MOBILE) -->
+    <!-- BOUTON MENU BURGER (S'AFFICHE UNIQUEMENT EN MOBILE) -->
     <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
 
     <nav id="mainNav">
@@ -191,10 +191,9 @@
     </p>
   </footer>
 
-  <!-- SCRIPT POUR LE MENU BURGER (EN MOBILE) -->
+  <!-- SCRIPT POUR LE MENU BURGER -->
   <script>
     function toggleMenu() {
-      // Ajoute/retire la classe "show" au nav
       document.getElementById('mainNav').classList.toggle('show');
     }
   </script>
