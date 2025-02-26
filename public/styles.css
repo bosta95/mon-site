@@ -235,17 +235,16 @@ footer {
    MEDIA QUERIES POUR MOBILE
    ========================= */
 
-/* Jusqu'à 900px : amélioration du menu burger */
+/* Pour écrans jusqu'à 900px */
 @media (max-width: 900px) {
     .header-container {
         flex-wrap: wrap;
         gap: 10px;
-        position: relative; /* Pour positionner le bouton burger */
+        position: relative;
     }
-
     .menu-toggle {
         display: block;
-        background-color: #6c5498; /* Couleur harmonieuse avec le reste du site */
+        background-color: #6c5498;
         color: #fff;
         padding: 10px;
         border-radius: 5px;
@@ -255,12 +254,10 @@ footer {
         z-index: 100;
         font-size: 1.8rem;
     }
-
     /* Masquer le menu par défaut */
     #mainNav ul {
         display: none;
     }
-
     /* Afficher le menu vertical lors de l'activation */
     #mainNav.show ul {
         display: flex;
@@ -270,59 +267,56 @@ footer {
         padding: 10px 0;
         width: 100%;
     }
-
     .hero-section h1 {
         font-size: 2.5rem;
     }
-
     .hero-section p {
         font-size: 1rem;
     }
-
     .offer-card {
         width: 90%;
     }
 }
 
-/* Jusqu'à 600px : ajustements spécifiques */
+/* Pour écrans jusqu'à 600px (mobile portrait) */
 @media (max-width: 600px) {
+    /* Réduction du logo */
     .logo img {
         height: 80px;
+        margin-left: 0; /* Assure l'absence de marge à gauche */
     }
-
+    /* Assure que le conteneur du logo est aligné à gauche */
+    .header-left {
+        width: 100%;
+        text-align: left;
+        padding-left: 0;
+    }
     .header-icons img {
         height: 25px;
     }
-
     .header-container {
         flex-direction: column;
         gap: 10px;
     }
-
     nav ul {
         flex-direction: column;
         gap: 10px;
     }
-
     .hero-section {
         height: 30vh;
         padding: 0 10px;
         background: #000 url("https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740258625/mobile.webp") no-repeat center center;
         background-size: cover;
     }
-
     .hero-section h1 {
         font-size: 2rem;
     }
-
     .hero-section p {
         font-size: 0.9rem;
     }
-
     .films-slider-section {
         padding: 40px 20px;
     }
-
     .offers-section {
         padding: 40px 20px;
     }
