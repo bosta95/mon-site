@@ -303,3 +303,11 @@ footer {
         padding: 40px 20px;
     }
 }
+
+/* Ajout pour changer l'image de fond de la section héros en fonction de la résolution */
+@media (max-width: 600px) {
+    .hero-section {
+        background: #000 url("https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740258625/mobile.webp") no-repeat center center;
+        background-size: cover;
+    }
+}
