@@ -31,7 +31,11 @@
         <img width="500" height="300" src="images/image8.svg" alt="image 8">
       </div>
     </div>
-    <nav>
+
+    <!-- BOUTON MENU BURGER (NE S'AFFICHE QU'EN MOBILE) -->
+    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+    <nav id="mainNav">
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="about.html">À propos</a></li>
@@ -186,5 +190,13 @@
       <a href="tutoriel.html" class="btn-footer">Tutoriel</a>
     </p>
   </footer>
+
+  <!-- SCRIPT POUR LE MENU BURGER (EN MOBILE) -->
+  <script>
+    function toggleMenu() {
+      // Ajoute/retire la classe "show" au nav
+      document.getElementById('mainNav').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>

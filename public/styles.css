@@ -48,7 +48,7 @@ html, body {
 
 .header-container nav ul {
     list-style: none;
-    display: flex;
+    display: flex; /* Sur PC, on garde l’affichage horizontal */
     gap: 20px;
     margin: 0;
     padding: 0;
@@ -58,6 +58,15 @@ html, body {
     text-decoration: none;
     color: #fff;
     font-weight: 500;
+}
+
+/* BOUTON MENU BURGER (MASQUÉ PAR DÉFAUT, ON L'AFFICHE EN MOBILE) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 10px; /* Pour ajuster l'espace à droite si besoin */
 }
 
 .hero-section {
@@ -136,7 +145,6 @@ html, body {
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(-50%);
     }
@@ -231,23 +239,47 @@ footer {
     background: #e67e7e;
 }
 
+/* =========================
+   MEDIA QUERIES
+   ========================= */
+
+/* 
+   Jusqu'à 900px : 
+   - on passe en mode "menu burger"
+   - on cache le menu principal 
+*/
 @media (max-width: 900px) {
     .logo img {
         height: 90px;
-        /* Logo légèrement réduit */
     }
 
     .header-container {
         flex-wrap: wrap;
         gap: 10px;
+        position: relative;
     }
 
-    nav ul {
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: center;
+    /* On affiche le bouton burger en mobile */
+    .menu-toggle {
+        display: block;
     }
 
+    /* Le menu principal (UL) est masqué par défaut en mobile */
+    #mainNav ul {
+        display: none;
+    }
+
+    /* Quand la classe .show est active, on affiche la liste en colonne */
+    #mainNav.show ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #111;
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    /* Ajustements divers */
     .hero-section h1 {
         font-size: 2.5rem;
     }
@@ -264,12 +296,10 @@ footer {
 @media (max-width: 600px) {
     .logo img {
         height: 80px;
-        /* Logo légèrement réduit sur mobile */
     }
 
     .header-icons img {
         height: 25px;
-        /* Images additionnelles plus petites sur mobile */
     }
 
     .header-container {
@@ -285,6 +315,9 @@ footer {
     .hero-section {
         height: 30vh;
         padding: 0 10px;
+        /* Image de fond adaptée au mobile */
+        background: #000 url("https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740258625/mobile.webp") no-repeat center center;
+        background-size: cover;
     }
 
     .hero-section h1 {
@@ -301,13 +334,5 @@ footer {
 
     .offers-section {
         padding: 40px 20px;
-    }
-}
-
-/* Ajout pour changer l'image de fond de la section héros en fonction de la résolution */
-@media (max-width: 600px) {
-    .hero-section {
-        background: #000 url("https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740258625/mobile.webp") no-repeat center center;
-        background-size: cover;
     }
 }
