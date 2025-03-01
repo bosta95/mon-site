@@ -325,3 +325,22 @@ footer {
         padding: 40px 20px;
     }
 }
+
+/* -------------------------------
+   STYLES POUR LES RÉSEAUX SOCIAUX
+   ------------------------------- */
+.social-footer {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.social-footer a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.social-footer img {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+}
