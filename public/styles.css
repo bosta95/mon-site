@@ -88,7 +88,6 @@ html, body {
 /* Overlay pour le texte */
 .hero-overlay {
     position: relative;
-    z-index: 1;
     color: #fff;
     padding: 20px;
 }
