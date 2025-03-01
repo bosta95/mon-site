@@ -64,10 +64,9 @@ html, body {
 .hero-section {
     position: relative;
     height: 40vh;
-    background: #000 url("https://res.cloudinary.com/dwcz1jp7j/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1740258625/pc.webp") no-repeat center center;
-    background-size: cover;
+    background: #000;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -75,31 +74,35 @@ html, body {
     margin: 0;
 }
 
-.hero-section::before {
-    content: "";
+/* Vidéo de fond */
+.hero-video {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    pointer-events: none;
-    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
 }
 
-.hero-section * {
+/* Overlay pour le texte */
+.hero-overlay {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
 }
 
-.hero-section h1 {
+.hero-overlay h1 {
+    margin: 0;
     font-size: 3rem;
-    margin: 0;
 }
 
-.hero-section p {
-    font-size: 1.2rem;
+.hero-overlay p {
     margin: 0;
+    font-size: 1.2rem;
 }
 
 .films-slider-section {
@@ -235,81 +238,42 @@ footer {
    MEDIA QUERIES POUR MOBILE
    ========================= */
 
-/* --- NOUVELLE VERSION max-width: 900px --- */
+/* Pour écrans jusqu'à 900px */
 @media (max-width: 900px) {
     .header-container {
-        /* On force une disposition en ligne pour reproduire l’effet "capture" */
-        flex-direction: row;
-        flex-wrap: nowrap; 
-        align-items: center;
-        justify-content: space-between;
-
-        /* Fond violet uni au lieu du dégradé */
-        background: #4B0082 !important; 
-        padding: 10px;
+        flex-wrap: wrap;
+        gap: 10px;
         position: relative;
     }
-
-    /* Bouton burger à gauche */
     .menu-toggle {
         display: block;
-        background-color: #4B0082;
+        background-color: #6c5498;
         color: #fff;
         padding: 10px;
         border-radius: 5px;
-        font-size: 1.8rem;
-
-        /* Positionnement absolu en haut à gauche */
         position: absolute;
         top: 10px;
-        left: 10px;
+        right: 20px;
         z-index: 100;
-        border: 2px solid #fff; /* Optionnel : un contour blanc */
+        font-size: 1.8rem;
     }
-
-    /* Masquer le menu par défaut */
     #mainNav ul {
         display: none;
     }
-
-    /* Afficher le menu en colonne lorsqu'on clique sur le burger */
     #mainNav.show ul {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        background: #4B0082; /* Même fond violet */
+        background: #111;
         padding: 10px 0;
         width: 100%;
-        margin-top: 10px;
     }
-
-    /* Logo et icônes alignés à droite du header */
-    .header-left {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    /* Logo plus petit sur mobile */
-    .logo img {
-        height: 60px;
-    }
-
-    /* Icônes plus petites */
-    .header-icons img {
-        height: 25px;
-        width: auto;
-    }
-
-    /* Ajuster la taille du titre du hero */
-    .hero-section h1 {
+    .hero-overlay h1 {
         font-size: 2.5rem;
     }
-    .hero-section p {
+    .hero-overlay p {
         font-size: 1rem;
     }
-
-    /* Les offres prennent toute la largeur disponible */
     .offer-card {
         width: 90%;
     }
@@ -317,12 +281,10 @@ footer {
 
 /* Pour écrans jusqu'à 600px (mobile portrait) */
 @media (max-width: 600px) {
-    /* Réduction du logo */
     .logo img {
         height: 80px;
-        margin-left: 0; /* Assure l'absence de marge à gauche */
+        margin-left: 0;
     }
-    /* Assure que le conteneur du logo est aligné à gauche */
     .header-left {
         width: 100%;
         text-align: left;
@@ -342,13 +304,11 @@ footer {
     .hero-section {
         height: 30vh;
         padding: 0 10px;
-        background: #000 url("https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740258625/mobile.webp") no-repeat center center;
-        background-size: cover;
     }
-    .hero-section h1 {
+    .hero-overlay h1 {
         font-size: 2rem;
     }
-    .hero-section p {
+    .hero-overlay p {
         font-size: 0.9rem;
     }
     .films-slider-section {
