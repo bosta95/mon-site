@@ -56,7 +56,7 @@ html, body {
     font-weight: 500;
 }
 
-/* Le bouton burger est masqué par défaut */
+/* Le bouton burger est masqué par défaut en desktop */
 .menu-toggle {
     display: none;
 }
@@ -235,44 +235,81 @@ footer {
    MEDIA QUERIES POUR MOBILE
    ========================= */
 
-/* Pour écrans jusqu'à 900px */
+/* --- NOUVELLE VERSION max-width: 900px --- */
 @media (max-width: 900px) {
     .header-container {
-        flex-wrap: wrap;
-        gap: 10px;
+        /* On force une disposition en ligne pour reproduire l’effet "capture" */
+        flex-direction: row;
+        flex-wrap: nowrap; 
+        align-items: center;
+        justify-content: space-between;
+
+        /* Fond violet uni au lieu du dégradé */
+        background: #4B0082 !important; 
+        padding: 10px;
         position: relative;
     }
+
+    /* Bouton burger à gauche */
     .menu-toggle {
         display: block;
-        background-color: #6c5498;
+        background-color: #4B0082;
         color: #fff;
         padding: 10px;
         border-radius: 5px;
+        font-size: 1.8rem;
+
+        /* Positionnement absolu en haut à gauche */
         position: absolute;
         top: 10px;
-        right: 20px;
+        left: 10px;
         z-index: 100;
-        font-size: 1.8rem;
+        border: 2px solid #fff; /* Optionnel : un contour blanc */
     }
+
     /* Masquer le menu par défaut */
     #mainNav ul {
         display: none;
     }
-    /* Afficher le menu vertical lors de l'activation */
+
+    /* Afficher le menu en colonne lorsqu'on clique sur le burger */
     #mainNav.show ul {
         display: flex;
         flex-direction: column;
         gap: 10px;
-        background: #111;
+        background: #4B0082; /* Même fond violet */
         padding: 10px 0;
         width: 100%;
+        margin-top: 10px;
     }
+
+    /* Logo et icônes alignés à droite du header */
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Logo plus petit sur mobile */
+    .logo img {
+        height: 60px;
+    }
+
+    /* Icônes plus petites */
+    .header-icons img {
+        height: 25px;
+        width: auto;
+    }
+
+    /* Ajuster la taille du titre du hero */
     .hero-section h1 {
         font-size: 2.5rem;
     }
     .hero-section p {
         font-size: 1rem;
     }
+
+    /* Les offres prennent toute la largeur disponible */
     .offer-card {
         width: 90%;
     }
