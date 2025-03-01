@@ -56,21 +56,21 @@ html, body {
     font-weight: 500;
 }
 
-/* Le bouton burger est masqué par défaut en desktop */
+/* Bouton burger (masqué en desktop) */
 .menu-toggle {
     display: none;
 }
 
+/* HERO SECTION AVEC VIDEO EN FOND */
 .hero-section {
     position: relative;
-    height: 40vh;
-    background: #000;
+    height: 40vh; /* Même hauteur que l'image de fond précédente */
+    background: #000; /* Couleur de secours */
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 10px;
     margin: 0;
 }
 
