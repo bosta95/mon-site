@@ -13,66 +13,72 @@ html, body {
     overflow-x: hidden;
 }
 
+/* HEADER */
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to right, #000 50%, #4B0082 100%);
+    justify-content: flex-start;
     padding: 10px 20px;
+    background: linear-gradient(to right, #000 50%, #4B0082 100%);
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    width: 100%;
 }
 
+/* Logo positionné à l'extrême gauche */
 .logo img {
-    height: 100px;
+    height: 80px;
 }
 
+/* Icônes du header */
 .header-icons {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .header-icons img {
-    height: 30px;
+    height: 25px;
     width: auto;
 }
 
-.header-container nav ul {
+/* Navigation : on la pousse à droite avec margin-left: auto */
+.header-nav {
+    margin-left: auto;
+    padding-right: 20px;
+}
+
+.header-nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin: 0;
     padding: 0;
 }
 
-.header-container nav ul li a {
+.header-nav ul li a {
     text-decoration: none;
     color: #fff;
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
-/* Bouton burger (masqué en desktop) */
-.menu-toggle {
-    display: none;
-}
-
-/* HERO SECTION : 40vh pour conserver la hauteur de l'ancienne image */
+/* HERO SECTION : 40vh pour conserver la hauteur d'origine */
 .hero-section {
     position: relative;
-    height: 40vh; 
+    height: 40vh;
     margin: 0;
     display: flex;
-    flex-direction: column; /* Pour centrer le texte verticalement */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    background: #000; /* Couleur de secours */
+    background: #000;
 }
 
 /* Vidéo de fond */
@@ -83,7 +89,7 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: auto;
+    /* Suppression du z-index pour que la vidéo soit visible */
 }
 
 /* Overlay pour le texte */
@@ -284,7 +290,7 @@ footer {
 /* Pour écrans jusqu'à 600px (mobile portrait) */
 @media (max-width: 600px) {
     .logo img {
-        height: 80px;
+        height: 70px;
         margin-left: 0;
     }
     .header-left {
@@ -293,7 +299,7 @@ footer {
         padding-left: 0;
     }
     .header-icons img {
-        height: 25px;
+        height: 20px;
     }
     .header-container {
         flex-direction: column;
@@ -304,7 +310,7 @@ footer {
         gap: 10px;
     }
     .hero-section {
-        height: 30vh; /* Réduit la hauteur sur les petits écrans */
+        height: 30vh;
         padding: 0 10px;
     }
     .hero-overlay h1 {
