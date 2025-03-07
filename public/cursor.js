@@ -9,20 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.className = 'cursor-dot';
     cursorContainer.appendChild(cursor);
 
-    // Création des segments de traînée
-    const numTrails = 12;
+    // Création des points de traînée
+    const numTrails = 20; // Augmentation du nombre de points pour une traînée plus fluide
     const trails = [];
     
     for (let i = 0; i < numTrails; i++) {
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
+        trail.style.background = `rgba(255, 140, 140, ${1 - (i / numTrails)})`; // Dégradé de couleur
         cursorContainer.appendChild(trail);
         trails.push({
             element: trail,
             x: 0,
-            y: 0,
-            angle: 0,
-            speed: 0
+            y: 0
         });
     }
 
@@ -30,57 +29,43 @@ document.addEventListener('DOMContentLoaded', () => {
     let mouseY = 0;
     let currentX = 0;
     let currentY = 0;
-    let lastX = 0;
-    let lastY = 0;
-    const ease = 0.35;
+    const positions = []; // Stockage des positions précédentes
 
-    // Utilisation de performance.now() pour une animation plus fluide
-    let lastTime = performance.now();
+    function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+    }
 
-    function updateCursor(currentTime) {
-        const deltaTime = (currentTime - lastTime) / 16;
-        lastTime = currentTime;
-
-        // Calcul de la vélocité avec plus de précision
-        const velocityX = (mouseX - lastX) / deltaTime;
-        const velocityY = (mouseY - lastY) / deltaTime;
-        const speed = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-        const angle = Math.atan2(velocityY, velocityX);
+    function updateCursor() {
+        // Mise à jour de la position du curseur principal avec effet de lissage
+        currentX = lerp(currentX, mouseX, 0.2);
+        currentY = lerp(currentY, mouseY, 0.2);
         
-        lastX = mouseX;
-        lastY = mouseY;
+        cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
 
-        // Mise à jour du curseur principal
-        currentX += (mouseX - currentX) * ease * deltaTime;
-        currentY += (mouseY - currentY) * ease * deltaTime;
-        
-        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        // Ajout de la position actuelle au début du tableau
+        positions.unshift({ x: currentX, y: currentY });
 
-        // Mise à jour des segments de traînée avec effet de décalage progressif
+        // Limitation du nombre de positions stockées
+        if (positions.length > numTrails) {
+            positions.pop();
+        }
+
+        // Mise à jour des points de traînée
         trails.forEach((trail, index) => {
-            const delay = index * 0.08;
-            const trailEase = ease - (index * 0.02);
-            
-            // Position avec effet de traînée plus prononcé
-            trail.x += (mouseX - trail.x) * trailEase * deltaTime;
-            trail.y += (mouseY - trail.y) * trailEase * deltaTime;
+            if (positions[index]) {
+                const pos = positions[index];
+                trail.x = pos.x;
+                trail.y = pos.y;
 
-            // Calcul de l'angle avec effet de lissage
-            const targetAngle = speed < 0.1 ? trail.angle : angle;
-            trail.angle += (targetAngle - trail.angle) * trailEase * deltaTime;
+                // Calcul de la taille et de l'opacité en fonction de la position
+                const size = 8 - (index * 0.3);
+                const opacity = 1 - (index / numTrails);
 
-            // Ajustement dynamique de la longueur et de l'opacité
-            const opacity = 1 - (index / numTrails);
-            const length = Math.min(40 + (speed * 0.8), 80);
-            const scale = 1 - (index * 0.05);
-
-            trail.element.style.transform = `
-                translate3d(${trail.x}px, ${trail.y}px, 0)
-                rotate(${trail.angle}rad)
-                scaleX(${scale})
-            `;
-            trail.element.style.opacity = opacity;
-            trail.element.style.height = `${length}px`;
+                trail.element.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
+                trail.element.style.width = `${size}px`;
+                trail.element.style.height = `${size}px`;
+                trail.element.style.opacity = opacity;
+            }
         });
 
         requestAnimationFrame(updateCursor);
@@ -94,20 +79,24 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorContainer.style.opacity = '1';
             requestAnimationFrame(updateCursor);
         }
-    }, { passive: true });
+    });
 
-    // Gestion optimisée des éléments interactifs
+    // Gestion des éléments interactifs
     const interactiveElements = document.querySelectorAll('a, button, .offer-card, .advantage-card');
     
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
             cursor.classList.add('cursor-hover');
-            trails.forEach(trail => trail.element.classList.add('trail-hover'));
+            trails.forEach(trail => {
+                trail.element.classList.add('trail-hover');
+            });
         });
 
         element.addEventListener('mouseleave', () => {
             cursor.classList.remove('cursor-hover');
-            trails.forEach(trail => trail.element.classList.remove('trail-hover'));
+            trails.forEach(trail => {
+                trail.element.classList.remove('trail-hover');
+            });
         });
     });
 }); 
