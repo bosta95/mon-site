@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Site IPTV Pro",
   "main": "server.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "lint": "eslint .",
-    "test": "echo \"No tests specified\" && exit 0",
-    "build": "webpack --mode production",
-    "analyze": "webpack-bundle-analyzer stats.json"
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "author": "Ton Nom",
   "license": "ISC",
