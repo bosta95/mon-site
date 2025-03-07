@@ -2,9 +2,40 @@ const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const compression = require('compression');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+
+// Configuration de la sécurité
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://api.stripe.com"],
+    },
+  },
+}));
+
+// Configuration CORS
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? 'https://www.iptvsmarterpros.com' 
+    : 'http://localhost:3000',
+  credentials: true
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limite chaque IP à 100 requêtes par fenêtre
+});
+app.use('/api/', limiter);
 
 // Forcer HTTPS uniquement en production
 if (process.env.NODE_ENV === 'production') {
@@ -19,14 +50,16 @@ if (process.env.NODE_ENV === 'production') {
 // Activer la compression
 app.use(compression());
 
-// Middleware pour parser les requêtes JSON
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware pour parser les requêtes JSON avec limite de taille
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// Servir les fichiers statiques
+// Cache-Control pour les fichiers statiques
+const cacheTime = 31536000; // 1 an
 app.use(express.static(path.join(__dirname, 'public'), {
-  maxAge: '1y',
-  etag: false
+  maxAge: cacheTime * 1000,
+  etag: true,
+  lastModified: true
 }));
 
 // Redirection favicon
@@ -55,12 +88,18 @@ function createTransporter() {
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_PORT == 465, // true si 465, false sinon
+    secure: process.env.SMTP_PORT === '465',
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS
     }
   });
+}
+
+// Fonction de validation d'email
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
 }
 
 // 📌 Route API pour envoyer un email depuis le formulaire de contact
@@ -72,14 +111,30 @@ app.post('/api/contact', async (req, res) => {
       return res.status(400).json({ error: 'Tous les champs sont requis' });
     }
 
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Format d\'email invalide' });
+    }
+
+    // Échappement des données utilisateur pour HTML
+    const escapedName = name.replace(/[&<>"']/g, (char) => {
+      const entities = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      };
+      return entities[char];
+    });
+
     const transporter = createTransporter();
 
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: process.env.MERCHANT_EMAIL, 
-      subject: `Nouveau message de ${name}`,
-      text: `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      html: `<p><strong>Nom:</strong> ${name}</p>
+      subject: `Nouveau message de ${escapedName}`,
+      text: `Nom: ${escapedName}\nEmail: ${email}\nMessage: ${message}`,
+      html: `<p><strong>Nom:</strong> ${escapedName}</p>
              <p><strong>Email:</strong> ${email}</p>
              <p><strong>Message:</strong> ${message}</p>`
     };

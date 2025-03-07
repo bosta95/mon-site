@@ -8,7 +8,7 @@
   <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
   <!-- Lien vers le fichier CSS externe -->
   <link href="styles.css?v=4" rel="stylesheet"/>
-  <meta content="Obtenez le meilleur abonnement IPTV avec +10 000 chaînes HD, films et séries en VOD. Qualité stable et fiable. Profitez d’une offre exclusive !" name="description"/>
+  <meta content="Obtenez le meilleur abonnement IPTV avec +10 000 chaînes HD, films et séries en VOD. Qualité stable et fiable. Profitez d'une offre exclusive !" name="description"/>
   
   <!-- Styles supplémentaires pour la vidéo de fond dans la section OFFRES et les cartes transparentes -->
   <style>
@@ -107,14 +107,88 @@
         <img alt="image 15" src="images/image15.svg"/>
         <img alt="image 16" src="images/image16.svg"/>
       </div>
+      <!-- Navigation Desktop -->
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="about.html">À propos</a></li>
-          <li><a href="tutoriel.html">Tutoriel</a></li>
-          <li><a href="faq.html">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li>
+            <a href="index.html">
+              <i class="fas fa-home"></i>
+              Accueil Premium
+            </a>
+          </li>
+          <li>
+            <a href="blog.html">
+              <i class="fas fa-blog"></i>
+              Blog
+              <span class="badge-new">NEW</span>
+            </a>
+          </li>
+          <li>
+            <a href="tutoriel.html">
+              <i class="fas fa-download"></i>
+              Guide Installation
+            </a>
+          </li>
+          <li>
+            <a href="#offers-section">
+              <i class="fas fa-tags"></i>
+              Tarifs & Offres
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="support-link">
+              <i class="fas fa-headset"></i>
+              Support 24/7
+            </a>
+          </li>
+          <li>
+            <a href="#" class="login-btn">
+              <i class="fas fa-user-circle"></i>
+              Espace Client
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Navigation Mobile -->
+      <nav class="mobile-nav">
+        <ul>
+          <li>
+            <a href="index.html">
+              <i class="fas fa-home"></i>
+              Accueil Premium
+            </a>
+          </li>
+          <li>
+            <a href="blog.html">
+              <i class="fas fa-blog"></i>
+              Blog
+              <span class="badge-new">NEW</span>
+            </a>
+          </li>
+          <li>
+            <a href="tutoriel.html">
+              <i class="fas fa-download"></i>
+              Guide Installation
+            </a>
+          </li>
+          <li>
+            <a href="#offers-section">
+              <i class="fas fa-tags"></i>
+              Tarifs & Offres
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="support-link">
+              <i class="fas fa-headset"></i>
+              Support 24/7
+            </a>
+          </li>
+          <li>
+            <a href="#" class="login-btn">
+              <i class="fas fa-user-circle"></i>
+              Espace Client
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
@@ -129,8 +203,12 @@
       loop 
       playsinline 
       preload="auto"
+      poster="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.jpg"
     >
-      <source src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" type="video/mp4">
+      <source 
+        src="https://res.cloudinary.com/dwcz1jp7j/video/upload/q_auto:best,f_auto/v1740830815/video1.mp4" 
+        type="video/mp4"
+      >
       Votre navigateur ne supporte pas la vidéo.
     </video>
     <div class="hero-overlay">
@@ -275,43 +353,120 @@
     </div>
   </section>
   
-  <!-- NOUVELLE SECTION : NOS AVANTAGES -->
+  <!-- SECTION AVANTAGES -->
   <section class="advantages-section">
-    <h2>La livraison instantanée de vos accès par e-mail !</h2>
-    <p>Le service le plus stable et complet du marché !</p>
-    <p>Découvrez l'abonnement Premium IPTV Smarters Pro et profitez de toutes vos chaînes, séries et films favoris, y compris l'ensemble des bouquets sportifs. Aucun matériel à installer : téléchargez simplement l'application IPTV Smarters Pro et insérez vos identifiants pour un accès illimité 24h/24 et 7j/7 pendant 1 an, disponible sur tous vos appareils !</p>
-    <h2>Caractéristiques de l'offre :</h2>
-    <ul>
-      <li><strong>Accès immédiat :</strong> Recevez instantanément votre login et votre mot de passe directement dans votre boîte e-mail, accompagnés d'un tutoriel détaillé pour une installation sans effort.</li>
-      <li><strong>Large choix de chaînes :</strong> Plus de 20 000 chaînes TV nationales et internationales, issues de plus de 70 pays.</li>
-      <li><strong>Richesse en contenu :</strong> Plus de 54 000 vidéos à la demande (VOD) et séries.</li>
-      <li><strong>Diffusion ultra-stable :</strong> Profitez d'une diffusion sans freez grâce à des serveurs dédiés européens de haute qualité avec une connexion de 10 Gbps (démarrage des chaînes en moins de 0,5 seconde).</li>
-      <li><strong>Compatibilité étendue :</strong> Regardez vos programmes sur Smart TV, smartphone, tablette, ordinateur, Android Box, etc.</li>
-      <li><strong>Installation instantanée :</strong> Configurez et installez le service en quelques minutes grâce à nos tutoriels complets.</li>
-      <li><strong>Service à la demande :</strong> Envie de regarder un film ou une série en particulier ? Contactez-nous et nous l'ajouterons à notre mise à jour mensuelle.</li>
-      <li><strong>Satisfaction garantie :</strong> Plus de 120000 clients satisfaits en France et un service clientèle francophone disponible 7j/7.</li>
-    </ul>
+    <div class="advantages-container">
+      <div class="advantages-header">
+        <h2>Profitez d'un Service IPTV Premium avec Accès Instantané</h2>
+        <p>Découvrez le service IPTV le plus stable et complet du marché. Plus de 22 000 chaînes TV et 50 000 films & séries en qualité HD et 4K, disponibles instantanément après votre inscription.</p>
+      </div>
+
+      <div class="advantages-grid">
+        <article class="advantage-card">
+          <h3>Accès Instantané Garanti</h3>
+          <p>Recevez vos identifiants de connexion par email immédiatement après votre inscription. Notre système automatisé vous assure un accès rapide à votre compte IPTV premium, accompagné d'un guide d'installation détaillé.</p>
+        </article>
+
+        <article class="advantage-card">
+          <h3>Qualité de Streaming Exceptionnelle</h3>
+          <p>Profitez d'une diffusion ultra-stable grâce à nos serveurs européens haute performance. Temps de chargement inférieur à 0,5 seconde et qualité d'image optimale en 4K, FHD et HD.</p>
+        </article>
+
+        <article class="advantage-card">
+          <h3>Compatibilité Universelle</h3>
+          <p>Notre service IPTV fonctionne sur tous vos appareils : Smart TV, Android Box, iOS, tablettes, ordinateurs et smartphones. Installation simple et rapide avec l'application IPTV Smarters Pro.</p>
+        </article>
+
+        <article class="advantage-card">
+          <h3>Support Client Premium</h3>
+          <p>Une équipe de support francophone disponible 7j/7 pour vous accompagner. Plus de 120 000 clients satisfaits en France nous font déjà confiance pour leur divertissement.</p>
+        </article>
+      </div>
+
+      <div class="key-features">
+        <h3>Caractéristiques Principales de Notre Service IPTV</h3>
+        <ul class="features-list">
+          <li>
+            <strong>Contenu Premium</strong>
+            +22 000 chaînes TV en direct et +50 000 films & séries à la demande
+          </li>
+          <li>
+            <strong>Qualité Garantie</strong>
+            Streaming en 4K/UHD/FHD/HD avec une stabilité optimale
+          </li>
+          <li>
+            <strong>Mises à Jour Régulières</strong>
+            Nouveau contenu ajouté chaque semaine et maintenance proactive
+          </li>
+          <li>
+            <strong>Multi-Écrans</strong>
+            Regardez simultanément sur plusieurs appareils selon votre abonnement
+          </li>
+          <li>
+            <strong>Contenu International</strong>
+            Chaînes et VOD de plus de 70 pays en plusieurs langues
+          </li>
+          <li>
+            <strong>Service Personnalisé</strong>
+            Demandez l'ajout de vos chaînes et contenus préférés
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
   
+  <!-- FOOTER -->
   <footer>
-    <p>© 2025 IPTV Pro - Tous droits réservés.</p>
-    <p>
-      <a class="btn-footer" href="conditions.html">Conditions Générales</a>
-      <a class="btn-footer" href="privacy.html">Politique de Confidentialité</a>
-      <a class="btn-footer" href="tutoriel.html">Tutoriel</a>
-    </p>
-    <!-- Liens vers vos réseaux sociaux -->
-    <div class="social-footer">
-      <a href="https://wa.me/652020293" target="_blank">
-        <img src="images/what.png" alt="WhatsApp" />
-      </a>
-      <a href="https://www.snapchat.com/add/dyuka.953" target="_blank">
-        <img src="images/snap.png" alt="Snapchat" />
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61573500942178" target="_blank">
-        <img src="images/fb.png" alt="Facebook" />
-      </a>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>À propos de IPTV Pro</h3>
+        <p>Votre source premium pour plus de 22 000 chaînes TV, films et séries en haute définition. Une expérience de streaming inégalée.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Liens Rapides</h3>
+        <ul class="footer-links">
+          <li><a href="#offers-section">Nos Offres</a></li>
+          <li><a href="#films">Films & Séries</a></li>
+          <li><a href="tutoriel.html">Guide Installation</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Informations Légales</h3>
+        <ul class="footer-links">
+          <li><a href="conditions.html">Conditions Générales</a></li>
+          <li><a href="privacy.html">Politique de Confidentialité</a></li>
+          <li><a href="#about">À Propos</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section" id="contact">
+        <h3>Support 24/7</h3>
+        <p>Notre équipe de support est disponible 24h/24 et 7j/7 pour vous assister.</p>
+        <p>Contactez-nous via :</p>
+        <div class="social-links">
+          <a href="https://wa.me/652020293" target="_blank" title="Support WhatsApp 24/7">
+            <img src="images/what.png" alt="WhatsApp" />
+          </a>
+          <a href="https://www.snapchat.com/add/dyuka.953" target="_blank" title="Support Snapchat">
+            <img src="images/snap.png" alt="Snapchat" />
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61573500942178" target="_blank" title="Support Facebook">
+            <img src="images/fb.png" alt="Facebook" />
+          </a>
+        </div>
+        <p class="support-time">Temps de réponse moyen : moins de 5 minutes</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 IPTV Pro - Tous droits réservés.</p>
     </div>
   </footer>
+
+  <!-- Script du curseur personnalisé -->
+  <script src="cursor.js"></script>
 </body>
 </html>
