@@ -18,6 +18,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:"],
       connectSrc: ["'self'", "https://api.stripe.com"],
+      mediaSrc: ["'self'", "https://res.cloudinary.com"],
     },
   },
 }));
