@@ -1,6 +1,4 @@
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html, body {
     margin: 0;
@@ -1503,4 +1501,3 @@ a:hover, button:hover {
 .support-link::after {
     animation: pulse-support 2s infinite;
 }
-

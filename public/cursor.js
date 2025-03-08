@@ -1,13 +1,17 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Création du conteneur du curseur
-    const cursorContainer = document.createElement('div');
-    cursorContainer.className = 'cursor-container';
-    document.body.appendChild(cursorContainer);
+// Optimisation du JavaScript pour alléger les ressources inutiles
 
-    // Création du point principal du curseur
+// Vérification si le DOM est prêt avant d'exécuter le script
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCursor);
+} else {
+    initCursor();
+}
+
+function initCursor() {
     const cursor = document.createElement('div');
-    cursor.className = 'cursor-dot';
-    cursorContainer.appendChild(cursor);
+    cursor.classList.add('cursor-dot');
+    cursor.style.zIndex = '9999';
+    document.body.appendChild(cursor);
 
     // Création des points de traînée
     const numTrails = 20; // Augmentation du nombre de points pour une traînée plus fluide
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
         trail.style.background = `rgba(255, 140, 140, ${1 - (i / numTrails)})`; // Dégradé de couleur
-        cursorContainer.appendChild(trail);
+        document.body.appendChild(trail);
         trails.push({
             element: trail,
             x: 0,
@@ -75,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mouseX = e.clientX;
         mouseY = e.clientY;
         
-        if (!cursorContainer.style.opacity) {
-            cursorContainer.style.opacity = '1';
+        if (!cursor.style.opacity) {
+            cursor.style.opacity = '1';
             requestAnimationFrame(updateCursor);
         }
     });
@@ -99,4 +103,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
-}); 
+
+    document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'scale(0.8)';
+        trails.forEach(trail => {
+            trail.element.style.opacity = '0.5';
+        });
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'scale(1)';
+        trails.forEach(trail => {
+            trail.element.style.opacity = '0.7';
+        });
+    });
+
+    updateCursor();
+} 

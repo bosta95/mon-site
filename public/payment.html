@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IPTV Pro - Abonnements et Films & Séries</title>
+  <title>IPTV Pro - Paiement</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .payment-btn { background: #6c5498; color: #fff; padding: 12px 25px; border-radius: 8px; text-decoration: none; transition: background 0.3s ease; }
+    .payment-btn:hover { background: #7f66b5; }
+    .hero-section { text-align: center; padding: 50px 20px; }
+  </style>
 </head>
 <body>
 
@@ -15,20 +20,21 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#hero">Accueil</a></li>
-        <li><a href="#abonnements">Offres</a></li>
-        <li><a href="#films">Films & Séries</a></li>
-        <li><a href="#about">À propos</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="offer.html">Offres</a></li>
+        <li><a href="tutoriel.html">Films & Séries</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="faq.html">FAQ</a></li>
         <li><span class="cart" id="cart-count">Panier (0)</span></li>
       </ul>
     </nav>
   </header>
 
-  <!-- MESSAGE TEMPORAIRE -->
+  <!-- SECTION PAIEMENT -->
   <section id="payment-message" class="hero-section">
-    <h2>Paiement</h2>
-    <p>Le système de paiement est en cours de mise à jour. Revenez bientôt !</p>
+    <h2>Paiement Sécurisé</h2>
+    <p>Cliquez sur le bouton ci-dessous pour procéder au paiement sécurisé.</p>
+    <a href="https://votre-page-de-paiement.com" class="payment-btn">Procéder au Paiement</a>
   </section>
 
   <!-- FOOTER -->

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription | IPTV Pro</title>
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .signup-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #1f1f1f;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        .signup-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ff8c8c;
+            font-size: 2.8rem;
+        }
+        .signup-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+        .signup-container .btn {
+            background: #6c5498;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            border: none;
+            width: 100%;
+        }
+        .signup-container .btn:hover {
+            background: #7f66b5;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Inscription</h1>
+        <form id="signup-form">
+            <input type="text" placeholder="Nom" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Mot de passe" required>
+            <button type="submit" class="btn">Créer un compte</button>
+        </form>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html> 

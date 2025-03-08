@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Client | IPTV Pro</title>
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            background: #f4f4f9;
+            font-family: 'Roboto', sans-serif;
+        }
+        .sidebar {
+            width: 250px;
+            background: #1f1f1f;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background: #6c5498;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        .btn {
+            background: #6c5498;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background: #7f66b5;
+        }
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        .status-actif {
+            background: #28a745;
+        }
+        .status-expire {
+            background: #dc3545;
+        }
+        .status-attente {
+            background: #ffc107;
+        }
+        @media(max-width:768px){ .sidebar{width:100px;} .sidebar a{font-size:0.9rem;padding:8px;} .content{padding:15px;} }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" class="active"><i class="fas fa-home"></i> Accueil</a>
+        <a href="#profile"><i class="fas fa-user"></i> Profil</a>
+        <a href="#orders"><i class="fas fa-box"></i> Commandes</a>
+        <a href="#settings"><i class="fas fa-cog"></i> Paramètres</a>
+        <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    </div>
+    <div class="content">
+        <div id="profile" class="card">
+            <h2>Mon Profil</h2>
+            <img src="images/profile-placeholder.png" alt="Image de profil" class="profile-pic" id="profile-pic">
+            <input type="file" id="upload-pic" accept="image/*">
+            <p id="user-name"></p>
+            <p id="user-email"></p>
+            <p id="account-created"></p>
+            <p id="last-login"></p>
+            <button onclick="editProfile()" class="btn">Modifier mes infos</button>
+        </div>
+        <div id="orders" class="card">
+            <h2>Historique des commandes</h2>
+            <ul id="orders-list"></ul>
+        </div>
+        <div id="settings" class="card">
+            <h2>Paramètres du compte</h2>
+            <button onclick="changePassword()" class="btn">Modifier le mot de passe</button>
+            <label><input type="checkbox" id="email-notifications"> Activer les notifications par email</label>
+        </div>
+    </div>
+    <script>
+        function checkLogin() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) {
+                alert('Veuillez vous connecter.');
+                window.location.href = 'login.html';
+            } else {
+                document.getElementById('user-name').textContent = 'Nom : ' + user.name;
+                document.getElementById('user-email').textContent = 'Email : ' + user.email;
+                document.getElementById('account-created').textContent = 'Compte créé le : ' + (user.created || 'Inconnu');
+                document.getElementById('last-login').textContent = 'Dernière connexion : ' + (user.lastLogin || 'Première connexion');
+                loadOrderHistory(user.email);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+
+        function editProfile() {
+            const newName = prompt('Entrez votre nouveau nom :', document.getElementById('user-name').textContent.split(': ')[1]);
+            const newEmail = prompt('Entrez votre nouvel email :', document.getElementById('user-email').textContent.split(': ')[1]);
+            const newPassword = prompt('Entrez votre nouveau mot de passe :');
+
+            if (newName && newEmail && newPassword) {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const userIndex = users.findIndex(user => user.email === currentUser.email);
+
+                if (userIndex !== -1) {
+                    users[userIndex].name = newName;
+                    users[userIndex].email = newEmail;
+                    users[userIndex].password = btoa(newPassword);
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    currentUser.name = newName;
+                    currentUser.email = newEmail;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                    alert('Informations mises à jour avec succès !');
+                    checkLogin();
+                }
+            }
+        }
+
+        function loadOrderHistory(email) {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const userOrders = orders.filter(order => order.email === email);
+            const ordersList = document.getElementById('orders-list');
+            ordersList.innerHTML = '';
+            userOrders.forEach(order => {
+                const li = document.createElement('li');
+                li.innerHTML = `Commande du ${order.date} : ${order.details} <span class="order-status ${order.status}">${order.status}</span>`;
+                ordersList.appendChild(li);
+            });
+        }
+
+        function changePassword() {
+            const newPassword = prompt('Entrez votre nouveau mot de passe :');
+            if (newPassword) {
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const userIndex = users.findIndex(user => user.email === currentUser.email);
+
+                if (userIndex !== -1) {
+                    users[userIndex].password = btoa(newPassword);
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    alert('Mot de passe mis à jour avec succès !');
+                }
+            }
+        }
+
+        document.getElementById('upload-pic').addEventListener('change', function(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('profile-pic').src = reader.result;
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                currentUser.profilePic = reader.result;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        checkLogin();
+    </script>
+</body>
+</html> 
