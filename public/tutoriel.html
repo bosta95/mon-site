@@ -23,97 +23,11 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet"/>
 <!-- Styles -->
-<link href="styles.css" rel="stylesheet"/>
-<style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-      background: #000;
-      color: #fff;
-      min-height: 100vh;
-    }
-    header, footer {
-      background: linear-gradient(to right, #000000 45%, #4B0082 100%);
-      padding: 30px 0;
-      text-align: center;
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      margin: 0;
-      padding: 0;
-    }
-    nav ul li {
-      margin: 0 15px;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-    }
-    nav ul li a:hover {
-      color: #ddd;
-    }
-    .content-wrapper {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #ff8c8c;
-    }
-    h2 {
-      font-size: 1.8rem;
-      margin-top: 40px;
-      margin-bottom: 10px;
-      color: #ff8c8c;
-    }
-    p, ol, ul {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      color: #ccc;
-    }
-    /* Bouton Tutoriel (pour les call-to-action internes) */
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      background: #ff8c8c;
-      color: #1a1a1a;
-      padding: 15px 30px;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .btn:hover {
-      background: #e67e7e;
-      transform: translateY(-2px);
-    }
-    .etape img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-      border: 2px solid #4B0082;
-      border-radius: 8px;
-    }
-  </style>
+<link href="styles.css?v=12" rel="stylesheet">
 </head>
 <body>
 <!-- ========== HEADER ========== -->
-<header>
+<header class="header-container animate-on-scroll">
 <div class="nav-container">
 <nav>
 <ul>
@@ -127,7 +41,7 @@
 </div>
 </header>
 <!-- ========== FIN HEADER ========== -->
-<div class="content-wrapper">
+<div class="content-wrapper animate-fade-in">
 <h1>Tutoriels IPTV - Installation et Guide Pas à Pas</h1>
 <p>
       Bienvenue dans ce guide complet d'installation d'<strong>IPTV Smarters Pro</strong> sur votre Fire TV ou autre appareil compatible. 
@@ -149,12 +63,12 @@
 <h2>Étape 2 : Autoriser les sources inconnues</h2>
 <img alt="Activer les sources inconnues (Placeholder)" src="/images/etape2.webp"/>
 <p>
-        Avant de pouvoir installer IPTV Smarters Pro via Downloader, vous devez autoriser l’installation d’applications de sources inconnues 
+        Avant de pouvoir installer IPTV Smarters Pro via Downloader, vous devez autoriser l'installation d'applications de sources inconnues 
         sur votre Fire TV. Pour cela :
       </p>
 <ul>
 <li>Accédez à <strong>Paramètres</strong> &gt; <strong>Ma Fire TV</strong> &gt; <strong>Options de développeur</strong>.</li>
-<li>Activez <em>Applications de sources inconnues</em> pour l’application Downloader.</li>
+<li>Activez <em>Applications de sources inconnues</em> pour l'application Downloader.</li>
 </ul>
 </section>
 <!-- Étape 3 -->
@@ -165,9 +79,9 @@
         Lancez <strong>Downloader</strong>, puis :
       </p>
 <ol>
-<li>Dans la barre d’adresse, saisissez le code direct du fichier APK d’IPTV Smarters Pro (164547).</li>
+<li>Dans la barre d'adresse, saisissez le code direct du fichier APK d'IPTV Smarters Pro (164547).</li>
 <li>Appuyez sur <em>Go</em> ; patientez 6 secondes. Si le téléchargement ne démarre pas, cliquez sur le lien.</li>
-<li>Une fois le téléchargement terminé, suivez les instructions à l’écran pour installer l’application.</li>
+<li>Une fois le téléchargement terminé, suivez les instructions à l'écran pour installer l'application.</li>
 </ol>
 </section>
 <!-- Étape 4 -->
@@ -175,8 +89,8 @@
 <h2>Étape 4 : Ouvrir et configurer IPTV Smarters Pro</h2>
 <img alt="Ouverture de l'application (Placeholder)" src="/images/etape4.webp"/>
 <p>
-        Après l’installation, ouvrez <strong>IPTV Smarters Pro</strong>. Vous serez invité à accepter les conditions 
-        d’utilisation et à accorder les autorisations nécessaires (accès au stockage, etc.). Sélectionnez ensuite « Login with Xtream Codes API ».
+        Après l'installation, ouvrez <strong>IPTV Smarters Pro</strong>. Vous serez invité à accepter les conditions 
+        d'utilisation et à accorder les autorisations nécessaires (accès au stockage, etc.). Sélectionnez ensuite « Login with Xtream Codes API ».
       </p>
 </section>
 <!-- Étape 5 -->
@@ -184,16 +98,16 @@
 <h2>Étape 5 : Ajouter votre abonnement IPTV</h2>
 <img alt="Configuration de l'abonnement (Placeholder)" src="/images/etape5.webp"/>
 <p>
-        Saisissez les informations fournies par votre fournisseur (URL, nom d’utilisateur, mot de passe, etc.).
+        Saisissez les informations fournies par votre fournisseur (URL, nom d'utilisateur, mot de passe, etc.).
       </p>
 </section>
 <!-- Étape 6 -->
 <section class="etape6" id="etape6">
-<h2>Étape 6 : Personnaliser l’interface</h2>
+<h2>Étape 6 : Personnaliser l'interface</h2>
 <img alt="Personnalisation de l'interface (Placeholder)" src="/images/etape6.webp"/>
 <p>
-        Dans les paramètres, vous pouvez personnaliser l’interface, trier vos chaînes, bloquer certaines catégories, gérer vos favoris, ou encore 
-        activer l’option EPG (Guide TV) si elle est incluse dans votre abonnement.
+        Dans les paramètres, vous pouvez personnaliser l'interface, trier vos chaînes, bloquer certaines catégories, gérer vos favoris, ou encore 
+        activer l'option EPG (Guide TV) si elle est incluse dans votre abonnement.
       </p>
 </section>
 <!-- Étape 7 -->
@@ -201,8 +115,8 @@
 <h2>Étape 7 : Profiter de votre abonnement</h2>
 <img alt="Profiter de votre abonnement (Placeholder)" src="/images/etape7.webp"/>
 <p>
-        C’est terminé ! Vous pouvez maintenant profiter de votre abonnement IPTV Smarters Pro, parcourir vos chaînes, films et séries préférés, 
-        et bénéficier d’un streaming de haute qualité.
+        C'est terminé ! Vous pouvez maintenant profiter de votre abonnement IPTV Smarters Pro, parcourir vos chaînes, films et séries préférés, 
+        et bénéficier d'un streaming de haute qualité.
       </p>
 </section>
 <p style="text-align: center; margin-top: 40px;">

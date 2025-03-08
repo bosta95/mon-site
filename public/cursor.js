@@ -8,10 +8,15 @@ if (document.readyState === 'loading') {
 }
 
 function initCursor() {
+    // Création d'un conteneur pour le curseur et ses éléments
+    const cursorContainer = document.createElement('div');
+    cursorContainer.classList.add('cursor-container');
+    cursorContainer.style.zIndex = '99999'; // Augmentation significative du z-index pour garantir que le curseur reste au-dessus de tous les éléments
+    document.body.appendChild(cursorContainer);
+    
     const cursor = document.createElement('div');
     cursor.classList.add('cursor-dot');
-    cursor.style.zIndex = '9999';
-    document.body.appendChild(cursor);
+    cursorContainer.appendChild(cursor);
 
     // Création des points de traînée
     const numTrails = 20; // Augmentation du nombre de points pour une traînée plus fluide
@@ -21,7 +26,7 @@ function initCursor() {
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
         trail.style.background = `rgba(255, 140, 140, ${1 - (i / numTrails)})`; // Dégradé de couleur
-        document.body.appendChild(trail);
+        cursorContainer.appendChild(trail);
         trails.push({
             element: trail,
             x: 0,
@@ -85,10 +90,16 @@ function initCursor() {
         }
     });
 
-    // Gestion des éléments interactifs
-    const interactiveElements = document.querySelectorAll('a, button, .offer-card, .advantage-card');
+    // Gestion des éléments interactifs avec une meilleure détection
+    const interactiveElements = document.querySelectorAll('a, button, .offer-card, .advantage-card, input, select, textarea, [role="button"]');
     
     interactiveElements.forEach(element => {
+        // Assurer que les éléments interactifs ont un z-index inférieur au curseur
+        if (!element.style.zIndex || parseInt(element.style.zIndex) >= 10000) {
+            element.style.position = element.style.position || 'relative';
+            element.style.zIndex = '1';
+        }
+        
         element.addEventListener('mouseenter', () => {
             cursor.classList.add('cursor-hover');
             trails.forEach(trail => {
@@ -118,5 +129,15 @@ function initCursor() {
         });
     });
 
+    // Désactiver le curseur par défaut
+    document.body.style.cursor = 'none';
+    
+    // Réactiver le curseur par défaut sur les appareils mobiles
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.body.style.cursor = 'auto';
+        cursorContainer.style.display = 'none';
+    }
+
+    cursor.style.opacity = '1'; // Assurer que le curseur principal est toujours visible
     updateCursor();
 } 
