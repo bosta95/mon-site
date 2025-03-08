@@ -128,10 +128,18 @@
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ clientEmail, orderId, product, price })
-          });
-
-          alert('Transaction réussie, merci ' + details.payer.name.given_name + ' !');
-          window.location.href = 'success.html';
+          }).then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                alert('Transaction réussie, merci ' + details.payer.name.given_name + ' !');
+                window.location.href = 'success.html';
+              } else {
+                alert('Erreur lors de l'envoi de l'email.');
+              }
+            }).catch(error => {
+              alert('Erreur lors de l'envoi de l'email.');
+              console.error('Erreur envoi email:', error);
+            });
         }).catch(error => {
           alert('Erreur lors du paiement, veuillez réessayer.');
           console.error('Erreur paiement:', error);
