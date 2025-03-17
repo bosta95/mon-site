@@ -47,51 +47,558 @@
     },
     "description": "Découvrez notre guide complet sur les tendances du streaming IPTV en 2025, avec des conseils sur les abonnements IPTV, innovations technologiques et sécurité pour une expérience de streaming premium."
   }
-  </script>
+</script>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet"/>
+<!-- Font Awesome pour les icônes -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 <!-- Fichier CSS -->
 <link href="styles.css?v=11" rel="stylesheet">
+
+<style>
+  /* Styles spécifiques à la page blog */
+  .blog-header {
+    background: linear-gradient(90deg, #ff6b6b, #6c5498);
+    padding: 80px 0 50px;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  
+  .blog-header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  
+  .blog-header p {
+    color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  
+  .blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+  
+  .blog-card {
+    background: rgba(20, 20, 20, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  }
+  
+  .blog-card-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .blog-card:hover .blog-card-image img {
+    transform: scale(1.05);
+  }
+  
+  .blog-card-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .blog-card-tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff6b6b, #6c5498);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    align-self: flex-start;
+  }
+  
+  .blog-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #fff;
+    line-height: 1.3;
+  }
+  
+  .blog-card p {
+    color: #ddd;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+  
+  .blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .blog-card-date {
+    color: #aaa;
+    font-size: 0.85rem;
+  }
+  
+  .blog-card-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+  }
+  
+  .blog-card-link i {
+    margin-left: 5px;
+    transition: transform 0.3s;
+  }
+  
+  .blog-card-link:hover {
+    color: #6c5498;
+  }
+  
+  .blog-card-link:hover i {
+    transform: translateX(5px);
+  }
+  
+  .blog-footer {
+    text-align: center;
+    background: rgba(20, 20, 20, 0.7);
+    padding: 30px 0;
+    margin-top: 50px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .blog-footer h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .blog-footer p {
+    color: #ddd;
+    max-width: 600px;
+    margin: 0 auto 25px;
+  }
+  
+  .blog-footer .btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff6b6b, #6c5498);
+    color: #fff;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .blog-footer .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  
+  .featured-article {
+    display: flex;
+    background: rgba(20, 20, 20, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .featured-article-image {
+    flex: 0 0 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .featured-article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .featured-article:hover .featured-article-image img {
+    transform: scale(1.05);
+  }
+  
+  .featured-article-content {
+    flex: 0 0 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .featured-article-tag {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff6b6b, #6c5498);
+    color: #fff;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    align-self: flex-start;
+  }
+  
+  .featured-article h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+    line-height: 1.3;
+  }
+  
+  .featured-article p {
+    color: #ddd;
+    margin-bottom: 30px;
+    line-height: 1.7;
+    font-size: 1.1rem;
+  }
+  
+  .featured-article-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+  }
+  
+  .featured-article-link i {
+    margin-left: 8px;
+    transition: transform 0.3s;
+  }
+  
+  .featured-article-link:hover {
+    color: #6c5498;
+  }
+  
+  .featured-article-link:hover i {
+    transform: translateX(5px);
+  }
+  
+  @media (max-width: 992px) {
+    .featured-article {
+      flex-direction: column;
+    }
+    
+    .featured-article-image, .featured-article-content {
+      flex: 0 0 100%;
+    }
+    
+    .featured-article-image {
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .blog-header h1 {
+      font-size: 2rem;
+    }
+    
+    .featured-article h2 {
+      font-size: 1.6rem;
+    }
+  }
+  
+  /* Styles supplémentaires pour corriger la navigation */
+  body {
+    margin-top: 60px; /* Pour tenir compte du header fixe */
+  }
+  
+  .header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(15, 15, 15, 0.95);
+    height: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .header-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+  }
+  
+  .header-nav ul li a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .header-nav ul li a:hover {
+    color: #ff8c8c;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
+  
+  .header-nav ul li a.active {
+    color: #ff6b6b;
+    background: rgba(108, 84, 152, 0.15);
+  }
+  
+  .header-nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 2px;
+    background: #ff6b6b;
+  }
+  
+  /* Ajuster la marge supérieure du contenu pour compenser le header fixe */
+  .blog-header {
+    margin-top: 70px;
+  }
+</style>
 </head>
 <body>
-<div class="blog-container animate-fade-in">
-<header class="header-container animate-on-scroll">
-<div class="logo">
-<img alt="IPTV Pro Logo" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" width="500"/>
-</div>
-<nav>
-<ul>
-<li><a href="/index.html">Accueil</a></li>
-<li><a href="/about.html">À propos</a></li>
-<li><a href="/tutoriel.html">Tutoriel</a></li>
-<li><a href="/faq.html">FAQ</a></li>
-<li><a href="/contact.html">Contact</a></li>
-<li><a href="/blog.html">Blog</a></li>
-</ul>
-</nav>
+<!-- HEADER AMÉLIORÉ -->
+<header class="header-container">
+  <div class="nav-container">
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
+      </a>
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="offer.html">Offres</a></li>
+        <li><a href="tutoriel.html">Guide</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
-<h1>Blog IPTV - Actus &amp; Conseils pour une Meilleure Expérience</h1>
-<p>Le monde du streaming évolue à une vitesse fulgurante, et en 2025, l'IPTV se positionne au cœur de cette révolution numérique. Dans cet article, nous explorons les tendances majeures qui redéfinissent l'expérience de streaming, avec des conseils pour profiter d'un service IPTV premium, accessible sur tous vos appareils.</p>
-<h2>Découvrez nos Conseils &amp; Astuces pour l'IPTV</h2>
-<p>Avec la montée en puissance de la technologie 4K et l'augmentation de la demande pour des contenus en haute définition, les abonnements IPTV premium deviennent incontournables. IPTV Pro se distingue en offrant un streaming de qualité avec plus de <strong>22 000 chaînes</strong>, une vaste sélection de films et de séries, et des mises à jour régulières pour une expérience toujours optimale.</p>
-<img alt="Streaming Premium en 4K" height="300" src="/images/streaming_4k.webp" width="500"/>
-<h2>Découvrez nos Conseils &amp; Astuces pour l'IPTV</h2>
-<p>En 2025, les innovations technologiques transforment l'univers du streaming IPTV. Des améliorations en compression vidéo, des interfaces utilisateur intuitives et l'intégration de l'intelligence artificielle pour des recommandations personnalisées sont désormais au cœur du divertissement numérique. Ces avancées permettent d'offrir une qualité d'image exceptionnelle et une expérience sur mesure.</p>
-<img alt="Innovations Technologiques en Streaming" height="300" src="/images/innovation_tech.webp" width="500"/>
-<h2>Découvrez nos Conseils &amp; Astuces pour l'IPTV</h2>
-<p>La sécurité est primordiale pour les services IPTV modernes. IPTV Pro utilise des protocoles de chiffrement avancés pour protéger vos données personnelles et sécuriser vos transactions. Ainsi, votre expérience de streaming reste non seulement immersive, mais également sûre.</p>
-<img alt="Sécurité et Confidentialité" height="300" src="/images/security.webp" width="500"/>
-<h2>Découvrez nos Conseils &amp; Astuces pour l'IPTV</h2>
-<p>Que vous soyez à la maison ou en déplacement, les abonnements IPTV offrent une flexibilité inégalée. IPTV Pro propose des options adaptées à tous les budgets – abonnement mensuel, trimestriel ou annuel – permettant à chacun de profiter de ses contenus favoris sur smart TV, smartphones, tablettes et ordinateurs.</p>
-<img alt="Flexibilité et Accessibilité" height="300" src="/images/flexibility.webp" width="500"/>
-<h2>Découvrez nos Conseils &amp; Astuces pour l'IPTV</h2>
-<p>Le futur du streaming IPTV est riche en promesses. Des technologies émergentes comme la réalité augmentée et la réalité virtuelle pourraient transformer votre expérience de divertissement en vous plongeant dans des mondes immersifs. Restez connecté pour découvrir comment ces innovations vont redéfinir le paysage du streaming en ligne.</p>
-<img alt="Perspectives Futures du Streaming" height="300" src="/images/future_tech.webp" width="500"/>
-<p>Pour en savoir plus sur nos services et découvrir d'autres astuces pour optimiser votre expérience de streaming, consultez notre <a href="/about.html">page À propos</a> ou revenez régulièrement sur notre blog.</p>
-<p style="text-align: center;"><a class="btn" href="/index.html">Retour à l'accueil</a></p>
+
+<!-- ENTÊTE DE BLOG -->
+<div class="blog-header">
+  <div class="container">
+    <h1>Blog IPTV - Actus &amp; Conseils pour une Meilleure Expérience</h1>
+    <p>Le monde du streaming évolue à une vitesse fulgurante, et en 2025, l'IPTV se positionne au cœur de cette révolution numérique. Découvrez nos conseils et astuces pour profiter pleinement de votre service IPTV premium.</p>
+  </div>
 </div>
+
+<div class="blog-container">
+  <!-- ARTICLE À LA UNE -->
+  <section class="featured-article">
+    <div class="featured-article-image">
+      <img src="images/streaming_4k.webp" alt="Streaming Premium en 4K">
+    </div>
+    <div class="featured-article-content">
+      <span class="featured-article-tag">À la une</span>
+      <h2>Les Tendances du Streaming IPTV en 2025</h2>
+      <p>Avec la montée en puissance de la technologie 4K et l'augmentation de la demande pour des contenus en haute définition, les abonnements IPTV premium deviennent incontournables. IPTV Pro se distingue en offrant un streaming de qualité avec plus de <strong>22 000 chaînes</strong>, une vaste sélection de films et de séries.</p>
+      <a href="#" class="featured-article-link">Lire l'article complet <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+  
+  <!-- GRILLE D'ARTICLES -->
+  <h2 class="section-title">Derniers Articles</h2>
+  <div class="blog-grid">
+    <!-- ARTICLE 1 -->
+    <article class="blog-card">
+      <div class="blog-card-image">
+        <img src="images/innovation_tech.webp" alt="Innovations Technologiques en Streaming">
+      </div>
+      <div class="blog-card-content">
+        <span class="blog-card-tag">Innovation</span>
+        <h3>Innovations Technologiques en Streaming IPTV</h3>
+        <p>En 2025, les innovations transforment l'univers du streaming IPTV avec des améliorations en compression vidéo, des interfaces utilisateur intuitives et l'IA pour des recommandations personnalisées.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">15 Mars 2025</span>
+          <a href="#" class="blog-card-link">Lire plus <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+    
+    <!-- ARTICLE 2 -->
+    <article class="blog-card">
+      <div class="blog-card-image">
+        <img src="images/security.webp" alt="Sécurité et Confidentialité">
+      </div>
+      <div class="blog-card-content">
+        <span class="blog-card-tag">Sécurité</span>
+        <h3>Sécurité et Confidentialité dans le Streaming</h3>
+        <p>La sécurité est primordiale pour les services IPTV modernes. IPTV Pro utilise des protocoles de chiffrement avancés pour protéger vos données personnelles et sécuriser vos transactions.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">2 Mars 2025</span>
+          <a href="#" class="blog-card-link">Lire plus <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+    
+    <!-- ARTICLE 3 -->
+    <article class="blog-card">
+      <div class="blog-card-image">
+        <img src="images/flexibility.webp" alt="Flexibilité et Accessibilité">
+      </div>
+      <div class="blog-card-content">
+        <span class="blog-card-tag">Accessibilité</span>
+        <h3>Flexibilité et Accessibilité des Abonnements IPTV</h3>
+        <p>Que vous soyez à la maison ou en déplacement, les abonnements IPTV offrent une flexibilité inégalée. IPTV Pro propose des options adaptées à tous les budgets pour profiter de vos contenus favoris.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">18 Février 2025</span>
+          <a href="#" class="blog-card-link">Lire plus <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+    
+    <!-- ARTICLE 4 -->
+    <article class="blog-card">
+      <div class="blog-card-image">
+        <img src="images/future_tech.webp" alt="Perspectives Futures du Streaming">
+      </div>
+      <div class="blog-card-content">
+        <span class="blog-card-tag">Futur</span>
+        <h3>Le Futur du Streaming IPTV et Réalité Virtuelle</h3>
+        <p>Le futur du streaming IPTV est riche en promesses. Des technologies émergentes comme la réalité augmentée et la réalité virtuelle pourraient transformer votre expérience de divertissement.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">5 Février 2025</span>
+          <a href="#" class="blog-card-link">Lire plus <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+    
+    <!-- ARTICLE 5 -->
+    <article class="blog-card">
+      <div class="blog-card-image">
+        <img src="images/streaming_4k.webp" alt="Guide d'Optimisation IPTV">
+      </div>
+      <div class="blog-card-content">
+        <span class="blog-card-tag">Guide</span>
+        <h3>Guide d'Optimisation de Votre Expérience IPTV</h3>
+        <p>Découvrez nos astuces pour optimiser votre expérience de streaming IPTV, de la configuration de votre réseau à l'installation des meilleures applications pour une qualité maximale.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">20 Janvier 2025</span>
+          <a href="#" class="blog-card-link">Lire plus <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+    
+    <!-- ARTICLE 6 -->
+    <article class="blog-card">
+      <div class="blog-card-image">
+        <img src="images/innovation_tech.webp" alt="Comparatif des Services IPTV">
+      </div>
+      <div class="blog-card-content">
+        <span class="blog-card-tag">Comparatif</span>
+        <h3>Comparatif des Meilleurs Services IPTV en 2025</h3>
+        <p>Notre analyse détaillée des différents services IPTV disponibles en 2025. Découvrez pourquoi IPTV Pro se démarque de la concurrence avec son offre de qualité supérieure.</p>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">8 Janvier 2025</span>
+          <a href="#" class="blog-card-link">Lire plus <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  <!-- PIED DE PAGE BLOG -->
+  <div class="blog-footer">
+    <h3>Envie d'en savoir plus ?</h3>
+    <p>Découvrez notre service premium IPTV avec plus de 22 000 chaînes, films et séries en haute définition. Profitez d'une expérience de streaming inégalée sur tous vos appareils.</p>
+    <a href="offer.html" class="btn">Découvrir nos offres</a>
+  </div>
+</div>
+
+<!-- FOOTER AMÉLIORÉ -->
 <footer>
-<p>© 2025 IPTV Pro - Tous droits réservés.</p>
+<div class="links">
+<a href="conditions.html">Conditions d'utilisation</a>
+<a href="privacy.html">Politique de confidentialité</a>
+<a href="contact.html">Support</a>
+</div>
+<p>© 2025 IPTV Pro. Tous droits réservés.</p>
 </footer>
+
+<!-- Script du curseur personnalisé -->
+<script src="cursor.js"></script>
 </body>
 </html>
