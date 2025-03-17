@@ -4,8 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IPTV Pro - Paiement Sécurisé</title>
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.paypal.com;">
   <link rel="stylesheet" href="styles.css?v=6" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Script de gestion des erreurs pour PayPal -->
+  <script>
+    // Fallback en cas d'échec de chargement du SDK PayPal
+    var paypalLoaded = false;
+    
+    // Fonction de vérification du chargement
+    function checkPayPalLoaded() {
+      if (typeof paypal !== 'undefined') {
+        paypalLoaded = true;
+        console.log("PayPal SDK chargé avec succès.");
+        return true;
+      }
+      
+      console.error("PayPal SDK n'a pas été chargé correctement.");
+      var paypalButtons = document.getElementById('paypal-button-container');
+      if (paypalButtons) {
+        paypalButtons.innerHTML = `
+          <div class="error-message">
+            <p><strong>Erreur de chargement PayPal</strong></p>
+            <p>Nos systèmes de paiement sont temporairement indisponibles.</p>
+            <p>Veuillez réessayer dans quelques instants ou nous contacter directement.</p>
+            <a href="contact.html" class="btn" style="display: inline-block; margin-top: 10px;">Contacter le support</a>
+          </div>
+        `;
+      }
+      return false;
+    }
+    
+    // Vérification initiale après chargement de la page
+    window.addEventListener('load', function() {
+      // Première vérification immédiate
+      if (!checkPayPalLoaded()) {
+        // Seconde vérification après un délai
+        setTimeout(function() {
+          if (!checkPayPalLoaded()) {
+            // Troisième vérification finale
+            setTimeout(checkPayPalLoaded, 5000);
+          }
+        }, 2000);
+      }
+    });
+  </script>
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
@@ -269,9 +313,61 @@
         font-size: 1.8rem;
       }
     }
+
+    .payment-form {
+      max-width: 500px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 15px;
+      background-color: rgba(15, 15, 15, 0.7);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin: 40px auto;
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
+
+    .payment-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image: url('images/IPTV_bleu.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.1;
+    }
+
+    /* Section Principale */
+    .main-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 100px 20px 50px;
+      overflow: hidden;
+    }
+    
+    .main-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('images/IPTV_bleu.svg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.05;
+      z-index: -1;
+    }
   </style>
   <!-- PayPal JavaScript SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
+  <script defer src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
 </head>
 <body>
 
