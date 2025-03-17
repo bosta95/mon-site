@@ -4,55 +4,119 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IPTV Pro - Paiement Sécurisé</title>
-  <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://res.cloudinary.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://www.paypal.com;">
+  <!-- Suppression de la CSP qui cause des problèmes -->
   <link rel="stylesheet" href="styles.css?v=6" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Script de gestion des erreurs pour PayPal -->
-  <script>
-    // Fallback en cas d'échec de chargement du SDK PayPal
-    var paypalLoaded = false;
-    
-    // Fonction de vérification du chargement
-    function checkPayPalLoaded() {
-      if (typeof paypal !== 'undefined') {
-        paypalLoaded = true;
-        console.log("PayPal SDK chargé avec succès.");
-        return true;
-      }
-      
-      console.error("PayPal SDK n'a pas été chargé correctement.");
-      var paypalButtons = document.getElementById('paypal-button-container');
-      if (paypalButtons) {
-        paypalButtons.innerHTML = `
-          <div class="error-message">
-            <p><strong>Erreur de chargement PayPal</strong></p>
-            <p>Nos systèmes de paiement sont temporairement indisponibles.</p>
-            <p>Veuillez réessayer dans quelques instants ou nous contacter directement.</p>
-            <a href="contact.html" class="btn" style="display: inline-block; margin-top: 10px;">Contacter le support</a>
-          </div>
-        `;
-      }
-      return false;
+  <!-- Polices en local plutôt que Google Fonts -->
+  <style>
+    /* Polices Montserrat importées localement */
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Montserrat Regular'), local('Montserrat-Regular'),
+           url('/fonts/montserrat-v15-latin-regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 500;
+      src: local('Montserrat Medium'), local('Montserrat-Medium'),
+           url('/fonts/montserrat-v15-latin-500.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 600;
+      src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'),
+           url('/fonts/montserrat-v15-latin-600.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Montserrat Bold'), local('Montserrat-Bold'),
+           url('/fonts/montserrat-v15-latin-700.woff2') format('woff2');
     }
     
-    // Vérification initiale après chargement de la page
-    window.addEventListener('load', function() {
-      // Première vérification immédiate
-      if (!checkPayPalLoaded()) {
-        // Seconde vérification après un délai
-        setTimeout(function() {
-          if (!checkPayPalLoaded()) {
-            // Troisième vérification finale
-            setTimeout(checkPayPalLoaded, 5000);
+    /* Fallback font */
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+  </style>
+  
+  <!-- Script de gestion des erreurs pour PayPal -->
+  <script>
+    // Solution de repli pour PayPal
+    document.addEventListener('DOMContentLoaded', function() {
+      var paypalContainer = document.getElementById('paypal-button-container');
+      if (paypalContainer) {
+        // Récupérer les informations du produit depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const plan = urlParams.get('plan') || 'mensuel';
+        const name = urlParams.get('name') || 'Abonnement IPTV';
+        const price = urlParams.get('price') || '9.99';
+        
+        // Afficher une solution alternative pour le paiement
+        paypalContainer.innerHTML = `
+          <div class="payment-alternative">
+            <div class="notification warning">
+              <p><strong>Information :</strong> Notre système de paiement PayPal est temporairement indisponible.</p>
+            </div>
+            
+            <div class="payment-details">
+              <h3>Détails de votre commande</h3>
+              <p><strong>Plan sélectionné :</strong> ${name}</p>
+              <p><strong>Prix :</strong> ${price}€</p>
+            </div>
+            
+            <div class="payment-options">
+              <h3>Méthodes de paiement alternatives</h3>
+              <p>Veuillez nous contacter directement pour finaliser votre achat :</p>
+              <div class="contact-buttons">
+                <a href="mailto:contact@iptvpro.com" class="btn email-btn">Contacter par Email</a>
+                <a href="contact.html" class="btn">Contacter le Support</a>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Ajouter des styles spécifiques
+        var style = document.createElement('style');
+        style.textContent = `
+          .payment-alternative {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
           }
-        }, 2000);
+          
+          .payment-details, .payment-options {
+            margin: 25px 0;
+          }
+          
+          .contact-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+          }
+          
+          .email-btn {
+            background: #ff6b6b;
+          }
+          
+          .email-btn:hover {
+            background: #ff4757;
+          }
+        `;
+        document.head.appendChild(style);
       }
     });
   </script>
+  
   <style>
     body {
-      font-family: 'Montserrat', sans-serif;
       background: linear-gradient(to bottom, #141414, #0a0a0a);
       color: #fff;
       margin: 0;
@@ -365,9 +429,143 @@
       opacity: 0.05;
       z-index: -1;
     }
+
+    /* Styles pour le formulaire PayPal */
+    .paypal-container {
+      background: rgba(30, 30, 30, 0.5);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .payment-info {
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+    
+    .paypal-button-container {
+      text-align: center;
+      margin: 25px 0;
+    }
+    
+    .paypal-button {
+      background: #0070ba;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: inline-block;
+    }
+    
+    .paypal-button:hover {
+      background: #005ea6;
+    }
+    
+    .paypal-button img {
+      height: 40px;
+      max-width: 100%;
+    }
+    
+    .payment-security {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    
+    .payment-security p {
+      margin-bottom: 10px;
+    }
+    
+    .payment-icons {
+      margin-top: 10px;
+    }
+    
+    .payment-icons img {
+      max-width: 250px;
+      height: auto;
+    }
+    
+    .separator {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 25px 0;
+      color: #888;
+    }
+    
+    .separator::before,
+    .separator::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .separator span {
+      margin: 0 15px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .contact-payment {
+      background: rgba(30, 30, 30, 0.5);
+      border-radius: 8px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .contact-payment h3 {
+      margin-top: 0;
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+    
+    .contact-payment p {
+      margin-bottom: 20px;
+      color: #ddd;
+    }
+    
+    .selected-plan {
+      margin-bottom: 30px;
+    }
+    
+    .plan-details {
+      background: rgba(30, 30, 30, 0.5);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .plan-name-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    .price {
+      color: #ff6b6b;
+    }
+    
+    #plan-description {
+      color: #bbb;
+      margin: 0;
+    }
+    
+    .payment-methods h2 {
+      margin-bottom: 20px;
+    }
   </style>
-  <!-- PayPal JavaScript SDK -->
-  <script defer src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
+  <!-- PayPal JavaScript SDK - Commenté car nous utilisons une solution alternative -->
+  <!-- <script defer src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script> -->
 </head>
 <body>
 
@@ -392,29 +590,77 @@
 
   <!-- SECTION PAIEMENT -->
   <main>
-    <div class="payment-container">
-      <div class="payment-header">
-        <h2>Paiement Sécurisé</h2>
-        <p>Finalisez votre abonnement IPTV Pro pour accéder à un monde de divertissement premium</p>
-      </div>
+    <div class="main-section">
+      <div class="payment-bg"></div>
       
-      <div class="plan-details">
-        <p>Votre abonnement : <span class="plan-name" id="plan-name">Chargement...</span></p>
-        <p class="plan-price" id="plan-price">€0.00</p>
-        <div class="plan-features">
-          <p>✓ Accédez à plus de 22 000 chaînes internationales</p>
-          <p>✓ Plus de 50 000 films et séries à la demande</p>
-          <p>✓ Qualité HD, Full HD et 4K disponible</p>
-          <p>✓ Compatible avec tous vos appareils</p>
+      <div class="payment-form">
+        <h1>Finaliser votre commande</h1>
+        
+        <div class="selected-plan">
+          <h2>Plan sélectionné</h2>
+          <div class="plan-details">
+            <div class="plan-name-price">
+              <span id="plan-name">Chargement...</span>
+              <span class="price" id="plan-price">--,-- €</span>
+            </div>
+            <p id="plan-description">Chargement des détails...</p>
+          </div>
         </div>
-      </div>
-      
-      <!-- Le conteneur PayPal où le bouton sera rendu -->
-      <div id="paypal-button-container"></div>
-      
-      <div class="secure-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.67-3.13 8.96-7 10.27-3.87-1.31-7-5.6-7-10.27V6.3l7-3.12z"/><path d="M10.5 13.59l-2.67-2.68-1.41 1.41 4.08 4.08 7-7-1.41-1.41-5.59 5.6z"/></svg>
-        <span>Paiement 100% sécurisé via PayPal. Vos identifiants vous seront envoyés par email.</span>
+        
+        <div class="payment-methods">
+          <h2>Paiement sécurisé</h2>
+          
+          <!-- Formulaire PayPal standard -->
+          <div class="paypal-container">
+            <p class="payment-info">Cliquez sur le bouton ci-dessous pour payer avec PayPal:</p>
+            
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="paypal-form">
+              <!-- Paramètres PayPal obligatoires -->
+              <input type="hidden" name="cmd" value="_xclick">
+              <input type="hidden" name="business" value="bosta958@hotmail.fr"> <!-- Votre adresse email PayPal -->
+              <input type="hidden" name="lc" value="FR">
+              <input type="hidden" name="currency_code" value="EUR">
+              
+              <!-- Paramètres du produit (seront remplis par JavaScript) -->
+              <input type="hidden" name="item_name" value="Abonnement IPTV">
+              <input type="hidden" name="amount" value="9.99">
+              <input type="hidden" name="custom" value="">
+              <input type="hidden" name="invoice" value="">
+              
+              <!-- URLs de retour - utilisez l'URL relative pour qu'elle fonctionne sur n'importe quel domaine -->
+              <input type="hidden" name="return" value="success.html">
+              <input type="hidden" name="cancel_return" value="cancel.html">
+              
+              <!-- Bouton PayPal -->
+              <div class="paypal-button-container">
+                <button type="submit" class="paypal-button">
+                  <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Payer avec PayPal">
+                </button>
+              </div>
+            </form>
+            
+            <div class="payment-security">
+              <p><i class="fas fa-lock"></i> Paiement 100% sécurisé</p>
+              <div class="payment-icons">
+                <img src="images/payment-icons.png" alt="Méthodes de paiement acceptées" onerror="this.style.display='none'">
+              </div>
+            </div>
+          </div>
+          
+          <div class="separator">
+            <span>OU</span>
+          </div>
+          
+          <!-- Option de contact direct -->
+          <div class="contact-payment">
+            <h3>Besoin d'aide pour votre paiement?</h3>
+            <p>Si vous rencontrez des difficultés avec le paiement en ligne, notre équipe est là pour vous aider:</p>
+            <div class="contact-buttons">
+              <a href="mailto:contact@iptvpro.com" class="btn email-btn">Contacter par Email</a>
+              <a href="contact.html" class="btn">Contacter le Support</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -430,51 +676,48 @@
   </footer>
 
   <script>
-    // Récupérer les paramètres de l'URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const planId = urlParams.get('plan');
-    const planName = urlParams.get('name');
-    const planPrice = urlParams.get('price');
-    
-    // Afficher les détails du plan
-    document.getElementById('plan-name').textContent = planName || 'Abonnement IPTV Pro';
-    document.getElementById('plan-price').textContent = '€' + (planPrice || '0.00');
-    
-    // Configurer le bouton PayPal
-    paypal.Buttons({
-      style: {
-        layout: 'vertical',
-        color: 'blue',
-        shape: 'pill',
-        label: 'pay'
-      },
-      // Configurer la transaction lors du clic sur le bouton
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            description: 'Abonnement IPTV Pro - ' + (planName || 'Standard'),
-            amount: {
-              currency_code: 'EUR',
-              value: planPrice || '0.00'
-            }
-          }]
-        });
-      },
+    // Configurer les valeurs du plan
+    document.addEventListener('DOMContentLoaded', function() {
+      // Récupérer les paramètres de l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const plan = urlParams.get('plan') || 'mensuel';
+      const name = urlParams.get('name') || 'Abonnement IPTV';
+      const price = urlParams.get('price') || '9.99';
       
-      // Finaliser la transaction
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          // Rediriger vers la page de succès
-          window.location.href = 'success.html?orderId=' + data.orderID + '&plan=' + planName;
-        });
-      },
+      // Mettre à jour les éléments HTML
+      const planNameElement = document.getElementById('plan-name');
+      const planPriceElement = document.getElementById('plan-price');
+      const planDescriptionElement = document.getElementById('plan-description');
+      const paypalForm = document.getElementById('paypal-form');
       
-      // Gérer les erreurs
-      onError: function(err) {
-        console.error('Erreur de paiement:', err);
-        alert('Une erreur est survenue lors du traitement de votre paiement. Veuillez réessayer.');
+      if (planNameElement) planNameElement.textContent = name;
+      if (planPriceElement) planPriceElement.textContent = price + '€';
+      
+      if (planDescriptionElement) {
+        let description = 'Accès premium à plus de 22 000 chaînes et contenus VOD';
+        if (plan === 'mensuel') {
+          description += ' pendant 1 mois.';
+        } else if (plan === '3mois') {
+          description += ' pendant 3 mois.';
+        } else if (plan === '6mois') {
+          description += ' pendant 6 mois.';
+        } else if (plan === '12mois') {
+          description += ' pendant 12 mois.';
+        }
+        planDescriptionElement.textContent = description;
       }
-    }).render('#paypal-button-container');
+      
+      // Configurer le formulaire PayPal avec les bons paramètres
+      if (paypalForm) {
+        // ID de transaction unique basé sur la date et un nombre aléatoire
+        const transactionId = 'IPTV-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+        
+        paypalForm.querySelector('input[name="item_name"]').value = name;
+        paypalForm.querySelector('input[name="amount"]').value = price;
+        paypalForm.querySelector('input[name="custom"]').value = transactionId;
+        paypalForm.querySelector('input[name="invoice"]').value = transactionId;
+      }
+    });
   </script>
 
 </body>
