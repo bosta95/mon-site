@@ -88,6 +88,12 @@
       <div class="logo">
         <img alt="IPTV Pro Logo" src="images/IPTV_glpgxi.svg"/>
       </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <!-- Navigation Desktop -->
       <nav class="header-nav">
         <ul>
@@ -415,5 +421,28 @@
 
   <!-- Script du curseur personnalisé -->
   <script src="cursor.js"></script>
+  <script>
+    // Script pour le menu hamburger mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const headerNav = document.querySelector('.header-nav');
+      
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+          mobileMenuToggle.classList.toggle('active');
+          headerNav.classList.toggle('active');
+        });
+      }
+      
+      // Fermer le menu quand on clique sur un lien
+      const navLinks = document.querySelectorAll('.header-nav ul li a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          mobileMenuToggle.classList.remove('active');
+          headerNav.classList.remove('active');
+        });
+      });
+    });
+  </script>
 </body>
 </html>

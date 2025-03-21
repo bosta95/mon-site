@@ -48,7 +48,7 @@
     },
     "description": "Découvrez notre guide complet sur les tendances du streaming IPTV en 2025, avec des conseils sur les abonnements IPTV, innovations technologiques et sécurité pour une expérience de streaming premium."
   }
-</script>
+  </script>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet"/>
 <!-- Font Awesome pour les icônes -->
@@ -434,6 +434,51 @@
   .blog-header {
     margin-top: 70px;
   }
+  
+  /* Styles responsifs pour le blog */
+  @media (max-width: 992px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .blog-container {
+      width: 100%;
+      padding: 0 15px;
+    }
+    
+    .blog-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .blog-post {
+      margin-bottom: 20px;
+    }
+    
+    .blog-post-image {
+      height: 200px;
+    }
+    
+    .blog-sidebar {
+      margin-top: 30px;
+    }
+    
+    .categories, .recent-posts {
+      padding: 15px;
+    }
+  }
+  
+  /* Amélioration pour tous les écrans */
+  .blog-post {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
 </style>
 </head>
 <body>
@@ -444,6 +489,12 @@
       <a href="index.html">
         <img src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
       </a>
+    </div>
+    <!-- Menu hamburger pour mobile -->
+    <div class="mobile-menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
     <nav class="header-nav">
       <ul>
@@ -591,15 +642,38 @@
 
 <!-- FOOTER AMÉLIORÉ -->
 <footer>
-<div class="links">
-<a href="conditions.html">Conditions d'utilisation</a>
-<a href="privacy.html">Politique de confidentialité</a>
-<a href="contact.html">Support</a>
-</div>
-<p>© 2025 IPTV Pro. Tous droits réservés.</p>
+  <div class="links">
+    <a href="conditions.html">Conditions d'utilisation</a>
+    <a href="privacy.html">Politique de confidentialité</a>
+    <a href="contact.html">Support</a>
+  </div>
+  <p>© 2025 IPTV Pro. Tous droits réservés.</p>
 </footer>
 
 <!-- Script du curseur personnalisé -->
 <script src="cursor.js"></script>
+<script>
+  // Script pour le menu hamburger mobile
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const headerNav = document.querySelector('.header-nav');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', function() {
+        mobileMenuToggle.classList.toggle('active');
+        headerNav.classList.toggle('active');
+      });
+    }
+    
+    // Fermer le menu quand on clique sur un lien
+    const navLinks = document.querySelectorAll('.header-nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenuToggle.classList.remove('active');
+        headerNav.classList.remove('active');
+      });
+    });
+  });
+</script>
 </body>
 </html>

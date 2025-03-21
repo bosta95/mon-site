@@ -188,6 +188,53 @@
     .pulse {
       animation: pulse 2s infinite;
     }
+    
+    /* Styles spécifiques pour mobile */
+    @media (max-width: 768px) {
+        .payment-container {
+            width: 95%;
+            padding: 15px;
+        }
+        
+        .payment-header {
+            padding: 10px;
+        }
+        
+        .payment-header h2 {
+            font-size: 1.2rem;
+        }
+        
+        .payment-form {
+            padding: 15px;
+        }
+        
+        .payment-summary {
+            padding: 15px;
+        }
+        
+        .product-info {
+            flex-direction: column;
+        }
+        
+        .product-info img {
+            margin-bottom: 10px;
+        }
+        
+        .paypal-button-container {
+            width: 100%;
+        }
+        
+        .input-group {
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .input-group input, 
+        .input-group select {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
   </style>
   
   <!-- PayPal JavaScript SDK -->
@@ -202,6 +249,12 @@
         <a href="index.html">
           <img src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
         </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
       <div class="header-links">
         <a href="index.html">Accueil</a>
@@ -317,6 +370,28 @@
         }
       }
     }, 3000);
+
+    // Script pour le menu hamburger mobile
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const headerNav = document.querySelector('.header-nav');
+        
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenuToggle.classList.toggle('active');
+                headerNav.classList.toggle('active');
+            });
+        }
+        
+        // Fermer le menu quand on clique sur un lien
+        const navLinks = document.querySelectorAll('.header-nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                headerNav.classList.remove('active');
+            });
+        });
+    });
   </script>
 </body>
 </html>

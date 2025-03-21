@@ -425,6 +425,12 @@
 <div class="logo-container">
 <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" alt="IPTV Pro Logo">
 </div>
+<!-- Menu hamburger pour mobile -->
+<div class="mobile-menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 <nav>
 <ul>
 <li><a href="index.html">Accueil</a></li>
@@ -688,5 +694,76 @@
 
 <!-- Script du curseur personnalisé -->
 <script src="cursor.js"></script>
+<script>
+    // Script pour le menu hamburger mobile
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const headerNav = document.querySelector('.header-nav');
+        
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenuToggle.classList.toggle('active');
+                headerNav.classList.toggle('active');
+            });
+        }
+        
+        // Fermer le menu quand on clique sur un lien
+        const navLinks = document.querySelectorAll('.header-nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                headerNav.classList.remove('active');
+            });
+        });
+    });
+</script>
+
+<!-- Ajouter les styles responsifs spécifiques au tutoriel -->
+<style>
+    /* Styles responsifs pour le tutoriel */
+    @media (max-width: 768px) {
+        .tutorial-content {
+            width: 100%;
+            padding: 0 15px;
+        }
+        
+        .step-content {
+            padding: 15px;
+        }
+        
+        .step-content img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .step-header {
+            padding: 8px 10px;
+        }
+        
+        .step-number {
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+        }
+        
+        .step-title {
+            font-size: 1rem;
+        }
+        
+        .download-links {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .download-link {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .video-container {
+            height: auto;
+        }
+    }
+</style>
 </body>
 </html>
