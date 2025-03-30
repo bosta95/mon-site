@@ -649,6 +649,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
   <div class="flyer">
@@ -750,33 +751,129 @@
       const shareMessenger = document.getElementById('share-messenger');
       const shareWhatsApp = document.getElementById('share-whatsapp');
       const copyLink = document.getElementById('copy-link');
+      const flyerElement = document.querySelector('.flyer');
+      
+      // Variable pour stocker l'image du flyer
+      let flyerImage = null;
+      
+      // Créer l'image du flyer
+      function createFlyerImage() {
+        return new Promise((resolve, reject) => {
+          html2canvas(flyerElement, {
+            scale: 2, // Meilleure qualité
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: null
+          }).then(canvas => {
+            const imgDataUrl = canvas.toDataURL('image/png');
+            resolve(imgDataUrl);
+          }).catch(error => {
+            console.error('Erreur lors de la capture du flyer:', error);
+            reject(error);
+          });
+        });
+      }
+      
+      // Générer l'image du flyer au chargement de la page
+      createFlyerImage().then(imgData => {
+        flyerImage = imgData;
+      }).catch(error => {
+        console.error('Impossible de générer l\'image du flyer:', error);
+      });
       
       printBtn.addEventListener('click', function() {
         window.print();
       });
       
       downloadBtn.addEventListener('click', function() {
-        alert('Pour télécharger en PDF, utilisez la fonction d\'impression de votre navigateur et choisissez "Enregistrer au format PDF"');
-        window.print();
+        if (flyerImage) {
+          const link = document.createElement('a');
+          link.download = 'flyer-iptv-smarter-pro.png';
+          link.href = flyerImage;
+          link.click();
+        } else {
+          alert('Pour télécharger en PDF, utilisez la fonction d\'impression de votre navigateur et choisissez "Enregistrer au format PDF"');
+          window.print();
+        }
       });
       
       // Partage sur Snapchat
       shareSnapchat.addEventListener('click', function() {
-        const url = encodeURIComponent('https://iptvsmarterpros.com/');
-        window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
+        if (flyerImage) {
+          // Pour Snapchat, nous devons créer un blob et l'envoyer
+          fetch(flyerImage)
+            .then(res => res.blob())
+            .then(blob => {
+              const file = new File([blob], "flyer-iptv.png", { type: "image/png" });
+              const filesArray = [file];
+              
+              if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+                navigator.share({
+                  title: 'IPTV Smarter Pro',
+                  text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
+                  files: filesArray,
+                })
+                .catch(error => {
+                  console.error('Erreur lors du partage:', error);
+                  // Fallback si le partage de fichier échoue
+                  const url = encodeURIComponent('https://iptvsmarterpros.com/');
+                  window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
+                });
+              } else {
+                // Fallback si le partage de fichier n'est pas supporté
+                const url = encodeURIComponent('https://iptvsmarterpros.com/');
+                window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
+              }
+            });
+        } else {
+          const url = encodeURIComponent('https://iptvsmarterpros.com/');
+          window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
+        }
       });
       
       // Partage sur Messenger
       shareMessenger.addEventListener('click', function() {
-        const url = encodeURIComponent('https://iptvsmarterpros.com/');
-        window.open(`https://www.facebook.com/dialog/send?app_id=&link=${url}&redirect_uri=${url}`, '_blank');
+        if (flyerImage && navigator.canShare) {
+          // Pour Messenger, nous utilisons le partage natif mobile
+          webShare('Messenger');
+        } else {
+          const url = encodeURIComponent('https://iptvsmarterpros.com/');
+          window.open(`https://www.facebook.com/dialog/send?app_id=&link=${url}&redirect_uri=${url}`, '_blank');
+        }
       });
       
       // Partage sur WhatsApp
       shareWhatsApp.addEventListener('click', function() {
-        const text = encodeURIComponent('IPTV Smarter Pro - Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K');
-        const url = encodeURIComponent('https://iptvsmarterpros.com/');
-        window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+        if (flyerImage) {
+          fetch(flyerImage)
+            .then(res => res.blob())
+            .then(blob => {
+              const file = new File([blob], "flyer-iptv.png", { type: "image/png" });
+              const filesArray = [file];
+              
+              if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+                navigator.share({
+                  files: filesArray,
+                  title: 'IPTV Smarter Pro',
+                  text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K\nhttps://iptvsmarterpros.com/'
+                }).catch(error => {
+                  // Fallback si le partage de fichier échoue
+                  const text = encodeURIComponent('IPTV Smarter Pro - Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K');
+                  const url = encodeURIComponent('https://iptvsmarterpros.com/');
+                  window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+                });
+              } else {
+                // Fallback si le partage de fichier n'est pas supporté
+                const text = encodeURIComponent('IPTV Smarter Pro - Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K');
+                const url = encodeURIComponent('https://iptvsmarterpros.com/');
+                window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+              }
+            });
+        } else {
+          const text = encodeURIComponent('IPTV Smarter Pro - Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K');
+          const url = encodeURIComponent('https://iptvsmarterpros.com/');
+          window.open(`https://wa.me/?text=${text} ${url}`, '_blank');
+        }
       });
       
       // Copier le lien
@@ -795,16 +892,53 @@
       });
       
       // Fonction pour partager sur les réseaux sociaux mobiles
-      function webShare() {
+      function webShare(appName = '') {
         if (navigator.share) {
-          navigator.share({
-            title: 'IPTV Smarter Pro',
-            text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
-            url: 'https://iptvsmarterpros.com/',
-          })
-          .catch(err => {
-            console.error('Erreur lors du partage: ', err);
-          });
+          if (flyerImage) {
+            fetch(flyerImage)
+              .then(res => res.blob())
+              .then(blob => {
+                const file = new File([blob], "flyer-iptv.png", { type: "image/png" });
+                const filesArray = [file];
+                
+                if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+                  navigator.share({
+                    files: filesArray,
+                    title: 'IPTV Smarter Pro',
+                    text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
+                    url: 'https://iptvsmarterpros.com/'
+                  }).catch(error => {
+                    console.error('Erreur lors du partage avec fichier:', error);
+                    // Fallback sans fichier
+                    navigator.share({
+                      title: 'IPTV Smarter Pro',
+                      text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
+                      url: 'https://iptvsmarterpros.com/'
+                    }).catch(err => {
+                      console.error('Erreur lors du partage sans fichier:', err);
+                    });
+                  });
+                } else {
+                  // Partage sans fichier si non supporté
+                  navigator.share({
+                    title: 'IPTV Smarter Pro',
+                    text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
+                    url: 'https://iptvsmarterpros.com/'
+                  }).catch(err => {
+                    console.error('Erreur lors du partage sans fichier:', err);
+                  });
+                }
+              });
+          } else {
+            // Partage sans fichier si l'image n'est pas disponible
+            navigator.share({
+              title: 'IPTV Smarter Pro',
+              text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
+              url: 'https://iptvsmarterpros.com/'
+            }).catch(err => {
+              console.error('Erreur lors du partage:', err);
+            });
+          }
         }
       }
       
@@ -813,7 +947,7 @@
         const shareNativeBtn = document.createElement('button');
         shareNativeBtn.className = 'share-btn copy';
         shareNativeBtn.innerHTML = '<i class="fas fa-share-alt"></i> Partager';
-        shareNativeBtn.addEventListener('click', webShare);
+        shareNativeBtn.addEventListener('click', () => webShare());
         document.querySelector('.share-buttons').appendChild(shareNativeBtn);
       }
     });
