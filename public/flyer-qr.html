@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Générateur de QR Code - IPTV Smarter Pro</title>
+  <title>Flyer QR IPTV Smarter Pro</title>
   <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
   <style>
     * {
@@ -14,378 +14,212 @@
     }
     
     body {
-      background-color: #0f0f1a;
-      color: #fff;
+      background-color: #f5f5f5;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
     }
     
-    .container {
-      max-width: 800px;
+    .flyer {
       width: 100%;
+      max-width: 400px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .flyer-top {
+      height: 8px;
+      background: linear-gradient(90deg, #ff6b6b, #6c5498);
+    }
+    
+    .flyer-content {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
     
-    .header {
-      margin-bottom: 40px;
-    }
-    
     .logo {
-      width: 160px;
-      margin-bottom: 20px;
+      width: 100px;
+      margin-bottom: 15px;
     }
     
     h1 {
-      font-size: 36px;
-      font-weight: 800;
-      margin-bottom: 15px;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #333;
     }
     
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-      max-width: 600px;
-      margin: 0 auto 30px;
-    }
-    
-    .highlight {
+    .price {
+      font-size: 32px;
+      font-weight: 700;
       color: #ff6b6b;
-      font-weight: 600;
+      margin: 15px 0;
     }
     
-    .form-container {
-      background: rgba(108, 84, 152, 0.2);
-      padding: 30px;
-      border-radius: 10px;
-      margin-bottom: 40px;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .period {
+      font-size: 16px;
+      color: #666;
     }
     
-    .input-group {
+    .qr {
+      margin: 20px 0;
+      background-color: white;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .qr-code {
+      width: 180px;
+      height: 180px;
+    }
+    
+    .tagline {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.4;
       margin-bottom: 20px;
-      text-align: left;
     }
     
-    label {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 8px;
-      font-weight: 500;
+    .devices {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
     }
     
-    input, select {
-      width: 100%;
-      padding: 12px 15px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 5px;
-      color: #fff;
-      font-size: 16px;
-      transition: all 0.3s ease;
+    .device-icon {
+      width: 30px;
+      height: 30px;
     }
     
-    input:focus, select:focus {
-      outline: none;
-      border-color: #ff6b6b;
-      background-color: rgba(255, 255, 255, 0.15);
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
     }
     
-    button {
+    .contact-item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      color: #444;
+    }
+    
+    .contact-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 15px;
+    }
+    
+    .btn {
       background: linear-gradient(135deg, #6c5498, #ff6b6b);
-      color: #fff;
+      color: white;
       border: none;
-      padding: 15px 30px;
-      font-size: 18px;
+      padding: 10px 20px;
+      font-size: 14px;
       font-weight: 600;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
     
-    .qr-result {
-      display: none;
-      margin-top: 40px;
-    }
-    
-    .qr-code-container {
-      background-color: #fff;
-      padding: 20px;
-      display: inline-block;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    
-    .qr-code {
-      width: 250px;
-      height: 250px;
-    }
-    
-    .download-btn {
-      margin-top: 20px;
-      background-color: #ffde59;
-      color: #333;
-    }
-    
-    .examples {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 50px;
-    }
-    
-    .example-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      padding: 20px;
-      width: 230px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s ease;
-    }
-    
-    .example-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.1);
-    }
-    
-    .example-card img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 15px;
-    }
-    
-    .example-card h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    
-    .example-card p {
-      font-size: 14px;
-      margin-bottom: 0;
-    }
-    
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 28px;
+    @media print {
+      body {
+        background: none;
+        padding: 0;
       }
       
-      p {
-        font-size: 16px;
+      .flyer {
+        box-shadow: none;
       }
       
-      .examples {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .example-card {
-        width: 100%;
-        max-width: 280px;
+      .action-buttons {
+        display: none;
       }
     }
   </style>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
+  <div class="flyer">
+    <div class="flyer-top"></div>
+    <div class="flyer-content">
       <img src="images/IPTV_glpgxi.svg" alt="IPTV Logo" class="logo">
-      <h1>Générateur de QR Code pour vos Flyers</h1>
-      <p>Créez des QR codes personnalisés pour rediriger vos clients vers votre site, une offre spéciale ou vos réseaux sociaux.</p>
-    </div>
-    
-    <div class="form-container">
-      <div class="input-group">
-        <label for="qr-type">Type de lien</label>
-        <select id="qr-type">
-          <option value="website">Site web</option>
-          <option value="offer">Offre spéciale</option>
-          <option value="whatsapp">WhatsApp</option>
-          <option value="custom">URL personnalisée</option>
-        </select>
+      <h1>IPTV SMARTER PRO</h1>
+      
+      <div class="price">9,99€<span class="period">/mois</span></div>
+      
+      <p class="tagline">Votre télévision partout, à tout moment</p>
+      
+      <div class="devices">
+        <img src="images/image4.svg" alt="TV" class="device-icon">
+        <img src="images/image7.svg" alt="Mobile" class="device-icon">
+        <img src="images/image6.svg" alt="Tablette" class="device-icon">
+        <img src="images/image5.svg" alt="PC" class="device-icon">
       </div>
       
-      <div class="input-group" id="website-group">
-        <label for="website-url">URL du site web</label>
-        <input type="text" id="website-url" value="https://www.iptvsmarterpros.com" placeholder="https://www.iptvsmarterpros.com">
+      <div class="qr">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQMAAAAGz+OhAAAABlBMKEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB40lEQVRIieWWMY7EIAxFLVFkrsAROJo3ykbJETgCVxilSGGBMc7MFFs4Q/GVxJnk+w9+IMzw/4eZ4JlCCPu+ZY3tfjt2D8BiKTsA8s2yF7DkAJh5NyU3wCqglANQZTdqAOLZcrNOAGgFEPacx3dALMXAR14H4CpnVkBtqQO4v5zxBYhNZa0AUavKDKCr1ORzQB4NSoGW7U4KqJ02NQHu0dgEyMmVAdSWW2kOoNhAcQDlM8B9Rz7rvQGwlc8AXBN/XCGdAZ7VCXcPYDtxBuwtvwcwR4BmIXvAErZLnVrVPgNqVYvlnSp5rr8q+Qxw1Sn3DeJRQ/EAi1Wt1qoTvAHcVxwBlUInMK5QxR1VNmuwAurmUdkB2BpUYVEJ5zPAUxG9ACoRxB5wVCRo0ckMCF9qg+V93rryHaAXAw6A4+uXJ5UlB0C3gLYDsEX/A+Q79wnA3lTcD+CuiDwg3gCVIvgJaD5T1u8AuAM8AFRJdp8BvBsYDwD1gRqL2WeCVyUJ0LhVuwW02mdXaiGGT4A+A+aF3HgC5LLr+QMQrvrtAD7q1wHm3cBmAFSRqHK3qiQ/AK4X8TrA46TiCojt+PoMWIYSqnDUwmwBzYp+A9aXXv0AxNcE8fQN2H8vovVPgMr3AfBDJw1XGMbSL+VUrbLxZtlxAAAAAElFTkSuQmCC" alt="QR Code" class="qr-code">
       </div>
       
-      <div class="input-group" id="offer-group" style="display: none;">
-        <label for="offer-select">Choisir une offre</label>
-        <select id="offer-select">
-          <option value="https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+1+mois&price=12.99">Premium IPTV 1 mois - 12,99€</option>
-          <option value="https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+3+mois&price=9.99">Premium IPTV 3 mois - 9,99€</option>
-          <option value="https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+6+mois&price=39.99">Premium IPTV 6 mois - 39,99€</option>
-          <option value="https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+12+mois&price=69.99">Premium IPTV 12 mois - 69,99€</option>
-        </select>
-      </div>
-      
-      <div class="input-group" id="whatsapp-group" style="display: none;">
-        <label for="whatsapp-number">Numéro WhatsApp (avec indicatif pays)</label>
-        <input type="text" id="whatsapp-number" value="652020293" placeholder="Ex: 33612345678">
-      </div>
-      
-      <div class="input-group" id="custom-group" style="display: none;">
-        <label for="custom-url">URL personnalisée</label>
-        <input type="text" id="custom-url" placeholder="https://...">
-      </div>
-      
-      <button id="generate-btn">Générer le QR Code</button>
-    </div>
-    
-    <div class="qr-result" id="qr-result">
-      <div class="qr-code-container">
-        <div id="qrcode" class="qr-code"></div>
-      </div>
-      <p>Scannez ce code avec l'appareil photo de votre smartphone ou une application de lecture QR code</p>
-      <button class="download-btn" id="download-btn">Télécharger le QR Code</button>
-    </div>
-    
-    <div class="examples">
-      <div class="example-card">
-        <img src="images/promo/qr-site.png" alt="QR Code Site Web">
-        <h3>Site Web</h3>
-        <p>Redirigez vers votre site principal pour que les clients découvrent tous vos services.</p>
-      </div>
-      
-      <div class="example-card">
-        <img src="images/promo/qr-offer.png" alt="QR Code Offre">
-        <h3>Offre Spéciale</h3>
-        <p>Créez un QR code pour une offre spécifique et augmentez vos conversions.</p>
-      </div>
-      
-      <div class="example-card">
-        <img src="images/promo/qr-whatsapp.png" alt="QR Code WhatsApp">
-        <h3>WhatsApp</h3>
-        <p>Permettez aux clients de vous contacter directement sur WhatsApp.</p>
+      <div class="contact">
+        <div class="contact-item">
+          <img src="images/what.png" alt="WhatsApp" class="contact-icon">
+          652 020 293
+        </div>
+        <div class="contact-item">
+          <img src="images/fb.png" alt="Facebook" class="contact-icon">
+          IPTV Smarter Pro
+        </div>
       </div>
     </div>
   </div>
   
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <div class="action-buttons">
+    <button class="btn" id="print-btn">Imprimer</button>
+    <button class="btn" id="download-btn">Télécharger</button>
+  </div>
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Éléments DOM
-      const qrTypeSelect = document.getElementById('qr-type');
-      const websiteGroup = document.getElementById('website-group');
-      const offerGroup = document.getElementById('offer-group');
-      const whatsappGroup = document.getElementById('whatsapp-group');
-      const customGroup = document.getElementById('custom-group');
-      const generateBtn = document.getElementById('generate-btn');
-      const qrResult = document.getElementById('qr-result');
+      const printBtn = document.getElementById('print-btn');
       const downloadBtn = document.getElementById('download-btn');
       
-      let qrcode = null;
-      
-      // Gérer le changement de type de QR code
-      qrTypeSelect.addEventListener('change', function() {
-        websiteGroup.style.display = 'none';
-        offerGroup.style.display = 'none';
-        whatsappGroup.style.display = 'none';
-        customGroup.style.display = 'none';
-        
-        switch(this.value) {
-          case 'website':
-            websiteGroup.style.display = 'block';
-            break;
-          case 'offer':
-            offerGroup.style.display = 'block';
-            break;
-          case 'whatsapp':
-            whatsappGroup.style.display = 'block';
-            break;
-          case 'custom':
-            customGroup.style.display = 'block';
-            break;
-        }
+      printBtn.addEventListener('click', function() {
+        window.print();
       });
       
-      // Générer le QR code
-      generateBtn.addEventListener('click', function() {
-        let qrValue = '';
-        
-        switch(qrTypeSelect.value) {
-          case 'website':
-            qrValue = document.getElementById('website-url').value;
-            break;
-          case 'offer':
-            qrValue = document.getElementById('offer-select').value;
-            break;
-          case 'whatsapp':
-            const whatsappNumber = document.getElementById('whatsapp-number').value;
-            qrValue = `https://wa.me/${whatsappNumber}`;
-            break;
-          case 'custom':
-            qrValue = document.getElementById('custom-url').value;
-            break;
-        }
-        
-        if (qrValue) {
-          // Afficher le résultat
-          qrResult.style.display = 'block';
-          
-          // Supprimer l'ancien QR code s'il existe
-          if (qrcode) {
-            document.getElementById('qrcode').innerHTML = '';
-          }
-          
-          // Générer le nouveau QR code
-          qrcode = new QRCode(document.getElementById('qrcode'), {
-            text: qrValue,
-            width: 250,
-            height: 250,
-            colorDark: '#000000',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.H
-          });
-          
-          // Faire défiler jusqu'au QR code
-          setTimeout(() => {
-            qrResult.scrollIntoView({ behavior: 'smooth' });
-          }, 100);
-        }
-      });
-      
-      // Télécharger le QR code
       downloadBtn.addEventListener('click', function() {
-        if (!qrcode) return;
-        
-        const canvas = document.querySelector('#qrcode canvas');
-        if (canvas) {
-          const link = document.createElement('a');
-          link.download = 'qrcode-iptv.png';
-          link.href = canvas.toDataURL('image/png');
-          link.click();
-        }
+        alert('Pour télécharger en PDF, utilisez la fonction d\'impression de votre navigateur et choisissez "Enregistrer au format PDF"');
+        window.print();
       });
-      
-      // Créer les images d'exemple
-      createExampleQRCodes();
     });
-    
-    // Fonction pour créer les QR codes d'exemple
-    function createExampleQRCodes() {
-      // Cette fonction pourrait être utilisée pour pré-générer des QR codes d'exemple
-      // Dans ce cas, nous utilisons des images statiques incluses dans le projet
-    }
   </script>
 </body>
 </html> 
