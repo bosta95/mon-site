@@ -381,6 +381,7 @@
       body {
         background: white;
         padding: 0;
+        margin: 0;
       }
       
       .flyer {
@@ -388,6 +389,10 @@
         background: white;
         page-break-inside: avoid;
         max-height: 100vh;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
       }
       
       .flyer::before, .flyer::after, .glow {
@@ -395,23 +400,31 @@
       }
       
       .flyer-content {
-        padding: 15px;
+        padding: 10px;
         color: black;
       }
       
       h1 {
         color: #333;
         text-shadow: none;
-        font-size: 32px;
+        font-size: 24px;
+        margin-bottom: 2px;
+      }
+      
+      .tagline {
+        font-size: 12px;
+        margin-bottom: 2px;
+        line-height: 1.3;
+      }
+      
+      .description {
+        font-size: 10px;
         margin-bottom: 5px;
+        line-height: 1.3;
       }
       
       .tagline, .device-name, .contact-item {
         color: #555;
-      }
-      
-      .description {
-        margin-bottom: 10px;
       }
       
       .action-buttons {
@@ -423,26 +436,100 @@
         backdrop-filter: none;
         border: 1px solid #eee;
         box-shadow: none;
-        padding: 15px;
-        margin-bottom: 15px;
+        padding: 10px;
+        margin-bottom: 10px;
       }
       
       .features {
-        margin: 10px 0;
+        margin: 5px 0;
+        gap: 5px;
+      }
+      
+      .feature {
+        font-size: 10px;
+        padding: 3px 8px;
       }
       
       .device-icon {
-        width: 70px;
-        height: 55px;
+        width: 40px;
+        height: 30px;
+        margin-bottom: 5px;
+      }
+      
+      .device-name {
+        font-size: 9px;
       }
       
       .logo {
-        width: 120px;
-        margin-bottom: 15px;
+        width: 80px;
+        margin-bottom: 5px;
       }
       
       .devices {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+      }
+      
+      .device {
+        width: 60px;
+        margin: 0 5px 5px;
+      }
+      
+      .price-container {
+        margin-bottom: 10px;
+      }
+      
+      .duration {
+        font-size: 12px;
+        margin-bottom: 0;
+      }
+      
+      .price {
+        font-size: 18px;
+        margin-top: 2px;
+      }
+      
+      .best-value {
+        font-size: 9px;
+        padding: 2px 5px;
+        margin-bottom: 2px;
+      }
+      
+      .price-option {
+        padding: 5px;
+      }
+      
+      .contact-item {
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+      
+      .contact-text {
+        font-size: 10px;
+        line-height: 1.3;
+      }
+      
+      .qr-code {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .qr-text {
+        font-size: 9px;
+      }
+      
+      .highlighted {
+        box-shadow: none;
+      }
+      
+      .contact-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 5px;
+      }
+      
+      @page {
+        margin: 0;
+        size: auto;
       }
     }
     
