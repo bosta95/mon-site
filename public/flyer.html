@@ -198,7 +198,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100px;
+      width: 110px;
       margin: 0 10px 15px;
       transition: transform 0.3s ease;
     }
@@ -208,11 +208,12 @@
     }
     
     .device-icon {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       margin-bottom: 10px;
-      filter: invert(1);
-      opacity: 0.9;
+      filter: none;
+      opacity: 1;
+      object-fit: contain;
     }
     
     .device-name {
@@ -257,7 +258,7 @@
       width: 26px;
       height: 26px;
       margin-right: 15px;
-      filter: brightness(1.2);
+      filter: none;
     }
     
     .qr {
@@ -423,20 +424,24 @@
       
       <div class="devices">
         <div class="device">
-          <img src="images/image4.svg" alt="Smart TV" class="device-icon">
-          <span class="device-name">Smart TV</span>
-        </div>
-        <div class="device">
-          <img src="images/image7.svg" alt="Smartphone" class="device-icon">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/smartphone_v4gzfk.png" alt="Smartphone" class="device-icon">
           <span class="device-name">Smartphone</span>
         </div>
         <div class="device">
-          <img src="images/image6.svg" alt="Tablette" class="device-icon">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/smart-tv_j0kzyh.png" alt="Smart TV" class="device-icon">
+          <span class="device-name">Smart TV</span>
+        </div>
+        <div class="device">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/tablet_bwrzhz.png" alt="Tablette" class="device-icon">
           <span class="device-name">Tablette</span>
         </div>
         <div class="device">
-          <img src="images/image5.svg" alt="PC" class="device-icon">
-          <span class="device-name">PC/Mac</span>
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/firetv_eeimoi.png" alt="Fire TV" class="device-icon">
+          <span class="device-name">Fire TV</span>
+        </div>
+        <div class="device">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/multi-devices_rbxvuk.png" alt="Multi-appareils" class="device-icon">
+          <span class="device-name">Multi-appareils</span>
         </div>
       </div>
       
