@@ -600,15 +600,29 @@
     
     @media (max-width: 768px) {
       .flyer-content {
-        padding: 30px;
+        padding: 20px;
+      }
+      
+      .header {
+        margin-bottom: 10px;
       }
       
       h1 {
-        font-size: 32px;
+        font-size: 28px;
+      }
+      
+      .tagline {
+        font-size: 14px;
+      }
+      
+      .description {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 10px;
       }
       
       .price {
-        font-size: 42px;
+        font-size: 28px;
       }
       
       .contact {
@@ -619,28 +633,102 @@
         margin-bottom: 20px;
       }
       
+      .device-icon {
+        width: 50px;
+        height: 40px;
+        object-fit: contain;
+      }
+      
+      .device {
+        width: 60px;
+      }
+      
+      .devices {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+      }
+      
       .qr-code {
         width: 100px;
         height: 100px;
+      }
+      
+      .features {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+      
+      .feature {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+      
+      .share-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+      
+      .share-btn {
+        padding: 8px 12px;
+        font-size: 12px;
       }
     }
     
     @media (max-width: 480px) {
       .flyer-content {
-        padding: 20px;
+        padding: 15px;
       }
       
       h1 {
-        font-size: 28px;
+        font-size: 24px;
+      }
+      
+      .tagline {
+        font-size: 12px;
+      }
+      
+      .description {
+        font-size: 11px;
+        line-height: 1.3;
       }
       
       .price {
-        font-size: 36px;
+        font-size: 24px;
       }
       
       .feature {
-        font-size: 12px;
-        padding: 6px 12px;
+        font-size: 10px;
+        padding: 5px 8px;
+      }
+      
+      .device-icon {
+        width: 40px;
+        height: 32px;
+      }
+      
+      .device-name {
+        font-size: 10px;
+      }
+      
+      .logo {
+        width: 100px;
+      }
+      
+      .qr-code {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .share-buttons {
+        gap: 5px;
+      }
+      
+      .share-btn {
+        padding: 6px 10px;
+        font-size: 11px;
       }
     }
   </style>
@@ -763,7 +851,22 @@
             scale: 2, // Meilleure qualité
             useCORS: true,
             allowTaint: true,
-            backgroundColor: null
+            backgroundColor: null,
+            width: flyerElement.offsetWidth,
+            height: flyerElement.offsetHeight,
+            logging: false,
+            onclone: function(clonedDoc) {
+              // Optimiser les éléments clonés pour l'image de partage
+              const clonedFlyer = clonedDoc.querySelector('.flyer');
+              if (clonedFlyer) {
+                // S'assurer que les images sont chargées
+                const images = clonedFlyer.querySelectorAll('img');
+                images.forEach(img => {
+                  if (img.complete) return;
+                  img.src = img.src; // Force un rechargement
+                });
+              }
+            }
           }).then(canvas => {
             const imgDataUrl = canvas.toDataURL('image/png');
             resolve(imgDataUrl);
@@ -799,36 +902,8 @@
       
       // Partage sur Snapchat
       shareSnapchat.addEventListener('click', function() {
-        if (flyerImage) {
-          // Pour Snapchat, nous devons créer un blob et l'envoyer
-          fetch(flyerImage)
-            .then(res => res.blob())
-            .then(blob => {
-              const file = new File([blob], "flyer-iptv.png", { type: "image/png" });
-              const filesArray = [file];
-              
-              if (navigator.canShare && navigator.canShare({ files: filesArray })) {
-                navigator.share({
-                  title: 'IPTV Smarter Pro',
-                  text: 'Plus de 22 000 chaînes TV et 50 000 films & séries en HD et 4K',
-                  files: filesArray,
-                })
-                .catch(error => {
-                  console.error('Erreur lors du partage:', error);
-                  // Fallback si le partage de fichier échoue
-                  const url = encodeURIComponent('https://iptvsmarterpros.com/');
-                  window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
-                });
-              } else {
-                // Fallback si le partage de fichier n'est pas supporté
-                const url = encodeURIComponent('https://iptvsmarterpros.com/');
-                window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
-              }
-            });
-        } else {
-          const url = encodeURIComponent('https://iptvsmarterpros.com/');
-          window.open(`https://www.snapchat.com/scan?attachmentUrl=${url}`, '_blank');
-        }
+        // Rediriger vers la page optimisée pour Snapchat
+        window.location.href = 'flyer-snap.html';
       });
       
       // Partage sur Messenger
