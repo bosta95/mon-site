@@ -245,12 +245,21 @@
     }
     
     .device-icon {
-      font-size: 40px;
+      width: 90px;
+      height: 70px;
       margin-bottom: 10px;
-      filter: none;
+      filter: brightness(1.2) contrast(1.2);
       opacity: 1;
       object-fit: contain;
-      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 5px;
+      border-radius: 10px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    
+    .device:hover .device-icon {
+      transform: scale(1.1);
+      filter: brightness(1.4) contrast(1.3);
     }
     
     .device-name {
@@ -487,24 +496,24 @@
       
       <div class="devices">
         <div class="device">
-          <span class="device-icon">&#x1F4F1;</span>
+          <img src="images/tel.PNG" alt="Smartphone" class="device-icon">
           <span class="device-name">Smartphone</span>
         </div>
         <div class="device">
-          <span class="device-icon">&#x1F4FA;</span>
+          <img src="images/smart.PNG" alt="Smart TV" class="device-icon">
           <span class="device-name">Smart TV</span>
         </div>
         <div class="device">
-          <span class="device-icon">&#x1F4F2;</span>
+          <img src="images/tablette.PNG" alt="Tablette" class="device-icon">
           <span class="device-name">Tablette</span>
         </div>
         <div class="device">
-          <span class="device-icon">&#x1F50C;</span>
+          <img src="images/fire.PNG" alt="Fire TV" class="device-icon">
           <span class="device-name">Fire TV</span>
         </div>
         <div class="device">
-          <span class="device-icon">&#x1F5A5;</span>
-          <span class="device-name">Multi-appareils</span>
+          <img src="images/pcmac.PNG" alt="PC/Mac" class="device-icon">
+          <span class="device-name">PC/Mac</span>
         </div>
       </div>
       
@@ -521,7 +530,7 @@
         </div>
         
         <div class="qr">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACgCAYAAACLz2ctAAAJZ0lEQVR4Xu2dMZIkNwxFmZEPYR/BkX0Ee4fJHNmRfQT5CI7sI8hHUORjOLIje5V7XauumZ7qbrYgkMT7EcrdNR2DP5/4JIAiS5Kf2BAAAAAAAAAAAAAAAADYh5++//H3T69v3c//fP2y+/r7v98Pvf/HH77sXv+c9yv9XnkAFJe//vz94/UjUPhz1BnW3q+2c1QZ4iQnAAYFsNXxW68vUacvKjgpACYCcOv1moBUAYwcIJA2xb2OR0sJYOQAgXSt/lhdvxTAyAECaRO8ve5nbYkSIJBu6/Yo9xMAuAFgZAB7j9YiAUgA1wpQ637WLyPq92sBSABL1cNRnxklQAK4Vk9HB9AskxKAWeY9AqpKSgHkLNhB0lojJYDbOzIegLSA2XoeAcASJbN0mIkHAG2k8wDgiCnvq3NSAnhk1DMygH0jiQKgBGSMtGBPn6X5jCkAFKlQpw9KAOdGRqMBKP1+7/sBUEcJdaxaAPf+TkAU5TTb0xYAw+TDxSF6HFQ7Hbf3/0tzRjojDpd6pQWE6TsRt08dgG8DNaMAOFoOogPI/cCE6nRdWgA1gFq5DQIYqvEUB2N+YLbORQCu9acGUK1DvAHUuiDQajNUP2sU08XtNYAl6qb0fP+HUNNjP3DpGPbmkVJ9l4LWLKcaoWoAt54rAaj0fjWARxbQwgXOAdDrNFbpexYAlGrlCADVAFqpoPYAkgLgYHG0qkq3DmDUFrBe3bj/g0FO7RnbkBbQYADFE9AnBdCkwbcY1Gj1qWQTwLktrMv7WTRz4VELKHcz03eAVuqh2wJaDGDkFnDRZKw66QGQtIBOA1jrm7QA5TRMDaBFK7gGkBZw11rFz4Ik7V89I9YEsEU13S4v/34WgHslqP2UXsoDwKQALn1EAG/3+3qUr8V7owLYcj4AuJPbegzE3OppCsARijdqTgEwAYA9ZUEAe9ZM9j2vAJ5tAa0BpAX0JvzB/L0BNGuYAwBD3gdcApCpOAcKtAKYKQWPCuBS6zLSbDgC2BAuBTDLfcDRB2Jni2v5fn9TAN0HYuSBGAAcCEAJ1HkKyFTcQf33pgBa3wd8NgCHDsTOVpgVAOf2Ay1vRhMD0BJgakDEgVjfUQwzAHsuZABQkWGmKTgzABVle/oSBuC5/cAel3PVey4E8KwBlVUA5/YDJfupPf8O0GpApYTvhQDuKZq1gPcPbS4GsAdIFgX/9NtvrfqsKIBnA6Rk1ioKgKTgAwOq2QG8IQXnSOvZoGS6jdIKYBo4T+1XVgCPT5IfnX44O+KZCcCj+9PldQVAMqG/LAgA5wFk9Oy35oM0ATRdZu4eUwPIKHgQOGdKvWf2nRScu+8LgMl7flUAd9cxUXzWDwC+H+mqA+hVHrMDKL2f9/1A6XlRUzA9YII+L86E/NUBvGI/0Krc6gAeHQXTAgLgIYC9o+AmAZSkYAA8dpM5C4Cj5M5LAcyQgvOmYKHVqwJoZR0E4N4BJIrPtAZwCkBGwYMAmSkFZ8t+jILzOKIJQEtHskzBeVu/OgDpIp0zAHs5yQA4AIBeZ8G0gK0E3XtX7QA3IwK4bYMAwPWaV5WCrwDgniYmBVdZPWe9ORuAN6TgxRnZpuLOsvUEpOAKnSOl4LNBK3l/iRQsGQXXB4AWqRgAa6u2aZYBwEnTsNXPzQigxTJnBdCiFQTAowCOmILZDwTAmQHMDGCW75c8D5sUfDgFlw6QlLNgKQCSgs+9WXwZACUH1g2gJPrg3GQ2GHRlS8HWIyzLm9FnAVgSqMUdsfYDZbtVBaB1Ck4HoMRljVzWU3AWv18JQAC8e3LY8vdZpmD39wNHmgH3JtpHsqDl76OmYOnzZgHQqlwAMAuAAhCPBGIazYSXpmDvaXwpAKvjpjMnIo7OP9tLwa3GwVp+13Iyuulbsq+PH3KVPMw/U4q3BnDru3uupxvZSoSu2wI+ewjfm4Kl76cFbBhASZxXXh89h1UCcZGC2Q+0dFG3c0cBsEU1vQyc1fdZtYItvl9yjr3nGtA1gLN8n+X1UAHobQE956u910sBPMr3b/WzbgEln3NWo+ilgqMASAsoU76eHrCagmkBdSuguAIQAD8RcvsHmFsNMUF+1p1tCm75PmuHXRWAkYDKBOAjwGbZAvFOwZFoiASg53VtZQBLwM0OYIQW8CqAWi0i+4F9AB7Z3dFmQ8/raQM4w3WgdQvovagBzAPgqGN9KwC9tzNqAQHwkLCHApA7YjkBnANADj57FBQpo1kAJAU/qP9TUvDSiNT6PwIWL69LpPRcWrYEf5TeXN2EZj+QCfnBW8DWAGwAiFRAowDYY2QBsE31yQhg6x2tEuiK97JeR5N/mRuZgk8d3Ek+3CuAexvSLQByJmxqDOH6XkoAvabuAHjMvRTAOQSzApQNwGoLyB0xgwuYOwXL7vCFV/GSFGw59WTpnIzPq1pAbwCRmY4BMCeA3Ak7GN9bXQ4AqxQS6c2t7vNt2SMXgOrTm1YAW6Q96feM3gJS5r4g5AFwUQpGyJOl4NgpeFSXaQEH638AzAmgtwWUdm4GACUbylYAtg5uSp8nTc8hruLZCbC6H1izM3vO6bFnaQQ8E4DeE/Ktz/MKoHUryB2xBgWcB8B77Q+APXKc/B7PsXAeAJc2kzVnwWSAgyXgRADyaLbiPX1S8NgpOJJ9jZ6CrUAsmZ6rAbRqfTIBaLGgWQEEwDwAemZLrwugrAUcCwQAbGu8SABGe9ivBmCL+HpPATIT9gdg9gB4fCdHCUABsI2uLlNwLQAepcwRApwZACzRW/I+rFIwI+CdI5bW56XfrwYgI+DjXpD+3lsKPhM8UtNxALgj+9kOyQzg3B8hxI7YzkNQbgCtIkx/Fa+kJQxpwLM/cAbATDdYSwf7mQCU5kxSMClY9aBe6a8v7x1tAzDZSHcOMUt+IQAqt4JqAJkJmx47Uy3lS794/wwgBRcQnCkFbz0jANICqh7XA4CkYNWWwGwAkYJJwRMDODqAjIJJwaRgUnBB+qUFzA3g1YPvZv8UKpT7oVX1exQAWzxrKg1wrQpIc5CSFBwRRG9/sCdVCr4ZwAjg1RZsKb+1eAagZP0BUPNQoRqAUl+0+Bm7jKYsGgABUDr7VeqjdQGc3gKm9YgSQEp+TADxMWOAFECYDmsApD6hB0SJIAAAAAAAAAAAAAAAAAA5+R+WF7ihB1rkdQAAAABJRU5ErkJggg==" alt="QR Code du site web" class="qr-code">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6BAMAAAB6wkcOAAAAG1BMVEXw8PAAAADh4eH5+fnp6ena2to6OjpeXl5mZmYm1rZwAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB8UlEQVR4nO3WQW7jQAxFUXvh/a/s3B0gAUY1Sak+PGf/Yl6JEi+K43niiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiI/lCz+TBkG5+TS2Pz4bT0ZrQKeTTe9MNZ/TDaLa9w9PbXZ1PO9bvRrng0Wl/yWLxo9jyZLcKXaIfdD0abxfUdLd9IzXxJnYw2v//v9uqTW+kV0qJ7x2h7LVXqbfTPaK3UBfJF68tX/mDM9o1eq329dUbr26hO36KhO2u9e9M5Iw1d2L3R10S9pWiE3pYt3TTaPCvplG0abW1qm4Y/Rtu2VbvM7K3UxZ19F/9KSYRz+yYfGyUBT0bLQummlmPSfrRcnMZfSO2j0UZKXVIYWmqWD4Uh3YhWDpbC76kXh7t8HY2SL+3V5w5HK+jyZV5GK1FfbS5NjmZbMVsB1yLWDRiNVpd08Wgs4Eo8x0vY8o7GDq78/vRF46VJ1u4yRsud6+mLxktjLmfLaGRcrltGI+N65yIeJVxvW8QjkMopdvVbLe/gzk0KXm1eJKMRc/V9Ffi9rlWMxjGXPl5tjJ72aHmWVOTnrtFOmHJaD0bbxVN+3n/OHO29+SQ5Gycjn+wnY5T++ew8IiIiIiIiIiIiIiIiIiIiIiIiIiIiIqK/1D83JhUd9d1O3QAAAABJRU5ErkJggg==" alt="QR Code vers le site web" class="qr-code">
           <div class="qr-text">Scannez pour visiter notre site</div>
         </div>
       </div>
