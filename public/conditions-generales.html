@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Conditions Générales - IPTV Smarter Pro</title>
+  <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
+  <style>
+    :root {
+      --primary-color: #6c5498;
+      --secondary-color: #ff6b6b;
+      --dark-bg: #0c0c18;
+      --light-text: #ffffff;
+      --muted-text: #b0b0b0;
+      --section-bg: rgba(26, 26, 46, 0.5);
+      --border-color: rgba(108, 84, 152, 0.3);
+      --highlight: rgba(255, 107, 107, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #1a1a30, #0c0c18);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    
+    .logo {
+      width: 50px;
+      margin-right: 15px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--light-text);
+      text-shadow: 0 2px 10px rgba(108, 84, 152, 0.3);
+    }
+    
+    .main-content {
+      padding: 40px 0;
+    }
+    
+    .legal-document {
+      background: var(--section-bg);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+    }
+    
+    .section:last-child {
+      margin-bottom: 0;
+    }
+    
+    h2 {
+      font-size: 24px;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    h3 {
+      font-size: 18px;
+      color: var(--primary-color);
+      margin: 20px 0 10px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+    
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    .highlighted {
+      background-color: var(--highlight);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 3px solid var(--secondary-color);
+    }
+    
+    .toc {
+      background: rgba(30, 30, 50, 0.6);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .toc-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--secondary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-title::before {
+      content: '📋';
+    }
+    
+    .toc-list {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+    
+    .toc-item {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .toc-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .toc-link {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .toc-link:hover {
+      color: var(--secondary-color);
+      padding-left: 5px;
+    }
+    
+    .date-info {
+      text-align: right;
+      font-size: 14px;
+      color: var(--muted-text);
+      margin-top: 30px;
+      font-style: italic;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: var(--light-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .back-to-top:hover {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    
+    footer {
+      background: rgba(10, 10, 20, 0.8);
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .footer-content {
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+    
+    .footer-links {
+      margin-top: 10px;
+    }
+    
+    .footer-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: var(--light-text);
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      .legal-document {
+        padding: 20px;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo-container">
+        <img src="images/IPTV_glpgxi.svg" alt="IPTV Smarter Pro Logo" class="logo">
+        <h1>Conditions Générales</h1>
+      </div>
+    </div>
+  </header>
+  
+  <div class="main-content">
+    <div class="container">
+      <div class="toc">
+        <div class="toc-title">Table des matières</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#introduction" class="toc-link">Introduction</a></li>
+          <li class="toc-item"><a href="#definitions" class="toc-link">Définitions</a></li>
+          <li class="toc-item"><a href="#services" class="toc-link">Services proposés</a></li>
+          <li class="toc-item"><a href="#subscription" class="toc-link">Abonnement et tarifs</a></li>
+          <li class="toc-item"><a href="#payment" class="toc-link">Modalités de paiement</a></li>
+          <li class="toc-item"><a href="#obligations" class="toc-link">Obligations de l'utilisateur</a></li>
+          <li class="toc-item"><a href="#intellectual-property" class="toc-link">Propriété intellectuelle</a></li>
+          <li class="toc-item"><a href="#limitation" class="toc-link">Limitation de responsabilité</a></li>
+          <li class="toc-item"><a href="#termination" class="toc-link">Résiliation</a></li>
+          <li class="toc-item"><a href="#modifications" class="toc-link">Modifications des conditions</a></li>
+          <li class="toc-item"><a href="#disputes" class="toc-link">Règlement des litiges</a></li>
+          <li class="toc-item"><a href="#contact" class="toc-link">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="legal-document">
+        <section id="introduction" class="section">
+          <h2>1. Introduction</h2>
+          <p>Les présentes conditions générales d'utilisation (ci-après dénommées "CGU") régissent l'utilisation du service IPTV Smarter Pro (ci-après dénommé "le Service") proposé par notre société (ci-après dénommée "nous" ou "notre société").</p>
+          <p>En vous abonnant à notre Service, vous acceptez sans réserve l'intégralité des présentes CGU. Si vous n'acceptez pas ces conditions, vous ne devez pas utiliser notre Service.</p>
+          <p>Nous nous réservons le droit de modifier ces CGU à tout moment. Les modifications prendront effet dès leur publication sur notre site. Il est de votre responsabilité de consulter régulièrement nos CGU.</p>
+        </section>
+        
+        <section id="definitions" class="section">
+          <h2>2. Définitions</h2>
+          <ul>
+            <li><strong>IPTV</strong> : Internet Protocol Television, technologie permettant de diffuser des contenus télévisuels via Internet plutôt que par des moyens traditionnels comme le satellite ou le câble.</li>
+            <li><strong>Service</strong> : l'ensemble des fonctionnalités et contenus proposés par IPTV Smarter Pro.</li>
+            <li><strong>Utilisateur</strong> : toute personne physique ou morale qui utilise le Service après souscription d'un abonnement.</li>
+            <li><strong>Contenu</strong> : l'ensemble des chaînes TV, films, séries et autres médias audiovisuels accessibles via le Service.</li>
+            <li><strong>Abonnement</strong> : souscription payante permettant d'accéder au Service pour une durée déterminée.</li>
+          </ul>
+        </section>
+        
+        <section id="services" class="section">
+          <h2>3. Services proposés</h2>
+          <p>IPTV Smarter Pro propose un service de diffusion de contenus télévisuels et multimédia via Internet, comprenant notamment :</p>
+          <ul>
+            <li>L'accès à un catalogue de chaînes TV françaises et internationales</li>
+            <li>L'accès à des films et séries en vidéo à la demande (VOD)</li>
+            <li>La possibilité de visionner les contenus sur différents appareils compatibles</li>
+            <li>Un guide des programmes électronique (EPG)</li>
+          </ul>
+          <p>La disponibilité des chaînes et contenus peut varier en fonction de contraintes techniques, légales ou contractuelles. Nous nous efforçons de maintenir un service de qualité, mais ne pouvons garantir la disponibilité permanente de l'intégralité des contenus.</p>
+        </section>
+        
+        <section id="subscription" class="section">
+          <h2>4. Abonnement et tarifs</h2>
+          <p>Pour accéder à notre Service, vous devez souscrire à l'un de nos abonnements. Les différentes offres et tarifs sont détaillés sur notre site web.</p>
+          <p>Les abonnements sont proposés pour des durées de 3 mois, 6 mois ou 12 mois. Le prix de l'abonnement est payable intégralement lors de la souscription.</p>
+          <p>Nous nous réservons le droit de modifier nos tarifs. Toute modification tarifaire sera applicable aux nouveaux abonnements ainsi qu'aux renouvellements d'abonnements existants.</p>
+          <div class="highlighted">
+            <p>L'accès au Service est activé après confirmation de votre paiement. Un e-mail de confirmation vous sera envoyé avec vos identifiants de connexion.</p>
+          </div>
+        </section>
+        
+        <section id="payment" class="section">
+          <h2>5. Modalités de paiement</h2>
+          <p>Le paiement des abonnements s'effectue en ligne via les moyens de paiement proposés sur notre site (carte bancaire, PayPal, etc.).</p>
+          <p>Tous les paiements sont sécurisés et traités par des prestataires de paiement tiers. Nous ne stockons pas vos informations de paiement sur nos serveurs.</p>
+          <p>Le renouvellement de votre abonnement n'est pas automatique. Vous devrez renouveler manuellement votre abonnement avant son expiration pour continuer à bénéficier du Service.</p>
+          <h3>5.1 Remboursement</h3>
+          <p>Conformément à notre politique de remboursement, vous disposez d'un délai de 24 heures après la souscription pour demander un remboursement en cas de problèmes techniques majeurs empêchant l'utilisation du Service. Passé ce délai, aucun remboursement ne sera accordé.</p>
+          <p>Les remboursements sont effectués via le même moyen de paiement que celui utilisé lors de la souscription.</p>
+        </section>
+        
+        <section id="obligations" class="section">
+          <h2>6. Obligations de l'utilisateur</h2>
+          <p>En utilisant notre Service, vous vous engagez à :</p>
+          <ul>
+            <li>Fournir des informations exactes lors de votre inscription</li>
+            <li>Ne pas partager vos identifiants de connexion avec des tiers</li>
+            <li>Ne pas utiliser le Service à des fins commerciales ou de diffusion publique</li>
+            <li>Ne pas tenter de contourner les mesures techniques de protection du Service</li>
+            <li>Respecter toutes les lois et réglementations applicables dans votre pays de résidence</li>
+            <li>Ne pas utiliser le Service d'une manière qui pourrait endommager, désactiver ou surcharger nos infrastructures</li>
+          </ul>
+          <p>Tout manquement à ces obligations pourra entraîner la suspension ou la résiliation de votre abonnement sans préavis ni remboursement.</p>
+        </section>
+        
+        <section id="intellectual-property" class="section">
+          <h2>7. Propriété intellectuelle</h2>
+          <p>Tous les contenus disponibles via notre Service sont protégés par des droits de propriété intellectuelle. Vous n'êtes autorisé qu'à les visionner à titre privé et personnel.</p>
+          <p>Il est strictement interdit de reproduire, télécharger, stocker, modifier, distribuer ou exploiter de quelque manière que ce soit ces contenus sans autorisation expresse.</p>
+          <p>Les marques, logos, noms de domaine et autres signes distinctifs présents sur notre site sont notre propriété exclusive. Aucune utilisation de ces éléments n'est autorisée sans notre accord préalable écrit.</p>
+        </section>
+        
+        <section id="limitation" class="section">
+          <h2>8. Limitation de responsabilité</h2>
+          <p>Dans les limites autorisées par la loi, nous déclinons toute responsabilité concernant :</p>
+          <ul>
+            <li>Les interruptions ou dysfonctionnements temporaires du Service</li>
+            <li>La qualité de la connexion Internet de l'utilisateur</li>
+            <li>La compatibilité des appareils de l'utilisateur avec notre Service</li>
+            <li>Le contenu des programmes diffusés</li>
+            <li>Tout dommage direct ou indirect résultant de l'utilisation ou de l'impossibilité d'utiliser le Service</li>
+          </ul>
+          <p>Notre responsabilité, si elle venait à être engagée, serait limitée au montant de votre abonnement en cours.</p>
+        </section>
+        
+        <section id="termination" class="section">
+          <h2>9. Résiliation</h2>
+          <h3>9.1 Résiliation par l'utilisateur</h3>
+          <p>Vous pouvez cesser d'utiliser le Service à tout moment. Cependant, les abonnements déjà payés ne sont pas remboursables (sauf dans les conditions mentionnées à l'article 5.1).</p>
+          <h3>9.2 Résiliation par IPTV Smarter Pro</h3>
+          <p>Nous nous réservons le droit de suspendre ou résilier votre abonnement, sans préavis ni remboursement, en cas de :</p>
+          <ul>
+            <li>Violation des présentes CGU</li>
+            <li>Utilisation frauduleuse du Service</li>
+            <li>Non-paiement des sommes dues</li>
+            <li>Demande des autorités légales</li>
+          </ul>
+        </section>
+        
+        <section id="modifications" class="section">
+          <h2>10. Modifications des conditions</h2>
+          <p>Nous nous réservons le droit de modifier les présentes CGU à tout moment. Les modifications seront publiées sur notre site web et vous seront notifiées par e-mail si les changements sont substantiels.</p>
+          <p>L'utilisation continue du Service après la publication des modifications vaut acceptation de ces dernières. Si vous n'acceptez pas les nouvelles conditions, vous devez cesser d'utiliser le Service.</p>
+        </section>
+        
+        <section id="disputes" class="section">
+          <h2>11. Règlement des litiges</h2>
+          <p>Les présentes CGU sont régies par la loi française.</p>
+          <p>En cas de litige, une solution amiable sera recherchée avant tout recours judiciaire. Toute réclamation doit nous être adressée par e-mail à l'adresse indiquée dans la section "Contact".</p>
+          <p>À défaut de résolution amiable, tout litige relatif à l'interprétation ou à l'exécution des présentes CGU sera soumis aux tribunaux compétents.</p>
+        </section>
+        
+        <section id="contact" class="section">
+          <h2>12. Contact</h2>
+          <p>Pour toute question concernant ces CGU ou notre Service, vous pouvez nous contacter :</p>
+          <ul>
+            <li>Par e-mail : support@iptvsmarterpros.com</li>
+            <li>Via Snapchat : dyuka.953</li>
+          </ul>
+        </section>
+        
+        <div class="date-info">
+          <p>Dernière mise à jour : 2 juin 2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <a href="#" class="back-to-top">↑</a>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2023 IPTV Smarter Pro - Tous droits réservés</p>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Accueil</a>
+          <a href="politique-confidentialite.html" class="footer-link">Politique de Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Smooth scroll pour les liens de la table des matières
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Afficher/masquer le bouton "Retour en haut" en fonction du défilement
+    window.addEventListener('scroll', function() {
+      var backToTop = document.querySelector('.back-to-top');
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'flex';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+    
+    // Action du bouton "Retour en haut"
+    document.querySelector('.back-to-top').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html> 

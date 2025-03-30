@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Politique de Confidentialité - IPTV Smarter Pro</title>
+  <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
+  <style>
+    :root {
+      --primary-color: #6c5498;
+      --secondary-color: #ff6b6b;
+      --dark-bg: #0c0c18;
+      --light-text: #ffffff;
+      --muted-text: #b0b0b0;
+      --section-bg: rgba(26, 26, 46, 0.5);
+      --border-color: rgba(108, 84, 152, 0.3);
+      --highlight: rgba(255, 107, 107, 0.1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #1a1a30, #0c0c18);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    
+    .logo {
+      width: 50px;
+      margin-right: 15px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--light-text);
+      text-shadow: 0 2px 10px rgba(108, 84, 152, 0.3);
+    }
+    
+    .main-content {
+      padding: 40px 0;
+    }
+    
+    .legal-document {
+      background: var(--section-bg);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+    }
+    
+    .section:last-child {
+      margin-bottom: 0;
+    }
+    
+    h2 {
+      font-size: 24px;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    h3 {
+      font-size: 18px;
+      color: var(--primary-color);
+      margin: 20px 0 10px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+    
+    ul, ol {
+      margin: 15px 0;
+      padding-left: 25px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+    
+    .highlighted {
+      background-color: var(--highlight);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 3px solid var(--secondary-color);
+    }
+    
+    .toc {
+      background: rgba(30, 30, 50, 0.6);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .toc-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--secondary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .toc-title::before {
+      content: '📋';
+    }
+    
+    .toc-list {
+      list-style-type: none;
+      padding-left: 10px;
+    }
+    
+    .toc-item {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .toc-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+    
+    .toc-link {
+      color: var(--light-text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .toc-link:hover {
+      color: var(--secondary-color);
+      padding-left: 5px;
+    }
+    
+    .date-info {
+      text-align: right;
+      font-size: 14px;
+      color: var(--muted-text);
+      margin-top: 30px;
+      font-style: italic;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: var(--light-text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .back-to-top:hover {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    
+    footer {
+      background: rgba(10, 10, 20, 0.8);
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .footer-content {
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+    
+    .footer-links {
+      margin-top: 10px;
+    }
+    
+    .footer-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: var(--light-text);
+    }
+    
+    .data-category {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(30, 30, 50, 0.4);
+      border-radius: 8px;
+      border-left: 3px solid var(--primary-color);
+    }
+    
+    .data-category h3 {
+      margin-top: 0;
+    }
+    
+    .rights-section {
+      margin: 25px 0;
+      background: rgba(108, 84, 152, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+    }
+    
+    .rights-section h3 {
+      color: var(--secondary-color);
+      margin-top: 0;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      h2 {
+        font-size: 20px;
+      }
+      
+      .legal-document {
+        padding: 20px;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo-container">
+        <img src="images/IPTV_glpgxi.svg" alt="IPTV Smarter Pro Logo" class="logo">
+        <h1>Politique de Confidentialité</h1>
+      </div>
+    </div>
+  </header>
+  
+  <div class="main-content">
+    <div class="container">
+      <div class="toc">
+        <div class="toc-title">Table des matières</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a href="#introduction" class="toc-link">Introduction</a></li>
+          <li class="toc-item"><a href="#collected-data" class="toc-link">Données collectées</a></li>
+          <li class="toc-item"><a href="#data-usage" class="toc-link">Utilisation des données</a></li>
+          <li class="toc-item"><a href="#data-sharing" class="toc-link">Partage des données</a></li>
+          <li class="toc-item"><a href="#data-security" class="toc-link">Sécurité des données</a></li>
+          <li class="toc-item"><a href="#cookies" class="toc-link">Cookies et technologies similaires</a></li>
+          <li class="toc-item"><a href="#user-rights" class="toc-link">Vos droits sur vos données</a></li>
+          <li class="toc-item"><a href="#data-retention" class="toc-link">Conservation des données</a></li>
+          <li class="toc-item"><a href="#children" class="toc-link">Protection des mineurs</a></li>
+          <li class="toc-item"><a href="#policy-changes" class="toc-link">Modifications de la politique</a></li>
+          <li class="toc-item"><a href="#contact" class="toc-link">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="legal-document">
+        <section id="introduction" class="section">
+          <h2>1. Introduction</h2>
+          <p>Chez IPTV Smarter Pro, nous accordons une grande importance à la protection de vos données personnelles. La présente politique de confidentialité (ci-après dénommée "Politique") vise à vous informer de nos pratiques concernant la collecte, l'utilisation et le partage des informations que vous nous fournissez lors de l'utilisation de notre service.</p>
+          <p>Cette Politique s'applique à tous les services proposés par IPTV Smarter Pro et est conforme au Règlement Général sur la Protection des Données (RGPD) et aux autres législations applicables en matière de protection des données.</p>
+          <div class="highlighted">
+            <p>En utilisant notre service, vous acceptez les pratiques décrites dans la présente Politique. Si vous n'acceptez pas ces pratiques, nous vous invitons à ne pas utiliser notre service.</p>
+          </div>
+        </section>
+        
+        <section id="collected-data" class="section">
+          <h2>2. Données collectées</h2>
+          <p>Nous collectons différents types de données afin de vous fournir nos services et d'améliorer votre expérience utilisateur :</p>
+          
+          <div class="data-category">
+            <h3>2.1 Données d'inscription</h3>
+            <p>Lorsque vous créez un compte sur notre plateforme, nous collectons :</p>
+            <ul>
+              <li>Votre adresse e-mail</li>
+              <li>Votre nom et prénom</li>
+              <li>Les informations de paiement (traitées par nos prestataires de paiement)</li>
+            </ul>
+          </div>
+          
+          <div class="data-category">
+            <h3>2.2 Données d'utilisation</h3>
+            <p>Lors de votre utilisation de notre service, nous pouvons collecter :</p>
+            <ul>
+              <li>Les contenus visionnés</li>
+              <li>Les heures et durées de visionnage</li>
+              <li>Les appareils utilisés pour accéder au service</li>
+              <li>Les préférences de contenu</li>
+              <li>Les interactions avec le service (recherches, filtres, etc.)</li>
+            </ul>
+          </div>
+          
+          <div class="data-category">
+            <h3>2.3 Données techniques</h3>
+            <p>Pour assurer le bon fonctionnement du service, nous collectons :</p>
+            <ul>
+              <li>L'adresse IP</li>
+              <li>Le type et la version du navigateur</li>
+              <li>Le type et le modèle de l'appareil</li>
+              <li>Le système d'exploitation</li>
+              <li>Les données de connexion et de navigation</li>
+              <li>Les journaux d'erreurs</li>
+            </ul>
+          </div>
+        </section>
+        
+        <section id="data-usage" class="section">
+          <h2>3. Utilisation des données</h2>
+          <p>Nous utilisons vos données personnelles pour les finalités suivantes :</p>
+          <ul>
+            <li><strong>Fournir et gérer le service</strong> : traitement des abonnements, accès aux contenus, assistance client</li>
+            <li><strong>Améliorer le service</strong> : analyse des usages, résolution des problèmes techniques, développement de nouvelles fonctionnalités</li>
+            <li><strong>Personnaliser l'expérience</strong> : recommandations de contenus, adaptation de l'interface</li>
+            <li><strong>Communication</strong> : informations importantes relatives au service, notifications techniques</li>
+            <li><strong>Sécurité</strong> : détection et prévention des activités frauduleuses ou abusives</li>
+            <li><strong>Obligations légales</strong> : respect des obligations légales et réglementaires</li>
+          </ul>
+          <p>Nous traitons vos données sur la base des fondements juridiques suivants :</p>
+          <ul>
+            <li>L'exécution du contrat qui nous lie (conditions générales d'utilisation)</li>
+            <li>Notre intérêt légitime à améliorer et sécuriser notre service</li>
+            <li>Votre consentement, lorsque celui-ci est requis</li>
+            <li>Le respect de nos obligations légales</li>
+          </ul>
+        </section>
+        
+        <section id="data-sharing" class="section">
+          <h2>4. Partage des données</h2>
+          <p>Nous pouvons partager vos données personnelles avec les catégories de destinataires suivantes :</p>
+          <ul>
+            <li><strong>Prestataires de services</strong> : sociétés qui nous aident à fournir nos services (hébergement, paiement, support client)</li>
+            <li><strong>Partenaires commerciaux</strong> : uniquement avec votre consentement explicite</li>
+            <li><strong>Autorités légales</strong> : en cas d'obligation légale, de décision de justice ou pour protéger nos droits</li>
+          </ul>
+          <p>Nous nous engageons à ne pas vendre vos données personnelles à des tiers. Lorsque nous partageons des données avec des prestataires, nous nous assurons qu'ils respectent des standards élevés de protection des données.</p>
+        </section>
+        
+        <section id="data-security" class="section">
+          <h2>5. Sécurité des données</h2>
+          <p>Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre la perte, l'accès non autorisé, la divulgation ou la destruction :</p>
+          <ul>
+            <li>Chiffrement des données sensibles</li>
+            <li>Accès limité aux données sur la base du besoin d'en connaître</li>
+            <li>Surveillance des systèmes pour détecter d'éventuelles vulnérabilités</li>
+            <li>Formation de notre personnel aux bonnes pratiques de sécurité</li>
+            <li>Évaluation régulière de l'efficacité de nos mesures de sécurité</li>
+          </ul>
+          <p>Malgré ces précautions, aucune méthode de transmission ou de stockage électronique n'est totalement sécurisée. Nous ne pouvons donc garantir une sécurité absolue.</p>
+          <div class="highlighted">
+            <p>En cas de violation de données susceptible d'engendrer un risque élevé pour vos droits et libertés, nous vous en informerons dans les délais prévus par la loi.</p>
+          </div>
+        </section>
+        
+        <section id="cookies" class="section">
+          <h2>6. Cookies et technologies similaires</h2>
+          <p>Notre site web utilise des cookies et technologies similaires pour améliorer votre expérience, analyser le trafic et personnaliser le contenu.</p>
+          <h3>6.1 Types de cookies utilisés</h3>
+          <ul>
+            <li><strong>Cookies essentiels</strong> : nécessaires au fonctionnement du site</li>
+            <li><strong>Cookies de performance</strong> : pour analyser la manière dont les visiteurs utilisent le site</li>
+            <li><strong>Cookies de fonctionnalité</strong> : pour mémoriser vos préférences</li>
+            <li><strong>Cookies de ciblage</strong> : pour personnaliser le contenu en fonction de vos intérêts</li>
+          </ul>
+          <h3>6.2 Gestion des cookies</h3>
+          <p>Vous pouvez contrôler et/ou supprimer les cookies à votre guise. Vous pouvez supprimer tous les cookies déjà présents sur votre ordinateur et paramétrer la plupart des navigateurs pour qu'ils les bloquent. Toutefois, si vous faites cela, vous devrez peut-être ajuster manuellement certaines préférences chaque fois que vous visiterez un site, et certaines fonctionnalités pourraient ne pas fonctionner.</p>
+        </section>
+        
+        <section id="user-rights" class="section">
+          <h2>7. Vos droits sur vos données</h2>
+          <p>Conformément aux réglementations sur la protection des données, vous disposez des droits suivants concernant vos données personnelles :</p>
+          
+          <div class="rights-section">
+            <h3>Droits d'accès et de contrôle</h3>
+            <ul>
+              <li><strong>Droit d'accès</strong> : obtenir une copie des données que nous détenons sur vous</li>
+              <li><strong>Droit de rectification</strong> : demander la correction des données inexactes</li>
+              <li><strong>Droit à l'effacement</strong> : demander la suppression de vos données dans certains cas</li>
+              <li><strong>Droit à la limitation du traitement</strong> : demander la restriction du traitement de vos données</li>
+              <li><strong>Droit à la portabilité</strong> : obtenir vos données dans un format structuré pour les transmettre à un autre responsable de traitement</li>
+              <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos données dans certains cas</li>
+            </ul>
+          </div>
+          
+          <p>Pour exercer ces droits, vous pouvez nous contacter aux coordonnées indiquées dans la section "Contact". Nous traiterons votre demande dans les délais prévus par la loi (généralement un mois, pouvant être prolongé de deux mois supplémentaires si nécessaire).</p>
+          <p>Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à l'autorité de contrôle de votre pays de résidence.</p>
+        </section>
+        
+        <section id="data-retention" class="section">
+          <h2>8. Conservation des données</h2>
+          <p>Nous conservons vos données personnelles aussi longtemps que nécessaire pour les finalités pour lesquelles elles ont été collectées, notamment pour satisfaire aux exigences légales, comptables et de reporting.</p>
+          <p>Les périodes de conservation spécifiques sont les suivantes :</p>
+          <ul>
+            <li><strong>Données de compte</strong> : conservées tant que votre compte est actif et pendant une période de 12 mois après sa fermeture</li>
+            <li><strong>Données d'utilisation</strong> : conservées pendant 24 mois</li>
+            <li><strong>Données de paiement</strong> : conservées conformément aux exigences légales en matière comptable et fiscale (généralement 10 ans)</li>
+            <li><strong>Logs techniques</strong> : conservés pendant 12 mois</li>
+          </ul>
+          <p>À l'issue de ces périodes, vos données sont soit supprimées, soit anonymisées de manière irréversible.</p>
+        </section>
+        
+        <section id="children" class="section">
+          <h2>9. Protection des mineurs</h2>
+          <p>Notre service n'est pas destiné aux personnes âgées de moins de 18 ans. Nous ne collectons pas sciemment des données personnelles concernant des enfants de moins de 18 ans. Si vous êtes un parent ou un tuteur et que vous pensez que votre enfant nous a fourni des données personnelles, veuillez nous contacter immédiatement. Si nous apprenons que nous avons collecté des données personnelles d'un enfant sans vérification du consentement parental, nous prenons des mesures pour supprimer ces informations de nos serveurs.</p>
+        </section>
+        
+        <section id="policy-changes" class="section">
+          <h2>10. Modifications de la politique</h2>
+          <p>Nous pouvons mettre à jour cette Politique de temps à autre pour refléter des changements dans nos pratiques ou pour d'autres raisons opérationnelles, légales ou réglementaires.</p>
+          <p>En cas de modifications importantes, nous vous en informerons par e-mail ou par une notification sur notre site avant que les modifications ne prennent effet. Nous vous encourageons à consulter régulièrement cette Politique pour prendre connaissance de toute mise à jour.</p>
+          <p>La poursuite de votre utilisation du service après la publication des modifications vaut acceptation de ces dernières.</p>
+        </section>
+        
+        <section id="contact" class="section">
+          <h2>11. Contact</h2>
+          <p>Si vous avez des questions, des préoccupations ou des demandes concernant cette Politique de confidentialité ou la manière dont nous traitons vos données personnelles, veuillez nous contacter :</p>
+          <ul>
+            <li><strong>Par e-mail</strong> : support@iptvsmarterpros.com</li>
+            <li><strong>Via Snapchat</strong> : dyuka.953</li>
+          </ul>
+          <p>Nous nous efforcerons de répondre à votre demande dans les meilleurs délais.</p>
+        </section>
+        
+        <div class="date-info">
+          <p>Dernière mise à jour : 2 juin 2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <a href="#" class="back-to-top">↑</a>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2023 IPTV Smarter Pro - Tous droits réservés</p>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Accueil</a>
+          <a href="conditions-generales.html" class="footer-link">Conditions Générales</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Smooth scroll pour les liens de la table des matières
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Afficher/masquer le bouton "Retour en haut" en fonction du défilement
+    window.addEventListener('scroll', function() {
+      var backToTop = document.querySelector('.back-to-top');
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'flex';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+    
+    // Action du bouton "Retour en haut"
+    document.querySelector('.back-to-top').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html> 
