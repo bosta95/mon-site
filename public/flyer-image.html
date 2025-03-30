@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>IPTV Smarter Pro - Flyer Image pour Réseaux Sociaux</title>
+  <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: #0f0f1a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .flyer-container {
+      width: 1080px;
+      height: 1080px;
+      max-width: 100%;
+      background: linear-gradient(135deg, #6c5498, #ff6b6b);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    
+    .flyer-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo {
+      width: 140px;
+    }
+    
+    .limited-offer {
+      background-color: #ff6b6b;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      transform: rotate(5deg);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+    
+    h1 {
+      font-size: 60px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .highlight {
+      color: #ffde59;
+    }
+    
+    h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+    
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .feature {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+    
+    .feature:before {
+      content: "✓";
+      color: #ffde59;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    
+    .price-container {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .price-label {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    
+    .price {
+      font-size: 48px;
+      font-weight: 800;
+      color: #ffde59;
+    }
+    
+    .cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    
+    .website {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    
+    .scan-text {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-icon {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(108, 84, 152, 0), rgba(0, 0, 0, 0.4));
+      z-index: 1;
+    }
+    
+    .download-button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: #6c5498;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .download-button:hover {
+      background-color: #7f66b5;
+    }
+    
+    .instructions {
+      margin-top: 20px;
+      max-width: 800px;
+      text-align: center;
+      line-height: 1.6;
+    }
+  </style>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="flyer-container" id="flyer">
+    <div class="overlay"></div>
+    
+    <div class="flyer-content">
+      <div class="header">
+        <img src="images/IPTV_glpgxi.svg" alt="IPTV Logo" class="logo">
+        <div class="limited-offer">OFFRE LIMITÉE!</div>
+      </div>
+      
+      <h1>Meilleur <span class="highlight">IPTV</span><br>France 2025</h1>
+      <h2>+22 000 chaînes TV & +50 000 films en Full HD/4K</h2>
+      
+      <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740830815/video1.jpg" alt="IPTV sur tous les appareils" class="main-image">
+      
+      <div class="features">
+        <div class="feature">Chaînes françaises HD</div>
+        <div class="feature">Films & séries VOD 4K</div>
+        <div class="feature">Sports Premium (Canal+, beIN)</div>
+        <div class="feature">Compatible tous appareils</div>
+        <div class="feature">Support 24/7</div>
+      </div>
+      
+      <div class="footer">
+        <div class="price-container">
+          <div class="price-label">À partir de</div>
+          <div class="price">9,99€</div>
+        </div>
+        
+        <div class="cta">
+          <div class="website">www.iptvsmarterpros.com</div>
+          <div class="scan-text">Visitez notre site ou suivez-nous</div>
+          <div class="social-icons">
+            <img src="images/what.png" alt="WhatsApp" class="social-icon">
+            <img src="images/snap.png" alt="Snapchat" class="social-icon">
+            <img src="images/fb.png" alt="Facebook" class="social-icon">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <button class="download-button" id="download-btn">Télécharger le flyer pour les réseaux sociaux</button>
+  
+  <div class="instructions">
+    <p>Ce flyer est optimisé pour les réseaux sociaux comme Instagram, Facebook et WhatsApp.</p>
+    <p>Cliquez sur le bouton ci-dessus pour télécharger l'image du flyer, puis partagez-la sur vos réseaux sociaux avec un lien vers votre site: www.iptvsmarterpros.com</p>
+  </div>
+  
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    document.getElementById('download-btn').addEventListener('click', function() {
+      // Capturer le flyer en image
+      html2canvas(document.getElementById('flyer')).then(function(canvas) {
+        // Créer un lien temporaire pour télécharger l'image
+        const link = document.createElement('a');
+        link.download = 'flyer-iptv.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    });
+  </script>
+</body>
+</html> 
