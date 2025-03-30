@@ -14,30 +14,82 @@
     }
     
     body {
-      background-color: #f5f5f5;
+      background-color: #121212;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      flex-direction: column;
     }
     
     .flyer {
       width: 100%;
-      max-width: 600px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       overflow: hidden;
+      position: relative;
     }
     
-    .flyer-top {
-      height: 8px;
+    .flyer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
       background: linear-gradient(90deg, #ff6b6b, #6c5498);
+      z-index: 2;
+    }
+    
+    .flyer::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6c5498, #ff6b6b);
     }
     
     .flyer-content {
-      padding: 30px;
+      padding: 40px;
+      position: relative;
+    }
+    
+    .flyer-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+CjxyZWN0IHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgZmlsbD0ibm9uZSIgLz4KPGNpcmNsZSBjeD0iMyIgY3k9IjQiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIgLz4KPC9zdmc+');
+      opacity: 0.3;
+      z-index: -1;
+    }
+    
+    .glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(108, 84, 152, 0.3) 0%, rgba(108, 84, 152, 0) 70%);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      z-index: 0;
+    }
+    
+    .glow:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 107, 107, 0.2) 0%, rgba(255, 107, 107, 0) 70%);
+      bottom: -150px;
+      left: -150px;
+      top: auto;
+      right: auto;
     }
     
     .header {
@@ -45,79 +97,143 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
+      position: relative;
+      z-index: 1;
     }
     
     .logo {
-      width: 120px;
-      margin-bottom: 15px;
+      width: 150px;
+      height: auto;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 5px 15px rgba(108, 84, 152, 0.5));
+      animation: pulse 3s infinite ease-in-out;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
     
     h1 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #333;
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(108, 84, 152, 0.8);
+      letter-spacing: 1px;
     }
     
     .tagline {
-      font-size: 16px;
-      color: #555;
-      line-height: 1.4;
+      font-size: 18px;
+      color: #e0e0e0;
+      line-height: 1.6;
+      max-width: 500px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
     
     .offer {
-      background-color: #f8f8f8;
-      border-radius: 8px;
-      padding: 20px;
+      background: rgba(30, 30, 50, 0.6);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+      padding: 30px;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
     }
     
     .price {
-      font-size: 36px;
+      font-size: 56px;
       font-weight: 700;
       color: #ff6b6b;
       margin-bottom: 5px;
+      text-shadow: 0 2px 10px rgba(255, 107, 107, 0.4);
     }
     
     .period {
-      font-size: 16px;
-      color: #666;
+      font-size: 20px;
+      color: #b0b0b0;
+      font-weight: 400;
+    }
+    
+    .features {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+      color: #fff;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 15px;
+      border-radius: 50px;
+      font-size: 14px;
+    }
+    
+    .feature::before {
+      content: '✓';
+      color: #6dff94;
+      margin-right: 8px;
+      font-weight: bold;
     }
     
     .devices {
       display: flex;
       justify-content: space-around;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
       flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
     
     .device {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 80px;
-      margin: 0 5px 15px;
+      width: 100px;
+      margin: 0 10px 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .device:hover {
+      transform: translateY(-5px);
     }
     
     .device-icon {
-      width: 40px;
-      height: 40px;
-      margin-bottom: 8px;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      filter: invert(1);
+      opacity: 0.9;
     }
     
     .device-name {
-      font-size: 12px;
-      color: #444;
+      font-size: 14px;
+      color: #e0e0e0;
       text-align: center;
+      font-weight: 500;
     }
     
     .contact {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 20px;
+      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+      background: rgba(30, 30, 50, 0.4);
+      padding: 25px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     .contact-info {
@@ -127,65 +243,135 @@
     .contact-item {
       display: flex;
       align-items: center;
-      margin-bottom: 10px;
-      font-size: 14px;
-      color: #444;
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #e0e0e0;
+      transition: transform 0.2s ease;
+    }
+    
+    .contact-item:hover {
+      transform: translateX(5px);
     }
     
     .contact-icon {
-      width: 20px;
-      height: 20px;
-      margin-right: 10px;
+      width: 26px;
+      height: 26px;
+      margin-right: 15px;
+      filter: brightness(1.2);
     }
     
     .qr {
       background-color: white;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+    
+    .qr:hover {
+      transform: scale(1.05);
     }
     
     .qr-code {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
     }
     
     .action-buttons {
       display: flex;
       justify-content: center;
-      margin-top: 20px;
-      gap: 15px;
+      margin-top: 30px;
+      gap: 20px;
     }
     
     .btn {
       background: linear-gradient(135deg, #6c5498, #ff6b6b);
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 14px;
+      padding: 12px 25px;
+      font-size: 16px;
       font-weight: 600;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(108, 84, 152, 0.4);
     }
     
     .btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
+      opacity: 0.95;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(108, 84, 152, 0.6);
+    }
+    
+    .btn:active {
+      transform: translateY(-1px);
     }
     
     @media print {
       body {
-        background: none;
+        background: white;
         padding: 0;
       }
       
       .flyer {
         box-shadow: none;
+        background: white;
+      }
+      
+      .flyer::before, .flyer::after, .glow {
+        display: none;
+      }
+      
+      .flyer-content {
+        padding: 20px;
+        color: black;
+      }
+      
+      h1 {
+        color: #333;
+        text-shadow: none;
+      }
+      
+      .tagline, .device-name, .contact-item {
+        color: #555;
       }
       
       .action-buttons {
         display: none;
+      }
+      
+      .offer, .contact {
+        background: #f8f8f8;
+        backdrop-filter: none;
+        border: 1px solid #eee;
+        box-shadow: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .flyer-content {
+        padding: 30px;
+      }
+      
+      h1 {
+        font-size: 32px;
+      }
+      
+      .price {
+        font-size: 42px;
+      }
+      
+      .contact {
+        flex-direction: column;
+      }
+      
+      .contact-info {
+        margin-bottom: 20px;
+      }
+      
+      .qr-code {
+        width: 100px;
+        height: 100px;
       }
     }
     
@@ -195,16 +381,16 @@
       }
       
       h1 {
-        font-size: 24px;
+        font-size: 28px;
       }
       
       .price {
-        font-size: 30px;
+        font-size: 36px;
       }
       
-      .qr-code {
-        width: 80px;
-        height: 80px;
+      .feature {
+        font-size: 12px;
+        padding: 6px 12px;
       }
     }
   </style>
@@ -215,12 +401,20 @@
 </head>
 <body>
   <div class="flyer">
-    <div class="flyer-top"></div>
+    <div class="glow"></div>
+    <div class="glow"></div>
     <div class="flyer-content">
       <div class="header">
         <img src="images/IPTV_glpgxi.svg" alt="IPTV Logo" class="logo">
         <h1>IPTV SMARTER PRO</h1>
         <p class="tagline">Votre télévision partout, à tout moment.<br>Accédez à des milliers de chaînes TV et films à la demande.</p>
+      </div>
+      
+      <div class="features">
+        <span class="feature">+22 000 Chaînes</span>
+        <span class="feature">4K Ultra HD</span>
+        <span class="feature">Films & Séries VOD</span>
+        <span class="feature">Sport en Direct</span>
       </div>
       
       <div class="offer">
@@ -258,7 +452,7 @@
           </div>
           <div class="contact-item">
             <img src="images/snap.png" alt="Snapchat" class="contact-icon">
-            iptv_smarterpro
+            dyuka.953
           </div>
         </div>
         

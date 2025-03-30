@@ -78,6 +78,11 @@ app.get('/tutoriel.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'tutoriel.html'));
 });
 
+// Route du flyer pour faciliter l'accès
+app.get('/flyer', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'flyer.html'));
+});
+
 // Route robots.txt
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain');
