@@ -3,6 +3,15 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- Préconnexion aux domaines externes -->
+  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  
+  <!-- Préchargement des ressources critiques -->
+  <link rel="preload" href="styles.css?v=5" as="style">
+  <link rel="preload" href="images/IPTV_glpgxi.svg" as="image">
+  
   <!-- Validation Bing Webmaster Tools -->
   <meta name="msvalidate.01" content="814819C9FA9F9A0AA228C561E5E96380" />
   <!-- SEO: Titre optimisé avec mots-clés pertinents -->
@@ -128,6 +137,15 @@
       background: #7f66b5;
     }
   </style>
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
   <!-- HEADER -->
@@ -159,39 +177,39 @@
   <!-- IMAGES BANNER -->
   <div class="images-banner">
     <div class="slide-track">
-      <!-- Premier groupe d'images -->
-      <img alt="Canal+ IPTV en direct HD" src="images/image3.svg"/>
-      <img alt="BeIN Sports IPTV chaînes sportives" src="images/image4.svg"/>
-      <img alt="RMC Sport IPTV en streaming HD" src="images/image5.svg"/>
-      <img alt="Netflix en streaming via IPTV" src="images/image6.svg"/>
-      <img alt="Disney+ films et séries en IPTV" src="images/image7.svg"/>
-      <img alt="Prime Video intégré à l'IPTV" src="images/image8.svg"/>
-      <img alt="TF1 en direct IPTV France" src="images/image9.svg"/>
-      <img alt="France TV en direct IPTV" src="images/image10.svg"/>
-      <img alt="Sport IPTV premium en direct" src="images/image11.svg"/>
-      <img alt="Films récents en IPTV HD" src="images/image12.svg"/>
-      <img alt="Séries TV en IPTV streaming" src="images/image14.svg"/>
-      <img alt="Chaînes internationales IPTV" src="images/image15.svg"/>
-      <img alt="Chaînes enfants IPTV éducatives" src="images/image16.svg"/>
-      <img alt="Chaînes d'information IPTV 24/7" src="images/image1.svg"/>
-      <img alt="Documentaires IPTV en HD" src="images/image2.svg"/>
+      <!-- Premier groupe d'images avec loading lazy -->
+      <img alt="Canal+ IPTV en direct HD" src="images/image3.svg" loading="lazy"/>
+      <img alt="BeIN Sports IPTV chaînes sportives" src="images/image4.svg" loading="lazy"/>
+      <img alt="RMC Sport IPTV en streaming HD" src="images/image5.svg" loading="lazy"/>
+      <img alt="Netflix en streaming via IPTV" src="images/image6.svg" loading="lazy"/>
+      <img alt="Disney+ films et séries en IPTV" src="images/image7.svg" loading="lazy"/>
+      <img alt="Prime Video intégré à l'IPTV" src="images/image8.svg" loading="lazy"/>
+      <img alt="TF1 en direct IPTV France" src="images/image9.svg" loading="lazy"/>
+      <img alt="France TV en direct IPTV" src="images/image10.svg" loading="lazy"/>
+      <img alt="Sport IPTV premium en direct" src="images/image11.svg" loading="lazy"/>
+      <img alt="Films récents en IPTV HD" src="images/image12.svg" loading="lazy"/>
+      <img alt="Séries TV en IPTV streaming" src="images/image14.svg" loading="lazy"/>
+      <img alt="Chaînes internationales IPTV" src="images/image15.svg" loading="lazy"/>
+      <img alt="Chaînes enfants IPTV éducatives" src="images/image16.svg" loading="lazy"/>
+      <img alt="Chaînes d'information IPTV 24/7" src="images/image1.svg" loading="lazy"/>
+      <img alt="Documentaires IPTV en HD" src="images/image2.svg" loading="lazy"/>
       
-      <!-- Répétition des images pour un défilement infini -->
-      <img alt="Canal+ IPTV en direct HD" src="images/image3.svg"/>
-      <img alt="BeIN Sports IPTV chaînes sportives" src="images/image4.svg"/>
-      <img alt="RMC Sport IPTV en streaming HD" src="images/image5.svg"/>
-      <img alt="Netflix en streaming via IPTV" src="images/image6.svg"/>
-      <img alt="Disney+ films et séries en IPTV" src="images/image7.svg"/>
-      <img alt="Prime Video intégré à l'IPTV" src="images/image8.svg"/>
-      <img alt="TF1 en direct IPTV France" src="images/image9.svg"/>
-      <img alt="France TV en direct IPTV" src="images/image10.svg"/>
-      <img alt="Sport IPTV premium en direct" src="images/image11.svg"/>
-      <img alt="Films récents en IPTV HD" src="images/image12.svg"/>
-      <img alt="Séries TV en IPTV streaming" src="images/image14.svg"/>
-      <img alt="Chaînes internationales IPTV" src="images/image15.svg"/>
-      <img alt="Chaînes enfants IPTV éducatives" src="images/image16.svg"/>
-      <img alt="Chaînes d'information IPTV 24/7" src="images/image1.svg"/>
-      <img alt="Documentaires IPTV en HD" src="images/image2.svg"/>
+      <!-- Répétition des images pour un défilement infini - aussi avec lazy loading -->
+      <img alt="Canal+ IPTV en direct HD" src="images/image3.svg" loading="lazy"/>
+      <img alt="BeIN Sports IPTV chaînes sportives" src="images/image4.svg" loading="lazy"/>
+      <img alt="RMC Sport IPTV en streaming HD" src="images/image5.svg" loading="lazy"/>
+      <img alt="Netflix en streaming via IPTV" src="images/image6.svg" loading="lazy"/>
+      <img alt="Disney+ films et séries en IPTV" src="images/image7.svg" loading="lazy"/>
+      <img alt="Prime Video intégré à l'IPTV" src="images/image8.svg" loading="lazy"/>
+      <img alt="TF1 en direct IPTV France" src="images/image9.svg" loading="lazy"/>
+      <img alt="France TV en direct IPTV" src="images/image10.svg" loading="lazy"/>
+      <img alt="Sport IPTV premium en direct" src="images/image11.svg" loading="lazy"/>
+      <img alt="Films récents en IPTV HD" src="images/image12.svg" loading="lazy"/>
+      <img alt="Séries TV en IPTV streaming" src="images/image14.svg" loading="lazy"/>
+      <img alt="Chaînes internationales IPTV" src="images/image15.svg" loading="lazy"/>
+      <img alt="Chaînes enfants IPTV éducatives" src="images/image16.svg" loading="lazy"/>
+      <img alt="Chaînes d'information IPTV 24/7" src="images/image1.svg" loading="lazy"/>
+      <img alt="Documentaires IPTV en HD" src="images/image2.svg" loading="lazy"/>
     </div>
   </div>
 
@@ -224,27 +242,27 @@
     <div class="slider">
       <div class="slide-track">
         <!-- Exemples d'images du slider hébergées sur Cloudinary -->
-        <img alt="Image 1" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" width="200"/>
-        <img alt="Image 2" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" width="200"/>
-        <img alt="Image 3" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" width="200"/>
-        <img alt="Image 4" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" width="200"/>
-        <img alt="Image 5" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" width="200"/>
-        <img alt="Image 6" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" width="200"/>
-        <img alt="Image 7" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" width="200"/>
-        <img alt="Image 8" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" width="200"/>
-        <img alt="Image 9" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" width="200"/>
-        <img alt="Image 10" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" width="200"/>
+        <img alt="Image 1" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" width="200" loading="lazy"/>
+        <img alt="Image 2" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" width="200" loading="lazy"/>
+        <img alt="Image 3" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" width="200" loading="lazy"/>
+        <img alt="Image 4" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" width="200" loading="lazy"/>
+        <img alt="Image 5" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" width="200" loading="lazy"/>
+        <img alt="Image 6" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" width="200" loading="lazy"/>
+        <img alt="Image 7" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" width="200" loading="lazy"/>
+        <img alt="Image 8" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" width="200" loading="lazy"/>
+        <img alt="Image 9" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" width="200" loading="lazy"/>
+        <img alt="Image 10" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" width="200" loading="lazy"/>
         <!-- Répétition pour l'effet de boucle -->
-        <img alt="Image 1" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" width="200"/>
-        <img alt="Image 2" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" width="200"/>
-        <img alt="Image 3" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" width="200"/>
-        <img alt="Image 4" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" width="200"/>
-        <img alt="Image 5" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" width="200"/>
-        <img alt="Image 6" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" width="200"/>
-        <img alt="Image 7" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" width="200"/>
-        <img alt="Image 8" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" width="200"/>
-        <img alt="Image 9" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" width="200"/>
-        <img alt="Image 10" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" width="200"/>
+        <img alt="Image 1" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/valid%C3%A9_md9ffz.webp" width="200" loading="lazy"/>
+        <img alt="Image 2" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/rig_l1bub4.webp" width="200" loading="lazy"/>
+        <img alt="Image 3" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/brea_pd3cdn.webp" width="200" loading="lazy"/>
+        <img alt="Image 4" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464291/dddde_dqd4il.webp" width="200" loading="lazy"/>
+        <img alt="Image 5" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739464290/dragon_dulfu3.webp" width="200" loading="lazy"/>
+        <img alt="Image 6" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/blood_aqm09a.webp" width="200" loading="lazy"/>
+        <img alt="Image 7" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/stitch_uv0vct.webp" width="200" loading="lazy"/>
+        <img alt="Image 8" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/mufasa_viogzz.webp" width="200" loading="lazy"/>
+        <img alt="Image 9" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/squidgame_vrxvcz.webp" width="200" loading="lazy"/>
+        <img alt="Image 10" class="slide" height="300" src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto/v1739468317/bianca_bhrcz6.webp" width="200" loading="lazy"/>
       </div>
     </div>
   </section>
