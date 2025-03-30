@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>IPTV Smarter Pro - Flyer Promotionnel</title>
+  <title>Flyer IPTV Smarter Pro</title>
   <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
   <style>
     * {
@@ -16,35 +16,44 @@
     body {
       background-color: #0f0f1a;
       color: #fff;
+      min-height: 100vh;
+      padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
     }
     
-    .flyer-container {
-      width: 1200px;
-      max-width: 90%;
-      background: linear-gradient(135deg, #6c5498, #ff6b6b);
-      border-radius: 20px;
+    .flyer {
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      aspect-ratio: 1.414 / 1;
+      background: linear-gradient(135deg, #2c1c45, #1a1a2e);
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       position: relative;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .flyer-top {
+      height: 12px;
+      background: linear-gradient(90deg, #ff6b6b, #6c5498);
     }
     
     .flyer-content {
+      padding: 30px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 40px;
-      position: relative;
-      z-index: 2;
+      gap: 30px;
+      height: calc(100% - 12px);
     }
     
-    .flyer-info {
+    .logo-section {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
     
     .logo {
@@ -53,253 +62,364 @@
     }
     
     h1 {
-      font-size: 42px;
+      font-size: 36px;
       font-weight: 800;
-      margin-bottom: 20px;
-      line-height: 1.2;
-      color: #fff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, #ff6b6b, #6c5498);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     
-    .highlight {
-      color: #ffde59;
-    }
-    
-    h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 30px;
-      line-height: 1.4;
+    .tagline {
+      font-size: 18px;
+      font-weight: 300;
+      margin-bottom: 25px;
+      line-height: 1.5;
     }
     
     .features {
-      list-style: none;
-      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
     }
     
-    .features li {
-      margin-bottom: 15px;
+    .feature {
       display: flex;
       align-items: center;
+      gap: 15px;
+    }
+    
+    .feature-icon {
+      background: linear-gradient(135deg, #6c5498, #ff6b6b);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    
+    .feature-icon img {
+      width: 30px;
+      height: 30px;
+      filter: brightness(0) invert(1);
+    }
+    
+    .feature-text {
+      flex: 1;
+    }
+    
+    .feature-text h3 {
       font-size: 18px;
+      margin-bottom: 5px;
+      color: #ff6b6b;
     }
     
-    .features li:before {
-      content: "✓";
-      color: #ffde59;
-      font-weight: bold;
-      margin-right: 10px;
-      font-size: 22px;
+    .feature-text p {
+      font-size: 14px;
+      opacity: 0.9;
+      line-height: 1.4;
     }
     
-    .price {
-      font-size: 36px;
-      font-weight: 800;
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .devices-image {
+      width: 100%;
+      border-radius: 10px;
       margin-bottom: 20px;
-      color: #ffde59;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
     
-    .cta-button {
-      display: inline-block;
-      padding: 15px 30px;
-      background-color: #ffde59;
-      color: #333;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 18px;
-      border-radius: 50px;
+    .price-section {
+      background: rgba(108, 84, 152, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .price-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #fff;
       text-align: center;
+    }
+    
+    .price-amount {
+      font-size: 40px;
+      font-weight: 800;
+      text-align: center;
+      color: #ff6b6b;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .price-period {
+      font-size: 18px;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+    
+    .price-features {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .price-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+    
+    .price-feature:before {
+      content: "✓";
+      color: #6c5498;
+      font-weight: bold;
+      background: rgba(255,255,255,0.8);
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    
+    .qr-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .contact-info {
+      flex: 1;
+    }
+    
+    .contact-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+    
+    .contact-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .qr-container {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .qr-code {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 20px;
+    }
+    
+    .btn {
+      background: linear-gradient(135deg, #6c5498, #ff6b6b);
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
       transition: all 0.3s ease;
-      margin-bottom: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     
-    .cta-button:hover {
+    .btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
     
-    .flyer-image {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    
-    .devices-img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right, rgba(108, 84, 152, 0.3), rgba(0, 0, 0, 0));
-      z-index: 1;
-    }
-    
-    .website {
-      text-align: center;
-      font-size: 20px;
-      margin-top: 10px;
-      color: #fff;
-      font-weight: 600;
-    }
-    
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .social-icons img {
-      width: 30px;
-      height: 30px;
-    }
-    
-    .qr-code {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      width: 100px;
-      height: 100px;
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 14px;
-      color: #333;
-      text-align: center;
-    }
-    
-    .limited-offer {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #ff6b6b;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 16px;
-      transform: rotate(5deg);
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-      z-index: 3;
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      
+      .flyer {
+        box-shadow: none;
+        border: none;
+      }
+      
+      .action-buttons {
+        display: none;
+      }
     }
     
     @media (max-width: 768px) {
       .flyer-content {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
       
       h1 {
-        font-size: 32px;
-      }
-      
-      h2 {
-        font-size: 20px;
-      }
-      
-      .features li {
-        font-size: 16px;
-      }
-      
-      .price {
         font-size: 28px;
       }
       
-      .flyer-image {
-        order: -1;
+      .devices-image {
+        height: 180px;
       }
-    }
-    
-    .print-button {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background-color: #6c5498;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      z-index: 1000;
-    }
-    
-    @media print {
-      .print-button {
-        display: none;
+      
+      .qr-container {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .qr-code {
+        width: 80px;
+        height: 80px;
       }
     }
   </style>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <button class="print-button" onclick="window.print()">Imprimer</button>
-  
-  <div class="flyer-container">
-    <div class="overlay"></div>
-    <div class="limited-offer">OFFRE LIMITÉE!</div>
-    
+  <div class="flyer">
+    <div class="flyer-top"></div>
     <div class="flyer-content">
-      <div class="flyer-info">
+      <div class="logo-section">
         <img src="images/IPTV_glpgxi.svg" alt="IPTV Logo" class="logo">
-        <h1>Meilleur Abonnement <span class="highlight">IPTV France</span> 2025</h1>
-        <h2>Plus de 22 000 chaînes TV et 50 000 films & séries en Full HD et 4K</h2>
+        <h1>IPTV SMARTER PRO</h1>
+        <p class="tagline">Votre télévision partout, à tout moment. <br>Plus de 22 000 chaînes et 50 000 films à votre portée.</p>
         
-        <ul class="features">
-          <li>Chaînes françaises et internationales en HD</li>
-          <li>Films et séries récents VOD en 4K</li>
-          <li>Contenu Sports Premium (Canal+, beIN, RMC)</li>
-          <li>Compatible tous appareils (Smart TV, Box, Mobile)</li>
-          <li>Support 24/7 en français</li>
-        </ul>
-        
-        <div class="price">À partir de 9,99€ seulement!</div>
-        
-        <a href="https://www.iptvsmarterpros.com/offer.html?product=Premium+IPTV+3+mois&price=9.99" class="cta-button">PROFITEZ DE L'OFFRE MAINTENANT</a>
-        
-        <div class="website">www.iptvsmarterpros.com</div>
-        
-        <div class="social-icons">
-          <a href="https://wa.me/652020293" target="_blank">
-            <img src="images/what.png" alt="WhatsApp">
-          </a>
-          <a href="https://www.snapchat.com/add/dyuka.953" target="_blank">
-            <img src="images/snap.png" alt="Snapchat">
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61573500942178" target="_blank">
-            <img src="images/fb.png" alt="Facebook">
-          </a>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="images/image4.svg" alt="Multiplateforme">
+            </div>
+            <div class="feature-text">
+              <h3>Multi-appareils</h3>
+              <p>Regardez sur Smart TV, smartphone, tablette, ordinateur ou box TV.</p>
+            </div>
+          </div>
+          
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="images/image5.svg" alt="Haute Qualité">
+            </div>
+            <div class="feature-text">
+              <h3>Haute Qualité</h3>
+              <p>Profitez de vos contenus en Full HD et 4K pour une expérience optimale.</p>
+            </div>
+          </div>
+          
+          <div class="feature">
+            <div class="feature-icon">
+              <img src="images/image6.svg" alt="Support">
+            </div>
+            <div class="feature-text">
+              <h3>Support Premium</h3>
+              <p>Assistance 7j/7 et mises à jour régulières pour une expérience sans faille.</p>
+            </div>
+          </div>
         </div>
       </div>
       
-      <div class="flyer-image">
-        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1740830815/video1.jpg" alt="IPTV sur tous les appareils" class="devices-img">
-        <div class="qr-code">
-          Scannez pour accéder au site
+      <div class="right-section">
+        <img src="images/pc.webp" alt="IPTV sur différents appareils" class="devices-image">
+        
+        <div class="price-section">
+          <p class="price-title">À partir de</p>
+          <div class="price-amount">9,99€<span class="price-period">/mois</span></div>
+          
+          <div class="price-features">
+            <div class="price-feature">22 000+ chaînes TV du monde entier</div>
+            <div class="price-feature">50 000+ films et séries à la demande</div>
+            <div class="price-feature">Compatible avec tous vos appareils</div>
+            <div class="price-feature">Mise à jour régulière des contenus</div>
+          </div>
+        </div>
+        
+        <div class="qr-section">
+          <div class="contact-info">
+            <p class="contact-title">Nous contacter</p>
+            <div class="contact-methods">
+              <div class="contact-method">
+                <img src="images/what.png" alt="WhatsApp" class="contact-icon">
+                652 020 293
+              </div>
+              <div class="contact-method">
+                <img src="images/fb.png" alt="Facebook" class="contact-icon">
+                IPTV Smarter Pro
+              </div>
+            </div>
+          </div>
+          
+          <div class="qr-container">
+            <img src="images/promo/qr-site.png" alt="QR Code" class="qr-code">
+          </div>
         </div>
       </div>
     </div>
   </div>
   
+  <div class="action-buttons">
+    <button class="btn" id="print-btn">Imprimer le flyer</button>
+    <button class="btn" id="download-btn">Télécharger en PDF</button>
+  </div>
+  
   <script>
-    // Script pour générer un QR code (plus tard)
     document.addEventListener('DOMContentLoaded', function() {
-      // Ici, vous pourriez ajouter un script pour générer un QR code
-      // dynamiquement pointant vers votre site
+      const printBtn = document.getElementById('print-btn');
+      const downloadBtn = document.getElementById('download-btn');
+      
+      printBtn.addEventListener('click', function() {
+        window.print();
+      });
+      
+      // Pour le téléchargement en PDF, vous auriez besoin d'une bibliothèque comme html2pdf.js
+      // Ceci est une implémentation simplifiée
+      downloadBtn.addEventListener('click', function() {
+        alert('Pour télécharger en PDF, utilisez la fonction d\'impression de votre navigateur et choisissez "Enregistrer au format PDF"');
+        window.print();
+      });
     });
   </script>
 </body>
