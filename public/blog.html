@@ -479,6 +479,98 @@
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
+  
+  /* Styles pour la section blog featured */
+  .blog-featured {
+    padding: 60px 0;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(12, 12, 24, 0.9));
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .featured-article {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    background: rgba(30, 30, 50, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .featured-image {
+    width: 50%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+  }
+  
+  .featured-content {
+    padding: 30px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .featured-content h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: 700;
+  }
+  
+  .article-meta {
+    font-size: 14px;
+    color: #ff6b6b;
+    margin-bottom: 15px;
+  }
+  
+  .article-excerpt {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, #6c5498, #ff6b6b);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(108, 84, 152, 0.3);
+  }
+  
+  /* Media queries pour la responsive */
+  @media (max-width: 768px) {
+    .featured-article {
+      flex-direction: column;
+    }
+    
+    .featured-image {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px 10px 0 0;
+    }
+    
+    .featured-content {
+      padding: 20px;
+    }
+    
+    .featured-content h3 {
+      font-size: 20px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -519,16 +611,23 @@
 </div>
 
 <div class="blog-container">
-  <!-- ARTICLE À LA UNE -->
-  <section class="featured-article">
-    <div class="featured-article-image">
-      <img src="images/streaming_4k.webp" alt="Streaming Premium en 4K">
-    </div>
-    <div class="featured-article-content">
-      <span class="featured-article-tag">À la une</span>
-      <h2>Les Tendances du Streaming IPTV en 2025</h2>
-      <p>Avec la montée en puissance de la technologie 4K et l'augmentation de la demande pour des contenus en haute définition, les abonnements IPTV premium deviennent incontournables. IPTV Pro se distingue en offrant un streaming de qualité avec plus de <strong>22 000 chaînes</strong>, une vaste sélection de films et de séries.</p>
-      <a href="#" class="featured-article-link">Lire l'article complet <i class="fas fa-arrow-right"></i></a>
+  <!-- SECTION BLOG - À LA UNE -->
+  <section class="section blog-featured">
+    <div class="container">
+      <h2 class="section-title">À la une</h2>
+      <div class="featured-article">
+        <img src="images/iptv2025.PNG" alt="SuperBOX S1PRO IPTV Box" class="featured-image">
+        <div class="featured-content">
+          <h3>SuperBOX S1PRO : La révolution IPTV en un boîtier</h3>
+          <p class="article-meta">Publié le 30 mars 2023 | Catégorie: Matériel</p>
+          <p class="article-excerpt">
+            Découvrez le SuperBOX S1PRO, un boîtier IPTV complet offrant plus de sports en streaming, films, séries TV et bien plus ! 
+            Avec un accès à des centaines de chaînes premium et une interface simple à utiliser, c'est la solution idéale pour 
+            transformer votre expérience télévisuelle.
+          </p>
+          <a href="#" class="btn btn-primary">Lire l'article</a>
+        </div>
+      </div>
     </div>
   </section>
   
