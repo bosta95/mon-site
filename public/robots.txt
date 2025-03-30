@@ -1,26 +1,42 @@
+# Règles pour tous les robots
 User-agent: *
-Disallow: /admin/
-Disallow: /wp-login.php
-Disallow: /cart/
-Disallow: /checkout/
-Disallow: /search?q=
-Disallow: /*?utm_source=
-Disallow: /*?ref=
-Allow: /image/upload/
-Allow: /wp-content/uploads/
-Allow: /wp-includes/js/
-Allow: /wp-content/themes/
+# Autoriser l'indexation de tout le site par défaut
+Allow: /
 
-# Empêche certains robots indésirables
+# Pages d'administration ou de paiement à ne pas indexer
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /payment-processing/
+Disallow: /confirmation-*
+Disallow: /*?ref=*
+Disallow: /*?utm_*
+Disallow: /*?fbclid=*
+
+# Autoriser spécifiquement ces répertoires importants
+Allow: /images/
+Allow: /styles.css
+Allow: /blog/
+Allow: /tutoriel.html
+Allow: /offer.html
+
+# Bloquer les robots indésirables et scraper connus
 User-agent: MJ12bot
 Disallow: /
+
 User-agent: SemrushBot
 Disallow: /
+
 User-agent: AhrefsBot
 Disallow: /
 
-# Délai d'exploration pour éviter une surcharge
-Crawl-delay: 10
+User-agent: PetalBot
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+# Délai d'exploration pour éviter une surcharge du serveur
+Crawl-delay: 5
 
 # Sitemap pour une meilleure indexation
 Sitemap: https://www.iptvsmarterpros.com/sitemap.xml

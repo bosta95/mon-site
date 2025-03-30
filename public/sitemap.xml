@@ -1,31 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://www.iptvsmarterpros.com/</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>daily</changefreq>
         <priority>1.00</priority>
-    </url>
-    <url>
-        <loc>https://www.iptvsmarterpros.com/about.html</loc>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://www.iptvsmarterpros.com/blog.html</loc>
-        <priority>0.85</priority>
-    </url>
-    <url>
-        <loc>https://www.iptvsmarterpros.com/faq.html</loc>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://www.iptvsmarterpros.com/contact.html</loc>
-        <priority>0.80</priority>
-    </url>
-    <url>
-        <loc>https://www.iptvsmarterpros.com/tutoriel.html</loc>
-        <priority>0.80</priority>
+        <image:image>
+            <image:loc>https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp</image:loc>
+            <image:title>IPTV Smarter Pro - Logo</image:title>
+        </image:image>
+        <video:video>
+            <video:thumbnail_loc>https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.jpg</video:thumbnail_loc>
+            <video:title>IPTV Smarter Pro - Présentation</video:title>
+            <video:description>Découvrez notre service IPTV premium avec plus de 22 000 chaînes et 50 000 films et séries</video:description>
+            <video:content_loc>https://res.cloudinary.com/dwcz1jp7j/video/upload/q_auto:best,f_auto/v1740830815/video1.mp4</video:content_loc>
+        </video:video>
     </url>
     <url>
         <loc>https://www.iptvsmarterpros.com/offer.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.95</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/tutoriel.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/blog.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>daily</changefreq>
         <priority>0.85</priority>
+    </url>
+    <!-- Articles de blog individuels pour une meilleure indexation -->
+    <url>
+        <loc>https://www.iptvsmarterpros.com/blog/tendances-streaming-2025.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/blog/guide-installation-iptv.html</loc>
+        <lastmod>2024-08-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/blog/chaines-sport-premium.html</loc>
+        <lastmod>2024-08-12</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/espace-client.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/about.html</loc>
+        <lastmod>2024-08-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/faq.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/payment.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.75</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/confirmation.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.60</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/contact.html</loc>
+        <lastmod>2024-08-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/conditions.html</loc>
+        <lastmod>2024-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.50</priority>
+    </url>
+    <url>
+        <loc>https://www.iptvsmarterpros.com/privacy.html</loc>
+        <lastmod>2024-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.50</priority>
     </url>
 </urlset>
