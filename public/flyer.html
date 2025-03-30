@@ -146,24 +146,61 @@
       z-index: 1;
     }
     
+    .price-container {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    
+    .price-option {
+      text-align: center;
+      padding: 15px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      width: 30%;
+    }
+    
+    .price-option:hover {
+      transform: translateY(-5px);
+    }
+    
+    .duration {
+      font-size: 18px;
+      color: #b0b0b0;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+    }
+    
     .price {
-      font-size: 56px;
+      font-size: 36px;
       font-weight: 700;
       color: #ff6b6b;
-      margin-bottom: 5px;
+      margin-top: 5px;
       text-shadow: 0 2px 10px rgba(255, 107, 107, 0.4);
     }
     
-    .period {
-      font-size: 20px;
-      color: #b0b0b0;
-      font-weight: 400;
+    .highlighted {
+      background: rgba(108, 84, 152, 0.2);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      box-shadow: 0 5px 15px rgba(108, 84, 152, 0.3);
+    }
+    
+    .best-value {
+      font-size: 12px;
+      color: #ff6b6b;
+      font-weight: 600;
+      background: rgba(255, 107, 107, 0.2);
+      padding: 3px 8px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      display: inline-block;
     }
     
     .features {
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
+      margin: 30px 0;
       flex-wrap: wrap;
       gap: 15px;
       color: #fff;
@@ -208,12 +245,12 @@
     }
     
     .device-icon {
-      width: 60px;
-      height: 60px;
+      font-size: 40px;
       margin-bottom: 10px;
       filter: none;
       opacity: 1;
       object-fit: contain;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
     }
     
     .device-name {
@@ -261,6 +298,12 @@
       filter: none;
     }
     
+    .contact-text {
+      font-size: 14px;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    
     .qr {
       background-color: white;
       padding: 15px;
@@ -276,6 +319,12 @@
     .qr-code {
       width: 120px;
       height: 120px;
+    }
+    
+    .qr-text {
+      font-size: 12px;
+      color: #b0b0b0;
+      text-align: center;
     }
     
     .action-buttons {
@@ -419,28 +468,42 @@
       </div>
       
       <div class="offer">
-        <div class="price">9,99€<span class="period">/mois</span></div>
+        <div class="price-container">
+          <div class="price-option">
+            <span class="duration">3 Mois</span>
+            <div class="price">9,99€</div>
+          </div>
+          <div class="price-option highlighted">
+            <span class="best-value">Meilleure offre</span>
+            <span class="duration">6 Mois</span>
+            <div class="price">19,99€</div>
+          </div>
+          <div class="price-option">
+            <span class="duration">12 Mois</span>
+            <div class="price">29,99€</div>
+          </div>
+        </div>
       </div>
       
       <div class="devices">
         <div class="device">
-          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/smartphone_v4gzfk.png" alt="Smartphone" class="device-icon">
+          <span class="device-icon">&#x1F4F1;</span>
           <span class="device-name">Smartphone</span>
         </div>
         <div class="device">
-          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/smart-tv_j0kzyh.png" alt="Smart TV" class="device-icon">
+          <span class="device-icon">&#x1F4FA;</span>
           <span class="device-name">Smart TV</span>
         </div>
         <div class="device">
-          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/tablet_bwrzhz.png" alt="Tablette" class="device-icon">
+          <span class="device-icon">&#x1F4F2;</span>
           <span class="device-name">Tablette</span>
         </div>
         <div class="device">
-          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/firetv_eeimoi.png" alt="Fire TV" class="device-icon">
+          <span class="device-icon">&#x1F50C;</span>
           <span class="device-name">Fire TV</span>
         </div>
         <div class="device">
-          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1745104495/flyer-images/multi-devices_rbxvuk.png" alt="Multi-appareils" class="device-icon">
+          <span class="device-icon">&#x1F5A5;</span>
           <span class="device-name">Multi-appareils</span>
         </div>
       </div>
@@ -448,21 +511,18 @@
       <div class="contact">
         <div class="contact-info">
           <div class="contact-item">
-            <img src="images/what.png" alt="WhatsApp" class="contact-icon">
-            652 020 293
-          </div>
-          <div class="contact-item">
-            <img src="images/fb.png" alt="Facebook" class="contact-icon">
-            IPTV Smarter Pro
-          </div>
-          <div class="contact-item">
             <img src="images/snap.png" alt="Snapchat" class="contact-icon">
             dyuka.953
+          </div>
+          <div class="contact-text">
+            Visitez notre site web pour plus d'informations<br>
+            ou contactez-nous via Snapchat!
           </div>
         </div>
         
         <div class="qr">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWAQMAAAAGz+OhAAAABlBMKEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB40lEQVRIieWWMY7EIAxFLVFkrsAROJo3ykbJETgCVxilSGGBMc7MFFs4Q/GVxJnk+w9+IMzw/4eZ4JlCCPu+ZY3tfjt2D8BiKTsA8s2yF7DkAJh5NyU3wCqglANQZTdqAOLZcrNOAGgFEPacx3dALMXAR14H4CpnVkBtqQO4v5zxBYhNZa0AUavKDKCr1ORzQB4NSoGW7U4KqJ02NQHu0dgEyMmVAdSWW2kOoNhAcQDlM8B9Rz7rvQGwlc8AXBN/XCGdAZ7VCXcPYDtxBuwtvwcwR4BmIXvAErZLnVrVPgNqVYvlnSp5rr8q+Qxw1Sn3DeJRQ/EAi1Wt1qoTvAHcVxwBlUInMK5QxR1VNmuwAurmUdkB2BpUYVEJ5zPAUxG9ACoRxB5wVCRo0ckMCF9qg+V93rryHaAXAw6A4+uXJ5UlB0C3gLYDsEX/A+Q79wnA3lTcD+CuiDwg3gCVIvgJaD5T1u8AuAM8AFRJdp8BvBsYDwD1gRqL2WeCVyUJ0LhVuwW02mdXaiGGT4A+A+aF3HgC5LLr+QMQrvrtAD7q1wHm3cBmAFSRqHK3qiQ/AK4X8TrA46TiCojt+PoMWIYSqnDUwmwBzYp+A9aXXv0AxNcE8fQN2H8vovVPgMr3AfBDJw1XGMbSL+VUrbLxZtlxAAAAAElFTkSuQmCC" alt="QR Code" class="qr-code">
+          <img src="data:image/png;base64,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" alt="QR Code du site web" class="qr-code">
+          <div class="qr-text">Scannez pour visiter notre site</div>
         </div>
       </div>
     </div>
