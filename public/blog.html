@@ -499,10 +499,20 @@
   }
   
   .featured-image {
-    width: 50%;
+    width: 500px;
     height: 400px;
     object-fit: cover;
     border-radius: 10px 0 0 10px;
+    display: block !important;
+    max-width: 100% !important;
+    min-width: 300px !important;
+  }
+  
+  /* Assurer la visibilité de l'image */
+  img.featured-image {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .featured-content {
@@ -616,7 +626,7 @@
     <div class="container">
       <h2 class="section-title">À la une</h2>
       <div class="featured-article">
-        <img src="images/iptv2025.PNG" alt="SuperBOX S1PRO IPTV Box" class="featured-image">
+        <img src="images/iptv2025.PNG" alt="IPTV en 2025: Tendances" class="featured-image" width="500" height="400" style="object-fit: cover; display: block; max-width: 100%;">
         <div class="featured-content">
           <h3>IPTV en 2025 : Tendances, Innovations et Conseils</h3>
           <p class="article-meta">Publié le 30 mars 2023 | Catégorie: Technologie</p>
