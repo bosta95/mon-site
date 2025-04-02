@@ -67,30 +67,34 @@
 <body>
     <div class="contact-form">
         <h1>Contactez-nous</h1>
-        <form id="contactForm">
+        <form id="contactForm" class="contact-form">
             <div class="form-group">
-                <label>Votre Email :</label>
-                <input type="email" id="email" required>
+                <label for="email">Votre email</label>
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label>Sujet :</label>
-                <input type="text" id="subject" required>
+                <label for="subject">Sujet</label>
+                <input type="text" id="subject" name="subject" required>
             </div>
             <div class="form-group">
-                <label>Message :</label>
-                <textarea id="message" required></textarea>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
             </div>
-            <button type="submit">Envoyer le message</button>
+            <button type="submit" class="btn">Envoyer le message</button>
+            <button type="button" class="btn" id="testEmail" style="margin-top: 10px; background: #4CAF50;">Tester l'envoi d'email</button>
         </form>
         <div id="result"></div>
     </div>
 
     <script>
-        document.getElementById('contactForm').onsubmit = async (e) => {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = 'Envoi en cours...';
-            resultDiv.className = '';
+            
+            const formData = {
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
 
             try {
                 const response = await fetch('/.netlify/functions/contact', {
@@ -98,28 +102,50 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        email: document.getElementById('email').value,
-                        subject: document.getElementById('subject').value,
-                        message: document.getElementById('message').value
-                    })
+                    body: JSON.stringify(formData)
                 });
 
-                const data = await response.json();
-                
+                const result = await response.json();
                 if (response.ok) {
-                    resultDiv.textContent = '✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.';
-                    resultDiv.className = 'success';
-                    document.getElementById('contactForm').reset();
+                    alert('Message envoyé avec succès !');
+                    this.reset();
                 } else {
-                    resultDiv.textContent = '❌ Erreur : ' + data.error;
-                    resultDiv.className = 'error';
+                    alert('Erreur lors de l\'envoi du message : ' + result.error);
                 }
             } catch (error) {
-                resultDiv.textContent = '❌ Erreur : ' + error.message;
-                resultDiv.className = 'error';
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de l\'envoi du message.');
             }
-        };
+        });
+
+        // Fonction de test pour l'envoi d'email
+        document.getElementById('testEmail').addEventListener('click', async function() {
+            const testData = {
+                email: 'contact@iptvsmarterpros.com',
+                product: 'Test de l\'envoi d\'email',
+                orderNumber: 'TEST-' + Date.now()
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/api', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Email de test envoyé avec succès !');
+                } else {
+                    alert('Erreur lors de l\'envoi de l\'email de test : ' + result.error);
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de l\'envoi de l\'email de test.');
+            }
+        });
     </script>
 </body>
 </html>

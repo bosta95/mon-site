@@ -537,7 +537,7 @@
             <li>Mises à jour hebdomadaires</li>
             <li>Support technique 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+10+jours&amp;price=0.03">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+10+jours&price=0.03">Commander</a>
         </div>
         
         <!-- Offre 1 - 3 mois -->
@@ -553,7 +553,7 @@
             <li>Mises à jour hebdomadaires</li>
             <li>Support technique 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+3+mois&amp;price=9.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+3+mois&price=9.99">Commander</a>
         </div>
         
         <!-- Offre 2 - 6 mois (populaire) -->
@@ -569,7 +569,7 @@
             <li>Mises à jour hebdomadaires</li>
             <li>Support technique 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+6+mois&amp;price=19.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+6+mois&price=19.99">Commander</a>
         </div>
         
         <!-- Offre 3 - 12 mois -->
@@ -585,7 +585,7 @@
             <li>Mises à jour hebdomadaires</li>
             <li>Support technique 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+12+mois&amp;price=29.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+12+mois&price=29.99">Commander</a>
         </div>
         
         <!-- Offre multi-écrans - Niveau 1 -->
@@ -601,7 +601,7 @@
             <li>2 écrans simultanés</li>
             <li>Support prioritaire 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+2+écrans&amp;price=59.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+2+écrans&price=59.99">Commander</a>
         </div>
         
         <!-- Offre multi-écrans - Niveau 2 -->
@@ -617,7 +617,7 @@
             <li>3 écrans simultanés</li>
             <li>Support VIP 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+3+écrans&amp;price=79.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+3+écrans&price=79.99">Commander</a>
         </div>
         
         <!-- Offre multi-écrans - Niveau 3 -->
@@ -633,7 +633,7 @@
             <li>4 écrans simultanés</li>
             <li>Support VIP dédié 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+4+écrans&amp;price=99.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Premium+IPTV+4+écrans&price=99.99">Commander</a>
         </div>
       </div>
     </div>
@@ -974,58 +974,6 @@
       }
     ]
   }
-  </script>
-
-  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
-  <script>
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        const selectedPlan = document.querySelector('input[name="plan"]:checked');
-        if (!selectedPlan) {
-          alert('Veuillez sélectionner une offre');
-          return;
-        }
-        const planValue = selectedPlan.value;
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: planValue
-            }
-          }]
-        });
-      },
-      onApprove: async function(data, actions) {
-        const order = await actions.order.capture();
-        
-        // Récupérer les détails de la commande
-        const orderDetails = {
-          email: order.payer.email_address,
-          product: document.querySelector('input[name="plan"]:checked').getAttribute('data-name'),
-          orderNumber: order.id
-        };
-
-        // Envoyer les détails au serveur pour l'envoi des emails
-        try {
-          const response = await fetch('/api/order', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(orderDetails)
-          });
-
-          const result = await response.json();
-          if (!response.ok) {
-            console.error('Erreur lors de l\'envoi des emails:', result.error);
-          }
-        } catch (error) {
-          console.error('Erreur:', error);
-        }
-
-        // Rediriger vers la page de succès
-        window.location.href = '/success.html';
-      }
-    }).render('#paypal-button-container');
   </script>
 </body>
 </html>
