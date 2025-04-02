@@ -1,62 +1,101 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Email Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
 </head>
 <body>
     <h1>Test d'envoi d'email</h1>
-    
     <form id="testForm">
-        <div>
-            <label for="email">Email :</label>
+        <div class="form-group">
+            <label>Email:</label>
             <input type="email" id="email" required>
         </div>
-
-        <div>
-            <label for="product">Produit :</label>
-            <input type="text" id="product" required>
+        <div class="form-group">
+            <label>Produit:</label>
+            <input type="text" id="product" value="IPTV Découverte - 10 jours" required>
         </div>
-
-        <div>
-            <label for="orderNumber">Numéro de commande :</label>
-            <input type="text" id="orderNumber" required>
+        <div class="form-group">
+            <label>Numéro de commande:</label>
+            <input type="text" id="orderNumber" value="TEST123" required>
         </div>
-
         <button type="submit">Envoyer le test</button>
     </form>
-
     <div id="result"></div>
 
     <script>
         document.getElementById('testForm').onsubmit = async (e) => {
             e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const product = document.getElementById('product').value;
-            const orderNumber = document.getElementById('orderNumber').value;
             const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Envoi en cours...';
+            resultDiv.className = '';
 
             try {
                 const response = await fetch('/api/order', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        email,
-                        product,
-                        orderNumber
+                        email: document.getElementById('email').value,
+                        product: document.getElementById('product').value,
+                        orderNumber: document.getElementById('orderNumber').value
                     })
                 });
 
                 const data = await response.json();
-                resultDiv.textContent = response.ok ? 
-                    'Email envoyé avec succès !' : 
-                    `Erreur : ${data.error}`;
+                
+                if (response.ok) {
+                    resultDiv.textContent = '✅ Email envoyé avec succès !';
+                    resultDiv.className = 'success';
+                } else {
+                    resultDiv.textContent = '❌ Erreur: ' + data.error;
+                    resultDiv.className = 'error';
+                }
             } catch (error) {
-                resultDiv.textContent = `Erreur : ${error.message}`;
+                resultDiv.textContent = '❌ Erreur: ' + error.message;
+                resultDiv.className = 'error';
             }
         };
     </script>

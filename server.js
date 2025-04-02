@@ -26,8 +26,8 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
-// Activer la compression
-franchemeapp.use(compression());
+// Configuration de la compression
+app.use(compression());
 
 // Middleware pour parser les requêtes JSON avec limite de taille
 app.use(express.json({ limit: '10kb' }));
@@ -56,6 +56,11 @@ app.get('/', (req, res) => {
 // Route explicite pour la page de test
 app.get('/test.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'test.html'));
+});
+
+// Route explicite pour la page de test simple
+app.get('/test-simple', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'test-simple.html'));
 });
 
 // Route tutoriel.html (optionnelle)
@@ -255,10 +260,21 @@ app.post('/api/order', async (req, res) => {
     const { email, product, orderNumber } = req.body;
 
     if (!email || !product || !orderNumber) {
+      console.log('❌ Données manquantes:', { email, product, orderNumber });
       return res.status(400).json({ error: 'Tous les champs sont requis' });
     }
 
+    console.log('📧 Configuration SMTP:', {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER,
+      merchantEmail: process.env.MERCHANT_EMAIL
+    });
+
+    const transporter = createTransporter();
+
     // Email pour le client
+    console.log('📧 Envoi de l\'email au client:', email);
     const clientEmail = await transporter.sendMail({
       from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
       to: email,
@@ -287,6 +303,7 @@ app.post('/api/order', async (req, res) => {
     });
 
     // Email pour l'admin
+    console.log('📧 Envoi de l\'email à l\'admin:', process.env.MERCHANT_EMAIL);
     const adminEmail = await transporter.sendMail({
       from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
       to: process.env.MERCHANT_EMAIL,
@@ -319,6 +336,7 @@ app.post('/api/order', async (req, res) => {
 
   } catch (error) {
     console.error('❌ Erreur lors de l\'envoi:', error.message);
+    console.error('❌ Détails de l\'erreur:', error);
     return res.status(500).json({ 
       error: 'Une erreur est survenue lors de l\'envoi des emails',
       details: error.message

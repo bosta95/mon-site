@@ -1,7 +1,19 @@
+# Fichiers sensibles
 .env
+.env.local
+.env.*.local
+
+# Dépendances
 node_modules/
-.DS_Store
+
+# Logs
 *.log
+npm-debug.log*
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
 .vscode/
 .idea/
 *.swp
@@ -9,5 +21,3 @@ node_modules/
 dist/
 build/
 coverage/
-.env.local
-.env.*.local
