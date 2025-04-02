@@ -188,12 +188,12 @@
       <!-- Navigation Desktop -->
       <nav class="header-nav">
         <ul>
-          <li><a href="index.html">Accueil Premium</a></li>
-          <li><a href="blog.html">Blog<span class="badge-new">NEW</span></a></li>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="offer.html">Offres</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="tutoriel.html">Guide Installation</a></li>
-          <li><a href="#offers-section">Tarifs & Offres</a></li>
-          <li><a href="#contact" class="support-link">Support 24/7</a></li>
-          <li><a href="espace-client.html" class="login-btn">Espace Client</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="espace-client.html" class="btn-primary">Espace Client</a></li>
         </ul>
       </nav>
     </div>
@@ -730,21 +730,102 @@
       </div>
       
       <div class="footer-section" id="contact">
-        <h3>Support 24/7</h3>
-        <p>Notre équipe de support est disponible 24h/24 et 7j/7 pour vous assister.</p>
-        <p>Contactez-nous via :</p>
-        <div class="social-links">
-          <a href="https://wa.me/652020293" target="_blank" title="Support WhatsApp 24/7">
-            <img src="images/what.png" alt="WhatsApp" />
-          </a>
-          <a href="https://www.snapchat.com/add/dyuka.953" target="_blank" title="Support Snapchat">
-            <img src="images/snap.png" alt="Snapchat" />
-          </a>
-          <a href="https://www.facebook.com/profile.php?id=61573500942178" target="_blank" title="Support Facebook">
-            <img src="images/fb.png" alt="Facebook" />
-          </a>
-        </div>
-        <p class="support-time">Temps de réponse moyen : moins de 5 minutes</p>
+        <h3>Contactez-nous</h3>
+        <form id="contactForm" class="footer-contact-form">
+          <div class="form-group">
+            <input type="email" id="email" placeholder="Votre Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="subject" placeholder="Sujet" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" placeholder="Votre message" required></textarea>
+          </div>
+          <button type="submit" class="contact-btn">Envoyer</button>
+        </form>
+        <div id="result"></div>
+        <style>
+          .footer-contact-form {
+            margin-top: 15px;
+          }
+          .footer-contact-form .form-group {
+            margin-bottom: 10px;
+          }
+          .footer-contact-form input,
+          .footer-contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+          }
+          .footer-contact-form textarea {
+            height: 100px;
+            resize: vertical;
+          }
+          .footer-contact-form .contact-btn {
+            background: linear-gradient(135deg, #6c5498, #ff6b6b);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+          }
+          .footer-contact-form .contact-btn:hover {
+            background: linear-gradient(135deg, #ff6b6b, #6c5498);
+          }
+          #result {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+          }
+          #result.success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #2ecc71;
+          }
+          #result.error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #ff6b6b;
+          }
+        </style>
+        <script>
+          document.getElementById('contactForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Envoi en cours...';
+            resultDiv.className = '';
+
+            try {
+              const response = await fetch('/.netlify/functions/contact', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  email: document.getElementById('email').value,
+                  subject: document.getElementById('subject').value,
+                  message: document.getElementById('message').value
+                })
+              });
+
+              const data = await response.json();
+              
+              if (response.ok) {
+                resultDiv.textContent = '✅ Message envoyé avec succès !';
+                resultDiv.className = 'success';
+                document.getElementById('contactForm').reset();
+              } else {
+                resultDiv.textContent = '❌ Erreur : ' + data.error;
+                resultDiv.className = 'error';
+              }
+            } catch (error) {
+              resultDiv.textContent = '❌ Erreur : ' + error.message;
+              resultDiv.className = 'error';
+            }
+          };
+        </script>
       </div>
     </div>
     
