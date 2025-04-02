@@ -975,5 +975,57 @@
     ]
   }
   </script>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        const selectedPlan = document.querySelector('input[name="plan"]:checked');
+        if (!selectedPlan) {
+          alert('Veuillez sélectionner une offre');
+          return;
+        }
+        const planValue = selectedPlan.value;
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: planValue
+            }
+          }]
+        });
+      },
+      onApprove: async function(data, actions) {
+        const order = await actions.order.capture();
+        
+        // Récupérer les détails de la commande
+        const orderDetails = {
+          email: order.payer.email_address,
+          product: document.querySelector('input[name="plan"]:checked').getAttribute('data-name'),
+          orderNumber: order.id
+        };
+
+        // Envoyer les détails au serveur pour l'envoi des emails
+        try {
+          const response = await fetch('/api/order', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderDetails)
+          });
+
+          const result = await response.json();
+          if (!response.ok) {
+            console.error('Erreur lors de l\'envoi des emails:', result.error);
+          }
+        } catch (error) {
+          console.error('Erreur:', error);
+        }
+
+        // Rediriger vers la page de succès
+        window.location.href = '/success.html';
+      }
+    }).render('#paypal-button-container');
+  </script>
 </body>
 </html>

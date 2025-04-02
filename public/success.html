@@ -3,78 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paiement Réussi - IPTV Pro</title>
-  <link rel="stylesheet" href="styles.css?v=6">
+  <title>Paiement Réussi - IPTV Smarter Pros</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
     .success-container {
-      max-width: 600px;
-      margin: 50px auto;
-      background: rgba(0,0,0,0.6);
+      background-color: white;
       padding: 30px;
-      border-radius: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
       text-align: center;
     }
     .success-icon {
       color: #4CAF50;
-      font-size: 60px;
+      font-size: 48px;
       margin-bottom: 20px;
     }
-    .order-details {
-      margin: 30px 0;
-      padding: 20px;
-      background: rgba(108, 84, 152, 0.2);
-      border-radius: 8px;
-      text-align: left;
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
     }
-    .next-steps {
-      margin-top: 30px;
-      padding: 20px;
-      background: rgba(255, 107, 107, 0.1);
-      border-radius: 8px;
+    p {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
   <div class="success-container">
-    <div class="success-icon">✓</div>
-    <h1>Paiement Réussi!</h1>
-    <p>Merci pour votre achat. Votre transaction a été traitée avec succès.</p>
-    
-    <div class="order-details">
-      <h2>Détails de votre commande</h2>
-      <p><strong>Abonnement :</strong> <span id="plan-name">Forfait IPTV Pro</span></p>
-      <p><strong>Numéro de commande :</strong> <span id="order-id">---</span></p>
-      <p><strong>Date :</strong> <span id="order-date">---</span></p>
-    </div>
-    
-    <div class="next-steps">
-      <h3>Prochaines étapes</h3>
-      <p>Vos identifiants d'accès vont être envoyés à votre adresse email dans les prochaines minutes.</p>
-      <p>Si vous ne recevez pas d'email dans l'heure, veuillez vérifier votre dossier de spam ou nous contacter.</p>
-    </div>
-    
-    <a href="index.html" class="btn" style="margin-top: 30px;">Retour à l'accueil</a>
+    <div class="success-icon">✅</div>
+    <h1>Paiement Réussi !</h1>
+    <p>Merci pour votre achat. Votre commande a été confirmée.</p>
+    <p>Un email de confirmation a été envoyé à votre adresse email avec tous les détails de votre commande.</p>
+    <p>Si vous ne recevez pas l'email dans les prochaines minutes, veuillez vérifier votre dossier spam.</p>
+    <a href="/" class="button">Retour à l'accueil</a>
   </div>
-
-  <script>
-    // Récupérer les paramètres d'URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('orderId');
-    const planName = urlParams.get('plan');
-    
-    // Afficher les détails de la commande
-    if (orderId) {
-      document.getElementById('order-id').textContent = orderId;
-    }
-    
-    if (planName) {
-      document.getElementById('plan-name').textContent = planName;
-    }
-    
-    // Afficher la date actuelle
-    const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    document.getElementById('order-date').textContent = now.toLocaleDateString('fr-FR', options);
-  </script>
 </body>
 </html>
