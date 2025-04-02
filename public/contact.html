@@ -81,7 +81,6 @@
                 <textarea id="message" name="message" required></textarea>
             </div>
             <button type="submit" class="btn">Envoyer le message</button>
-            <button type="button" class="btn" id="testEmail" style="margin-top: 10px; background: #4CAF50;">Tester l'envoi d'email</button>
         </form>
         <div id="result"></div>
     </div>
@@ -115,35 +114,6 @@
             } catch (error) {
                 console.error('Erreur:', error);
                 alert('Une erreur est survenue lors de l\'envoi du message.');
-            }
-        });
-
-        // Fonction de test pour l'envoi d'email
-        document.getElementById('testEmail').addEventListener('click', async function() {
-            const testData = {
-                email: 'contact@iptvsmarterpros.com',
-                product: 'Test de l\'envoi d\'email',
-                orderNumber: 'TEST-' + Date.now()
-            };
-
-            try {
-                const response = await fetch('/.netlify/functions/api', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(testData)
-                });
-
-                const result = await response.json();
-                if (response.ok) {
-                    alert('Email de test envoyé avec succès !');
-                } else {
-                    alert('Erreur lors de l\'envoi de l\'email de test : ' + result.error);
-                }
-            } catch (error) {
-                console.error('Erreur:', error);
-                alert('Une erreur est survenue lors de l\'envoi de l\'email de test.');
             }
         });
     </script>
