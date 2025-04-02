@@ -7,30 +7,21 @@ exports.handler = async function(event, context) {
 
   try {
     const { email, product, orderNumber } = JSON.parse(event.body);
-    console.log('Données reçues:', { email, product, orderNumber });
-
-    // Configuration du transporteur email avec Namecheap PrivateEmail
+    
+    // Configuration du transporteur email
     const transporter = nodemailer.createTransport({
-      host: 'mail.privateemail.com',
-      port: 465,
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
       secure: true,
       auth: {
-        user: 'contact@iptvsmarterpros.com',
+        user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
-      },
-      debug: true
-    });
-
-    console.log('Configuration SMTP:', {
-      host: 'mail.privateemail.com',
-      port: 465,
-      user: 'contact@iptvsmarterpros.com',
-      merchantEmail: 'contact@iptvsmarterpros.com'
+      }
     });
 
     // Email au client
     const clientEmailResult = await transporter.sendMail({
-      from: 'IPTV Smarter Pros <contact@iptvsmarterpros.com>',
+      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
       to: email,
       subject: 'Confirmation de commande IPTV Smarter Pros',
       html: `
@@ -41,12 +32,11 @@ exports.handler = async function(event, context) {
         <p>Nous vous enverrons vos identifiants de connexion dans un prochain email.</p>
       `
     });
-    console.log('Email client envoyé:', clientEmailResult.messageId);
 
     // Email à l'administrateur
     const adminEmailResult = await transporter.sendMail({
-      from: 'IPTV Smarter Pros <contact@iptvsmarterpros.com>',
-      to: 'contact@iptvsmarterpros.com',
+      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
+      to: process.env.MERCHANT_EMAIL,
       subject: 'Nouvelle commande IPTV Smarter Pros',
       html: `
         <h1>Nouvelle commande reçue</h1>
@@ -56,17 +46,15 @@ exports.handler = async function(event, context) {
         <p>Veuillez envoyer les identifiants de connexion au client.</p>
       `
     });
-    console.log('Email admin envoyé:', adminEmailResult.messageId);
 
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Emails envoyés avec succès' })
     };
   } catch (error) {
-    console.error('Erreur détaillée:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erreur lors de l\'envoi des emails', details: error.message })
+      body: JSON.stringify({ error: 'Erreur lors de l\'envoi des emails' })
     };
   }
 }; 

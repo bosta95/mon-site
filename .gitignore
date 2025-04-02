@@ -1,23 +1,44 @@
-# Fichiers sensibles
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
 .env
 .env.local
 .env.*.local
+smtp.env
 
-# Dépendances
-node_modules/
+# Build files
+dist/
+build/
+.netlify/
 
 # Logs
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Fichiers système
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
-.vscode/
-.idea/
-*.swp
-*.swo
-dist/
-build/
-coverage/
+# Sensitive data
+users.json
+*.pem
+*.key
+*.cert
