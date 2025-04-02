@@ -9,59 +9,38 @@ require('dotenv').config();
 
 const app = express();
 
-// Configuration de la sécurité
+// Configuration de la sécurité avec des règles plus souples pour le test
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.stripe.com"],
-      mediaSrc: ["'self'", "https://res.cloudinary.com"],
-    },
-  },
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: false
 }));
 
-// Configuration CORS
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? 'https://www.iptvsmarterpros.com' 
-    : 'http://localhost:3000',
-  credentials: true
-}));
+// Configuration CORS plus permissive pour le test
+app.use(cors());
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limite chaque IP à 100 requêtes par fenêtre
+  windowMs: 15 * 60 * 1000,
+  max: 100
 });
 app.use('/api/', limiter);
 
-// Forcer HTTPS uniquement en production
-if (process.env.NODE_ENV === 'production') {
-  app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(`https://${req.get('Host')}${req.url}`);
-    }
-    next();
-  });
-}
-
 // Activer la compression
-app.use(compression());
+franchemeapp.use(compression());
 
 // Middleware pour parser les requêtes JSON avec limite de taille
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// Cache-Control pour les fichiers statiques
-const cacheTime = 31536000; // 1 an
-app.use(express.static(path.join(__dirname, 'public'), {
-  maxAge: cacheTime * 1000,
-  etag: true,
-  lastModified: true
-}));
+// Logging middleware
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
+// Servir les fichiers statiques
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Redirection favicon
 app.get('/favicon.ico', (req, res) => {
@@ -70,7 +49,13 @@ app.get('/favicon.ico', (req, res) => {
 
 // Route principale pour servir index.html
 app.get('/', (req, res) => {
+  console.log('Accès à la page d\'accueil');
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Route explicite pour la page de test
+app.get('/test.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'test.html'));
 });
 
 // Route tutoriel.html (optionnelle)
@@ -89,6 +74,60 @@ app.get('/robots.txt', (req, res) => {
   res.send(`User-agent: *\nDisallow: /admin/\nDisallow: /checkout/\nSitemap: https://www.iptvsmarterpros.com/sitemap.xml`);
 });
 
+// Route de test
+app.get('/test', (req, res) => {
+  console.log('Accès à la page de test');
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Test Email</title>
+    </head>
+    <body>
+      <h1>Test d'envoi d'email</h1>
+      <form id="testForm">
+        <div>
+          <label>Email:</label>
+          <input type="email" id="email" required>
+        </div>
+        <div>
+          <label>Produit:</label>
+          <input type="text" id="product" required>
+        </div>
+        <div>
+          <label>Numéro de commande:</label>
+          <input type="text" id="orderNumber" required>
+        </div>
+        <button type="submit">Envoyer</button>
+      </form>
+      <div id="result"></div>
+      <script>
+        document.getElementById('testForm').onsubmit = async (e) => {
+          e.preventDefault();
+          const data = {
+            email: document.getElementById('email').value,
+            product: document.getElementById('product').value,
+            orderNumber: document.getElementById('orderNumber').value
+          };
+          try {
+            const response = await fetch('/api/order', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            document.getElementById('result').textContent = 
+              response.ok ? 'Email envoyé !' : 'Erreur: ' + result.error;
+          } catch (error) {
+            document.getElementById('result').textContent = 'Erreur: ' + error.message;
+          }
+        };
+      </script>
+    </body>
+    </html>
+  `);
+});
+
 // Fonction pour configurer Nodemailer
 function createTransporter() {
   return nodemailer.createTransport({
@@ -98,6 +137,9 @@ function createTransporter() {
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS
+    },
+    tls: {
+      rejectUnauthorized: false
     }
   });
 }
@@ -155,8 +197,9 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
-// 📌 Route API pour envoyer un email après une commande
+// Route API pour envoyer un email après une commande
 app.post('/api/order', async (req, res) => {
+  console.log('Tentative d\'envoi d\'email:', req.body);
   try {
     const { email, product, orderNumber } = req.body;
 
@@ -164,50 +207,87 @@ app.post('/api/order', async (req, res) => {
       return res.status(400).json({ error: 'Tous les champs sont requis' });
     }
 
-    const transporter = createTransporter();
-
-    // 📩 Email pour l'admin
-    const adminMailOptions = {
-      from: process.env.SMTP_USER,
-      to: process.env.MERCHANT_EMAIL,
-      subject: `Nouvelle commande - N° ${orderNumber}`,
-      text: `Nouvelle commande reçue !\n\nDétails :\n- Produit : ${product}\n- Numéro de commande : ${orderNumber}\n- Email du client : ${email}`,
-      html: `<h2>Nouvelle commande reçue !</h2>
-             <p><strong>Produit :</strong> ${product}</p>
-             <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
-             <p><strong>Email du client :</strong> ${email}</p>`
-    };
-
-    // 📩 Email de confirmation pour le client
-    const clientMailOptions = {
-      from: process.env.SMTP_USER,
+    // Email pour le client
+    const clientEmail = await transporter.sendMail({
+      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: `Confirmation de votre commande N° ${orderNumber}`,
-      text: `Bonjour,\n\nMerci pour votre commande !\n\nDétails :\n- Produit : ${product}\n- Numéro de commande : ${orderNumber}\n\nNous vous remercions pour votre confiance !`,
-      html: `<h2>Merci pour votre commande !</h2>
-             <p>Bonjour,</p>
-             <p>Nous avons bien reçu votre commande.</p>
-             <p><strong>Produit :</strong> ${product}</p>
-             <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
-             <p>Nous vous remercions pour votre confiance !</p>
-             <p>Cordialement, <br> L'équipe IPTV Pro</p>`
-    };
+      subject: `Confirmation de commande N° ${orderNumber}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #2c3e50; text-align: center;">Confirmation de votre commande</h2>
+          
+          <p>Bonjour,</p>
+          
+          <p>Nous vous remercions pour votre confiance ! Votre commande a bien été enregistrée.</p>
+          
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="color: #2c3e50; margin-top: 0;">Détails de votre commande</h3>
+            <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
+            <p><strong>Produit :</strong> ${product}</p>
+          </div>
+          
+          <p>Pour toute question concernant votre commande, n'hésitez pas à nous contacter à <a href="mailto:contact@iptvsmarterpros.com">contact@iptvsmarterpros.com</a></p>
+          
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #666; font-size: 12px;">Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
+          </div>
+        </div>
+      `
+    });
 
-    await Promise.all([
-      transporter.sendMail(adminMailOptions),
-      transporter.sendMail(clientMailOptions)
-    ]);
+    // Email pour l'admin
+    const adminEmail = await transporter.sendMail({
+      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
+      to: process.env.MERCHANT_EMAIL,
+      subject: `[Nouvelle Commande] N° ${orderNumber}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #2c3e50;">Nouvelle commande reçue</h2>
+          
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="color: #2c3e50; margin-top: 0;">Détails de la commande</h3>
+            <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
+            <p><strong>Produit :</strong> ${product}</p>
+            <p><strong>Email du client :</strong> ${email}</p>
+          </div>
+          
+          <p>Cette commande nécessite votre attention pour le traitement.</p>
+        </div>
+      `
+    });
 
-    return res.status(200).json({ success: 'Commande enregistrée et emails envoyés !' });
+    console.log('✅ Emails envoyés avec succès !');
+    console.log('📧 ID du message client:', clientEmail.messageId);
+    console.log('📧 ID du message admin:', adminEmail.messageId);
+
+    return res.status(200).json({ 
+      success: 'Commande enregistrée et emails envoyés avec succès',
+      orderNumber,
+      timestamp: new Date().toISOString()
+    });
 
   } catch (error) {
-    console.error('Erreur lors de l\'envoi des emails :', error);
-    return res.status(500).json({ error: 'Erreur lors de l\'envoi des emails.' });
+    console.error('❌ Erreur lors de l\'envoi:', error.message);
+    return res.status(500).json({ 
+      error: 'Une erreur est survenue lors de l\'envoi des emails',
+      details: error.message
+    });
   }
 });
 
 // Démarrage du serveur
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`✅ Serveur démarré sur le port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🚀 Serveur démarré sur http://localhost:${PORT}`);
+  console.log(`📧 Email configuré: ${process.env.SMTP_USER}`);
+  console.log(`📁 Dossier public: ${path.join(__dirname, 'public')}\n`);
+});
+
+// Gestion des erreurs non capturées
+process.on('uncaughtException', (error) => {
+  console.error('❌ Erreur non capturée:', error);
+});
+
+process.on('unhandledRejection', (error) => {
+  console.error('❌ Promesse rejetée non gérée:', error);
 });
