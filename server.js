@@ -181,17 +181,18 @@ app.post('/api/test-email', async (req, res) => {
 // Fonction pour configurer Nodemailer
 function createTransporter() {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_PORT === '465',
+    host: 'smtp.privateemail.com',
+    port: 465,
+    secure: true,
     auth: {
-      user: process.env.SMTP_USER,
+      user: process.env.SMTP_USER || 'contact@iptvsmarterpros.com',
       pass: process.env.SMTP_PASS
     },
     tls: {
-      rejectUnauthorized: false,
-      minVersion: "TLSv1.2"
+      rejectUnauthorized: false
     },
+    debug: true,
+    logger: true,
     pool: true,
     maxConnections: 5,
     maxMessages: 100,
