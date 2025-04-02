@@ -28,30 +28,45 @@ exports.handler = async function(event, context) {
       merchantEmail: 'contact@iptvsmarterpros.com'
     });
 
-    // Email de confirmation de commande
-    const orderEmailResult = await transporter.sendMail({
+    // Email au client
+    const clientEmailResult = await transporter.sendMail({
+      from: 'IPTV Smarter Pros <contact@iptvsmarterpros.com>',
+      to: email,
+      subject: 'Confirmation de commande IPTV Smarter Pros',
+      html: `
+        <h1>Merci pour votre commande !</h1>
+        <p>Votre commande a bien été reçue.</p>
+        <p><strong>Produit :</strong> ${product}</p>
+        <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
+        <p>Nous vous enverrons vos identifiants de connexion dans un prochain email.</p>
+      `
+    });
+    console.log('Email client envoyé:', clientEmailResult.messageId);
+
+    // Email à l'administrateur
+    const adminEmailResult = await transporter.sendMail({
       from: 'IPTV Smarter Pros <contact@iptvsmarterpros.com>',
       to: 'contact@iptvsmarterpros.com',
       subject: 'Nouvelle commande IPTV Smarter Pros',
       html: `
         <h1>Nouvelle commande reçue</h1>
+        <p><strong>Client :</strong> ${email}</p>
         <p><strong>Produit :</strong> ${product}</p>
         <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
-        <p><strong>Email du client :</strong> ${email}</p>
         <p>Veuillez envoyer les identifiants de connexion au client.</p>
       `
     });
-    console.log('Email de commande envoyé:', orderEmailResult.messageId);
+    console.log('Email admin envoyé:', adminEmailResult.messageId);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Email envoyé avec succès' })
+      body: JSON.stringify({ message: 'Emails envoyés avec succès' })
     };
   } catch (error) {
     console.error('Erreur détaillée:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erreur lors de l\'envoi de l\'email', details: error.message })
+      body: JSON.stringify({ error: 'Erreur lors de l\'envoi des emails', details: error.message })
     };
   }
 }; 
