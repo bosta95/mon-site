@@ -58,6 +58,10 @@
       background-color: #f2dede;
       color: #a94442;
     }
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -76,7 +80,7 @@
         <label>Numéro de commande :</label>
         <input type="text" id="orderNumber" required>
       </div>
-      <button type="submit">Confirmer la commande</button>
+      <button type="submit" id="submitButton">Confirmer la commande</button>
     </form>
     <div id="result"></div>
   </div>
@@ -84,12 +88,19 @@
   <script>
     document.getElementById('paymentForm').onsubmit = async (e) => {
       e.preventDefault();
+      
+      const form = document.getElementById('paymentForm');
+      const submitButton = document.getElementById('submitButton');
       const resultDiv = document.getElementById('result');
+      
+      // Désactiver le formulaire pendant l'envoi
+      form.classList.add('loading');
+      submitButton.disabled = true;
       resultDiv.textContent = 'Traitement en cours...';
       resultDiv.className = '';
 
       try {
-        const response = await fetch('/.netlify/functions/api', {
+        const response = await fetch('/api/order', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -104,15 +115,22 @@
         const data = await response.json();
         
         if (response.ok) {
-          resultDiv.textContent = '✅ Commande confirmée ! Vous allez recevoir un email de confirmation.';
+          resultDiv.textContent = '✅ Commande confirmée ! Un email de confirmation a été envoyé à votre adresse.';
           resultDiv.className = 'success';
+          // Réinitialiser le formulaire après succès
+          form.reset();
         } else {
-          resultDiv.textContent = '❌ Erreur : ' + data.error;
+          resultDiv.textContent = '❌ Erreur : ' + (data.error || 'Une erreur est survenue');
           resultDiv.className = 'error';
         }
       } catch (error) {
         resultDiv.textContent = '❌ Erreur : ' + error.message;
         resultDiv.className = 'error';
+        console.error('Erreur détaillée:', error);
+      } finally {
+        // Réactiver le formulaire
+        form.classList.remove('loading');
+        submitButton.disabled = false;
       }
     };
   </script>
