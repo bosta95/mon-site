@@ -3,395 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>IPTV Pro - Paiement Sécurisé</title>
-  <!-- Suppression de la CSP qui cause des problèmes sur Heroku mais sera utile sur nouvel hébergeur -->
-  <link rel="stylesheet" href="styles.css?v=6" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <title>Paiement - IPTV Smarter Pros</title>
   <style>
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to bottom, #141414, #0a0a0a);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    /* Header et navigation améliorés */
-    .header-container {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-      padding: 15px 0;
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-      top: 0;
-    }
-    
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-    
-    .logo img {
-      height: 50px;
-      width: auto;
-      transition: transform 0.3s ease;
-    }
-    
-    /* Main Section */
-    .payment-container {
+      font-family: Arial, sans-serif;
       max-width: 800px;
-      margin: 100px auto 50px;
-      padding: 30px;
-      background-color: rgba(20, 20, 20, 0.7);
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
     }
-    
-    .payment-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    .payment-header h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ff6b6b, #6c5498);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: inline-block;
-    }
-    
-    .payment-header p {
-      color: #ddd;
-      font-size: 1.1rem;
-    }
-    
-    .plan-details {
-      background-color: rgba(30, 30, 30, 0.7);
-      padding: 25px;
-      border-radius: 10px;
-      margin-bottom: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .plan-name {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #fff;
-    }
-    
-    .plan-price {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #ff6b6b;
-      margin: 15px 0;
-    }
-    
-    .plan-features {
-      margin-top: 20px;
-    }
-    
-    .plan-features p {
-      margin: 10px 0;
-      color: #bbb;
-    }
-    
-    #paypal-button-container {
-      margin: 30px 0;
-    }
-    
-    .secure-badge {
-      display: flex;
-      align-items: center;
-      background-color: rgba(30, 30, 30, 0.5);
-      padding: 15px;
+    .payment-form {
+      background-color: white;
+      padding: 20px;
       border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
       margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
     }
-    
-    .secure-badge svg {
-      width: 24px;
-      height: 24px;
-      fill: #2ecc71;
-      margin-right: 15px;
-      flex-shrink: 0;
+    .success {
+      background-color: #dff0d8;
+      color: #3c763d;
     }
-    
-    .secure-badge span {
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-    
-    /* Style pour les messages d'erreur */
-    .error-message {
-      background-color: rgba(220, 53, 69, 0.15);
-      color: #ff6b6b;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      margin: 20px 0;
-      border: 1px solid rgba(220, 53, 69, 0.3);
-      font-weight: 500;
-    }
-    
-    /* Style pour mettre en évidence les avantages */
-    .plan-features p strong {
-      color: #ff6b6b;
-      font-weight: 600;
-    }
-    
-    /* Style pour le bouton de retour */
-    .back-button {
-      display: inline-block;
-      margin-top: 20px;
-      color: #aaa;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s;
-    }
-    
-    .back-button:hover {
-      color: #ff6b6b;
-    }
-    
-    /* Animation pour le bouton PayPal */
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
-      }
-    }
-    
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-    
-    /* Styles spécifiques pour mobile */
-    @media (max-width: 768px) {
-        .payment-container {
-            width: 95%;
-            padding: 15px;
-        }
-        
-        .payment-header {
-            padding: 10px;
-        }
-        
-        .payment-header h2 {
-            font-size: 1.2rem;
-        }
-        
-        .payment-form {
-            padding: 15px;
-        }
-        
-        .payment-summary {
-            padding: 15px;
-        }
-        
-        .product-info {
-            flex-direction: column;
-        }
-        
-        .product-info img {
-            margin-bottom: 10px;
-        }
-        
-        .paypal-button-container {
-            width: 100%;
-        }
-        
-        .input-group {
-            flex-direction: column;
-            width: 100%;
-        }
-        
-        .input-group input, 
-        .input-group select {
-            width: 100%;
-            margin-bottom: 10px;
-        }
+    .error {
+      background-color: #f2dede;
+      color: #a94442;
     }
   </style>
-  
-  <!-- PayPal JavaScript SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
 </head>
 <body>
-
-  <!-- HEADER -->
-  <header class="header-container">
-    <div class="header-content">
-      <div class="logo">
-        <a href="index.html">
-          <img src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
-        </a>
+  <div class="payment-form">
+    <h1>Paiement IPTV Smarter Pros</h1>
+    <form id="paymentForm">
+      <div class="form-group">
+        <label>Email :</label>
+        <input type="email" id="email" required>
       </div>
-      <!-- Menu hamburger pour mobile -->
-      <div class="mobile-menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="form-group">
+        <label>Produit :</label>
+        <input type="text" id="product" required>
       </div>
-      <div class="header-links">
-        <a href="index.html">Accueil</a>
-        <a href="contact.html">Support</a>
+      <div class="form-group">
+        <label>Numéro de commande :</label>
+        <input type="text" id="orderNumber" required>
       </div>
-    </div>
-  </header>
-
-  <!-- SECTION PAIEMENT -->
-  <main>
-    <div class="payment-container">
-      <div class="payment-header">
-        <h2>Paiement Sécurisé</h2>
-        <p>Finalisez votre abonnement IPTV Pro pour accéder à un monde de divertissement premium</p>
-      </div>
-      
-      <div class="plan-details">
-        <p>Votre abonnement : <span class="plan-name" id="plan-name">Chargement...</span></p>
-        <p class="plan-price" id="plan-price">€0.00</p>
-        <div class="plan-features">
-          <p>✓ <strong>Accès complet</strong> à plus de 22 000 chaînes internationales</p>
-          <p>✓ Plus de <strong>50 000 films et séries</strong> à la demande</p>
-          <p>✓ Qualité <strong>HD, Full HD et 4K</strong> disponible</p>
-          <p>✓ <strong>Compatible</strong> avec tous vos appareils</p>
-          <p>✓ <strong>Service client 24/7</strong> à votre disposition</p>
-        </div>
-      </div>
-      
-      <!-- Le conteneur PayPal où le bouton sera rendu -->
-      <div id="paypal-button-container" class="pulse"></div>
-      
-      <div class="secure-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.67-3.13 8.96-7 10.27-3.87-1.31-7-5.6-7-10.27V6.3l7-3.12z"/><path d="M10.5 13.59l-2.67-2.68-1.41 1.41 4.08 4.08 7-7-1.41-1.41-5.59 5.6z"/></svg>
-        <span>Paiement 100% sécurisé via PayPal. Vos identifiants vous seront envoyés par email immédiatement après votre paiement.</span>
-      </div>
-      
-      <a href="javascript:history.back()" class="back-button">← Retour aux offres</a>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <p>© 2025 IPTV Pro - Tous droits réservés</p>
-      <div class="footer-links">
-        <a href="privacy.html">Confidentialité</a>
-        <a href="terms.html">Conditions d'utilisation</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </footer>
+      <button type="submit">Confirmer la commande</button>
+    </form>
+    <div id="result"></div>
+  </div>
 
   <script>
-    // Récupérer les paramètres de l'URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const planId = urlParams.get('plan');
-    const planName = urlParams.get('name');
-    const planPrice = urlParams.get('price');
-    
-    // Afficher les détails du plan
-    document.getElementById('plan-name').textContent = planName || 'Abonnement IPTV Pro';
-    document.getElementById('plan-price').textContent = '€' + (planPrice || '0.00');
-    
-    // Configurer le bouton PayPal
-    // Note: Ce code sera prêt à fonctionner sur un nouvel hébergeur sans restrictions
-    paypal.Buttons({
-      style: {
-        layout: 'vertical',
-        color: 'blue',
-        shape: 'pill',
-        label: 'pay'
-      },
-      // Configurer la transaction lors du clic sur le bouton
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            description: 'Abonnement IPTV Pro - ' + (planName || 'Standard'),
-            amount: {
-              currency_code: 'EUR',
-              value: planPrice || '0.00'
-            }
-          }]
-        });
-      },
-      
-      // Finaliser la transaction
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          // Rediriger vers la page de succès
-          window.location.href = 'success.html?orderId=' + data.orderID + '&plan=' + planName;
-        });
-      },
-      
-      // Gérer les erreurs
-      onError: function(err) {
-        console.error('Erreur de paiement:', err);
-        document.getElementById('paypal-button-container').innerHTML = '<div class="error-message">Une erreur est survenue lors du traitement de votre paiement. Veuillez réessayer ou nous contacter directement.</div>';
-      }
-    }).render('#paypal-button-container');
-    
-    // Si le SDK PayPal ne se charge pas (ce qui arrivera sur Heroku)
-    setTimeout(function() {
-      if (typeof paypal === 'undefined') {
-        var container = document.getElementById('paypal-button-container');
-        if (container) {
-          container.innerHTML = `
-            <div class="error-message">
-              <p><strong>Important :</strong> Notre système de paiement est en cours de maintenance.</p>
-              <p>Pour finaliser votre commande, veuillez nous contacter directement :</p>
-              <p><a href="mailto:contact@iptvpro.com" style="color: #ff6b6b; text-decoration: none;">contact@iptvpro.com</a> ou <a href="contact.html" style="color: #ff6b6b; text-decoration: none;">formulaire de contact</a></p>
-            </div>
-          `;
-        }
-      }
-    }, 3000);
+    document.getElementById('paymentForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = 'Traitement en cours...';
+      resultDiv.className = '';
 
-    // Script pour le menu hamburger mobile
-    document.addEventListener('DOMContentLoaded', function() {
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const headerNav = document.querySelector('.header-nav');
-        
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', function() {
-                mobileMenuToggle.classList.toggle('active');
-                headerNav.classList.toggle('active');
-            });
-        }
-        
-        // Fermer le menu quand on clique sur un lien
-        const navLinks = document.querySelectorAll('.header-nav ul li a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenuToggle.classList.remove('active');
-                headerNav.classList.remove('active');
-            });
+      try {
+        const response = await fetch('/.netlify/functions/api', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: document.getElementById('email').value,
+            product: document.getElementById('product').value,
+            orderNumber: document.getElementById('orderNumber').value
+          })
         });
-    });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          resultDiv.textContent = '✅ Commande confirmée ! Vous allez recevoir un email de confirmation.';
+          resultDiv.className = 'success';
+        } else {
+          resultDiv.textContent = '❌ Erreur : ' + data.error;
+          resultDiv.className = 'error';
+        }
+      } catch (error) {
+        resultDiv.textContent = '❌ Erreur : ' + error.message;
+        resultDiv.className = 'error';
+      }
+    };
   </script>
 </body>
 </html>
