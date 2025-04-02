@@ -128,6 +128,51 @@ app.get('/test', (req, res) => {
   `);
 });
 
+// Route pour la page de test d'email
+app.get('/test-email', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'test-email.html'));
+});
+
+// Route API pour tester l'envoi d'email
+app.post('/api/test-email', async (req, res) => {
+  try {
+    const { email, subject, message } = req.body;
+
+    if (!email || !subject || !message) {
+      return res.status(400).json({ error: 'Tous les champs sont requis' });
+    }
+
+    const transporter = createTransporter();
+
+    const mailOptions = {
+      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
+      to: email,
+      subject: subject,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #2c3e50;">Test d'envoi d'email</h2>
+          <p>${message}</p>
+          <p>Cet email a été envoyé via le serveur SMTP de Namecheap.</p>
+        </div>
+      `
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    return res.status(200).json({ 
+      success: 'Email de test envoyé avec succès',
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'envoi de l\'email de test:', error.message);
+    return res.status(500).json({ 
+      error: 'Une erreur est survenue lors de l\'envoi de l\'email',
+      details: error.message
+    });
+  }
+});
+
 // Fonction pour configurer Nodemailer
 function createTransporter() {
   return nodemailer.createTransport({
@@ -139,8 +184,14 @@ function createTransporter() {
       pass: process.env.SMTP_PASS
     },
     tls: {
-      rejectUnauthorized: false
-    }
+      rejectUnauthorized: false,
+      minVersion: "TLSv1.2"
+    },
+    pool: true,
+    maxConnections: 5,
+    maxMessages: 100,
+    rateDelta: 1000,
+    rateLimit: 5
   });
 }
 
