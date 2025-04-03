@@ -1194,18 +1194,43 @@
             });
             
             // Formulaire de changement de mot de passe admin
-            document.getElementById('admin-password-form').addEventListener('submit', function(e) {
+            document.getElementById('admin-password-form').addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
+                const currentPassword = document.getElementById('current-password').value;
                 const newPassword = document.getElementById('new-password').value;
                 const confirmPassword = document.getElementById('confirm-password').value;
                 
                 if (newPassword !== confirmPassword) {
-                    alert('Les mots de passe ne correspondent pas');
+                    alert('Les mots de passe ne correspondent pas.');
                     return;
                 }
                 
-                alert('Mot de passe admin modifié avec succès');
-                document.getElementById('admin-password-form').reset();
+                try {
+                    const response = await fetch('/api/admin/change-password', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            currentPassword,
+                            newPassword
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        alert('Mot de passe modifié avec succès.');
+                        document.getElementById('admin-password-form').reset();
+                    } else {
+                        alert(result.error || 'Erreur lors du changement de mot de passe.');
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors du changement de mot de passe.');
+                }
             });
         });
     </script>

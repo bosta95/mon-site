@@ -155,7 +155,7 @@
         
         <div id="error-message" class="error-message"></div>
         
-        <form id="signup-form" class="signup-form">
+        <form id="register-form" class="signup-form">
             <div class="form-group">
                 <label for="username">Nom d'utilisateur</label>
                 <input type="text" id="username" name="username" required>
@@ -187,7 +187,7 @@
 
     <script src="auth.js"></script>
     <script>
-        document.getElementById('signup-form').addEventListener('submit', async function(event) {
+        document.getElementById('register-form').addEventListener('submit', async function(event) {
             event.preventDefault();
             
             const username = document.getElementById('username').value;
@@ -195,41 +195,19 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
-            // Utiliser l'API d'authentification
-            const result = await register(username, email, password);
-            
-            if (result.success) {
-                alert('Compte créé avec succès !');
-                window.location.href = 'espace-client-login.html';
-            } else {
-                // Fallback sur l'ancien système si l'API n'est pas disponible
-                try {
-                    // Vérifier si l'email existe déjà
-                    const users = JSON.parse(localStorage.getItem('users') || '[]');
-                    
-                    if (users.some(user => user.email === email)) {
-                        errorMessage.textContent = 'Cet email est déjà utilisé.';
-                        errorMessage.style.display = 'block';
-                        return;
-                    }
-                    
-                    // Créer un nouvel utilisateur
-                    const newUser = {
-                        name: username,
-                        email: email,
-                        password: btoa(password) // Simple base64 encoding for demonstration
-                    };
-                    
-                    // Ajouter l'utilisateur à la liste
-                    users.push(newUser);
-                    localStorage.setItem('users', JSON.stringify(users));
-                    
-                    alert('Compte créé avec succès !');
-                    window.location.href = 'espace-client-login.html';
-                } catch (error) {
-                    errorMessage.textContent = result.error || 'Erreur lors de la création du compte. Veuillez réessayer.';
+            try {
+                const result = await register(username, email, password);
+                
+                if (result.success) {
+                    window.location.href = 'confirmation.html';
+                } else {
+                    errorMessage.textContent = result.error || 'Erreur lors de l\'inscription. Veuillez réessayer.';
                     errorMessage.style.display = 'block';
                 }
+            } catch (error) {
+                errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer plus tard.';
+                errorMessage.style.display = 'block';
+                console.error('Erreur d\'inscription:', error);
             }
         });
     </script>

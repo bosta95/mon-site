@@ -189,31 +189,19 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
-            // Utiliser l'API d'authentification
-            const result = await login(username, password);
-            
-            if (result.success) {
-                // Rediriger vers l'espace client
-                window.location.href = 'espace-client.html';
-            } else {
-                // Fallback sur l'ancien système si l'API n'est pas disponible
-                // Récupérer les utilisateurs du localStorage
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
+            try {
+                const result = await login(username, password);
                 
-                // Vérifier si l'utilisateur existe
-                const user = users.find(user => user.email === username && user.password === btoa(password));
-                
-                if (user) {
-                    // Stocker l'utilisateur actuel
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    localStorage.setItem('authToken', 'true');
-                    
-                    // Rediriger vers l'espace client
+                if (result.success) {
                     window.location.href = 'espace-client.html';
                 } else {
                     errorMessage.textContent = result.error || 'Identifiants incorrects. Veuillez réessayer.';
                     errorMessage.style.display = 'block';
                 }
+            } catch (error) {
+                errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer plus tard.';
+                errorMessage.style.display = 'block';
+                console.error('Erreur de connexion:', error);
             }
         });
     </script>
