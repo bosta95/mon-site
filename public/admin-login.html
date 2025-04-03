@@ -168,31 +168,27 @@
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
-            // Utiliser l'API d'authentification
-            const result = await login(username, password);
-            
-            if (result.success) {
-                // Vérifier si l'utilisateur est admin
-                if (result.user.role === 'admin') {
-                    // Rediriger vers le tableau de bord admin
-                    window.location.href = 'admin-dashboard.html';
-                } else {
-                    errorMessage.textContent = 'Accès non autorisé. Vous n\'avez pas les droits d\'administrateur.';
-                    errorMessage.style.display = 'block';
-                }
-            } else {
-                // Fallback sur l'ancien système si l'API n'est pas disponible
-                if (username === 'admin' && password === 'admin123') {
-                    // Enregistrer la session admin
-                    localStorage.setItem('adminLogged', 'true');
-                    localStorage.setItem('userRole', 'admin');
-                    
-                    // Rediriger vers le tableau de bord admin
-                    window.location.href = 'admin-dashboard.html';
+            try {
+                // Utiliser l'API d'authentification
+                const result = await login(username, password);
+                
+                if (result.success) {
+                    // Vérifier si l'utilisateur est admin
+                    if (result.user.role === 'admin') {
+                        // Rediriger vers le tableau de bord admin
+                        window.location.href = 'admin-dashboard.html';
+                    } else {
+                        errorMessage.textContent = 'Accès non autorisé. Vous n\'avez pas les droits d\'administrateur.';
+                        errorMessage.style.display = 'block';
+                    }
                 } else {
                     errorMessage.textContent = result.error || 'Identifiants incorrects. Veuillez réessayer.';
                     errorMessage.style.display = 'block';
                 }
+            } catch (error) {
+                errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer plus tard.';
+                errorMessage.style.display = 'block';
+                console.error('Erreur de connexion:', error);
             }
         });
     </script>
