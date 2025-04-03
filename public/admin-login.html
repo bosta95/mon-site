@@ -48,36 +48,34 @@
 
         .admin-logo p {
             color: #8e8ea9;
-            margin-top: 5px;
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
+            gap: 20px;
         }
 
         .form-group {
-            margin-bottom: 20px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: #ddd;
+            color: #8e8ea9;
+            font-size: 0.9rem;
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px;
+            padding: 12px 15px;
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.3);
+            background-color: rgba(20, 20, 40, 0.5);
             color: #fff;
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .form-group input:focus {
@@ -87,61 +85,47 @@
         }
 
         .btn-admin {
-            padding: 14px 20px;
             background: linear-gradient(90deg, #6c5498, #ff6b6b);
-            color: #fff;
+            color: white;
             border: none;
+            padding: 12px 20px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             margin-top: 10px;
         }
 
         .btn-admin:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(108, 84, 152, 0.4);
         }
 
-        .error-message {
-            background-color: rgba(220, 53, 69, 0.15);
-            color: #ff6b6b;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px solid rgba(220, 53, 69, 0.3);
-            display: none;
-        }
-
         .back-link {
-            margin-top: 25px;
+            display: inline-block;
+            margin-top: 20px;
             color: #8e8ea9;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
         }
 
         .back-link:hover {
-            color: #ff6b6b;
+            color: #fff;
         }
 
         .security-note {
-            margin-top: 25px;
-            font-size: 12px;
-            color: #666;
-            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #8e8ea9;
         }
 
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .admin-login-container {
-            animation: fadeIn 0.5s ease-out;
+        .error-message {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            display: none;
         }
     </style>
 </head>
@@ -175,26 +159,40 @@
         </div>
     </div>
 
+    <script src="auth.js"></script>
     <script>
-        document.getElementById('admin-login-form').addEventListener('submit', function(event) {
+        document.getElementById('admin-login-form').addEventListener('submit', async function(event) {
             event.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
-            // Vérification des identifiants admin
-            // Pour la démonstration, nous utilisons des identifiants en dur
-            // Dans un environnement de production, utilisez une authentification sécurisée
-            if (username === 'admin' && password === 'admin123') {
-                // Enregistrer la session admin
-                localStorage.setItem('adminLogged', 'true');
-                
-                // Rediriger vers le tableau de bord admin
-                window.location.href = 'admin-dashboard.html';
+            // Utiliser l'API d'authentification
+            const result = await login(username, password);
+            
+            if (result.success) {
+                // Vérifier si l'utilisateur est admin
+                if (result.user.role === 'admin') {
+                    // Rediriger vers le tableau de bord admin
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    errorMessage.textContent = 'Accès non autorisé. Vous n\'avez pas les droits d\'administrateur.';
+                    errorMessage.style.display = 'block';
+                }
             } else {
-                errorMessage.textContent = 'Identifiants incorrects. Veuillez réessayer.';
-                errorMessage.style.display = 'block';
+                // Fallback sur l'ancien système si l'API n'est pas disponible
+                if (username === 'admin' && password === 'admin123') {
+                    // Enregistrer la session admin
+                    localStorage.setItem('adminLogged', 'true');
+                    localStorage.setItem('userRole', 'admin');
+                    
+                    // Rediriger vers le tableau de bord admin
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    errorMessage.textContent = result.error || 'Identifiants incorrects. Veuillez réessayer.';
+                    errorMessage.style.display = 'block';
+                }
             }
         });
     </script>

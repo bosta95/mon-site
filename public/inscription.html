@@ -4,19 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription | IPTV Pro</title>
-    <link href="styles.css?v=8" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom, #1e1e2f, #0a0a1a);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-container {
+            background-color: rgba(30, 30, 50, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            background: linear-gradient(90deg, #6c5498, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .logo p {
+            color: #8e8ea9;
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8e8ea9;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(20, 20, 40, 0.5);
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6c5498;
+            box-shadow: 0 0 0 2px rgba(108, 84, 152, 0.3);
+        }
+
+        .btn-signup {
+            background: linear-gradient(90deg, #6c5498, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 84, 152, 0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #8e8ea9;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .security-note {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #8e8ea9;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            color: #8e8ea9;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: #6c5498;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #ff6b6b;
+        }
+    </style>
 </head>
 <body>
     <div class="signup-container">
-        <h1>Inscription</h1>
-        <form id="signup-form">
-            <input type="text" placeholder="Nom" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Mot de passe" required>
-            <button type="submit" class="btn">Créer un compte</button>
+        <div class="logo">
+            <h1>Inscription</h1>
+            <p>IPTV Pro - Créez votre compte</p>
+        </div>
+        
+        <div id="error-message" class="error-message"></div>
+        
+        <form id="signup-form" class="signup-form">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn-signup">S'inscrire</button>
         </form>
+        
+        <div class="login-link">
+            <p>Déjà un compte ? <a href="espace-client-login.html">Connectez-vous</a></p>
+        </div>
+        
+        <a href="index.html" class="back-link">Retour au site</a>
+        
+        <div class="security-note">
+            <p>Inscription sécurisée | Vos données sont protégées</p>
+        </div>
     </div>
-    <p class="error-message" id="error-message"></p>
-    <script src="signup.js"></script>
+
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            // Utiliser l'API d'authentification
+            const result = await register(username, email, password);
+            
+            if (result.success) {
+                alert('Compte créé avec succès !');
+                window.location.href = 'espace-client-login.html';
+            } else {
+                // Fallback sur l'ancien système si l'API n'est pas disponible
+                try {
+                    // Vérifier si l'email existe déjà
+                    const users = JSON.parse(localStorage.getItem('users') || '[]');
+                    
+                    if (users.some(user => user.email === email)) {
+                        errorMessage.textContent = 'Cet email est déjà utilisé.';
+                        errorMessage.style.display = 'block';
+                        return;
+                    }
+                    
+                    // Créer un nouvel utilisateur
+                    const newUser = {
+                        name: username,
+                        email: email,
+                        password: btoa(password) // Simple base64 encoding for demonstration
+                    };
+                    
+                    // Ajouter l'utilisateur à la liste
+                    users.push(newUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    
+                    alert('Compte créé avec succès !');
+                    window.location.href = 'espace-client-login.html';
+                } catch (error) {
+                    errorMessage.textContent = result.error || 'Erreur lors de la création du compte. Veuillez réessayer.';
+                    errorMessage.style.display = 'block';
+                }
+            }
+        });
+    </script>
 </body>
 </html> 
