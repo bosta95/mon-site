@@ -4,13 +4,30 @@
  */
 
 // Fonction pour vérifier si l'utilisateur est connecté
-function isLoggedIn() {
-    return localStorage.getItem('authToken') !== null;
+async function isLoggedIn() {
+    try {
+        const response = await fetch('/api/auth/check', {
+            credentials: 'include'
+        });
+        return response.ok;
+    } catch (error) {
+        console.error('Erreur de vérification de connexion:', error);
+        return false;
+    }
 }
 
 // Fonction pour vérifier si l'utilisateur est admin
-function isAdmin() {
-    return localStorage.getItem('userRole') === 'admin';
+async function isAdmin() {
+    try {
+        const response = await fetch('/api/auth/check-role', {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        return data.role === 'admin';
+    } catch (error) {
+        console.error('Erreur de vérification du rôle:', error);
+        return false;
+    }
 }
 
 // Fonction pour se connecter
@@ -22,17 +39,12 @@ async function login(username, password) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ username, password }),
-            credentials: 'include' // Important pour les cookies de session
+            credentials: 'include'
         });
 
         const data = await response.json();
         
         if (response.ok) {
-            // Stocker les informations de l'utilisateur
-            localStorage.setItem('authToken', 'true'); // Similaire à l'ancien système
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
-            localStorage.setItem('userRole', data.user.role);
-            
             return { success: true, user: data.user };
         } else {
             return { success: false, error: data.error };
@@ -51,7 +63,8 @@ async function register(username, email, password) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, email, password })
+            body: JSON.stringify({ username, email, password }),
+            credentials: 'include'
         });
 
         const data = await response.json();
@@ -78,11 +91,6 @@ async function logout() {
         const data = await response.json();
         
         if (response.ok) {
-            // Supprimer les informations de l'utilisateur
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('userRole');
-            
             return { success: true, message: data.message };
         } else {
             return { success: false, error: data.error };
@@ -94,16 +102,26 @@ async function logout() {
 }
 
 // Fonction pour obtenir les informations de l'utilisateur actuel
-function getCurrentUser() {
-    const userJson = localStorage.getItem('currentUser');
-    return userJson ? JSON.parse(userJson) : null;
+async function getCurrentUser() {
+    try {
+        const response = await fetch('/api/auth/current-user', {
+            credentials: 'include'
+        });
+        if (response.ok) {
+            return await response.json();
+        }
+        return null;
+    } catch (error) {
+        console.error('Erreur de récupération des informations utilisateur:', error);
+        return null;
+    }
 }
 
 // Fonction pour rediriger vers la page appropriée selon le rôle
-function redirectBasedOnRole() {
-    const userRole = localStorage.getItem('userRole');
+async function redirectBasedOnRole() {
+    const isUserAdmin = await isAdmin();
     
-    if (userRole === 'admin') {
+    if (isUserAdmin) {
         window.location.href = 'admin-dashboard.html';
     } else {
         window.location.href = 'espace-client.html';

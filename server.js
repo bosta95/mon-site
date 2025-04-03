@@ -31,8 +31,13 @@ app.use(helmet({
 }));
 
 // Configuration des sessions
+if (!process.env.SESSION_SECRET) {
+  console.error('ERREUR: SESSION_SECRET doit être défini dans les variables d\'environnement');
+  process.exit(1);
+}
+
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'votre_secret_tres_securise',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -231,6 +236,30 @@ app.post('/api/logout', (req, res) => {
     res.clearCookie('connect.sid');
     res.json({ message: 'Déconnexion réussie' });
   });
+});
+
+// Routes d'authentification supplémentaires
+app.get('/api/auth/check', requireAuth, (req, res) => {
+  res.status(200).json({ authenticated: true });
+});
+
+app.get('/api/auth/check-role', requireAuth, (req, res) => {
+  res.status(200).json({ role: req.session.userRole });
+});
+
+app.get('/api/auth/current-user', requireAuth, async (req, res) => {
+  try {
+    const users = await loadUsers();
+    const user = users.find(u => u.id === req.session.userId);
+    if (user) {
+      const { password, ...userWithoutPassword } = user;
+      res.status(200).json(userWithoutPassword);
+    } else {
+      res.status(404).json({ error: 'Utilisateur non trouvé' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
 });
 
 // Route principale
