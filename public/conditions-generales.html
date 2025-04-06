@@ -251,23 +251,182 @@
         padding: 20px;
       }
     }
+    
+    /* Styles pour la barre de navigation et l'en-tête */
+    .header-container {
+      background: rgba(20, 20, 20, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+      padding: 8px 0;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      top: 0;
+      border-bottom: 2px solid #6c5498;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Menu hamburger pour mobile */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .mobile-menu-toggle span {
+      height: 2px;
+      width: 100%;
+      background-color: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    
+    /* Navigation Desktop */
+    .header-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    
+    .header-nav ul li {
+      margin-left: 15px;
+    }
+    
+    .header-nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 8px 15px;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .header-nav ul li a:hover {
+      color: #E74C3C;
+    }
+    
+    .header-nav ul li a.btn-primary {
+      background: #E74C3C;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 4px;
+    }
+    
+    .header-nav ul li a.btn-primary:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .header-nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 15, 25, 0.95);
+        padding: 20px;
+        height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-out;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 100;
+      }
+      
+      .header-nav.active {
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        padding: 20px;
+      }
+      
+      .header-nav ul {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .header-nav ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+    }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="logo-container">
-        <img src="images/IPTV_glpgxi.svg" alt="IPTV Smarter Pro Logo" class="logo">
-        <h1>Conditions Générales</h1>
+  <!-- HEADER -->
+  <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <img alt="IPTV Pro Logo" src="images/IPTV_glpgxi.svg"/>
       </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="blog.html">Blog <span class="badge-new">NEW</span></a></li>
+          <li><a href="tutoriel.html">Guide Installation</a></li>
+          <li><a href="index.html#offers-section">Tarifs & Offres</a></li>
+          <li><a href="contact.html">Support 24/7</a></li>
+          <li><a href="espace-client.html" class="btn-primary">ESPACE CLIENT</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
-  
-  <div class="main-content">
-    <div class="container">
+
+  <div class="cg-header">
+    <h1>Conditions Générales</h1>
+  </div>
+
+  <div class="container terms-content">
+    <div class="terms-section">
       <div class="toc">
         <div class="toc-title">Table des matières</div>
         <ul class="toc-list">

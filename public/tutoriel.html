@@ -50,75 +50,129 @@
         border-bottom: 2px solid #6c5498;
     }
     
-    .nav-container {
-        max-width: 1200px;
-        margin: 0 auto;
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 40px;
+      width: auto;
+    }
+    
+    /* Menu hamburger pour mobile */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .mobile-menu-toggle span {
+      height: 2px;
+      width: 100%;
+      background-color: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    
+    /* Navigation Desktop */
+    .header-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    
+    .header-nav ul li {
+      margin-left: 15px;
+    }
+    
+    .header-nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 8px 15px;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    
+    .header-nav ul li a:hover {
+      color: #E74C3C;
+    }
+    
+    .header-nav ul li a.btn-primary {
+      background: #E74C3C;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 4px;
+    }
+    
+    .header-nav ul li a.btn-primary:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-    }
-    
-    .logo-container {
-        display: flex;
-        align-items: center;
-    }
-    
-    .logo-container img {
-        height: 40px;
-        width: auto;
-        transition: transform 0.3s ease;
-    }
-    
-    nav ul {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: 5px;
-    }
-    
-    nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 14px;
-        padding: 8px 12px;
-        border-radius: 25px;
-        transition: all 0.3s ease;
-        position: relative;
-        display: inline-block;
-    }
-    
-    nav ul li a::after {
-        content: '';
+      }
+      
+      .header-nav {
         position: absolute;
-        bottom: 3px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 2px;
-        background: #ff6b6b;
-        transition: width 0.3s ease;
-    }
-    
-    nav ul li a:hover {
-        background: rgba(255, 107, 107, 0.1);
-        color: #ff6b6b;
-    }
-    
-    nav ul li a:hover::after {
-        width: 70%;
-    }
-    
-    nav ul li a.active {
-        background: rgba(108, 84, 152, 0.15);
-        color: #ff6b6b;
-    }
-    
-    nav ul li a.active::after {
-        width: 70%;
-        background: #ff6b6b;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 15, 25, 0.95);
+        padding: 20px;
+        height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-out;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 100;
+      }
+      
+      .header-nav.active {
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        padding: 20px;
+      }
+      
+      .header-nav ul {
+        flex-direction: column;
+        width: 100%;
+      }
+      
+      .header-nav ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
     }
     
     /* Conteneur principal */
@@ -415,12 +469,7 @@
             margin-top: 80px;
         }
         
-        .nav-container {
-            flex-direction: column;
-            padding: 10px;
-        }
-        
-        nav ul {
+        .header-nav ul {
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 10px;
@@ -604,9 +653,9 @@
 <body>
 <!-- HEADER AMÉLIORÉ -->
 <header class="header-container">
-<div class="nav-container">
-<div class="logo-container">
-<img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" alt="IPTV Pro Logo">
+<div class="header-content">
+<div class="logo">
+<img alt="IPTV Pro Logo" src="images/IPTV_glpgxi.svg"/>
 </div>
 <!-- Menu hamburger pour mobile -->
 <div class="mobile-menu-toggle">
@@ -614,14 +663,15 @@
     <span></span>
     <span></span>
 </div>
-<nav>
+<!-- Navigation Desktop -->
+<nav class="header-nav">
 <ul>
 <li><a href="index.html">Accueil</a></li>
 <li><a href="blog.html">Blog <span class="badge-new">NEW</span></a></li>
 <li><a href="tutoriel.html" class="active">Guide Installation</a></li>
-<li><a href="#offers-section">Tarifs & Offres</a></li>
+<li><a href="index.html#offers-section">Tarifs & Offres</a></li>
 <li><a href="contact.html">Support 24/7</a></li>
-<li><a href="espace-client.html" class="btn-primary">Espace Client</a></li>
+<li><a href="espace-client.html" class="btn-primary">ESPACE CLIENT</a></li>
 </ul>
 </nav>
 </div>

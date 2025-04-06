@@ -28,4 +28,48 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     console.log("Toutes les optimisations JS sont en place ! ⚡");
+
+    // Fonction pour gérer le menu hamburger mobile
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const headerNav = document.querySelector('.header-nav');
+    
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenuToggle.classList.toggle('active');
+            headerNav.classList.toggle('active');
+        });
+    }
+    
+    // Fermer le menu quand on clique sur un lien
+    const navLinks = document.querySelectorAll('.header-nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenuToggle.classList.remove('active');
+            headerNav.classList.remove('active');
+        });
+    });
+    
+    // Restaurer l'affichage de la bannière fixe si elle a été masquée
+    const fixedFooter = document.querySelector('.fixed-footer');
+    if (fixedFooter) {
+        // Récupérer l'état stocké dans localStorage
+        const hiddenTime = localStorage.getItem('fixedFooterHidden');
+        if (hiddenTime) {
+            const now = Date.now();
+            const oneHour = 60 * 60 * 1000; // 1 heure en millisecondes
+            if (now - hiddenTime > oneHour) {
+                // Si plus d'une heure s'est écoulée, on supprime l'état et on réaffiche
+                localStorage.removeItem('fixedFooterHidden');
+                fixedFooter.classList.remove('hide');
+                fixedFooter.style.transform = 'translateY(0)';
+            } else {
+                // Programmer la réapparition après le temps restant
+                const timeRemaining = oneHour - (now - hiddenTime);
+                setTimeout(function() {
+                    fixedFooter.classList.remove('hide');
+                    localStorage.removeItem('fixedFooterHidden');
+                }, timeRemaining);
+            }
+        }
+    }
 });

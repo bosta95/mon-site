@@ -3,117 +3,555 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - IPTV Smarter Pros</title>
+    <title>Contact et Support 24/7 - IPTV Smarter Pros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link href="styles.css?v=11" rel="stylesheet">
     <style>
+        /* Styles spécifiques à la page de contact */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #141414, #0a0a0a);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .contact-header {
+            background: linear-gradient(90deg, #E74C3C, #6c5498);
+            padding: 80px 0 50px;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 50px;
+            position: relative;
+            margin-top: 70px; /* Pour laisser de la place à l'en-tête fixe */
+        }
+        
+        /* Styles pour la navigation et l'en-tête */
+        .header-container {
+          background: rgba(20, 20, 20, 0.9);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+          padding: 8px 0;
+          position: fixed;
+          width: 100%;
+          z-index: 1000;
+          top: 0;
+          border-bottom: 2px solid #6c5498;
+        }
+        
+        .header-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+        
+        .logo {
+          display: flex;
+          align-items: center;
+        }
+        
+        .logo img {
+          height: 40px;
+          width: auto;
+        }
+        
+        /* Menu hamburger pour mobile */
+        .mobile-menu-toggle {
+          display: none;
+          flex-direction: column;
+          justify-content: space-between;
+          width: 30px;
+          height: 20px;
+          cursor: pointer;
+        }
+        
+        .mobile-menu-toggle span {
+          height: 2px;
+          width: 100%;
+          background-color: #fff;
+          transition: transform 0.3s, opacity 0.3s;
+        }
+        
+        /* Navigation Desktop */
+        .header-nav ul {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          align-items: center;
+        }
+        
+        .header-nav ul li {
+          margin-left: 15px;
+        }
+        
+        .header-nav ul li a {
+          text-decoration: none;
+          color: #fff;
+          font-weight: 500;
+          padding: 8px 15px;
+          border-radius: 4px;
+          transition: all 0.3s;
+        }
+        
+        .header-nav ul li a:hover {
+          color: #E74C3C;
+        }
+        
+        .header-nav ul li a.btn-primary {
+          background: #E74C3C;
+          color: #fff;
+          padding: 8px 15px;
+          border-radius: 4px;
+        }
+        
+        .header-nav ul li a.btn-primary:hover {
+          background: #c0392b;
+          transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+          .mobile-menu-toggle {
+            display: flex;
+          }
+          
+          .header-nav {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 25, 0.95);
+            padding: 20px;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 100;
+          }
+          
+          .header-nav.active {
+            height: auto;
+            opacity: 1;
+            visibility: visible;
+            padding: 20px;
+          }
+          
+          .header-nav ul {
+            flex-direction: column;
+            width: 100%;
+          }
+          
+          .header-nav ul li {
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+          }
+          
+          .mobile-menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+          }
+          
+          .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+          }
+          
+          .mobile-menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+          }
+        }
+
+        .contact-header h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .contact-header p {
+            color: #fff;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
-        .contact-form {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
         }
+
+        .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+        }
+
+        .contact-form-container h2, .contact-info h2 {
+            color: #E74C3C;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-form-container h2:after, .contact-info h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #E74C3C;
+        }
+
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
-        label {
+
+        .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #ddd;
         }
-        input, textarea {
+
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
-        textarea {
-            height: 150px;
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #E74C3C;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.25);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
             resize: vertical;
         }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+
+        .submit-btn {
+            display: inline-block;
             width: 100%;
+            background: #E74C3C;
+            color: #fff;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .submit-btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
         }
+
+        .submit-btn i {
+            margin-right: 8px;
+        }
+
+        .contact-info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-info-list li i {
+            color: #E74C3C;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .contact-info-content {
+            flex: 1;
+        }
+
+        .contact-info-content h3 {
+            color: #fff;
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+
+        .contact-info-content p {
+            color: #aaa;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 25px;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #E74C3C;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
         #result {
             margin-top: 20px;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
         }
+
         .success {
-            background-color: #dff0d8;
-            color: #3c763d;
+            background-color: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+            border: 1px solid rgba(39, 174, 96, 0.3);
         }
+
         .error {
-            background-color: #f2dede;
-            color: #a94442;
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-header p {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="contact-form">
-        <h1>Contactez-nous</h1>
-        <form id="contactForm" class="contact-form">
-            <div class="form-group">
-                <label for="email">Votre email</label>
-                <input type="email" id="email" name="email" required>
+    <!-- HEADER -->
+    <header class="header-container">
+        <div class="header-content">
+            <div class="logo">
+                <img alt="IPTV Pro Logo" src="images/IPTV_glpgxi.svg"/>
             </div>
-            <div class="form-group">
-                <label for="subject">Sujet</label>
-                <input type="text" id="subject" name="subject" required>
+            <!-- Menu hamburger pour mobile -->
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="btn">Envoyer le message</button>
-        </form>
-        <div id="result"></div>
+            <!-- Navigation Desktop -->
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="blog.html">Blog <span class="badge-new">NEW</span></a></li>
+                    <li><a href="tutoriel.html">Guide Installation</a></li>
+                    <li><a href="index.html#offers-section">Tarifs & Offres</a></li>
+                    <li><a href="contact.html" class="active">Support 24/7</a></li>
+                    <li><a href="espace-client.html" class="btn-primary">ESPACE CLIENT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTACT HEADER -->
+    <div class="contact-header">
+        <div class="container">
+            <h1>Support 24/7 - Nous Sommes Là Pour Vous</h1>
+            <p>Notre équipe d'experts est disponible 24h/24 et 7j/7 pour répondre à toutes vos questions. Utilisez le formulaire ci-dessous pour nous contacter et nous vous répondrons dans les plus brefs délais.</p>
+        </div>
     </div>
+
+    <!-- CONTACT CONTENT -->
+    <div class="contact-container">
+        <!-- Formulaire de contact -->
+        <div class="contact-form-container">
+            <h2>Envoyez-nous un message</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Votre nom</label>
+                    <input type="text" id="name" name="name" required placeholder="Entrez votre nom">
+                </div>
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Votre email</label>
+                    <input type="email" id="email" name="email" required placeholder="Entrez votre email">
+                </div>
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-tag"></i> Sujet</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Choisissez un sujet</option>
+                        <option value="Assistance technique">Assistance technique</option>
+                        <option value="Question sur l'abonnement">Question sur l'abonnement</option>
+                        <option value="Renouvellement">Renouvellement</option>
+                        <option value="Problème de paiement">Problème de paiement</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment-alt"></i> Votre message</label>
+                    <textarea id="message" name="message" required placeholder="Décrivez votre question ou problème en détail..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+                <div id="result" class=""></div>
+            </form>
+        </div>
+
+        <!-- Infos de contact -->
+        <div class="contact-info">
+            <h2>Nos coordonnées</h2>
+            <ul class="contact-info-list">
+                <li>
+                    <i class="fas fa-headset"></i>
+                    <div class="contact-info-content">
+                        <h3>Support technique 24/7</h3>
+                        <p>Notre équipe est disponible à toute heure pour vous assister dans l'installation, la configuration ou tout autre problème technique.</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-info-content">
+                        <h3>Email</h3>
+                        <p>support@iptvsmarterpros.com</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-clock"></i>
+                    <div class="contact-info-content">
+                        <h3>Disponibilité</h3>
+                        <p>24 heures sur 24, 7 jours sur 7</p>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-comments"></i>
+                    <div class="contact-info-content">
+                        <h3>Réseaux sociaux</h3>
+                        <div class="social-links">
+                            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-snapchat"></i></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="tutoriel.html">Guide d'installation</a>
+            <a href="conditions-generales.html">Conditions d'utilisation</a>
+            <a href="politique-confidentialite.html">Politique de confidentialité</a>
+        </div>
+        <p>© 2025 IPTV Smarter Pros. Tous droits réservés.</p>
+    </footer>
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const formData = {
-                email: document.getElementById('email').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            resultDiv.className = '';
+            
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
             try {
                 const response = await fetch('/.netlify/functions/contact', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({ email, subject, message })
                 });
-
+                
                 const result = await response.json();
+                
                 if (response.ok) {
-                    alert('Message envoyé avec succès !');
-                    this.reset();
+                    resultDiv.className = 'success';
+                    resultDiv.innerHTML = '<i class="fas fa-check-circle"></i> Votre message a été envoyé avec succès!';
+                    document.getElementById('contactForm').reset();
+                    
+                    // Redirection vers la page de succès après 2 secondes
+                    setTimeout(() => {
+                        window.location.href = '/success.html';
+                    }, 2000);
                 } else {
-                    alert('Erreur lors de l\'envoi du message : ' + result.error);
+                    resultDiv.className = 'error';
+                    resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${result.error || 'Une erreur est survenue. Veuillez réessayer.'}`;
                 }
             } catch (error) {
+                resultDiv.className = 'error';
+                resultDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Une erreur est survenue lors de l\'envoi. Veuillez réessayer.';
                 console.error('Erreur:', error);
-                alert('Une erreur est survenue lors de l\'envoi du message.');
             }
         });
     </script>
