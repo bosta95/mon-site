@@ -49,9 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     
-    // Restaurer l'affichage de la bannière fixe si elle a été masquée
+    // Gestion de la bannière fixe - uniquement sur la page d'accueil
     const fixedFooter = document.querySelector('.fixed-footer');
-    if (fixedFooter) {
+    
+    // Vérifier si nous sommes sur la page d'accueil et si la bannière existe
+    const isHomePage = window.location.pathname === '/' || 
+                       window.location.pathname === '/index.html' || 
+                       window.location.href.includes('index.html');
+    
+    if (fixedFooter && isHomePage) {
         // Récupérer l'état stocké dans localStorage
         const hiddenTime = localStorage.getItem('fixedFooterHidden');
         if (hiddenTime) {
@@ -71,5 +77,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, timeRemaining);
             }
         }
+        
+        // Gestion du bouton de fermeture
+        const hideFixedFooter = document.getElementById('hideFixedFooter');
+        if (hideFixedFooter) {
+            hideFixedFooter.addEventListener('click', function() {
+                fixedFooter.classList.add('hide');
+                localStorage.setItem('fixedFooterHidden', Date.now());
+            });
+        }
+    } else if (fixedFooter && !isHomePage) {
+        // Si ce n'est pas la page d'accueil, masquer la bannière
+        fixedFooter.style.display = 'none';
     }
 });
