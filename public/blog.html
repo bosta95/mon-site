@@ -358,7 +358,7 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(15, 15, 15, 0.95);
+    background: #111;
     height: 60px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -544,21 +544,20 @@
   
   .btn-primary {
     display: inline-block;
-    background: linear-gradient(135deg, #6c5498, #ff6b6b);
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 50px;
+    background: #E74C3C;
+    color: #fff !important;
+    padding: 8px 15px;
+    border-radius: 4px;
     text-decoration: none;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
-    cursor: pointer;
-    align-self: flex-start;
   }
   
   .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(108, 84, 152, 0.3);
+    background: #c0392b;
+    transform: translateY(-2px);
   }
   
   /* Media queries pour la responsive */
@@ -581,6 +580,46 @@
       font-size: 20px;
     }
   }
+  
+  /* Styles modernes pour les boutons */
+  .btn, .btn-primary {
+    display: inline-block;
+    background: #6c5498;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:hover, .btn-primary:hover {
+    background: #8269b2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn-primary {
+    background: #ff8c8c;
+  }
+  
+  .btn-primary:hover {
+    background: #ff7272;
+  }
+  
+  /* Style pour les badges et boutons selon la capture d'écran */
+  .badge-new {
+    background: #E74C3C;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 5px;
+    font-weight: 500;
+  }
 </style>
 </head>
 <body>
@@ -601,12 +640,11 @@
     <nav class="header-nav">
       <ul>
         <li><a href="index.html">Accueil</a></li>
-        <li><a href="offer.html">Offres</a></li>
-        <li><a href="tutoriel.html">Guide</a></li>
-        <li><a href="about.html">À propos</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="blog.html" class="active">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="blog.html" class="active">Blog <span class="badge-new">NEW</span></a></li>
+        <li><a href="tutoriel.html">Guide Installation</a></li>
+        <li><a href="#offers-section">Tarifs & Offres</a></li>
+        <li><a href="contact.html">Support 24/7</a></li>
+        <li><a href="espace-client.html" class="btn-primary">Espace Client</a></li>
       </ul>
     </nav>
   </div>
@@ -746,7 +784,7 @@
   <div class="blog-footer">
     <h3>Envie d'en savoir plus ?</h3>
     <p>Découvrez notre service premium IPTV avec plus de 22 000 chaînes, films et séries en haute définition. Profitez d'une expérience de streaming inégalée sur tous vos appareils.</p>
-    <a href="offer.html" class="btn">Découvrir nos offres</a>
+    <a href="index.html" class="btn">Retour à l'accueil</a>
   </div>
 </div>
 

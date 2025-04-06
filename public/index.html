@@ -27,10 +27,14 @@
   <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   
   <!-- Préchargement des ressources critiques -->
   <link rel="preload" href="styles.css?v=5" as="style">
   <link rel="preload" href="images/IPTV_glpgxi.svg" as="image">
+  
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <!-- Validation Bing Webmaster Tools -->
   <meta name="msvalidate.01" content="814819C9FA9F9A0AA228C561E5E96380" />
@@ -152,18 +156,131 @@
       color: #ff8c8c;
       font-weight: bold;
     }
-    .offer-card .btn {
+    
+    /* Styles améliorés pour les boutons */
+    .offer-card .btn, .btn, .btn-primary {
       display: inline-block;
       background: #6c5498;
       color: #fff;
-      padding: 8px 15px;
+      padding: 10px 20px;
       border-radius: 6px;
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: background 0.3s;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
+    
+    .offer-card .btn:hover, .btn:hover, .btn-primary:hover {
+      background: #8269b2;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn-primary {
+      background: #ff8c8c;
+    }
+    
+    .btn-primary:hover {
+      background: #ff7272;
+    }
+    
+    .offer-card .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #ff6b6b, #6c5498);
+      transition: width 0.3s ease;
+      z-index: -1;
+    }
+    
+    .offer-card .btn:hover:before {
+      width: 100%;
+    }
+    
     .offer-card .btn:hover {
-      background: #7f66b5;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4);
+    }
+    
+    /* Styles modernes pour les boutons */
+    .btn-primary, .btn-installation {
+      display: inline-block;
+      background: linear-gradient(135deg, #6c5498, #ff8c8c);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(108, 84, 152, 0.3);
+      border: none;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn-primary:hover, .btn-installation:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(108, 84, 152, 0.4);
+      background: linear-gradient(135deg, #ff8c8c, #6c5498);
+    }
+    
+    .btn-installation {
+      background: linear-gradient(135deg, #4CAF50, #2E7D32);
+      margin-right: 10px;
+    }
+    
+    .btn-installation:hover {
+      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+    }
+    
+    /* Style pour les badges et boutons selon la capture d'écran */
+    .badge-new {
+      background: #E74C3C;
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 5px;
+      font-weight: 500;
+    }
+    
+    .btn-primary {
+      display: inline-block;
+      background: #E74C3C;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+    
+    /* Ajustements de la navigation selon la capture */
+    .header-container {
+      background: #111;
+    }
+    
+    .header-nav ul li a {
+      color: #fff;
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+    
+    .header-nav ul li a:hover {
+      color: #E74C3C;
     }
   </style>
 </head>
@@ -189,10 +306,10 @@
       <nav class="header-nav">
         <ul>
           <li><a href="index.html">Accueil</a></li>
-          <li><a href="offer.html">Offres</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a href="blog.html">Blog <span class="badge-new">NEW</span></a></li>
           <li><a href="tutoriel.html">Guide Installation</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#offers-section">Tarifs & Offres</a></li>
+          <li><a href="contact.html">Support 24/7</a></li>
           <li><a href="espace-client.html" class="btn-primary">Espace Client</a></li>
         </ul>
       </nav>
@@ -445,10 +562,28 @@
           cursor: pointer;
           box-shadow: 0 5px 15px rgba(108, 84, 152, 0.3);
           margin-top: auto;
+          position: relative;
+          overflow: hidden;
+          z-index: 1;
+        }
+        
+        .offer-card .btn:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background: linear-gradient(135deg, #ff6b6b, #6c5498);
+          transition: width 0.3s ease;
+          z-index: -1;
+        }
+        
+        .offer-card .btn:hover:before {
+          width: 100%;
         }
         
         .offer-card .btn:hover {
-          background: linear-gradient(135deg, #ff6b6b, #6c5498);
           transform: translateY(-3px);
           box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4);
         }
@@ -696,7 +831,7 @@
       <div class="footer-section">
         <h3>Liens Rapides</h3>
         <ul class="footer-links">
-          <li><a href="#offers-section">Nos Offres</a></li>
+          <li><a href="#hero">Accueil</a></li>
           <li><a href="#films">Films & Séries</a></li>
           <li><a href="tutoriel.html">Guide Installation</a></li>
           <li><a href="blog.html">Blog</a></li>

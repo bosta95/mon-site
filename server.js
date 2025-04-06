@@ -301,10 +301,10 @@ function isValidProduct(product) {
 // Route API pour le formulaire de contact
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, subject, message } = req.body;
 
     // Validation des entrées
-    if (!name || !email || !message) {
+    if (!name || !email || !subject || !message) {
       return res.status(400).json({ error: 'Tous les champs sont requis' });
     }
 
@@ -318,6 +318,7 @@ app.post('/api/contact', async (req, res) => {
 
     // Assainissement des entrées
     const sanitizedName = sanitizeInput(name);
+    const sanitizedSubject = sanitizeInput(subject);
     const sanitizedMessage = sanitizeInput(message);
 
     const transporter = nodemailer.createTransport({
@@ -337,13 +338,14 @@ app.post('/api/contact', async (req, res) => {
     const mailOptions = {
       from: process.env.SMTP_USER,
       to: process.env.MERCHANT_EMAIL,
-      subject: `Nouveau message de ${sanitizedName}`,
-      text: `Nom: ${sanitizedName}\nEmail: ${email}\nMessage: ${sanitizedMessage}`,
+      subject: `[Contact] ${sanitizedSubject}`,
+      text: `Nom: ${sanitizedName}\nEmail: ${email}\nSujet: ${sanitizedSubject}\nMessage: ${sanitizedMessage}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #2c3e50;">Nouveau message de contact</h1>
+          <h1 style="color: #E74C3C;">Nouveau message de contact</h1>
           <p><strong>Nom:</strong> ${sanitizedName}</p>
           <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Sujet:</strong> ${sanitizedSubject}</p>
           <p><strong>Message:</strong></p>
           <p style="white-space: pre-wrap;">${sanitizedMessage}</p>
         </div>

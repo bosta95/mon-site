@@ -24,6 +24,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- Styles -->
 <link href="styles.css?v=12" rel="stylesheet">
+<!-- Font Awesome pour les icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
     /* Styles spécifiques à la page du guide */
     body {
@@ -316,22 +318,43 @@
     
     .btn {
         display: inline-block;
-        background: #6c5498;
-        color: white;
-        padding: 12px 30px;
-        border-radius: 30px;
+        background: linear-gradient(135deg, #6c5498, #ff6b6b);
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 50px;
         text-decoration: none;
+        font-size: 0.9rem;
         font-weight: 600;
-        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         transition: all 0.3s ease;
         border: none;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(108, 84, 152, 0.3);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    .btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(135deg, #ff6b6b, #6c5498);
+        transition: width 0.3s ease;
+        z-index: -1;
+    }
+    
+    .btn:hover:before {
+        width: 100%;
     }
     
     .btn:hover {
-        background: #ff6b6b;
         transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4);
     }
     
     /* Footer amélioré */
@@ -416,58 +439,40 @@
             font-size: 1.2rem;
         }
     }
-</style>
-</head>
-<body>
-<!-- HEADER AMÉLIORÉ -->
-<header class="header-container">
-<div class="nav-container">
-<div class="logo-container">
-<img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" alt="IPTV Pro Logo">
-</div>
-<!-- Menu hamburger pour mobile -->
-<div class="mobile-menu-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
-<nav>
-<ul>
-<li><a href="index.html">Accueil</a></li>
-<li><a href="offer.html">Offres</a></li>
-<li><a href="tutoriel.html" class="active">Guide</a></li>
-<li><a href="about.html">À propos</a></li>
-<li><a href="faq.html">FAQ</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
-</div>
-</header>
-
-<!-- CONTENU PRINCIPAL REFORMULÉ -->
-<div class="content-wrapper">
-<h1>Guide d'Installation IPTV - En 7 Étapes</h1>
-<div class="intro-text">
-<p>
-      Bienvenue dans ce guide complet d'installation d'<strong>IPTV Smarters Pro</strong> sur votre Fire TV ou autre appareil compatible. 
-      Suivez les 7 étapes ci-dessous pour configurer facilement votre abonnement et profiter d'un streaming premium avec plus de 22 000 
-      chaînes, films et séries en haute définition.
-    </p>
-</div>
-
-<!-- Nouvelle section pour la vidéo YouTube -->
-<div class="video-tutorial">
-    <div class="video-container">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/lpiRwbYmrzg?start=77" title="Tutoriel d'installation IPTV Smarters Pro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
-    </div>
-    <div class="video-description">
-        <h3>Tutoriel vidéo explicatif</h3>
-        <p>Regardez notre tutoriel vidéo détaillé pour une démonstration complète de l'installation et de la configuration d'IPTV Smarters Pro.</p>
-    </div>
-</div>
-
-<!-- Styles pour la vidéo YouTube -->
-<style>
+    
+    /* Styles modernes pour les boutons */
+    .btn-primary, .btn-installation {
+        display: inline-block;
+        background: linear-gradient(135deg, #6c5498, #ff8c8c);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(108, 84, 152, 0.3);
+        border: none;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .btn-primary:hover, .btn-installation:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(108, 84, 152, 0.4);
+        background: linear-gradient(135deg, #ff8c8c, #6c5498);
+    }
+    
+    .btn-installation {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        margin-right: 10px;
+    }
+    
+    .btn-installation:hover {
+        background: linear-gradient(135deg, #2E7D32, #4CAF50);
+    }
+    
+    /* Styles pour la vidéo YouTube */
     .video-tutorial {
         display: flex;
         flex-direction: column;
@@ -531,7 +536,118 @@
             font-size: 0.9rem;
         }
     }
+    
+    /* Styles améliorés pour les boutons */
+    .btn, .btn-primary {
+      display: inline-block;
+      background: #6c5498;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn:hover, .btn-primary:hover {
+      background: #8269b2;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .btn-primary {
+      background: #ff8c8c;
+    }
+    
+    .btn-primary:hover {
+      background: #ff7272;
+    }
+    
+    /* Style des badges et boutons selon la capture d'écran */
+    .badge-new {
+      background: #E74C3C;
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 5px;
+      font-weight: 500;
+    }
+    
+    .btn-primary {
+      display: inline-block;
+      background: #E74C3C;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+    }
+    
+    /* Ajustements de la navigation selon la capture */
+    .header-container {
+      background: #111;
+    }
 </style>
+</head>
+<body>
+<!-- HEADER AMÉLIORÉ -->
+<header class="header-container">
+<div class="nav-container">
+<div class="logo-container">
+<img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" alt="IPTV Pro Logo">
+</div>
+<!-- Menu hamburger pour mobile -->
+<div class="mobile-menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+<nav>
+<ul>
+<li><a href="index.html">Accueil</a></li>
+<li><a href="blog.html">Blog <span class="badge-new">NEW</span></a></li>
+<li><a href="tutoriel.html" class="active">Guide Installation</a></li>
+<li><a href="#offers-section">Tarifs & Offres</a></li>
+<li><a href="contact.html">Support 24/7</a></li>
+<li><a href="espace-client.html" class="btn-primary">Espace Client</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<!-- CONTENU PRINCIPAL REFORMULÉ -->
+<div class="content-wrapper">
+<h1>Guide d'Installation IPTV - En 7 Étapes</h1>
+<div class="intro-text">
+<p>
+      Bienvenue dans ce guide complet d'installation d'<strong>IPTV Smarters Pro</strong> sur votre Fire TV ou autre appareil compatible. 
+      Suivez les 7 étapes ci-dessous pour configurer facilement votre abonnement et profiter d'un streaming premium avec plus de 22 000 
+      chaînes, films et séries en haute définition.
+    </p>
+</div>
+
+<!-- Nouvelle section pour la vidéo YouTube -->
+<div class="video-tutorial">
+    <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/lpiRwbYmrzg?start=77" title="Tutoriel d'installation IPTV Smarters Pro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    </div>
+    <div class="video-description">
+        <h3>Tutoriel vidéo explicatif</h3>
+        <p>Regardez notre tutoriel vidéo détaillé pour une démonstration complète de l'installation et de la configuration d'IPTV Smarters Pro.</p>
+    </div>
+</div>
 
 <div class="guide-steps">
 <!-- Étape 1 -->
@@ -678,7 +794,7 @@
 </div>
 
 <div class="action-button">
-<a class="btn" href="offer.html">Découvrir nos offres</a>
+<a class="btn" href="index.html">Retour à l'accueil</a>
 </div>
 </div>
 
