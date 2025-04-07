@@ -1,27 +1,59 @@
-# Règles pour tous les robots
+# Configuration optimisée pour l'indexation Google
 User-agent: *
 Allow: /
 
-# Pages à ne pas indexer
+# Pages privées et administratives (ne pas indexer)
 Disallow: /admin/
-Disallow: /checkout/
-Disallow: /payment-processing/
-Disallow: /confirmation-*
+Disallow: /admin-*
+Disallow: /admin-login.html
+Disallow: /admin-dashboard.html
+Disallow: /espace-client-login.html
+Disallow: /login.html
+Disallow: /inscription.html
+Disallow: /payment.html
+Disallow: /success.html
+Disallow: /cancel.html
+Disallow: /confirmation.html
+
+# Fichiers système et ressources (ne pas indexer)
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /images/
+Disallow: /favicon.ico
+Disallow: /favicon.svg
+Disallow: /browserconfig.xml
+Disallow: /site.webmanifest
+
+# Paramètres de tracking et UTM (ne pas indexer)
 Disallow: /*?ref=*
 Disallow: /*?utm_*
 Disallow: /*?fbclid=*
-Disallow: /payment/
-Disallow: /confirmation/
-Disallow: /espace-client/
 
-# Bloquer les robots indésirables
+# Paramètres spécifiques pour Googlebot
+User-agent: Googlebot
+Allow: /*.js$
+Allow: /*.css$
+Allow: /images/
+Crawl-delay: 1
+
+# Paramètres spécifiques pour Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+Crawl-delay: 1
+
+# Blocage des robots indésirables
 User-agent: MJ12bot
 Disallow: /
 
-User-agent: SemrushBot
+User-agent: AhrefsBot
 Disallow: /
 
-User-agent: AhrefsBot
+User-agent: SemrushBot
 Disallow: /
 
 User-agent: PetalBot
@@ -30,12 +62,5 @@ Disallow: /
 User-agent: YandexBot
 Disallow: /
 
-# Délai d'exploration
-Crawl-delay: 2
-
-# Sitemap
-Sitemap: https://iptvsmarterpros.com/sitemap.xml
-
-# Empêcher l'indexation des pages de test
-Disallow: /test/
-Disallow: /private/
+# Lien vers le sitemap
+Sitemap: https://iptvsmarterpros.com/sitemap.xml 
