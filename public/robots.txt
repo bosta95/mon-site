@@ -1,9 +1,8 @@
 # Règles pour tous les robots
 User-agent: *
-# Autoriser l'indexation de tout le site par défaut
 Allow: /
 
-# Pages d'administration ou de paiement à ne pas indexer
+# Pages à ne pas indexer
 Disallow: /admin/
 Disallow: /checkout/
 Disallow: /payment-processing/
@@ -11,15 +10,11 @@ Disallow: /confirmation-*
 Disallow: /*?ref=*
 Disallow: /*?utm_*
 Disallow: /*?fbclid=*
+Disallow: /payment/
+Disallow: /confirmation/
+Disallow: /espace-client/
 
-# Autoriser spécifiquement ces répertoires importants
-Allow: /images/
-Allow: /styles.css
-Allow: /blog/
-Allow: /tutoriel.html
-Allow: /offer.html
-
-# Bloquer les robots indésirables et scraper connus
+# Bloquer les robots indésirables
 User-agent: MJ12bot
 Disallow: /
 
@@ -35,8 +30,12 @@ Disallow: /
 User-agent: YandexBot
 Disallow: /
 
-# Délai d'exploration pour éviter une surcharge du serveur
-Crawl-delay: 5
+# Délai d'exploration
+Crawl-delay: 2
 
-# Sitemap pour une meilleure indexation
-Sitemap: https://www.iptvsmarterpros.com/sitemap.xml
+# Sitemap
+Sitemap: https://iptvsmarterpros.com/sitemap.xml
+
+# Empêcher l'indexation des pages de test
+Disallow: /test/
+Disallow: /private/
