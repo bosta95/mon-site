@@ -672,7 +672,7 @@
         
         .offers-grid {
           display: grid;
-          grid-template-columns: repeat(6, 1fr);
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           gap: 25px;
           max-width: 1400px;
           margin: 0 auto;
@@ -824,9 +824,41 @@
           transform: translateY(-10px) scale(1.05);
         }
         
-        @media (max-width: 1200px) {
+        /* Style pour la carte personnalisée */
+        .offer-card.custom {
+          background: linear-gradient(135deg, rgba(108, 84, 152, 0.4), rgba(255, 107, 107, 0.4));
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .offer-card.custom h3 {
+          color: #fff;
+        }
+        
+        .offer-card.custom h3::after {
+          background: #fff;
+        }
+        
+        .offer-card.custom .price {
+          font-size: 1.8rem;
+          color: #fff;
+        }
+        
+        .offer-card.custom .benefits li::before {
+          color: #fff;
+        }
+        
+        .offer-card.custom .btn {
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid #fff;
+        }
+        
+        .offer-card.custom .btn:before {
+          background: rgba(255, 255, 255, 0.3);
+        }
+        
+        @media (max-width: 1400px) {
           .offers-grid {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
           }
           
@@ -834,6 +866,13 @@
             width: 100%;
             min-width: auto;
             max-width: 100%;
+          }
+        }
+        
+        @media (max-width: 1100px) {
+          .offers-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
           }
         }
         
@@ -866,7 +905,7 @@
 
         @media (max-width: 576px) {
           .offers-grid {
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: 1fr;
             max-width: 280px;
           }
         }
@@ -878,45 +917,45 @@
           <h3>Essentiel - 3 mois</h3>
           <p class="price">9.99€</p>
           <ul class="benefits">
-            <li>+22 000 Chaînes TV HD</li>
-            <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/FHD/HD/SD</li>
-            <li>Chaînes adultes HD</li>
+            <li>+18 000 Chaînes TV HD</li>
+            <li>+30 000 Films & Séries VOD</li>
+            <li>Qualité HD garantie</li>
+            <li>+18 basiques</li>
             <li>Compatible tous appareils</li>
-            <li>Mises à jour hebdomadaires</li>
-            <li>Support technique 24/7</li>
+            <li>Mises à jour mensuelles</li>
+            <li>Support technique par email</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+3+mois&price=9.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Essentiel+IPTV+3+mois&price=9.99">Commander</a>
         </div>
         
-        <!-- Offre 2 - 6 mois (populaire) -->
-        <div class="offer-card popular">
+        <!-- Offre 2 - 6 mois -->
+        <div class="offer-card">
           <h3>Standard - 6 mois</h3>
           <p class="price">19.99€</p>
           <ul class="benefits">
-            <li>+22 000 Chaînes TV HD</li>
-            <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/FHD/HD/SD</li>
-            <li>Chaînes adultes HD</li>
+            <li>+20 000 Chaînes TV HD</li>
+            <li>+40 000 Films & Séries VOD</li>
+            <li>Qualité FHD/HD garantie</li>
+            <li>+18 HD</li>
             <li>Compatible tous appareils</li>
-            <li>Mises à jour hebdomadaires</li>
+            <li>Mises à jour bi-mensuelles</li>
             <li>Support technique 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+6+mois&price=19.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Standard+IPTV+6+mois&price=19.99">Commander</a>
         </div>
         
-        <!-- Offre 3 - 12 mois -->
-        <div class="offer-card">
+        <!-- Offre 3 - 12 mois (populaire) -->
+        <div class="offer-card popular">
           <h3>Premium - 12 mois</h3>
           <p class="price">29.99€</p>
           <ul class="benefits">
             <li>+22 000 Chaînes TV HD</li>
             <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/FHD/HD/SD</li>
-            <li>Chaînes adultes HD</li>
+            <li>Qualité 4K/FHD/HD garantie</li>
+            <li>+18 HD complètes</li>
             <li>Compatible tous appareils</li>
             <li>Mises à jour hebdomadaires</li>
-            <li>Support technique 24/7</li>
+            <li>Support technique prioritaire</li>
           </ul>
           <a class="btn" href="offer-details.html?product=Premium+IPTV+12+mois&price=29.99">Commander</a>
         </div>
@@ -929,12 +968,12 @@
             <li>+22 000 Chaînes TV HD</li>
             <li>+50 000 Films & Séries VOD</li>
             <li>Qualité 4K/UHD garantie</li>
-            <li>Chaînes adultes HD</li>
+            <li>+18 HD (contrôle)</li>
             <li>Compatible tous appareils</li>
             <li>2 écrans simultanés</li>
             <li>Support prioritaire 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+2+écrans&price=59.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Famille+IPTV+2+écrans&price=59.99">Commander</a>
         </div>
         
         <!-- Offre multi-écrans - Niveau 2 -->
@@ -942,15 +981,15 @@
           <h3>Pro - 3 écrans</h3>
           <p class="price">79.99€</p>
           <ul class="benefits">
-            <li>+22 000 Chaînes TV HD</li>
+            <li>+22 000 Chaînes TV HD/4K</li>
             <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/UHD garantie</li>
-            <li>Chaînes adultes HD</li>
+            <li>Qualité 4K/UHD Premium</li>
+            <li>+18 HD complètes</li>
             <li>Compatible tous appareils</li>
             <li>3 écrans simultanés</li>
             <li>Support VIP 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+3+écrans&price=79.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Pro+IPTV+3+écrans&price=79.99">Commander</a>
         </div>
         
         <!-- Offre multi-écrans - Niveau 3 -->
@@ -958,17 +997,150 @@
           <h3>Elite - 4 écrans</h3>
           <p class="price">99.99€</p>
           <ul class="benefits">
-            <li>+22 000 Chaînes TV HD</li>
+            <li>+22 000 Chaînes TV HD/4K</li>
             <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/UHD garantie</li>
-            <li>Chaînes adultes HD</li>
+            <li>Qualité 4K/UHD Ultra-Premium</li>
+            <li>+18 HD complètes</li>
             <li>Compatible tous appareils</li>
             <li>4 écrans simultanés</li>
             <li>Support VIP dédié 24/7</li>
           </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+4+écrans&price=99.99">Commander</a>
+          <a class="btn" href="offer-details.html?product=Elite+IPTV+4+écrans&price=99.99">Commander</a>
+        </div>
+
+        <!-- Pack Concours -->
+        <div class="offer-card contest">
+          <div class="contest-ribbon">CONCOURS</div>
+          <h3>Gagnez 12 Mois GRATUITS</h3>
+          <p class="price">Tirage le 15 du mois</p>
+          <ul class="benefits contest-benefits">
+            <li>Abonnement Premium 12 mois offert</li>
+            <li>1 gagnant chaque mois</li>
+            <li>S'abonner à notre chaîne YouTube</li>
+            <li>Suivre notre compte TikTok</li>
+            <li>Commenter "Je participe"</li>
+            <li>Partager la publication</li>
+          </ul>
+          <div class="social-buttons">
+            <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-btn youtube">
+              <i class="fab fa-youtube"></i> S'abonner
+            </a>
+            <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn tiktok">
+              <i class="fab fa-tiktok"></i> Suivre
+            </a>
+          </div>
+          <a href="concours.html" class="contest-rules">Voir les règles du concours</a>
+        </div>
+        
+        <!-- Offre personnalisable -->
+        <div class="offer-card custom">
+          <h3>Pack Personnalisé</h3>
+          <p class="price">Sur devis</p>
+          <ul class="benefits">
+            <li>Sélection de chaînes sur mesure</li>
+            <li>Catalogue VOD personnalisable</li>
+            <li>Qualité vidéo à la demande</li>
+            <li>Options +18 configurables</li>
+            <li>Nb d'écrans selon besoin</li>
+            <li>Mises à jour à votre rythme</li>
+            <li>Support dédié personnalisé</li>
+          </ul>
+          <a class="btn" href="contact.html?subject=Pack+Personnalisé">Contactez-nous</a>
         </div>
       </div>
+
+      <style>
+        /* Style pour la carte concours */
+        .offer-card.contest {
+          background: linear-gradient(135deg, rgba(255, 0, 128, 0.3), rgba(91, 0, 220, 0.3));
+          border: 2px solid rgba(255, 255, 255, 0.4);
+          position: relative;
+          overflow: hidden;
+          transform: scale(1.05);
+        }
+        
+        .contest-ribbon {
+          position: absolute;
+          top: 0;
+          right: 0;
+          background: linear-gradient(135deg, #ff0080, #5b00dc);
+          color: white;
+          padding: 7px 15px;
+          font-size: 0.8rem;
+          font-weight: bold;
+          transform: rotate(45deg) translateX(25%) translateY(-60%);
+          width: 150px;
+          text-align: center;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          letter-spacing: 1px;
+        }
+        
+        .offer-card.contest h3 {
+          margin-top: 5px;
+          color: #fff;
+          font-size: 1.4rem;
+        }
+        
+        .offer-card.contest h3::after {
+          background: white;
+        }
+        
+        .offer-card.contest .price {
+          color: #fff;
+          font-size: 1.5rem;
+        }
+        
+        .contest-benefits li {
+          font-weight: 500;
+        }
+        
+        .contest-benefits li::before {
+          color: white;
+        }
+        
+        .social-buttons {
+          display: flex;
+          gap: 10px;
+          margin-top: 15px;
+        }
+        
+        .social-btn {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 8px 0;
+          border-radius: 5px;
+          color: white;
+          font-weight: bold;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          font-size: 0.9rem;
+        }
+        
+        .social-btn i {
+          margin-right: 5px;
+          font-size: 1.1rem;
+        }
+        
+        .social-btn.youtube {
+          background: #FF0000;
+        }
+        
+        .social-btn.tiktok {
+          background: #000000;
+        }
+        
+        .social-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .offer-card.contest:hover {
+          transform: translateY(-10px) scale(1.05);
+          box-shadow: 0 15px 30px rgba(255, 0, 128, 0.3);
+        }
+      </style>
     </div>
   </section>
   

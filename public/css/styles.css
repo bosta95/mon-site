@@ -1,0 +1,105 @@
+.contest-rules {
+  display: inline-block;
+  margin-top: 15px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+}
+
+.contest-rules:hover {
+  color: #ff0080;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.offer-card.contest {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.3), rgba(91, 0, 220, 0.3));
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  transform: scale(1.05);
+}
+
+.contest-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #ff0080, #5b00dc);
+  color: white;
+  padding: 7px 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  transform: rotate(45deg) translateX(25%) translateY(-60%);
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  letter-spacing: 1px;
+}
+
+.offer-card.contest h3 {
+  margin-top: 5px;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.offer-card.contest h3::after {
+  background: white;
+}
+
+.offer-card.contest .price {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.contest-benefits li {
+  font-weight: 500;
+}
+
+.contest-benefits li::before {
+  color: white;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.social-btn i {
+  margin-right: 5px;
+  font-size: 1.1rem;
+}
+
+.social-btn.youtube {
+  background: #FF0000;
+}
+
+.social-btn.tiktok {
+  background: #000000;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.offer-card.contest:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(255, 0, 128, 0.3);
+} 
