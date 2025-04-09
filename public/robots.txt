@@ -15,15 +15,6 @@ Disallow: /success.html
 Disallow: /cancel.html
 Disallow: /confirmation.html
 
-# Fichiers système et ressources (ne pas indexer)
-Disallow: /*.js$
-Disallow: /*.css$
-Disallow: /images/
-Disallow: /favicon.ico
-Disallow: /favicon.svg
-Disallow: /browserconfig.xml
-Disallow: /site.webmanifest
-
 # Paramètres de tracking et UTM (ne pas indexer)
 Disallow: /*?ref=*
 Disallow: /*?utm_*
@@ -31,6 +22,7 @@ Disallow: /*?fbclid=*
 
 # Paramètres spécifiques pour Googlebot
 User-agent: Googlebot
+Allow: /
 Allow: /*.js$
 Allow: /*.css$
 Allow: /images/
@@ -38,12 +30,20 @@ Crawl-delay: 1
 
 # Paramètres spécifiques pour Googlebot-Image
 User-agent: Googlebot-Image
+Allow: /
 Allow: /images/
 Allow: /*.jpg$
 Allow: /*.jpeg$
 Allow: /*.png$
 Allow: /*.webp$
 Allow: /*.svg$
+Crawl-delay: 1
+
+# Autres robots majeurs
+User-agent: bingbot
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
 Crawl-delay: 1
 
 # Blocage des robots indésirables
@@ -63,4 +63,4 @@ User-agent: YandexBot
 Disallow: /
 
 # Lien vers le sitemap
-Sitemap: https://iptvsmarterpros.com/sitemap.xml 
+Sitemap: https://iptvsmarterpros.com/sitemap.xml

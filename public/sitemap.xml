@@ -36,23 +36,23 @@
         </image:image>
     </url>
 
-    <!-- Abonnements durée -->
+    <!-- Note: Pages d'offre avec paramètres - Assurez-vous que ces URLs ne sont pas bloquées par robots.txt -->
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium+IPTV+3+mois&amp;price=9.99</loc>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_mois&amp;price=9.99</loc>
         <lastmod>2024-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium+IPTV+6+mois&amp;price=19.99</loc>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_6_mois&amp;price=19.99</loc>
         <lastmod>2024-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium+IPTV+12+mois&amp;price=29.99</loc>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_12_mois&amp;price=29.99</loc>
         <lastmod>2024-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -60,21 +60,21 @@
 
     <!-- Abonnements multi-écrans -->
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium+IPTV+2+écrans&amp;price=59.99</loc>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_2_ecrans&amp;price=59.99</loc>
         <lastmod>2024-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium+IPTV+3+écrans&amp;price=79.99</loc>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_ecrans&amp;price=79.99</loc>
         <lastmod>2024-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium+IPTV+4+écrans&amp;price=99.99</loc>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_4_ecrans&amp;price=99.99</loc>
         <lastmod>2024-04-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -101,6 +101,7 @@
         <priority>0.7</priority>
     </url>
     
+    <!-- Articles de blog - Ajoutez ou supprimez selon ce qui existe réellement -->
     <url>
         <loc>https://iptvsmarterpros.com/blog/tendances-streaming-2025.html</loc>
         <lastmod>2024-04-07</lastmod>
