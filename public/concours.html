@@ -1050,115 +1050,156 @@
         // Configuration pour le partage
         const CONTEST_TITLE = "Concours IPTV Smarter Pro";
         const CONTEST_TEXT = "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours";
-        const CONTEST_URL = window.location.origin + "/concours.html";
         
-        // Créer un canvas caché avec l'image du flyer
-        const flyerImage = new Image();
-        flyerImage.crossOrigin = "Anonymous";
-        flyerImage.src = "/images/concours-flyer.png"; // Assurez-vous que cette image existe
-        
+        // Fonction simplifiée pour partager directement l'image
         function shareFlyer(platform) {
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.style.display = 'flex';
             
-            // Utiliser une image préexistante ou générer dynamiquement le flyer
-            if (flyerImage.complete) {
-                processShare(platform);
-            } else {
-                flyerImage.onload = function() {
-                    processShare(platform);
-                };
+            // Télécharger directement l'image selon la plateforme
+            setTimeout(() => {
+                const imagePath = '/images/concours-flyer.png';
                 
-                flyerImage.onerror = function() {
-                    // Fallback: ouvrir la page du flyer
-                    loadingOverlay.style.display = 'none';
-                    window.open('/concours-flyer.html', '_blank');
-                    closeShareModal();
-                };
-            }
+                // Créer un lien de téléchargement
+                const downloadLink = document.createElement('a');
+                downloadLink.href = window.location.origin + imagePath;
+                
+                switch(platform) {
+                    case 'facebook':
+                        downloadLink.download = 'concours-facebook.png';
+                        downloadLink.click();
+                        showInstructions(
+                            "Image téléchargée pour Facebook", 
+                            "1. Ouvrez Facebook et créez un nouveau post",
+                            "2. Cliquez sur 'Ajouter photo/vidéo' et sélectionnez l'image téléchargée",
+                            "3. Ajoutez le texte: " + CONTEST_TEXT
+                        );
+                        break;
+                    case 'twitter':
+                        downloadLink.download = 'concours-twitter.png';
+                        downloadLink.click();
+                        showInstructions(
+                            "Image téléchargée pour Twitter", 
+                            "1. Ouvrez Twitter et créez un nouveau tweet",
+                            "2. Cliquez sur l'icône d'image et sélectionnez l'image téléchargée",
+                            "3. Ajoutez le texte: " + CONTEST_TEXT
+                        );
+                        break;
+                    case 'whatsapp':
+                        downloadLink.download = 'concours-whatsapp.png';
+                        downloadLink.click();
+                        showInstructions(
+                            "Image téléchargée pour WhatsApp", 
+                            "1. Ouvrez WhatsApp et sélectionnez un contact ou un groupe",
+                            "2. Cliquez sur l'icône de pièce jointe et sélectionnez l'image téléchargée",
+                            "3. Ajoutez le texte: " + CONTEST_TEXT
+                        );
+                        break;
+                    case 'instagram':
+                        downloadLink.download = 'concours-instagram.png';
+                        downloadLink.click();
+                        showInstructions(
+                            "Image téléchargée pour Instagram", 
+                            "1. Ouvrez Instagram et créez un nouveau post",
+                            "2. Sélectionnez l'image téléchargée dans votre galerie",
+                            "3. Ajoutez le texte: " + CONTEST_TEXT
+                        );
+                        copyTextToClipboard(CONTEST_TEXT);
+                        break;
+                    case 'tiktok':
+                        downloadLink.download = 'concours-tiktok.png';
+                        downloadLink.click();
+                        showInstructions(
+                            "Image téléchargée pour TikTok", 
+                            "1. Ouvrez TikTok et créez un nouveau post",
+                            "2. Sélectionnez l'image téléchargée dans votre galerie",
+                            "3. Ajoutez le texte: " + CONTEST_TEXT
+                        );
+                        copyTextToClipboard(CONTEST_TEXT);
+                        break;
+                    case 'youtube':
+                        downloadLink.download = 'concours-youtube.png';
+                        downloadLink.click();
+                        showInstructions(
+                            "Image téléchargée pour YouTube", 
+                            "1. Ouvrez YouTube et créez un post communautaire",
+                            "2. Sélectionnez l'image téléchargée",
+                            "3. Ajoutez le texte: " + CONTEST_TEXT
+                        );
+                        break;
+                }
+                
+                loadingOverlay.style.display = 'none';
+                closeShareModal();
+            }, 500);
         }
         
-        function processShare(platform) {
-            const loadingOverlay = document.getElementById('loadingOverlay');
+        function showInstructions(title, ...instructions) {
+            // Créer une modal avec les instructions
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '3000';
             
-            // Créer un canvas temporaire
-            const canvas = document.createElement('canvas');
-            canvas.width = flyerImage.width;
-            canvas.height = flyerImage.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(flyerImage, 0, 0);
+            // Créer le contenu de la modal
+            const modalContent = document.createElement('div');
+            modalContent.style.backgroundColor = '#222';
+            modalContent.style.maxWidth = '500px';
+            modalContent.style.width = '90%';
+            modalContent.style.padding = '30px';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
             
-            // Convertir en image
-            const image = canvas.toDataURL('image/png', 1.0);
+            // Titre
+            const modalTitle = document.createElement('h3');
+            modalTitle.textContent = title;
+            modalTitle.style.color = '#fff';
+            modalTitle.style.marginBottom = '20px';
+            modalTitle.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+            modalTitle.style.paddingBottom = '10px';
+            modalContent.appendChild(modalTitle);
             
-            // Partager selon la plateforme
-            switch(platform) {
-                case 'facebook':
-                    downloadImageWithInstructions(
-                        image, 
-                        'concours-facebook.png', 
-                        "Image téléchargée! Pour partager sur Facebook:",
-                        "1. Allez sur Facebook et créez un nouveau post",
-                        "2. Cliquez sur 'Ajouter photo/vidéo' et sélectionnez l'image téléchargée",
-                        "3. Ajoutez le texte: " + CONTEST_TEXT
-                    );
-                    break;
-                case 'twitter':
-                    downloadImageWithInstructions(
-                        image, 
-                        'concours-twitter.png', 
-                        "Image téléchargée! Pour partager sur Twitter:",
-                        "1. Allez sur Twitter et créez un nouveau tweet",
-                        "2. Cliquez sur l'icône d'image et sélectionnez le fichier téléchargé",
-                        "3. Ajoutez le texte: " + CONTEST_TEXT
-                    );
-                    break;
-                case 'whatsapp':
-                    downloadImageWithInstructions(
-                        image, 
-                        'concours-whatsapp.png', 
-                        "Image téléchargée! Pour partager sur WhatsApp:",
-                        "1. Ouvrez WhatsApp et sélectionnez un contact ou un groupe",
-                        "2. Cliquez sur l'icône de pièce jointe et sélectionnez l'image téléchargée",
-                        "3. Ajoutez le texte: " + CONTEST_TEXT
-                    );
-                    break;
-                case 'instagram':
-                    downloadImageWithInstructions(
-                        image,
-                        'concours-instagram.png',
-                        "Image téléchargée! Pour partager sur Instagram:",
-                        "1. Ouvrez Instagram et créez un nouveau post",
-                        "2. Sélectionnez l'image téléchargée",
-                        "3. Le texte du concours a été copié dans votre presse-papiers"
-                    );
-                    copyTextToClipboard(CONTEST_TEXT);
-                    break;
-                case 'tiktok':
-                    downloadImageWithInstructions(
-                        image,
-                        'concours-tiktok.png',
-                        "Image téléchargée! Pour partager sur TikTok:",
-                        "1. Ouvrez TikTok et créez un nouveau post",
-                        "2. Sélectionnez l'image téléchargée dans votre galerie",
-                        "3. Le texte du concours a été copié dans votre presse-papiers"
-                    );
-                    copyTextToClipboard(CONTEST_TEXT + '\n\n' + CONTEST_URL);
-                    break;
-                case 'youtube':
-                    downloadImageWithInstructions(
-                        image,
-                        'concours-youtube.png',
-                        "Image téléchargée! Pour partager sur YouTube:",
-                        "1. Allez sur votre chaîne YouTube et créez un post communautaire",
-                        "2. Sélectionnez l'image téléchargée",
-                        "3. Ajoutez le texte: " + CONTEST_TEXT
-                    );
-                    break;
-            }
+            // Instructions
+            const modalInstructions = document.createElement('ul');
+            modalInstructions.style.color = '#fff';
+            modalInstructions.style.paddingLeft = '20px';
             
-            loadingOverlay.style.display = 'none';
-            closeShareModal();
+            instructions.forEach(instruction => {
+                const li = document.createElement('li');
+                li.textContent = instruction;
+                li.style.marginBottom = '10px';
+                modalInstructions.appendChild(li);
+            });
+            
+            modalContent.appendChild(modalInstructions);
+            
+            // Bouton pour fermer la modal
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = "J'ai compris";
+            closeBtn.style.backgroundColor = '#ff0080';
+            closeBtn.style.color = '#fff';
+            closeBtn.style.border = 'none';
+            closeBtn.style.padding = '10px 20px';
+            closeBtn.style.borderRadius = '5px';
+            closeBtn.style.marginTop = '20px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.width = '100%';
+            closeBtn.style.fontWeight = 'bold';
+            
+            closeBtn.addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+            
+            modalContent.appendChild(closeBtn);
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
         }
         
         function copyTextToClipboard(text) {
@@ -1168,83 +1209,6 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-        }
-        
-        function downloadImageWithInstructions(dataUrl, fileName, title, ...instructions) {
-            // Télécharger l'image
-            const link = document.createElement('a');
-            link.download = fileName;
-            link.href = dataUrl;
-            link.click();
-            
-            // Créer une modal avec les instructions
-            setTimeout(() => {
-                // Créer la modal
-                const modal = document.createElement('div');
-                modal.style.position = 'fixed';
-                modal.style.top = '0';
-                modal.style.left = '0';
-                modal.style.width = '100%';
-                modal.style.height = '100%';
-                modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-                modal.style.display = 'flex';
-                modal.style.justifyContent = 'center';
-                modal.style.alignItems = 'center';
-                modal.style.zIndex = '3000';
-                
-                // Créer le contenu de la modal
-                const modalContent = document.createElement('div');
-                modalContent.style.backgroundColor = '#222';
-                modalContent.style.maxWidth = '500px';
-                modalContent.style.width = '90%';
-                modalContent.style.padding = '30px';
-                modalContent.style.borderRadius = '15px';
-                modalContent.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
-                
-                // Titre
-                const modalTitle = document.createElement('h3');
-                modalTitle.textContent = title;
-                modalTitle.style.color = '#fff';
-                modalTitle.style.marginBottom = '20px';
-                modalTitle.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
-                modalTitle.style.paddingBottom = '10px';
-                modalContent.appendChild(modalTitle);
-                
-                // Instructions
-                const modalInstructions = document.createElement('ul');
-                modalInstructions.style.color = '#fff';
-                modalInstructions.style.paddingLeft = '20px';
-                
-                instructions.forEach(instruction => {
-                    const li = document.createElement('li');
-                    li.textContent = instruction;
-                    li.style.marginBottom = '10px';
-                    modalInstructions.appendChild(li);
-                });
-                
-                modalContent.appendChild(modalInstructions);
-                
-                // Bouton pour fermer la modal
-                const closeBtn = document.createElement('button');
-                closeBtn.textContent = "J'ai compris";
-                closeBtn.style.backgroundColor = '#ff0080';
-                closeBtn.style.color = '#fff';
-                closeBtn.style.border = 'none';
-                closeBtn.style.padding = '10px 20px';
-                closeBtn.style.borderRadius = '5px';
-                closeBtn.style.marginTop = '20px';
-                closeBtn.style.cursor = 'pointer';
-                closeBtn.style.width = '100%';
-                closeBtn.style.fontWeight = 'bold';
-                
-                closeBtn.addEventListener('click', () => {
-                    document.body.removeChild(modal);
-                });
-                
-                modalContent.appendChild(closeBtn);
-                modal.appendChild(modalContent);
-                document.body.appendChild(modal);
-            }, 500);
         }
     </script>
 
