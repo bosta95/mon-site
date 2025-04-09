@@ -669,6 +669,88 @@
                 text-align: center;
             }
         }
+
+        /* Styles pour le modal du flyer */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #f9f9f9;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .flyer-modal {
+            max-width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        .flyer-container {
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .share-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .share-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #1da1f2; }
+        .whatsapp { background-color: #25d366; }
+        .instagram { background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); }
+        .tiktok { background: linear-gradient(45deg, #000000, #25F4EE, #FE2C55); }
+        .youtube { background-color: #ff0000; }
     </style>
 </head>
 <body>
@@ -868,11 +950,40 @@
                     <img src="images/payment-methods.png" alt="Moyens de paiement acceptés" width="200">
                 </div>
             </div>
+            <div class="footer-links">
+                <h4>Liens rapides</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="pricing.html">Tarifs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="concours.html">Concours</a></li>
+                    <li><a href="#" id="showFlyerBtn">Voir/Partager le flyer</a></li>
+                </ul>
+            </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2024 IPTV Smarter Pros. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <!-- Modal pour afficher le flyer -->
+    <div id="flyerModal" class="modal">
+        <div class="modal-content flyer-modal">
+            <span class="close">&times;</span>
+            <h2>Flyer du concours</h2>
+            <div class="flyer-container">
+                <iframe src="concours-flyer.html" frameborder="0" width="100%" height="600px"></iframe>
+            </div>
+            <div class="share-options">
+                <button class="share-btn facebook" onclick="shareFlyer('facebook')">Facebook</button>
+                <button class="share-btn twitter" onclick="shareFlyer('twitter')">Twitter</button>
+                <button class="share-btn whatsapp" onclick="shareFlyer('whatsapp')">WhatsApp</button>
+                <button class="share-btn instagram" onclick="shareFlyer('instagram')">Instagram</button>
+                <button class="share-btn tiktok" onclick="shareFlyer('tiktok')">TikTok</button>
+                <button class="share-btn youtube" onclick="shareFlyer('youtube')">YouTube</button>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript pour le menu mobile -->
     <script>
@@ -1135,6 +1246,92 @@
                 document.body.appendChild(modal);
             }, 500);
         }
+    </script>
+
+    <!-- JavaScript pour le modal du flyer -->
+    <script>
+        // Créer image de prévisualisation pour le partage si elle n'existe pas déjà
+        document.addEventListener('DOMContentLoaded', function() {
+            const img = new Image();
+            img.src = window.location.origin + '/images/concours-flyer.png';
+            img.onerror = function() {
+                // L'image n'existe pas, créer une balise meta pour le partage
+                const metaOg = document.createElement('meta');
+                metaOg.setAttribute('property', 'og:image');
+                metaOg.setAttribute('content', window.location.origin + '/concours-flyer.html');
+                document.head.appendChild(metaOg);
+                
+                const metaTwitter = document.createElement('meta');
+                metaTwitter.setAttribute('name', 'twitter:image');
+                metaTwitter.setAttribute('content', window.location.origin + '/concours-flyer.html');
+                document.head.appendChild(metaTwitter);
+            };
+        });
+
+        // Fonction pour afficher le modal du flyer
+        document.getElementById('showFlyerBtn').onclick = function() {
+            document.getElementById('flyerModal').style.display = 'block';
+        };
+
+        // Fonction pour fermer le modal
+        document.querySelectorAll('.close').forEach(function(close) {
+            close.onclick = function() {
+                document.getElementById('flyerModal').style.display = 'none';
+            };
+        });
+
+        // Fermer le modal si on clique en dehors
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        };
+
+        // Fonction pour partager le flyer
+        function shareFlyer(platform) {
+            // URL du flyer et de l'image
+            const flyerUrl = window.location.origin + '/concours-flyer.html';
+            const imageUrl = window.location.origin + '/images/concours-flyer.png';
+            
+            // Titre et description pour le partage
+            const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
+            const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
+            
+            // Créer l'URL de partage selon la plateforme
+            let shareUrl;
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(flyerUrl)}&picture=${encodeURIComponent(imageUrl)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(flyerUrl)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + flyerUrl)}`;
+                    break;
+                case 'instagram':
+                case 'tiktok':
+                    alert(`Pour partager sur ${platform === 'instagram' ? 'Instagram' : 'TikTok'}, ouvrez l'application et créez un nouveau post avec le lien: ${flyerUrl}`);
+                    navigator.clipboard.writeText(flyerUrl);
+                    return;
+                case 'youtube':
+                    alert(`Pour partager sur YouTube, créez une nouvelle vidéo ou un post communautaire avec le lien: ${flyerUrl}`);
+                    navigator.clipboard.writeText(flyerUrl);
+                    return;
+                default:
+                    shareUrl = flyerUrl;
+            }
+            
+            // Ouvrir dans une nouvelle fenêtre
+            window.open(shareUrl, '_blank');
+        }
+
+        // Modifier le bouton de partage existant pour ouvrir le modal du flyer
+        document.querySelector('.flyer-button').onclick = function(e) {
+            e.preventDefault();
+            document.getElementById('flyerModal').style.display = 'block';
+        };
     </script>
 </body>
 </html> 
