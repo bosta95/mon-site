@@ -375,7 +375,14 @@
             100% { transform: rotate(360deg); }
         }
         
+        /* Ajustements pour mobile */
         @media (max-width: 768px) {
+            .flyer-container {
+                width: 100% !important;
+                aspect-ratio: 9 / 16;
+                margin: 0 auto;
+            }
+            
             .main-title {
                 font-size: 2rem !important;
                 padding: 15px !important;
@@ -417,11 +424,18 @@
         
         @media (max-width: 480px) {
             body {
-                padding: 10px;
+                padding: 0;
+            }
+            
+            .flyer-container {
+                border-radius: 0;
+                min-height: 100vh;
+                width: 100% !important;
             }
             
             .flyer-content {
                 padding: 15px;
+                justify-content: space-between;
             }
             
             .main-title {
@@ -534,7 +548,6 @@
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <script>
         // Sélection des éléments
         const flyerContainer = document.querySelector('.flyer-container');
@@ -547,10 +560,18 @@
         const CONTEST_TEXT = "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours";
         const CONTEST_URL = window.location.href;
         
-        // Format par défaut (9:16 pour Stories)
-        flyerContainer.style.width = '1080px';
-        flyerContainer.style.height = 'auto';
-        flyerContainer.style.aspectRatio = '9 / 16';
+        // S'assurer que le container s'adapte à l'écran mobile
+        function adjustContainerSize() {
+            if (window.innerWidth <= 480) {
+                document.body.style.height = '100vh';
+                flyerContainer.style.minHeight = '100vh';
+                flyerContainer.style.width = '100%';
+            }
+        }
+        
+        // Appliquer les ajustements au chargement et lors du redimensionnement
+        window.addEventListener('load', adjustContainerSize);
+        window.addEventListener('resize', adjustContainerSize);
         
         // Ouvrir/fermer le menu de partage
         shareButton.addEventListener('click', function() {
@@ -580,7 +601,9 @@
                 logging: false,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: null
+                backgroundColor: null,
+                windowWidth: 1080,
+                windowHeight: 1920
             }).then(canvas => {
                 const image = canvas.toDataURL('image/png', 1.0);
                 const link = document.createElement('a');
