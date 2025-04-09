@@ -1034,7 +1034,7 @@
                 navigator.share({
                     title: "Concours IPTV Smarter Pro",
                     text: "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours",
-                    url: "https://iptvsmarterpro.com/index.html"
+                    url: "https://iptvsmarterpros.com/index.html"
                 }).then(() => {
                     console.log('Partage réussi!');
                 }).catch((error) => {
@@ -1066,7 +1066,7 @@
             loadingOverlay.style.display = 'flex';
             
             // URL du site principal avec le domaine correct
-            const siteUrl = "https://iptvsmarterpro.com/index.html";
+            const siteUrl = "https://iptvsmarterpros.com/index.html";
             // Titre et description pour le partage
             const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
             const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
@@ -1173,12 +1173,22 @@
 
         // Fonction pour partager le flyer
         function shareFlyer(platform) {
-            // Vérifier si l'API Web Share est disponible
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'flex';
+            
+            // URL du site principal avec le domaine correct
+            const siteUrl = "https://iptvsmarterpros.com/index.html";
+            // Titre et description pour le partage
+            const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
+            const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
+            
+            // Si c'est un appareil mobile qui supporte le partage natif, utiliser cette option pour tout partage
             if (navigator.share && platform === 'native') {
+                loadingOverlay.style.display = 'none';
                 navigator.share({
-                    title: "CONCOURS IPTV Smarter Pro",
-                    text: "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois!",
-                    url: "https://iptvsmarterpro.com/concours.html"
+                    title: title,
+                    text: description,
+                    url: siteUrl
                 }).then(() => {
                     console.log('Partage réussi!');
                 }).catch((error) => {
@@ -1201,7 +1211,7 @@
                 navigator.share({
                     title: "CONCOURS IPTV Smarter Pro",
                     text: "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!",
-                    url: "https://iptvsmarterpro.com/concours.html"
+                    url: "https://iptvsmarterpros.com/concours.html"
                 }).then(() => {
                     console.log('Partage réussi!');
                 }).catch((error) => {
