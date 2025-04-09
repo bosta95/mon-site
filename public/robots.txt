@@ -3,13 +3,6 @@ User-agent: *
 Allow: /
 
 # Pages privées et administratives (ne pas indexer)
-Disallow: /admin/
-Disallow: /admin-*
-Disallow: /admin-login.html
-Disallow: /admin-dashboard.html
-Disallow: /espace-client-login.html
-Disallow: /login.html
-Disallow: /inscription.html
 Disallow: /payment.html
 Disallow: /success.html
 Disallow: /cancel.html
@@ -63,4 +56,6 @@ User-agent: YandexBot
 Disallow: /
 
 # Lien vers le sitemap
-Sitemap: https://iptvsmarterpros.com/sitemap.xml
+Sitemap: https://www.iptvsmarterpros.com/sitemap.xml
+
+# Cache-Control: max-age=3600
