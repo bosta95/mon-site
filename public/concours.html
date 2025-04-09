@@ -1028,11 +1028,27 @@
     </script>
 
     <!-- JavaScript pour le partage du concours -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         // Ajout des scripts pour le partage du flyer
         function openShareModal() {
-            document.getElementById('shareModal').style.display = 'flex';
+            // Vérifier si l'API Web Share est disponible
+            if (navigator.share) {
+                // Utiliser l'API Web Share directement
+                navigator.share({
+                    title: "Concours IPTV Smarter Pro",
+                    text: "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours",
+                    url: window.location.origin + '/concours-flyer.html'
+                }).then(() => {
+                    console.log('Partage réussi!');
+                }).catch((error) => {
+                    console.log('Erreur lors du partage:', error);
+                    // Fallback vers la modal si le partage échoue
+                    document.getElementById('shareModal').style.display = 'flex';
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
+                document.getElementById('shareModal').style.display = 'flex';
+            }
         }
         
         function closeShareModal() {
@@ -1047,159 +1063,68 @@
             }
         }
         
-        // Configuration pour le partage
-        const CONTEST_TITLE = "Concours IPTV Smarter Pro";
-        const CONTEST_TEXT = "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours";
-        
         // Fonction simplifiée pour partager directement l'image
         function shareFlyer(platform) {
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.style.display = 'flex';
             
-            // Télécharger directement l'image selon la plateforme
+            // Si c'est un appareil mobile qui supporte le partage natif, utiliser cette option pour tout partage
+            if (navigator.share && platform === 'native') {
+                loadingOverlay.style.display = 'none';
+                navigator.share({
+                    title: "CONCOURS IPTV Smarter Pro",
+                    text: "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois!",
+                    url: window.location.origin + '/concours-flyer.html'
+                }).then(() => {
+                    console.log('Partage réussi!');
+                    closeShareModal();
+                }).catch((error) => {
+                    console.log('Erreur de partage', error);
+                });
+                return;
+            }
+            
             setTimeout(() => {
-                const imagePath = '/images/concours-flyer.png';
+                loadingOverlay.style.display = 'none';
                 
-                // Créer un lien de téléchargement
-                const downloadLink = document.createElement('a');
-                downloadLink.href = window.location.origin + imagePath;
+                // URL du flyer et de l'image
+                const flyerUrl = window.location.origin + '/concours-flyer.html';
+                const imageUrl = window.location.origin + '/images/concours-flyer.png';
+                
+                // Titre et description pour le partage
+                const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
+                const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
+                
+                let shareUrl;
                 
                 switch(platform) {
                     case 'facebook':
-                        downloadLink.download = 'concours-facebook.png';
-                        downloadLink.click();
-                        showInstructions(
-                            "Image téléchargée pour Facebook", 
-                            "1. Ouvrez Facebook et créez un nouveau post",
-                            "2. Cliquez sur 'Ajouter photo/vidéo' et sélectionnez l'image téléchargée",
-                            "3. Ajoutez le texte: " + CONTEST_TEXT
-                        );
+                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(flyerUrl)}&picture=${encodeURIComponent(imageUrl)}`;
                         break;
                     case 'twitter':
-                        downloadLink.download = 'concours-twitter.png';
-                        downloadLink.click();
-                        showInstructions(
-                            "Image téléchargée pour Twitter", 
-                            "1. Ouvrez Twitter et créez un nouveau tweet",
-                            "2. Cliquez sur l'icône d'image et sélectionnez l'image téléchargée",
-                            "3. Ajoutez le texte: " + CONTEST_TEXT
-                        );
+                        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(flyerUrl)}`;
                         break;
                     case 'whatsapp':
-                        downloadLink.download = 'concours-whatsapp.png';
-                        downloadLink.click();
-                        showInstructions(
-                            "Image téléchargée pour WhatsApp", 
-                            "1. Ouvrez WhatsApp et sélectionnez un contact ou un groupe",
-                            "2. Cliquez sur l'icône de pièce jointe et sélectionnez l'image téléchargée",
-                            "3. Ajoutez le texte: " + CONTEST_TEXT
-                        );
+                        shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + flyerUrl)}`;
                         break;
                     case 'instagram':
-                        downloadLink.download = 'concours-instagram.png';
-                        downloadLink.click();
-                        showInstructions(
-                            "Image téléchargée pour Instagram", 
-                            "1. Ouvrez Instagram et créez un nouveau post",
-                            "2. Sélectionnez l'image téléchargée dans votre galerie",
-                            "3. Ajoutez le texte: " + CONTEST_TEXT
-                        );
-                        copyTextToClipboard(CONTEST_TEXT);
-                        break;
                     case 'tiktok':
-                        downloadLink.download = 'concours-tiktok.png';
-                        downloadLink.click();
-                        showInstructions(
-                            "Image téléchargée pour TikTok", 
-                            "1. Ouvrez TikTok et créez un nouveau post",
-                            "2. Sélectionnez l'image téléchargée dans votre galerie",
-                            "3. Ajoutez le texte: " + CONTEST_TEXT
-                        );
-                        copyTextToClipboard(CONTEST_TEXT);
-                        break;
+                        navigator.clipboard.writeText(flyerUrl);
+                        alert(`Lien copié ! Ouvrez ${platform === 'instagram' ? 'Instagram' : 'TikTok'} et collez le lien dans votre publication.`);
+                        closeShareModal();
+                        return;
                     case 'youtube':
-                        downloadLink.download = 'concours-youtube.png';
-                        downloadLink.click();
-                        showInstructions(
-                            "Image téléchargée pour YouTube", 
-                            "1. Ouvrez YouTube et créez un post communautaire",
-                            "2. Sélectionnez l'image téléchargée",
-                            "3. Ajoutez le texte: " + CONTEST_TEXT
-                        );
-                        break;
+                        navigator.clipboard.writeText(flyerUrl);
+                        alert(`Lien copié ! Ouvrez YouTube et collez le lien dans votre post communautaire.`);
+                        closeShareModal();
+                        return;
+                    default:
+                        shareUrl = flyerUrl;
                 }
                 
-                loadingOverlay.style.display = 'none';
+                window.open(shareUrl, '_blank');
                 closeShareModal();
             }, 500);
-        }
-        
-        function showInstructions(title, ...instructions) {
-            // Créer une modal avec les instructions
-            const modal = document.createElement('div');
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.zIndex = '3000';
-            
-            // Créer le contenu de la modal
-            const modalContent = document.createElement('div');
-            modalContent.style.backgroundColor = '#222';
-            modalContent.style.maxWidth = '500px';
-            modalContent.style.width = '90%';
-            modalContent.style.padding = '30px';
-            modalContent.style.borderRadius = '15px';
-            modalContent.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
-            
-            // Titre
-            const modalTitle = document.createElement('h3');
-            modalTitle.textContent = title;
-            modalTitle.style.color = '#fff';
-            modalTitle.style.marginBottom = '20px';
-            modalTitle.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
-            modalTitle.style.paddingBottom = '10px';
-            modalContent.appendChild(modalTitle);
-            
-            // Instructions
-            const modalInstructions = document.createElement('ul');
-            modalInstructions.style.color = '#fff';
-            modalInstructions.style.paddingLeft = '20px';
-            
-            instructions.forEach(instruction => {
-                const li = document.createElement('li');
-                li.textContent = instruction;
-                li.style.marginBottom = '10px';
-                modalInstructions.appendChild(li);
-            });
-            
-            modalContent.appendChild(modalInstructions);
-            
-            // Bouton pour fermer la modal
-            const closeBtn = document.createElement('button');
-            closeBtn.textContent = "J'ai compris";
-            closeBtn.style.backgroundColor = '#ff0080';
-            closeBtn.style.color = '#fff';
-            closeBtn.style.border = 'none';
-            closeBtn.style.padding = '10px 20px';
-            closeBtn.style.borderRadius = '5px';
-            closeBtn.style.marginTop = '20px';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.width = '100%';
-            closeBtn.style.fontWeight = 'bold';
-            
-            closeBtn.addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-            
-            modalContent.appendChild(closeBtn);
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
         }
         
         function copyTextToClipboard(text) {
@@ -1253,49 +1178,68 @@
 
         // Fonction pour partager le flyer
         function shareFlyer(platform) {
-            // URL du flyer et de l'image
-            const flyerUrl = window.location.origin + '/concours-flyer.html';
-            const imageUrl = window.location.origin + '/images/concours-flyer.png';
-            
-            // Titre et description pour le partage
-            const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
-            const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
-            
-            // Créer l'URL de partage selon la plateforme
-            let shareUrl;
-            
-            switch(platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(flyerUrl)}&picture=${encodeURIComponent(imageUrl)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(flyerUrl)}`;
-                    break;
-                case 'whatsapp':
-                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + flyerUrl)}`;
-                    break;
-                case 'instagram':
-                case 'tiktok':
-                    alert(`Pour partager sur ${platform === 'instagram' ? 'Instagram' : 'TikTok'}, ouvrez l'application et créez un nouveau post avec le lien: ${flyerUrl}`);
-                    navigator.clipboard.writeText(flyerUrl);
-                    return;
-                case 'youtube':
-                    alert(`Pour partager sur YouTube, créez une nouvelle vidéo ou un post communautaire avec le lien: ${flyerUrl}`);
-                    navigator.clipboard.writeText(flyerUrl);
-                    return;
-                default:
-                    shareUrl = flyerUrl;
+            // Vérifier si l'API Web Share est disponible
+            if (navigator.share && platform === 'native') {
+                navigator.share({
+                    title: "CONCOURS IPTV Smarter Pro",
+                    text: "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois!",
+                    url: window.location.origin + '/concours-flyer.html'
+                }).then(() => {
+                    console.log('Partage réussi!');
+                }).catch((error) => {
+                    console.log('Erreur lors du partage:', error);
+                    // Fallback vers la modal si le partage échoue
+                    document.getElementById('flyerModal').style.display = 'block';
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
+                document.getElementById('flyerModal').style.display = 'block';
             }
-            
-            // Ouvrir dans une nouvelle fenêtre
-            window.open(shareUrl, '_blank');
-        }
+        };
 
-        // Modifier le bouton de partage existant pour ouvrir le modal du flyer
+        // Modifier le bouton de partage existant pour utiliser l'API Web Share native ou ouvrir le modal
         document.querySelector('.flyer-button').onclick = function(e) {
             e.preventDefault();
-            document.getElementById('flyerModal').style.display = 'block';
+            
+            // Si l'API Web Share est disponible, l'utiliser directement
+            if (navigator.share) {
+                navigator.share({
+                    title: "CONCOURS IPTV Smarter Pro",
+                    text: "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!",
+                    url: window.location.origin + '/concours-flyer.html'
+                }).then(() => {
+                    console.log('Partage réussi!');
+                }).catch((error) => {
+                    console.log('Erreur lors du partage:', error);
+                    // Fallback vers la modal si le partage échoue
+                    document.getElementById('flyerModal').style.display = 'block';
+                });
+            } else {
+                // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
+                document.getElementById('flyerModal').style.display = 'block';
+            }
         };
+
+        // Ajouter un bouton de partage natif dans le modal du flyer
+        document.addEventListener('DOMContentLoaded', function() {
+            if (navigator.share) {
+                const shareOptions = document.querySelector('.share-options');
+                const nativeShareBtn = document.createElement('button');
+                nativeShareBtn.className = 'share-btn native';
+                nativeShareBtn.textContent = 'Partager (natif)';
+                nativeShareBtn.style.background = 'linear-gradient(45deg, #ff0080, #5b00dc)';
+                nativeShareBtn.onclick = function() {
+                    shareFlyer('native');
+                };
+                
+                // Insérer le bouton de partage natif en premier
+                if (shareOptions && shareOptions.firstChild) {
+                    shareOptions.insertBefore(nativeShareBtn, shareOptions.firstChild);
+                } else if (shareOptions) {
+                    shareOptions.appendChild(nativeShareBtn);
+                }
+            }
+        });
     </script>
 </body>
 </html> 
