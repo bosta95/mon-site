@@ -1060,35 +1060,18 @@
             }
         }
         
-        // Fonction simplifiée pour partager directement l'image
+        // Fonction pour partager le flyer
         function shareFlyer(platform) {
             const loadingOverlay = document.getElementById('loadingOverlay');
             loadingOverlay.style.display = 'flex';
             
-            // URL du site principal avec le domaine correct
-            const siteUrl = "https://iptvsmarterpros.com/index.html";
-            // Titre et description pour le partage
-            const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
-            const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
-            
-            // Si c'est un appareil mobile qui supporte le partage natif, utiliser cette option pour tout partage
-            if (navigator.share && platform === 'native') {
-                loadingOverlay.style.display = 'none';
-                navigator.share({
-                    title: title,
-                    text: description,
-                    url: siteUrl
-                }).then(() => {
-                    console.log('Partage réussi!');
-                    closeShareModal();
-                }).catch((error) => {
-                    console.log('Erreur de partage', error);
-                });
-                return;
-            }
-            
             setTimeout(() => {
                 loadingOverlay.style.display = 'none';
+                
+                // URL de la page concours (et non du flyer)
+                const siteUrl = "https://iptvsmarterpros.com/concours.html";
+                // Titre et description pour le partage
+                const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
                 
                 let shareUrl;
                 
@@ -1100,27 +1083,35 @@
                         shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(siteUrl)}`;
                         break;
                     case 'whatsapp':
-                        shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + siteUrl)}`;
+                        shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(title + " " + siteUrl)}`;
                         break;
                     case 'instagram':
                     case 'tiktok':
                         navigator.clipboard.writeText(siteUrl);
                         alert(`Lien copié ! Ouvrez ${platform === 'instagram' ? 'Instagram' : 'TikTok'} et collez le lien dans votre publication.`);
-                        closeShareModal();
                         return;
                     case 'youtube':
                         navigator.clipboard.writeText(siteUrl);
                         alert(`Lien copié ! Ouvrez YouTube et collez le lien dans votre post communautaire.`);
-                        closeShareModal();
+                        return;
+                    case 'native':
+                        if (navigator.share) {
+                            navigator.share({
+                                title: title,
+                                text: "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!",
+                                url: siteUrl
+                            });
+                        }
                         return;
                     default:
                         shareUrl = siteUrl;
                 }
                 
-                window.open(shareUrl, '_blank');
-                closeShareModal();
+                if (shareUrl) {
+                    window.open(shareUrl, '_blank');
+                }
             }, 500);
-        }
+        };
         
         function copyTextToClipboard(text) {
             const textArea = document.createElement('textarea');
@@ -1171,58 +1162,11 @@
             }
         };
 
-        // Fonction pour partager le flyer
-        function shareFlyer(platform) {
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            loadingOverlay.style.display = 'flex';
-            
-            // URL du site principal avec le domaine correct
-            const siteUrl = "https://iptvsmarterpros.com/index.html";
-            // Titre et description pour le partage
-            const title = "CONCOURS IPTV Smarter Pro avec 1 AN d'abonnement à gagner!";
-            const description = "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!";
-            
-            // Si c'est un appareil mobile qui supporte le partage natif, utiliser cette option pour tout partage
-            if (navigator.share && platform === 'native') {
-                loadingOverlay.style.display = 'none';
-                navigator.share({
-                    title: title,
-                    text: description,
-                    url: siteUrl
-                }).then(() => {
-                    console.log('Partage réussi!');
-                }).catch((error) => {
-                    console.log('Erreur lors du partage:', error);
-                    // Fallback vers la modal si le partage échoue
-                    document.getElementById('flyerModal').style.display = 'block';
-                });
-            } else {
-                // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
-                document.getElementById('flyerModal').style.display = 'block';
-            }
-        };
-
-        // Modifier le bouton de partage existant pour utiliser l'API Web Share native ou ouvrir le modal
+        // Modifier le bouton de partage existant pour ouvrir directement la modale
         document.querySelector('.flyer-button').onclick = function(e) {
             e.preventDefault();
-            
-            // Si l'API Web Share est disponible, l'utiliser directement
-            if (navigator.share) {
-                navigator.share({
-                    title: "CONCOURS IPTV Smarter Pro",
-                    text: "Participez à notre grand concours et tentez de gagner 1 AN d'abonnement IPTV Smarter Pro!",
-                    url: "https://iptvsmarterpros.com/concours.html"
-                }).then(() => {
-                    console.log('Partage réussi!');
-                }).catch((error) => {
-                    console.log('Erreur lors du partage:', error);
-                    // Fallback vers la modal si le partage échoue
-                    document.getElementById('flyerModal').style.display = 'block';
-                });
-            } else {
-                // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
-                document.getElementById('flyerModal').style.display = 'block';
-            }
+            // Ouvrir directement la fenêtre modale sans redirection
+            document.getElementById('flyerModal').style.display = 'block';
         };
 
         // Ajouter un bouton de partage natif dans le modal du flyer
