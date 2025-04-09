@@ -453,114 +453,126 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1001;
+            z-index: 9999;
             justify-content: center;
             align-items: center;
         }
-
-        .modal-content {
-            background-color: #191919;
+        
+        .share-modal-content {
+            background: #222;
+            max-width: 500px;
+            width: 90%;
             padding: 30px;
             border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
         }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .share-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .share-option-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 15px;
-            border-radius: 8px;
+        
+        .share-modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            min-width: 120px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
         }
-
-        .share-option-btn:hover {
+        
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 15px 10px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .share-option:hover {
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-3px);
         }
-
-        .share-option-btn.facebook {
-            background-color: #1877f2;
+        
+        .share-option i {
+            font-size: 28px;
+            margin-bottom: 8px;
         }
-
-        .share-option-btn.twitter {
-            background-color: #1da1f2;
-        }
-
-        .share-option-btn.whatsapp {
-            background-color: #25d366;
-        }
-
-        .share-option-btn.telegram {
-            background-color: #0088cc;
-        }
-
-        .share-option-btn.copy {
-            background-color: #6c5ce7;
-        }
-
-        .copy-success {
-            display: none;
-            margin-top: 15px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
+        
+        .share-option span {
+            font-size: 12px;
             text-align: center;
         }
-
-        @media (max-width: 768px) {
-            .social-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .social-btn-large {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .countdown {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
-            .countdown-item {
-                min-width: 60px;
-            }
-
-            .share-options {
-                flex-direction: column;
-            }
-
-            .share-option-btn {
-                width: 100%;
-            }
+        
+        .share-option.facebook {
+            color: #1877F2;
+        }
+        
+        .share-option.twitter {
+            color: #1DA1F2;
+        }
+        
+        .share-option.whatsapp {
+            color: #25D366;
+        }
+        
+        .share-option.instagram {
+            color: #E1306C;
+        }
+        
+        .share-option.tiktok {
+            color: #ffffff;
+        }
+        
+        .share-option.youtube {
+            color: #FF0000;
+        }
+        
+        .share-close {
+            background: linear-gradient(135deg, #ff0080, #5b00dc);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .share-close:hover {
+            filter: brightness(1.1);
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        
+        .loading-spinner {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #ff0080;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Ajout des styles pour l'accès au flyer */
@@ -702,8 +714,8 @@
                 <h3>Téléchargez notre flyer de concours</h3>
                 <p>Partagez notre concours sur vos réseaux sociaux et augmentez vos chances de gagner!</p>
                 <div class="flyer-buttons">
-                    <a href="/concours-flyer.html" class="flyer-button" target="_blank">
-                        <i class="fas fa-share-alt"></i> Accéder au flyer
+                    <a href="javascript:openShareModal()" class="flyer-button">
+                        <i class="fas fa-share-alt"></i> Partager le flyer
                     </a>
                     <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-button youtube">
                         <i class="fab fa-youtube"></i> YouTube
@@ -769,28 +781,40 @@
 
         <!-- Fenêtre modale pour le partage (affichée uniquement si l'API Web Share n'est pas disponible) -->
         <div id="shareModal" class="share-modal">
-            <div class="modal-content">
-                <span class="close-modal" onclick="closeShareModal()">&times;</span>
-                <h3>Partager le concours</h3>
+            <div class="share-modal-content">
+                <h3 class="share-modal-title">Partager le flyer sur</h3>
                 <div class="share-options">
-                    <button onclick="shareVia('facebook')" class="share-option-btn facebook">
-                        <i class="fab fa-facebook-f"></i> Facebook
-                    </button>
-                    <button onclick="shareVia('twitter')" class="share-option-btn twitter">
-                        <i class="fab fa-twitter"></i> Twitter
-                    </button>
-                    <button onclick="shareVia('whatsapp')" class="share-option-btn whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button onclick="shareVia('telegram')" class="share-option-btn telegram">
-                        <i class="fab fa-telegram-plane"></i> Telegram
-                    </button>
-                    <button onclick="shareVia('copy')" class="share-option-btn copy">
-                        <i class="far fa-copy"></i> Copier le lien
-                    </button>
+                    <div class="share-option facebook" onclick="shareFlyer('facebook')">
+                        <i class="fab fa-facebook"></i>
+                        <span>Facebook</span>
+                    </div>
+                    <div class="share-option twitter" onclick="shareFlyer('twitter')">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </div>
+                    <div class="share-option whatsapp" onclick="shareFlyer('whatsapp')">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </div>
+                    <div class="share-option instagram" onclick="shareFlyer('instagram')">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </div>
+                    <div class="share-option tiktok" onclick="shareFlyer('tiktok')">
+                        <i class="fab fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </div>
+                    <div class="share-option youtube" onclick="shareFlyer('youtube')">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </div>
                 </div>
-                <div id="copySuccess" class="copy-success">Lien copié !</div>
+                <button class="share-close" onclick="closeShareModal()">Fermer</button>
             </div>
+        </div>
+
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
         </div>
 
         <div class="next-draw">
@@ -893,114 +917,223 @@
     </script>
 
     <!-- JavaScript pour le partage du concours -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        // Configuration du partage
-        const CONTEST_TITLE = "Concours IPTV Smarter Pro";
-        const CONTEST_TEXT = "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours";
-        const CONTEST_URL = "https://iptvsmarterpros.com/concours.html";
-        
-        // Fonction de partage natif
-        function shareContest() {
-            if (navigator.share) {
-                navigator.share({
-                    title: CONTEST_TITLE,
-                    text: CONTEST_TEXT,
-                    url: CONTEST_URL
-                })
-                .then(() => console.log('Partage réussi'))
-                .catch((error) => {
-                    console.log('Erreur lors du partage:', error);
-                    openShareModal(); // Solution de secours si le partage natif échoue
-                });
-            } else {
-                // Si l'API Web Share n'est pas supportée (navigateurs desktop)
-                openShareModal();
-            }
-        }
-        
-        // Ouvrir la fenêtre modale de partage
+        // Ajout des scripts pour le partage du flyer
         function openShareModal() {
-            const modal = document.getElementById('shareModal');
-            modal.style.display = 'flex';
-            
-            // Fermer la modale en cliquant en dehors
-            window.onclick = function(event) {
-                if (event.target === modal) {
-                    closeShareModal();
-                }
-            };
+            document.getElementById('shareModal').style.display = 'flex';
         }
         
-        // Fermer la fenêtre modale
         function closeShareModal() {
             document.getElementById('shareModal').style.display = 'none';
-            document.getElementById('copySuccess').style.display = 'none';
         }
         
-        // Partager via différentes plateformes
-        function shareVia(platform) {
-            let shareUrl = '';
+        // Fermer la modal si on clique en dehors
+        window.onclick = function(event) {
+            const modal = document.getElementById('shareModal');
+            if (event.target === modal) {
+                closeShareModal();
+            }
+        }
+        
+        // Configuration pour le partage
+        const CONTEST_TITLE = "Concours IPTV Smarter Pro";
+        const CONTEST_TEXT = "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours";
+        const CONTEST_URL = window.location.origin + "/concours.html";
+        
+        // Créer un canvas caché avec l'image du flyer
+        const flyerImage = new Image();
+        flyerImage.crossOrigin = "Anonymous";
+        flyerImage.src = "/images/concours-flyer.png"; // Assurez-vous que cette image existe
+        
+        function shareFlyer(platform) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'flex';
             
+            // Utiliser une image préexistante ou générer dynamiquement le flyer
+            if (flyerImage.complete) {
+                processShare(platform);
+            } else {
+                flyerImage.onload = function() {
+                    processShare(platform);
+                };
+                
+                flyerImage.onerror = function() {
+                    // Fallback: ouvrir la page du flyer
+                    loadingOverlay.style.display = 'none';
+                    window.open('/concours-flyer.html', '_blank');
+                    closeShareModal();
+                };
+            }
+        }
+        
+        function processShare(platform) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Créer un canvas temporaire
+            const canvas = document.createElement('canvas');
+            canvas.width = flyerImage.width;
+            canvas.height = flyerImage.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(flyerImage, 0, 0);
+            
+            // Convertir en image
+            const image = canvas.toDataURL('image/png', 1.0);
+            
+            // Partager selon la plateforme
             switch(platform) {
                 case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CONTEST_URL)}`;
+                    downloadImageWithInstructions(
+                        image, 
+                        'concours-facebook.png', 
+                        "Image téléchargée! Pour partager sur Facebook:",
+                        "1. Allez sur Facebook et créez un nouveau post",
+                        "2. Cliquez sur 'Ajouter photo/vidéo' et sélectionnez l'image téléchargée",
+                        "3. Ajoutez le texte: " + CONTEST_TEXT
+                    );
                     break;
                 case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(CONTEST_TEXT)}&url=${encodeURIComponent(CONTEST_URL)}`;
+                    downloadImageWithInstructions(
+                        image, 
+                        'concours-twitter.png', 
+                        "Image téléchargée! Pour partager sur Twitter:",
+                        "1. Allez sur Twitter et créez un nouveau tweet",
+                        "2. Cliquez sur l'icône d'image et sélectionnez le fichier téléchargé",
+                        "3. Ajoutez le texte: " + CONTEST_TEXT
+                    );
                     break;
                 case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(CONTEST_TEXT + ' ' + CONTEST_URL)}`;
+                    downloadImageWithInstructions(
+                        image, 
+                        'concours-whatsapp.png', 
+                        "Image téléchargée! Pour partager sur WhatsApp:",
+                        "1. Ouvrez WhatsApp et sélectionnez un contact ou un groupe",
+                        "2. Cliquez sur l'icône de pièce jointe et sélectionnez l'image téléchargée",
+                        "3. Ajoutez le texte: " + CONTEST_TEXT
+                    );
                     break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(CONTEST_URL)}&text=${encodeURIComponent(CONTEST_TEXT)}`;
+                case 'instagram':
+                    downloadImageWithInstructions(
+                        image,
+                        'concours-instagram.png',
+                        "Image téléchargée! Pour partager sur Instagram:",
+                        "1. Ouvrez Instagram et créez un nouveau post",
+                        "2. Sélectionnez l'image téléchargée",
+                        "3. Le texte du concours a été copié dans votre presse-papiers"
+                    );
+                    copyTextToClipboard(CONTEST_TEXT);
                     break;
-                case 'copy':
-                    copyToClipboard(CONTEST_TEXT + ' ' + CONTEST_URL);
-                    return;
+                case 'tiktok':
+                    downloadImageWithInstructions(
+                        image,
+                        'concours-tiktok.png',
+                        "Image téléchargée! Pour partager sur TikTok:",
+                        "1. Ouvrez TikTok et créez un nouveau post",
+                        "2. Sélectionnez l'image téléchargée dans votre galerie",
+                        "3. Le texte du concours a été copié dans votre presse-papiers"
+                    );
+                    copyTextToClipboard(CONTEST_TEXT + '\n\n' + CONTEST_URL);
+                    break;
+                case 'youtube':
+                    downloadImageWithInstructions(
+                        image,
+                        'concours-youtube.png',
+                        "Image téléchargée! Pour partager sur YouTube:",
+                        "1. Allez sur votre chaîne YouTube et créez un post communautaire",
+                        "2. Sélectionnez l'image téléchargée",
+                        "3. Ajoutez le texte: " + CONTEST_TEXT
+                    );
+                    break;
             }
             
-            if (shareUrl) {
-                window.open(shareUrl, '_blank');
-            }
+            loadingOverlay.style.display = 'none';
+            closeShareModal();
         }
         
-        // Copier le lien dans le presse-papier
-        function copyToClipboard(text) {
-            // Utiliser l'API moderne si disponible
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(text)
-                    .then(() => showCopySuccess())
-                    .catch(err => console.error('Erreur: ', err));
-            } else {
-                // Solution de secours pour navigateurs plus anciens
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                textArea.style.position = 'fixed';
-                textArea.style.opacity = '0';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    showCopySuccess();
-                } catch (err) {
-                    console.error('Erreur lors de la copie: ', err);
-                }
-                
-                document.body.removeChild(textArea);
-            }
+        function copyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
         }
         
-        // Afficher la confirmation de copie
-        function showCopySuccess() {
-            const successMsg = document.getElementById('copySuccess');
-            successMsg.style.display = 'block';
+        function downloadImageWithInstructions(dataUrl, fileName, title, ...instructions) {
+            // Télécharger l'image
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = dataUrl;
+            link.click();
             
-            // Masquer après 2 secondes
+            // Créer une modal avec les instructions
             setTimeout(() => {
-                successMsg.style.display = 'none';
-            }, 2000);
+                // Créer la modal
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '3000';
+                
+                // Créer le contenu de la modal
+                const modalContent = document.createElement('div');
+                modalContent.style.backgroundColor = '#222';
+                modalContent.style.maxWidth = '500px';
+                modalContent.style.width = '90%';
+                modalContent.style.padding = '30px';
+                modalContent.style.borderRadius = '15px';
+                modalContent.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.5)';
+                
+                // Titre
+                const modalTitle = document.createElement('h3');
+                modalTitle.textContent = title;
+                modalTitle.style.color = '#fff';
+                modalTitle.style.marginBottom = '20px';
+                modalTitle.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
+                modalTitle.style.paddingBottom = '10px';
+                modalContent.appendChild(modalTitle);
+                
+                // Instructions
+                const modalInstructions = document.createElement('ul');
+                modalInstructions.style.color = '#fff';
+                modalInstructions.style.paddingLeft = '20px';
+                
+                instructions.forEach(instruction => {
+                    const li = document.createElement('li');
+                    li.textContent = instruction;
+                    li.style.marginBottom = '10px';
+                    modalInstructions.appendChild(li);
+                });
+                
+                modalContent.appendChild(modalInstructions);
+                
+                // Bouton pour fermer la modal
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = "J'ai compris";
+                closeBtn.style.backgroundColor = '#ff0080';
+                closeBtn.style.color = '#fff';
+                closeBtn.style.border = 'none';
+                closeBtn.style.padding = '10px 20px';
+                closeBtn.style.borderRadius = '5px';
+                closeBtn.style.marginTop = '20px';
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.style.width = '100%';
+                closeBtn.style.fontWeight = 'bold';
+                
+                closeBtn.addEventListener('click', () => {
+                    document.body.removeChild(modal);
+                });
+                
+                modalContent.appendChild(closeBtn);
+                modal.appendChild(modalContent);
+                document.body.appendChild(modal);
+            }, 500);
         }
     </script>
 </body>
