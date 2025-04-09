@@ -6,9 +6,6 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss');
-const session = require('express-session');
-const bcrypt = require('bcryptjs');
-const fs = require('fs').promises;
 require('dotenv').config();
 
 const app = express();
@@ -30,27 +27,10 @@ app.use(helmet({
   },
 }));
 
-// Configuration des sessions
-if (!process.env.SESSION_SECRET) {
-  console.error('ERREUR: SESSION_SECRET doit être défini dans les variables d\'environnement');
-  process.exit(1);
-}
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 heures
-  }
-}));
-
-// Configuration CORS sécurisée
+// Configuration CORS pour Netlify
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : 'https://iptvsmarterpros.com',
-  methods: ['GET', 'POST'],
+  origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
@@ -129,155 +109,6 @@ app.get('/favicon.ico', (req, res) => {
   res.redirect('/favicon.svg');
 });
 
-// Fonctions de gestion des utilisateurs
-const usersFilePath = path.join(__dirname, 'users.json');
-
-async function loadUsers() {
-  try {
-    const data = await fs.readFile(usersFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
-}
-
-async function saveUsers(users) {
-  await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2));
-}
-
-// Middleware d'authentification
-const requireAuth = (req, res, next) => {
-  if (req.session && req.session.userId) {
-    next();
-  } else {
-    res.status(401).json({ error: 'Accès non autorisé' });
-  }
-};
-
-// Routes d'authentification
-app.post('/api/register', async (req, res) => {
-  try {
-    const { username, password, email } = req.body;
-
-    if (!username || !password || !email) {
-      return res.status(400).json({ error: 'Tous les champs sont requis' });
-    }
-
-    const users = await loadUsers();
-    
-    if (users.some(user => user.username === username)) {
-      return res.status(400).json({ error: 'Nom d\'utilisateur déjà pris' });
-    }
-
-    if (users.some(user => user.email === email)) {
-      return res.status(400).json({ error: 'Email déjà utilisé' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const newUser = {
-      id: Date.now().toString(),
-      username,
-      email,
-      password: hashedPassword,
-      role: 'user'
-    };
-
-    users.push(newUser);
-    await saveUsers(users);
-
-    res.status(201).json({ message: 'Compte créé avec succès' });
-  } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la création du compte' });
-  }
-});
-
-app.post('/api/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Tous les champs sont requis' });
-    }
-
-    const users = await loadUsers();
-    const user = users.find(u => u.username === username);
-
-    if (!user) {
-      return res.status(401).json({ error: 'Identifiants invalides' });
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
-      return res.status(401).json({ error: 'Identifiants invalides' });
-    }
-
-    req.session.userId = user.id;
-    req.session.userRole = user.role;
-
-    res.json({ 
-      message: 'Connexion réussie',
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role
-      }
-    });
-  } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la connexion' });
-  }
-});
-
-app.post('/api/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Erreur lors de la déconnexion' });
-    }
-    res.clearCookie('connect.sid');
-    res.json({ message: 'Déconnexion réussie' });
-  });
-});
-
-// Routes d'authentification supplémentaires
-app.get('/api/auth/check', requireAuth, (req, res) => {
-  res.status(200).json({ authenticated: true });
-});
-
-app.get('/api/auth/check-role', requireAuth, (req, res) => {
-  res.status(200).json({ role: req.session.userRole });
-});
-
-app.get('/api/auth/current-user', requireAuth, async (req, res) => {
-  try {
-    const users = await loadUsers();
-    const user = users.find(u => u.id === req.session.userId);
-    if (user) {
-      const { password, ...userWithoutPassword } = user;
-      res.status(200).json(userWithoutPassword);
-    } else {
-      res.status(404).json({ error: 'Utilisateur non trouvé' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Erreur serveur' });
-  }
-});
-
-// Route principale
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Route tutoriel
-app.get('/tutoriel.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'tutoriel.html'));
-});
-
-// Route robots.txt
-app.get('/robots.txt', (req, res) => {
-  res.type('text/plain');
-  res.send(`User-agent: *\nDisallow: /admin/\nDisallow: /checkout/\nSitemap: https://www.iptvsmarterpros.com/sitemap.xml`);
-});
-
 // Fonction de validation d'email améliorée
 function isValidEmail(email) {
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -297,6 +128,22 @@ function isValidProduct(product) {
   const validProducts = ['1_mois', '3_mois', '6_mois', '12_mois'];
   return validProducts.includes(product);
 }
+
+// Route principale
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Route tutoriel
+app.get('/tutoriel.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'tutoriel.html'));
+});
+
+// Route robots.txt
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send(`User-agent: *\nDisallow: /checkout/\nSitemap: https://www.iptvsmarterpros.com/sitemap.xml`);
+});
 
 // Route API pour le formulaire de contact
 app.post('/api/contact', async (req, res) => {
