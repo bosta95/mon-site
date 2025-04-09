@@ -752,6 +752,105 @@
                 transform: translateY(-9px) rotate(-45deg);
             }
         }
+
+        /* Styles pour les sections d'abonnement et d'identifiants */
+        .subscription-box, .credentials-box {
+            background: rgba(25, 25, 35, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .subscription-box h3, .credentials-box h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #fff;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subscription-row, .credentials-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .subscription-label, .credentials-label {
+            width: 180px;
+            color: #8e8ea9;
+            font-size: 0.9rem;
+        }
+
+        .subscription-value, .credentials-value {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .status-active {
+            color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-expired {
+            color: #F44336;
+            background: rgba(244, 67, 54, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-renew {
+            display: inline-block;
+            background: linear-gradient(90deg, #6c5498, #ff6b6b);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-renew:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 84, 152, 0.4);
+        }
+
+        .btn-copy {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .credentials-details {
+            background: rgba(20, 20, 30, 0.4);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body class="protected-page">
@@ -1122,28 +1221,142 @@
                     <button onclick="confirmDeleteAccount()" class="btn btn-danger">Supprimer mon compte</button>
                 </div>
             </section>
+
+            <!-- Section pour afficher les informations d'abonnement -->
+            <div class="subscription-box">
+                <h3>Mon Abonnement IPTV</h3>
+                <div class="subscription-details">
+                    <div class="subscription-row">
+                        <span class="subscription-label">Plan:</span>
+                        <span class="subscription-value" id="subscription-plan">Chargement...</span>
+                    </div>
+                    <div class="subscription-row">
+                        <span class="subscription-label">Statut:</span>
+                        <span class="subscription-value"><span id="subscription-status">Chargement...</span></span>
+                    </div>
+                    <div class="subscription-row">
+                        <span class="subscription-label">Date de début:</span>
+                        <span class="subscription-value" id="subscription-start">Chargement...</span>
+                    </div>
+                    <div class="subscription-row">
+                        <span class="subscription-label">Date d'expiration:</span>
+                        <span class="subscription-value" id="subscription-end">Chargement...</span>
+                    </div>
+                    <div class="subscription-row">
+                        <span class="subscription-label">Numéro de commande:</span>
+                        <span class="subscription-value" id="subscription-order">Chargement...</span>
+                    </div>
+                </div>
+                <a href="#" class="btn-renew" id="renew-button">Renouveler mon abonnement</a>
+            </div>
+
+            <!-- Section pour afficher les identifiants IPTV -->
+            <div class="credentials-box">
+                <h3>Mes identifiants de connexion</h3>
+                <div class="credentials-details">
+                    <div class="credentials-row">
+                        <span class="credentials-label">Nom d'utilisateur:</span>
+                        <span class="credentials-value" id="iptv-username">Chargement...</span>
+                        <button class="btn-copy" data-clipboard="iptv-username">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="credentials-row">
+                        <span class="credentials-label">Mot de passe:</span>
+                        <span class="credentials-value" id="iptv-password">Chargement...</span>
+                        <button class="btn-copy" data-clipboard="iptv-password">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="credentials-row">
+                        <span class="credentials-label">Lien M3U:</span>
+                        <span class="credentials-value" id="iptv-m3u">Chargement...</span>
+                        <button class="btn-copy" data-clipboard="iptv-m3u">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
+    <script src="auth-check.js"></script>
     <script>
         // Vérifier l'état de connexion au chargement de la page
-        document.addEventListener('DOMContentLoaded', function() {
-            checkLogin();
-            showSection('dashboard');
-            setupEventListeners();
-            
-            // Simulation de données d'abonnement
-            displaySubscriptionInfo({
-                status: 'active',
-                plan: 'Premium',
-                startDate: '01/06/2024',
-                endDate: '01/07/2024',
-                price: '39,99 €',
-                duration: '1 mois',
-                devices: 4,
-                quality: 'Full HD, 4K',
-                progress: 70
-            });
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Vérifier si l'utilisateur est connecté
+                const isAuthenticated = await isLoggedIn();
+                if (!isAuthenticated) {
+                    window.location.href = 'espace-client-login.html';
+                    return;
+                }
+                
+                // Récupérer les informations de l'utilisateur
+                const userData = await getCurrentUser();
+                if (!userData) {
+                    console.error('Impossible de récupérer les informations utilisateur');
+                    return;
+                }
+                
+                // Mettre à jour les informations d'abonnement
+                if (userData.subscription) {
+                    document.getElementById('subscription-plan').textContent = userData.subscription.plan;
+                    
+                    const statusElement = document.getElementById('subscription-status');
+                    statusElement.textContent = userData.subscription.status === 'active' ? 'Actif' : 'Expiré';
+                    statusElement.classList.add(userData.subscription.status === 'active' ? 'status-active' : 'status-expired');
+                    
+                    // Formater les dates
+                    const startDate = new Date(userData.subscription.startDate);
+                    const endDate = new Date(userData.subscription.endDate);
+                    document.getElementById('subscription-start').textContent = startDate.toLocaleDateString('fr-FR');
+                    document.getElementById('subscription-end').textContent = endDate.toLocaleDateString('fr-FR');
+                    
+                    document.getElementById('subscription-order').textContent = userData.subscription.orderNumber;
+                    
+                    // Configurer le bouton de renouvellement
+                    const renewButton = document.getElementById('renew-button');
+                    if (userData.subscription.renewUrl) {
+                        renewButton.href = userData.subscription.renewUrl;
+                    }
+                }
+                
+                // Mettre à jour les identifiants IPTV
+                if (userData.credentials) {
+                    document.getElementById('iptv-username').textContent = userData.credentials.username;
+                    document.getElementById('iptv-password').textContent = userData.credentials.password;
+                    document.getElementById('iptv-m3u').textContent = userData.credentials.m3uUrl;
+                }
+                
+                // Fonction pour copier dans le presse-papiers
+                const copyButtons = document.querySelectorAll('.btn-copy');
+                copyButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const targetId = this.getAttribute('data-clipboard');
+                        const textToCopy = document.getElementById(targetId).textContent;
+                        
+                        navigator.clipboard.writeText(textToCopy)
+                            .then(() => {
+                                // Feedback visuel temporaire
+                                this.innerHTML = '<i class="fas fa-check"></i>';
+                                setTimeout(() => {
+                                    this.innerHTML = '<i class="fas fa-copy"></i>';
+                                }, 2000);
+                            })
+                            .catch(err => {
+                                console.error('Erreur lors de la copie:', err);
+                                this.innerHTML = '<i class="fas fa-times"></i>';
+                                setTimeout(() => {
+                                    this.innerHTML = '<i class="fas fa-copy"></i>';
+                                }, 2000);
+                            });
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+            }
         });
         
         // Vérifier si l'utilisateur est connecté

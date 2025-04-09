@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1680000000000",
+    "username": "client_test",
+    "email": "client@test.com",
+    "password": "$2a$12$TLwqz5ex22DHjHTJkJUBZ.Zz3nwrDbZbQmcCIKsM/c4.RPBhqcfKe",
+    "role": "user",
+    "subscription": {
+      "plan": "Premium IPTV 3 mois",
+      "startDate": "2024-01-01T00:00:00.000Z",
+      "endDate": "2024-04-01T00:00:00.000Z",
+      "status": "active",
+      "orderNumber": "ORDER-123456",
+      "price": "9.99",
+      "renewUrl": "/offer-details.html?product=Premium_IPTV_3_mois&price=9.99"
+    },
+    "credentials": {
+      "username": "P1LR9HKN",
+      "password": "6B18V4XA",
+      "m3uUrl": "http://subdomain.ott-smart.xyz/get.php?username=P1LR9HKN&password=6B18V4XA"
+    }
+  }
+]
