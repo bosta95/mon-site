@@ -440,6 +440,100 @@
             font-size: 0.9rem;
         }
 
+        /* Styles pour le bouton de partage et la modale */
+        .social-btn-large.share-btn {
+            background: linear-gradient(135deg, #ff0080, #5b00dc);
+        }
+
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #191919;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .share-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .share-option-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 120px;
+        }
+
+        .share-option-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .share-option-btn.facebook {
+            background-color: #1877f2;
+        }
+
+        .share-option-btn.twitter {
+            background-color: #1da1f2;
+        }
+
+        .share-option-btn.whatsapp {
+            background-color: #25d366;
+        }
+
+        .share-option-btn.telegram {
+            background-color: #0088cc;
+        }
+
+        .share-option-btn.copy {
+            background-color: #6c5ce7;
+        }
+
+        .copy-success {
+            display: none;
+            margin-top: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
         @media (max-width: 768px) {
             .social-container {
                 flex-direction: column;
@@ -458,6 +552,109 @@
             
             .countdown-item {
                 min-width: 60px;
+            }
+
+            .share-options {
+                flex-direction: column;
+            }
+
+            .share-option-btn {
+                width: 100%;
+            }
+        }
+
+        /* Ajout des styles pour l'accès au flyer */
+        .flyer-access {
+            background: linear-gradient(135deg, #ff0080, #5b00dc);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .flyer-access h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .flyer-access p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .flyer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .flyer-button {
+            display: inline-block;
+            background: white;
+            color: #ff0080;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .flyer-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #f5f5f5;
+        }
+
+        .flyer-button i {
+            margin-right: 8px;
+        }
+
+        .social-button {
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-button.youtube {
+            background: #FF0000;
+            color: white;
+        }
+
+        .social-button.tiktok {
+            background: #000000;
+            color: white;
+        }
+
+        .social-button i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .flyer-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .flyer-button, .social-button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
             }
         }
     </style>
@@ -500,6 +697,23 @@
     <!-- Contenu principal -->
     <div class="contest-container">
         <div class="contest-info-container">
+            <!-- Ajout d'un lien vers le flyer du concours -->
+            <div class="flyer-access">
+                <h3>Téléchargez notre flyer de concours</h3>
+                <p>Partagez notre concours sur vos réseaux sociaux et augmentez vos chances de gagner!</p>
+                <div class="flyer-buttons">
+                    <a href="/concours-flyer.html" class="flyer-button" target="_blank">
+                        <i class="fas fa-share-alt"></i> Accéder au flyer
+                    </a>
+                    <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-button youtube">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
+                    <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-button tiktok">
+                        <i class="fab fa-tiktok"></i> TikTok
+                    </a>
+                </div>
+            </div>
+            
             <h2>À propos du concours</h2>
             <p>Chez IPTV Smarter Pros, nous aimons récompenser notre communauté ! C'est pourquoi nous organisons un tirage au sort mensuel pour offrir un abonnement Premium 12 mois (valeur 29,99€) à l'un de nos followers sur les réseaux sociaux.</p>
             <p>Le tirage au sort a lieu le 15 de chaque mois et le gagnant sera contacté directement via son profil sur les réseaux sociaux !</p>
@@ -537,15 +751,6 @@
             </div>
         </div>
 
-        <div class="social-container">
-            <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-btn-large youtube">
-                <i class="fab fa-youtube"></i> YouTube
-            </a>
-            <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn-large tiktok">
-                <i class="fab fa-tiktok"></i> TikTok
-            </a>
-        </div>
-
         <div class="rules-container">
             <h2>Règlement du concours</h2>
             <ul class="rules-list">
@@ -560,6 +765,32 @@
                 <li>Aucune contrepartie financière ne sera accordée en lieu et place du lot offert.</li>
                 <li>Vos données personnelles ne sont pas collectées dans le cadre de ce concours.</li>
             </ul>
+        </div>
+
+        <!-- Fenêtre modale pour le partage (affichée uniquement si l'API Web Share n'est pas disponible) -->
+        <div id="shareModal" class="share-modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeShareModal()">&times;</span>
+                <h3>Partager le concours</h3>
+                <div class="share-options">
+                    <button onclick="shareVia('facebook')" class="share-option-btn facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </button>
+                    <button onclick="shareVia('twitter')" class="share-option-btn twitter">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <button onclick="shareVia('whatsapp')" class="share-option-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                    <button onclick="shareVia('telegram')" class="share-option-btn telegram">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </button>
+                    <button onclick="shareVia('copy')" class="share-option-btn copy">
+                        <i class="far fa-copy"></i> Copier le lien
+                    </button>
+                </div>
+                <div id="copySuccess" class="copy-success">Lien copié !</div>
+            </div>
         </div>
 
         <div class="next-draw">
@@ -659,6 +890,118 @@
             updateCountdown();
             setInterval(updateCountdown, 1000);
         });
+    </script>
+
+    <!-- JavaScript pour le partage du concours -->
+    <script>
+        // Configuration du partage
+        const CONTEST_TITLE = "Concours IPTV Smarter Pro";
+        const CONTEST_TEXT = "Participez au concours IPTV Smarter Pro et gagnez un abonnement premium gratuit de 12 mois! #IPTV #concours";
+        const CONTEST_URL = "https://iptvsmarterpros.com/concours.html";
+        
+        // Fonction de partage natif
+        function shareContest() {
+            if (navigator.share) {
+                navigator.share({
+                    title: CONTEST_TITLE,
+                    text: CONTEST_TEXT,
+                    url: CONTEST_URL
+                })
+                .then(() => console.log('Partage réussi'))
+                .catch((error) => {
+                    console.log('Erreur lors du partage:', error);
+                    openShareModal(); // Solution de secours si le partage natif échoue
+                });
+            } else {
+                // Si l'API Web Share n'est pas supportée (navigateurs desktop)
+                openShareModal();
+            }
+        }
+        
+        // Ouvrir la fenêtre modale de partage
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.style.display = 'flex';
+            
+            // Fermer la modale en cliquant en dehors
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    closeShareModal();
+                }
+            };
+        }
+        
+        // Fermer la fenêtre modale
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+            document.getElementById('copySuccess').style.display = 'none';
+        }
+        
+        // Partager via différentes plateformes
+        function shareVia(platform) {
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CONTEST_URL)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(CONTEST_TEXT)}&url=${encodeURIComponent(CONTEST_URL)}`;
+                    break;
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(CONTEST_TEXT + ' ' + CONTEST_URL)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(CONTEST_URL)}&text=${encodeURIComponent(CONTEST_TEXT)}`;
+                    break;
+                case 'copy':
+                    copyToClipboard(CONTEST_TEXT + ' ' + CONTEST_URL);
+                    return;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank');
+            }
+        }
+        
+        // Copier le lien dans le presse-papier
+        function copyToClipboard(text) {
+            // Utiliser l'API moderne si disponible
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text)
+                    .then(() => showCopySuccess())
+                    .catch(err => console.error('Erreur: ', err));
+            } else {
+                // Solution de secours pour navigateurs plus anciens
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    document.execCommand('copy');
+                    showCopySuccess();
+                } catch (err) {
+                    console.error('Erreur lors de la copie: ', err);
+                }
+                
+                document.body.removeChild(textArea);
+            }
+        }
+        
+        // Afficher la confirmation de copie
+        function showCopySuccess() {
+            const successMsg = document.getElementById('copySuccess');
+            successMsg.style.display = 'block';
+            
+            // Masquer après 2 secondes
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 2000);
+        }
     </script>
 </body>
 </html> 
