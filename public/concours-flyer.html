@@ -513,72 +513,33 @@
         function shareVia(platform) {
             // Fermer le menu de partage
             shareOptions.style.display = 'none';
+            loadingOverlay.style.display = 'flex';
             
-            // Partage natif si disponible et demandé
-            if (platform === 'native' && navigator.share) {
-                navigator.share({
-                    title: CONTEST_TITLE,
-                    text: CONTEST_TEXT,
-                    url: CONTEST_URL
-                }).then(() => {
-                    console.log('Partage réussi!');
-                }).catch((error) => {
-                    console.log('Erreur lors du partage:', error);
-                });
-                return;
-            }
-            
-            // Pour les autres plateformes ou si le partage natif n'est pas disponible
-            let shareUrl;
-            
-            switch(platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(CONTEST_URL)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(CONTEST_TEXT)}&url=${encodeURIComponent(CONTEST_URL)}`;
-                    break;
-                case 'whatsapp':
-                    shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(CONTEST_TEXT + ' ' + CONTEST_URL)}`;
-                    break;
-                case 'instagram':
-                case 'tiktok':
-                    // Pour Instagram et TikTok, télécharger l'image
-                    loadingOverlay.style.display = 'flex';
-                    
-                    html2canvas(flyerContainer, {
-                        scale: 2,
-                        logging: false,
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: null
-                    }).then(canvas => {
-                        const image = canvas.toDataURL('image/png', 1.0);
-                        const link = document.createElement('a');
-                        link.download = `concours-${platform}.png`;
-                        link.href = image;
-                        link.click();
-                        
-                        // Instructions pour l'utilisateur
-                        setTimeout(() => {
-                            loadingOverlay.style.display = 'none';
-                            alert(`Image téléchargée! Ouvrez ${platform} et créez un nouveau post avec l'image.`);
-                        }, 500);
-                    }).catch(error => {
-                        console.error('Erreur lors de la capture :', error);
-                        loadingOverlay.style.display = 'none';
-                    });
-                    return;
-                case 'native':
-                    // Si le navigateur ne supporte pas l'API de partage natif
-                    alert("Votre navigateur ne supporte pas le partage natif. Veuillez utiliser une autre option de partage.");
-                    return;
-                default:
-                    shareUrl = CONTEST_URL;
-            }
-            
-            // Ouvrir l'URL de partage dans une nouvelle fenêtre
-            window.open(shareUrl, '_blank');
+            // Créer l'image du flyer avec html2canvas
+            html2canvas(flyerContainer, {
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const image = canvas.toDataURL('image/png', 1.0);
+                const link = document.createElement('a');
+                
+                // Pour toutes les plateformes, on télécharge l'image directement
+                link.download = `concours-iptv-smarter-pro.png`;
+                link.href = image;
+                link.click();
+                
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    alert(`Image téléchargée! Partagez-la directement sur ${platform}.`);
+                }, 500);
+            }).catch(error => {
+                console.error('Erreur lors de la capture :', error);
+                loadingOverlay.style.display = 'none';
+                alert("Erreur lors de la préparation de l'image.");
+            });
         }
     </script>
 </body>
