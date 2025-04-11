@@ -8,41 +8,699 @@
 <!-- Google Analytics supprimé pour économiser 51 Kio -->
 
 <!-- Titre SEO -->
-<title>À propos - IPTV Smarter Pro</title>
+<title>À propos - IPTV Smarter Pro | Notre histoire et notre engagement</title>
 <!-- Description SEO -->
-<meta content="Découvrez qui nous sommes et pourquoi IPTV Smarter Pros est le meilleur choix pour un abonnement IPTV de qualité." name="description"/>
+<meta content="Découvrez qui nous sommes et pourquoi IPTV Smarter Pros est le premier choix pour un service IPTV premium avec plus de 22 000 chaînes TV et 50 000 films et séries en HD/4K." name="description"/>
 <!-- Balise Keywords (optionnelle) -->
 <meta content="IPTV, abonnement IPTV, streaming, films, séries, chaînes TV, télévision en ligne, streaming HD, 4K, IPTV Pro, divertissement, mises à jour, code IPTV" name="keywords"/>
 <!-- Balise Canonical -->
 <link href="https://www.iptvsmarterpros.com/about.html" rel="canonical"/>
 <!-- Open Graph / Facebook -->
-<meta content="À propos - IPTV Pro | Streaming, Films &amp; Séries en Ligne" property="og:title"/>
-<meta content="Découvrez IPTV Pro, le leader du streaming premium et de l'abonnement IPTV avec plus de 22 000 chaînes, films et séries en haute définition." property="og:description"/>
+<meta content="À propos - IPTV Smarter Pro | Notre histoire et notre engagement" property="og:title"/>
+<meta content="Découvrez IPTV Smarter Pro, le leader du streaming premium et de l'abonnement IPTV avec plus de 22 000 chaînes, films et séries en haute définition." property="og:description"/>
 <meta content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" property="og:image"/>
 <meta content="https://www.iptvsmarterpros.com/about.html" property="og:url"/>
 <meta content="website" property="og:type"/>
 <!-- Twitter Card -->
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="À propos - IPTV Pro | Streaming, Films &amp; Séries en Ligne" name="twitter:title"/>
-<meta content="IPTV Pro vous offre une expérience de streaming exceptionnelle avec plus de 22 000 chaînes, films et séries. Découvrez nos offres premium et vivez le divertissement sans limite." name="twitter:description"/>
+<meta content="À propos - IPTV Smarter Pro | Notre histoire et notre engagement" name="twitter:title"/>
+<meta content="IPTV Smarter Pro vous offre une expérience de streaming exceptionnelle avec plus de 22 000 chaînes, films et séries. Découvrez nos offres premium et profitez du divertissement sans limite." name="twitter:description"/>
 <meta content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" name="twitter:image"/>
+
+<!-- Font Awesome pour les icônes -->
+<script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
+
+<link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
 <link href="styles.css?v=9" rel="stylesheet">
+
+<style>
+  :root {
+    --primary-color: #6c5498;
+    --secondary-color: #ff6b6b;
+    --dark-bg: #0c0c18;
+    --light-text: #ffffff;
+    --muted-text: #b0b0b0;
+    --section-bg: rgba(26, 26, 46, 0.5);
+    --border-color: rgba(108, 84, 152, 0.3);
+    --card-bg: rgba(30, 30, 50, 0.7);
+  }
+  
+  body {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header-container {
+    background: linear-gradient(135deg, rgba(12, 12, 24, 0.9), rgba(26, 26, 46, 0.9));
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .about-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739468317/mufasa_viogzz.webp') center/cover no-repeat;
+    padding: 120px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .about-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(108, 84, 152, 0.7), rgba(255, 107, 107, 0.7));
+    opacity: 0.2;
+  }
+  
+  .about-header h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin: 0;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .about-header p {
+    color: #eee;
+    font-size: 1.2rem;
+    margin: 20px auto;
+    max-width: 800px;
+    position: relative;
+  }
+  
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  
+  .about-section {
+    margin-bottom: 80px;
+  }
+  
+  .section-title {
+    color: var(--secondary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    border-radius: 3px;
+  }
+  
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  
+  .about-text {
+    font-size: 1.05rem;
+    color: var(--light-text);
+    line-height: 1.8;
+  }
+  
+  .about-text p {
+    margin-bottom: 20px;
+  }
+  
+  .about-image {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  
+  .about-image:hover img {
+    transform: scale(1.03);
+  }
+  
+  .about-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(108, 84, 152, 0.3), rgba(255, 107, 107, 0.3));
+    z-index: 1;
+  }
+  
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .value-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.2);
+  }
+  
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  }
+  
+  .value-card i {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    display: block;
+  }
+  
+  .value-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+  
+  .team-section {
+    text-align: center;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  
+  .team-member {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-10px);
+  }
+  
+  .team-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .team-info {
+    padding: 20px;
+  }
+  
+  .team-name {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .team-role {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .team-bio {
+    color: var(--muted-text);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .stats-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739464290/dragon_dulfu3.webp') center/cover no-repeat;
+    padding: 80px 0;
+    position: relative;
+    text-align: center;
+    margin: 80px 0;
+  }
+  
+  .stats-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(108, 84, 152, 0.8), rgba(255, 107, 107, 0.8));
+    opacity: 0.2;
+  }
+  
+  .stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+  }
+  
+  .stat-item {
+    padding: 20px;
+  }
+  
+  .stat-number {
+    color: var(--secondary-color);
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .stat-label {
+    color: #fff;
+    font-size: 1.1rem;
+  }
+  
+  .cta-section {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 60px;
+    text-align: center;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(108, 84, 152, 0.1), rgba(255, 107, 107, 0.1));
+    z-index: 0;
+  }
+  
+  .cta-title {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .cta-text {
+    color: var(--muted-text);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  
+  .cta-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transition: width 0.3s ease;
+    z-index: -1;
+  }
+  
+  .cta-btn:hover::before {
+    width: 100%;
+  }
+  
+  .cta-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+  }
+  
+  .navigation-btn {
+    display: inline-block;
+    background: rgba(108, 84, 152, 0.2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(108, 84, 152, 0.3);
+  }
+  
+  .navigation-btn:hover {
+    background: rgba(108, 84, 152, 0.4);
+    transform: translateY(-3px);
+  }
+  
+  .navigation-btn i {
+    margin-right: 10px;
+  }
+  
+  @media (max-width: 992px) {
+    .about-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .about-image {
+      order: -1;
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .about-header {
+      padding: 100px 0 60px;
+    }
+    
+    .about-header h1 {
+      font-size: 2rem;
+    }
+    
+    .about-header p {
+      font-size: 1rem;
+    }
+    
+    .section-title {
+      font-size: 1.8rem;
+    }
+    
+    .about-container {
+      padding: 40px 20px;
+    }
+    
+    .about-section {
+      margin-bottom: 60px;
+    }
+    
+    .cta-section {
+      padding: 40px 20px;
+    }
+    
+    .cta-title {
+      font-size: 1.8rem;
+    }
+  }
+  
+  /* Style amélioré pour la navigation */
+  .header-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 5px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .header-nav ul li a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .header-nav ul li a:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #6c5498, #ff6b6b);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .header-nav ul li a:hover {
+    color: #ff8c8c;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+  }
+  
+  .header-nav ul li a:hover:before {
+    width: 80%;
+  }
+  
+  .header-nav ul li a.highlight-btn {
+    background: linear-gradient(135deg, #ff6b6b, #6c5498);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(108, 84, 152, 0.3);
+    border: none;
+  }
+  
+  .header-nav ul li a.highlight-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(108, 84, 152, 0.4);
+    background: linear-gradient(135deg, #6c5498, #ff6b6b);
+    color: white;
+  }
+  
+  .header-nav ul li a.highlight-btn .shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    animation: shine 3s infinite;
+  }
+  
+  @keyframes shine {
+    0% { left: -100%; }
+    20% { left: 100%; }
+    100% { left: 100%; }
+  }
+</style>
 </head>
 <body>
-<div class="container">
-<div class="about-header animate-fade-in">
-<h1>À propos de IPTV Smarter Pros - Votre Meilleur Fournisseur IPTV</h1>
-</div>
-<div class="about-content animate-on-scroll">
-<p>Bienvenue chez <strong>IPTV Pro</strong>, le leader du streaming premium et de l'abonnement IPTV. Nous vous offrons une solution complète de divertissement en ligne, avec un accès instantané à plus de <strong>22 000 chaînes</strong>, ainsi qu'à une vaste sélection de films et de séries en haute définition.</p>
-<p>Notre service IPTV vous permet de profiter d'une expérience de streaming fluide et immersive, que ce soit en 4K, FHD, HD ou SD. Grâce à nos mises à jour régulières, vous bénéficiez toujours des dernières nouveautés et d'un contenu toujours à jour.</p>
-<p>Nous sommes passionnés par le divertissement et nous nous engageons à rendre la télévision en ligne accessible à tous. Nos offres flexibles et nos tarifs compétitifs sont conçus pour répondre à vos besoins, que vous souhaitiez visionner des films récents, suivre vos séries préférées ou découvrir de nouvelles chaînes internationales.</p>
-<p>Chez <strong>IPTV Pro</strong>, notre équipe dévouée travaille sans relâche pour vous offrir le meilleur de la technologie et du contenu. Nous vous garantissons une qualité de diffusion exceptionnelle sur tous vos appareils – smart TV, smartphones, tablettes et ordinateurs.</p>
-<p>Merci de faire confiance à IPTV Pro. Nous sommes impatients de vous offrir une expérience de divertissement inégalée et de transformer chaque moment de visionnage en un instant de pur plaisir.</p>
-</div>
-<div class="return animate-fade-in">
-<a class="btn" href="index.html">Retour à l'accueil</a>
-</div>
-</div>
+  <!-- En-tête -->
+  <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="images/IPTV_glpgxi.svg"/>
+        </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav" id="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#offers-section">OFFRES</a></li>
+          <li><a href="tutoriel.html">Tutoriel</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">À Propos</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="concours.html" class="highlight-btn"><span class="shine"></span>CONCOURS</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <header class="about-header">
+    <div class="container">
+      <h1>À propos de IPTV Smarter Pro</h1>
+      <p>Votre partenaire de confiance pour une expérience de divertissement premium</p>
+    </div>
+  </header>
+
+  <div class="about-container">
+    <!-- Notre histoire -->
+    <section class="about-section">
+      <h2 class="section-title">Notre Histoire</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Bienvenue chez <strong>IPTV Smarter Pro</strong>, le leader du streaming premium et de l'abonnement IPTV en France et en Europe. Fondée par une équipe de passionnés de technologie et de divertissement, notre entreprise est née d'une vision simple : rendre accessible à tous un service de télévision et de divertissement de haute qualité à un prix abordable.</p>
+          <p>Depuis nos débuts, nous avons constamment évolué pour offrir à nos utilisateurs une expérience toujours plus riche et plus fluide. Notre engagement envers l'innovation et la satisfaction client nous a permis de nous imposer comme une référence dans le domaine de l'IPTV.</p>
+          <p>Aujourd'hui, <strong>IPTV Smarter Pro</strong> dessert fièrement des milliers de clients satisfaits à travers la France et l'Europe, tout en continuant à investir dans les meilleures technologies pour vous offrir une expérience de visionnage exceptionnelle.</p>
+        </div>
+        <div class="about-image">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739464290/dragon_dulfu3.webp" alt="IPTV Smarter Pro - Streaming de qualité">
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos valeurs -->
+    <section class="about-section">
+      <h2 class="section-title">Nos Valeurs</h2>
+      <p>Chez IPTV Smarter Pro, nos valeurs guident chacune de nos actions et décisions. Elles reflètent notre engagement envers vous, nos clients, et notre vision du service que nous souhaitons offrir.</p>
+      
+      <div class="values-grid">
+        <div class="value-card">
+          <i class="fas fa-star"></i>
+          <h3>Excellence</h3>
+          <p>Nous ne nous contentons jamais de l'ordinaire. Notre équipe s'efforce continuellement d'améliorer notre service pour vous offrir une expérience de streaming irréprochable.</p>
+        </div>
+        
+        <div class="value-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Fiabilité</h3>
+          <p>Nous comprenons l'importance d'un service stable et sans interruption. C'est pourquoi nous investissons dans des infrastructures robustes pour garantir une diffusion fluide en permanence.</p>
+        </div>
+        
+        <div class="value-card">
+          <i class="fas fa-user-friends"></i>
+          <h3>Proximité</h3>
+          <p>Votre satisfaction est notre priorité. Notre équipe de support client est disponible 24/7 pour répondre à vos questions et vous accompagner dans votre expérience IPTV.</p>
+        </div>
+        
+        <div class="value-card">
+          <i class="fas fa-rocket"></i>
+          <h3>Innovation</h3>
+          <p>Le monde du streaming évolue rapidement, et nous évoluons avec lui. Nous recherchons constamment les dernières technologies pour améliorer notre service.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nos chiffres -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">22 000+</div>
+            <div class="stat-label">Chaînes TV</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number">50 000+</div>
+            <div class="stat-label">Films & Séries VOD</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Disponibilité</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Support Client</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Notre Service -->
+    <section class="about-section">
+      <h2 class="section-title">Notre Service</h2>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/f_auto,q_auto,w_200/v1739464291/valid%C3%A9_md9ffz.webp" alt="IPTV Smarter Pro - Contenu diversifié">
+        </div>
+        <div class="about-text">
+          <p><strong>IPTV Smarter Pro</strong> vous offre une solution complète de divertissement avec un accès à plus de 22 000 chaînes TV du monde entier et une vaste bibliothèque de plus de 50 000 films et séries à la demande.</p>
+          <p>Notre plateforme est compatible avec tous vos appareils préférés : Smart TV, Android Box, iPhone, iPad, ordinateurs et bien plus encore. Grâce à nos serveurs haute performance situés en Europe, vous bénéficiez d'un streaming fluide et d'une qualité d'image exceptionnelle, que ce soit en 4K, FHD ou HD.</p>
+          <p>Nous proposons différentes formules d'abonnement adaptées à tous les besoins et budgets, avec des fonctionnalités avancées comme le multi-écrans, le contrôle parental et une interface intuitive pour une navigation simplifiée.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Appel à l'action -->
+    <section class="cta-section">
+      <h2 class="cta-title">Prêt à transformer votre expérience de divertissement ?</h2>
+      <p class="cta-text">Rejoignez les milliers de clients satisfaits qui profitent déjà de notre service IPTV premium. Commencez avec un essai et découvrez par vous-même la différence IPTV Smarter Pro.</p>
+      <a href="index.html#offers-section" class="cta-btn">Découvrir nos offres</a>
+    </section>
+
+    <!-- Navigation -->
+    <div style="text-align: center;">
+      <a href="index.html" class="navigation-btn"><i class="fas fa-home"></i> Retour à l'accueil</a>
+    </div>
+  </div>
+
+  <script>
+    // Menu mobile toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+      this.classList.toggle('active');
+      document.getElementById('header-nav').classList.toggle('active');
+      document.body.classList.toggle('menu-open');
+    });
+    
+    // Fermer le menu mobile quand on clique sur un lien
+    document.querySelectorAll('#header-nav a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.getElementById('mobile-menu-toggle').classList.remove('active');
+        document.getElementById('header-nav').classList.remove('active');
+        document.body.classList.remove('menu-open');
+      });
+    });
+  </script>
 </body>
 </html>
