@@ -33,19 +33,25 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const headerNav = document.querySelector('.header-nav');
     
-    if (mobileMenuToggle) {
+    if (mobileMenuToggle && headerNav) {
+        console.log("Menu mobile trouvé");
         mobileMenuToggle.addEventListener('click', function() {
+            console.log("Menu mobile cliqué");
             mobileMenuToggle.classList.toggle('active');
             headerNav.classList.toggle('active');
         });
+    } else {
+        console.log("Menu mobile non trouvé:", mobileMenuToggle, headerNav);
     }
     
     // Fermer le menu quand on clique sur un lien
     const navLinks = document.querySelectorAll('.header-nav ul li a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            mobileMenuToggle.classList.remove('active');
-            headerNav.classList.remove('active');
+            if (mobileMenuToggle && headerNav) {
+                mobileMenuToggle.classList.remove('active');
+                headerNav.classList.remove('active');
+            }
         });
     });
     
