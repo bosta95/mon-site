@@ -475,7 +475,7 @@
                     <i class="fas fa-envelope"></i>
                     <div class="contact-info-content">
                         <h3>Email</h3>
-                        <p>support@iptvsmarterpros.com</p>
+                        <p>contact@iptvsmarterpros.com</p>
                     </div>
                 </li>
                 <li>
@@ -521,30 +521,26 @@
             resultDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
             resultDiv.className = '';
             
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
             try {
-                const response = await fetch('/.netlify/functions/contact', {
+                const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, subject, message })
+                    body: JSON.stringify({ name, email, subject, message })
                 });
                 
                 const result = await response.json();
                 
                 if (response.ok) {
                     resultDiv.className = 'success';
-                    resultDiv.innerHTML = '<i class="fas fa-check-circle"></i> Votre message a été envoyé avec succès!';
+                    resultDiv.innerHTML = '<i class="fas fa-check-circle"></i> Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.';
                     document.getElementById('contactForm').reset();
-                    
-                    // Redirection vers la page de succès après 2 secondes
-                    setTimeout(() => {
-                        window.location.href = '/success.html';
-                    }, 2000);
                 } else {
                     resultDiv.className = 'error';
                     resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${result.error || 'Une erreur est survenue. Veuillez réessayer.'}`;

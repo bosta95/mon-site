@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouvelle Commande</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Montserrat', Arial, sans-serif; background-color: #f4f4f4; color: #333;">
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px; margin: 20px auto; border-spacing: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <!-- HEADER -->
+    <tr>
+      <td align="center" bgcolor="#111111" style="padding: 0;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
+          <tr>
+            <td align="center" style="padding: 25px 0; background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);">
+              <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" alt="IPTV Smarter Pros" style="width: 220px; height: auto;">
+            </td>
+          </tr>
+          <tr>
+            <td height="5" style="padding: 0; background: linear-gradient(to right, #E74C3C, #F39C12, #E74C3C); line-height: 5px; font-size: 0;">&nbsp;</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    
+    <!-- CONTENT -->
+    <tr>
+      <td bgcolor="#ffffff" style="padding: 0;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
+          <!-- NOTIFICATION BANNER -->
+          <tr>
+            <td bgcolor="#2c3e50" style="padding: 15px 30px; text-align: center; color: #fff; border-bottom: 1px solid #eee;">
+              <h2 style="margin: 0; font-size: 22px; font-weight: 600;">
+                <span style="display: inline-block; background-color: #E74C3C; width: 26px; height: 26px; line-height: 26px; border-radius: 50%; margin-right: 8px; text-align: center; font-size: 14px;">!</span>
+                Nouvelle commande #{{orderNumber}}
+              </h2>
+            </td>
+          </tr>
+          
+          <!-- MAIN CONTENT -->
+          <tr>
+            <td style="padding: 30px 35px;">
+              <p style="margin: 0 0 25px 0; font-size: 16px; line-height: 1.6; color: #333;">Une nouvelle commande a été passée sur votre plateforme IPTV Smarter Pros. Détails ci-dessous:</p>
+              
+              <!-- ORDER SUMMARY -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin-bottom: 25px; border: 1px solid #eee; border-radius: 6px; overflow: hidden;">
+                <tr>
+                  <td colspan="2" bgcolor="#f8f9fa" style="padding: 15px; border-bottom: 1px solid #eee; font-size: 18px; font-weight: 600; color: #2c3e50;">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik01IDJ2LTFoMTR2MWgtMTR6bTEzIDE1LjdjLS40MjggMi43OTktMy4yMTMgNC45ODMtNi4xNSA1LjI5OS00LjI3OC40NzMtOC4wMzgtMy44NjEtNy4zMzMtOC4yNTQuNDQ1LTIuNzYgMi4yNzctNC44MTYgNC43ODQtNS41NzQuNzI0LS4yNTcgMS4xMDQtMS4wMzMgMS4wODUtMS45MTMtLjAxMi0uNTk5LS40MzItMS4xMzYtMS4wMTUtMS4zNTYtLjk0Ni0uMzU2LTEuODczLS43MzktMi43OTItMS4xMzUgOS4wMzktMS4xNzkgNy44ODYtMS4yMTEgMTYuNDIxIDEuMTVsLTIuMTM4LjgzM2MtLjUxNi4xOTktLjk0MS42MjQtMS4wMDggMS4xNzMtLjA5Mi43NTQuMzgzIDEuNDM2IDEuMDk5IDEuNjkxIDIuNjE0Ljk0MyA0LjQzNiAzLjI5IDQuNzk1IDUuOTE1LjQgMi45MDQtLjk5NyA1LjczNi0yLjk5OCA3LjIyNGwtLjUxMy0xLjYyNWMuNjkxLS43MDcgMS4zNS0xLjQzOCAxLjk2My0yLjE5OC42MTYtLjc2MSAxLjEwOS0xLjQ4NyAxLjQ3Ny0yLjE3OS0xLjU3OSAxLjgyOS0zLjI2MiAzLjE1Ny01LjMzOCAzLjk2NCAxLjMzOS00LjAzNSAxLjQyNi00LjQ5OCAyLjY2MS05LjE1em0tMS41NzktNC42MjhjLTEuNDkxLS4yMjgtMi4zNzIuNDctMi4zNzIgMS44NTVzLjg4MSAyLjA4MyAyLjM3MiAxLjg1NWMxLjQ5MS0uMjI4IDIuMzcyLjQ3IDIuMzcyIDEuODU1IDAgLjMxNC0uMDQ2LjU5Ni0uMTI3Ljg0NC0xLjQyNy0xLjQzNy0xLjIzNy0uMzY3LTEuOTA2LTQuNjUzLS4yMzQtMS41MTYuMzQ5LTEuOTg0IDEuOTEzLTIuNDgzLS4yMDIuMjI1LS4zNTIuNDg4LS4zNTIuNzI3em0tMTEuMDEyIDEuODU3Yy0uMDMuMjEtLjA0OS40MjQtLjA0OS42NDIgMCAzLjU5NyA0LjIzNiA0Ljk5NiA3LjQxMiAyLjczMyAxLjM3MiAyLjA5MS43MDYgMS4wNTkgMS45ODYgMy41MjItLjg1MS4yOTQtMS43NjEuNDQtMi42OTcuNDQtNC43NTYgMC04LjYwOS00LjAzNC04LjYwOS04Ljk5N3MzLjg1My04Ljk5OCA4LjYwOS04Ljk5OGMuNjY0IDAgMS4zMTEuMDc2IDEuOTMzLjIxNyAwIDAtLjYzIDEuOTM1LTEuOTQgMi4wODktMS4xMTguMTMtMS45ODkuNTctMS45ODkgMS40MDEgMCAuODMuODcgMS4yNyAxLjk4OSAxLjM5OCAxLjExOC4xMyAxLjk4OS41NyAxLjk4OSAxLjQwMSAwIC43MDQtLjYyOCAxLjE1My0xLjU3MSAxLjMzLTIuNDk4IDEuNDg3LTUuOTA3IDEuNjc5LTguMDYzLTEuMTc4em01LjUxNC0yLjEzM2MwLS44My0uODctMS4yNy0xLjk4OS0xLjRzLTEuOTg5LS41Ny0xLjk4OS0xLjRjMC0uODMuODctMS4yNyAxLjk4OS0xLjRzMS45ODktLjU3IDEuOTg5LTEuNGMwLTEuMjEyLTEuNjk4LTEuNDY5LTIuNzIzLTEuMDQyLTIuMjQ4LjkzNy00LjQwNiAyLjY5MS00LjQwNiA2LjU5NiAwIDMuOTA2IDQuMzE3IDYuMTk0IDYuODkzIDQuNTItLjQ4LTEuNDcxLS4xMzgtLjgwNC0xLjM0OC0zLjkzOC0uOTk2LjUyLTIuMTU0LS4wNTctMi4xNTQtLjUzNnoiIGZpbGw9IiMyYzNlNTAiLz48L3N2Zz4=" alt="Order Icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 10px;">
+                    Résumé de la commande
+                  </td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Numéro de commande</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;"><span style="font-family: monospace; font-size: 15px; color: #E74C3C; font-weight: 600;">{{orderNumber}}</span></td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Date & Heure</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">{{orderDate}} - {{orderTime}}</td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Produit</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">{{productName}}</td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Prix</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">{{productPrice}}</td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Méthode de paiement</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">{{paymentMethod}}</td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Statut paiement</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">
+                    <span style="display: inline-block; padding: 4px 8px; background-color: #fff8e1; color: #f57c00; border-radius: 4px; font-size: 14px; font-weight: 500;">À vérifier</span>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- CLIENT INFO -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin-bottom: 25px; border: 1px solid #eee; border-radius: 6px; overflow: hidden;">
+                <tr>
+                  <td colspan="2" bgcolor="#f8f9fa" style="padding: 15px; border-bottom: 1px solid #eee; font-size: 18px; font-weight: 600; color: #2c3e50;">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMGMtNi42MjcgMC0xMiA1LjM3My0xMiAxMnM1LjM3MyAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3My0xMi0xMi0xMnptNy43NTMgMTguMzA1Yy0uMjYxLS41ODYtLjc4OS0uOTkxLTEuODcxLTEuMjQxLTIuMjkzLS41MjktNC40MjgtLjk5My0zLjM5My0yLjk0NSAzLjE0NS01Ljk0Mi45MzMtOS4zNjctMi40ODktOS4zNjctMy40NDIgMC01LjYzOSAzLjQ0NC0yLjQ4OSA5LjM2NyAxLjA0MiAxLjk1Mi0xLjEwNyAyLjQxNi0zLjM5MyAyLjk0NS0xLjA4NCouMjUtMS42MTMuNjU1LTEuODcxIDEuMjQxLTEuMDcyIDIuNDA3IDIuNjE1IDMuMTU4IDcuNzUzIDMuMTU4IDUuMTQzIDAgOC44MjgtLjc1MSA3Ljc1My0zLjE1OHoiIGZpbGw9IiMyYzNlNTAiLz48L3N2Zz4=" alt="Client Icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 10px;">
+                    Informations client
+                  </td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Email du client</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">
+                    <a href="mailto:{{clientEmail}}" style="color: #3498db; text-decoration: none;">{{clientEmail}}</a>
+                    <a href="https://wa.me/{{clientPhone}}" style="display: inline-block; margin-left: 10px; color: white; background-color: #25D366; text-decoration: none; padding: 2px 8px; border-radius: 4px; font-size: 12px;">WhatsApp</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Téléphone</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">{{clientPhone}}</td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">IP du client</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">
+                    <span style="font-family: monospace; color: #666;">{{clientIP}}</span>
+                    <a href="https://www.iplocation.net/ip-lookup?query={{clientIP}}" target="_blank" style="display: inline-block; margin-left: 10px; color: #3498db; text-decoration: none; font-size: 12px;">Vérifier</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; border-bottom: 1px solid #eee; font-weight: 500; color: #555;">Pays</td>
+                  <td width="60%" style="padding: 15px; border-bottom: 1px solid #eee;">{{clientCountry}}</td>
+                </tr>
+                <tr>
+                  <td width="40%" style="padding: 15px; font-weight: 500; color: #555;">Appareil</td>
+                  <td width="60%" style="padding: 15px;">{{clientDevice}}</td>
+                </tr>
+              </table>
+              
+              <!-- ACTIONS -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin-bottom: 25px; border-left: 4px solid #E74C3C; background-color: #fef8f8; padding: 15px; border-radius: 3px;">
+                <tr>
+                  <td>
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #444;">Actions à effectuer</h3>
+                    <ol style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.6; color: #444;">
+                      <li style="margin-bottom: 8px;">Vérifier le paiement dans votre <a href="https://www.paypal.com/signin" target="_blank" style="color: #3498db; text-decoration: none;">espace PayPal</a></li>
+                      <li style="margin-bottom: 8px;">Générer les identifiants d'accès pour le client (utilisateur et mot de passe)</li>
+                      <li style="margin-bottom: 8px;">Configurer l'abonnement sur le serveur pour la période choisie</li>
+                      <li>Envoyer les identifiants par email au client en utilisant le modèle "credentials-email"</li>
+                    </ol>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- QUICK TOOLS -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin-bottom: 25px; background-color: #f0f7ff; padding: 15px; border-radius: 4px;">
+                <tr>
+                  <td>
+                    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #2c3e50;">Outils rapides</h3>
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
+                      <tr>
+                        <td width="33%" style="padding: 5px;">
+                          <a href="https://www.iptvsmarterpros.com/admin/generate-account" target="_blank" style="display: block; text-align: center; background-color: #3498db; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-weight: 500;">
+                            Générer compte
+                          </a>
+                        </td>
+                        <td width="33%" style="padding: 5px;">
+                          <a href="https://www.iptvsmarterpros.com/admin/check-payment/{{orderNumber}}" target="_blank" style="display: block; text-align: center; background-color: #f39c12; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-weight: 500;">
+                            Vérifier paiement
+                          </a>
+                        </td>
+                        <td width="33%" style="padding: 5px;">
+                          <a href="https://www.iptvsmarterpros.com/admin/send-credentials/{{orderNumber}}" target="_blank" style="display: block; text-align: center; background-color: #2ecc71; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-weight: 500;">
+                            Envoyer identifiants
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- CTA -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin: 30px 0 10px;">
+                <tr>
+                  <td align="center">
+                    <a href="https://www.iptvsmarterpros.com/admin" style="display: inline-block; padding: 14px 28px; background: linear-gradient(to right, #2c3e50, #34495e); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: all 0.3s;">
+                      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMiAwYzYuNjIzIDAgMTIgNS4zNzcgMTIgMTJzLTUuMzc3IDEyLTEyIDEyLTEyLTUuMzc3LTEyLTEyIDUuMzc3LTEyIDEyLTEyem0wIDJjNS41MTkgMCAxMCA0LjQ4MSAxMCAxMHMtNC40ODEgMTAtMTAgMTAtMTAtNC40ODEtMTAtMTAgNC40ODEtMTAgMTAtMTB6bTIgMTJsLTEuNDEgMS40MWMtLjIuMi0uNTExLjItLjcxMSAwbC00LjI5LTQuMyA0LjI5LTQuMyAuNzExLjcwLTMuNSAzLjU5IDMuNSAzLjU5Ljk5OS45OTktLjU5OS43MTF6IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==" alt="Dashboard Icon" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 8px; filter: invert(1);">
+                      Accéder au tableau de bord
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              
+              <!-- URGENCY NOTICE -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin-top: 30px; text-align: center;">
+                <tr>
+                  <td>
+                    <p style="margin: 0; padding: 15px; background-color: #ffeaea; border-radius: 4px; font-size: 15px; line-height: 1.6; color: #E74C3C; font-weight: 500;">
+                      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmM1LjUxNCAwIDEwIDQuNDg2IDEwIDEwcy00LjQ4NiAxMC0xMCAxMC0xMC00LjQ4Ni0xMC0xMCA0LjQ4Ni0xMCAxMC0xMHptMC0yYy02LjYyNyAwLTEyIDUuMzczLTEyIDEyczUuMzczIDEyIDEyIDEyIDEyLTUuMzczIDEyLTEyLTUuMzczLTEyLTEyLTEyem0tMS41IDZoM3YxMGgtM3YtMTB6bTEuNS0xLjVjLS44MjggMC0xLjUuNjcxLTEuNSAxLjVzLjY3MiAxLjUgMS41IDEuNSAxLjUtLjY3MSAxLjUtMS41LS42NzItMS41LTEuNS0xLjV6IiBmaWxsPSIjRTc0QzNDIi8+PC9zdmc+" alt="Important Notice" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 8px;">
+                      <strong>IMPORTANT:</strong> Le client attend ses identifiants. Merci de traiter cette commande rapidement.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    
+    <!-- FOOTER -->
+    <tr>
+      <td style="padding: 0;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
+          <!-- ANIMATED LINE -->
+          <tr>
+            <td height="5" style="padding: 0; background: linear-gradient(to right, #3498db, #E74C3C, #3498db); background-size: 200% 100%; line-height: 5px; font-size: 0;">&nbsp;</td>
+          </tr>
+          <!-- FOOTER CONTENT -->
+          <tr>
+            <td bgcolor="#111111" style="padding: 30px; text-align: center;">
+              <p style="margin: 0 0 15px 0; font-size: 14px; color: #aaa;">
+                &copy; 2025 IPTV Smarter Pros - Tous droits réservés
+              </p>
+              <p style="margin: 0; font-size: 13px; color: #777;">
+                Email de notification automatique - Ne pas répondre
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html> 
