@@ -22,12 +22,14 @@
   <!-- End Google Analytics -->
   
   <!-- Préchargement et optimisation des polices -->
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"></noscript>
   
   <!-- Préchargement des ressources critiques -->
   <link rel="preload" href="styles.css?v=5" as="style">
-  <link rel="preload" href="images/IPTV_glpgxi.svg" as="image">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=1" media="print" onload="this.media='all'">
+  <link rel="preload" href="images/IPTV_glpgxi.svg" as="image" type="image/svg+xml">
   
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="images/IPTV_glpgxi.svg">
@@ -57,9 +59,6 @@
   <title>IPTV Pas Cher 2025 | Test Gratuit | +22 000 Chaînes TV & VOD</title>
   <!-- Favicon -->
   <link href="images/favicon.svg" rel="icon" type="image/svg+xml"/>
-  <!-- Lien vers le fichier CSS externe -->
-  <link href="styles.css?v=5" rel="stylesheet"/>
-  <link href="css/styles.css?v=1" rel="stylesheet"/>
   <!-- SEO: Description optimisée avec mots-clés et appel à l'action -->
   <meta name="description" content="Service IPTV pas cher avec +22 000 chaînes TV, films et séries VOD. Compatible Smart TV, Android, iPhone. Test gratuit disponible. Prix à partir de 9,99€/mois." />
   <!-- SEO: Mots-clés ciblés -->
@@ -619,18 +618,87 @@
       }
     });
   </script>
+
+  <script defer>
+  // Suppression de l'événement DOMContentLoaded qui est redondant avec l'attribut defer
+  (function() {
+    // Intersection Observer pour les images et sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
+          
+          // Traitement spécifique pour les images
+          if (target.tagName === 'IMG' && target.dataset.src) {
+            target.src = target.dataset.src;
+            target.removeAttribute('data-src');
+          }
+          
+          // Ajout de la classe visible pour les animations
+          target.classList.add('visible');
+          
+          // On arrête d'observer une fois que l'élément est visible
+          observer.unobserve(target);
+        }
+      });
+    }, {
+      rootMargin: '50px',
+      threshold: 0.1
+    });
+    
+    // Observer toutes les images avec data-src et les sections à animer
+    document.querySelectorAll('img[data-src], .fade-in, .slide-in').forEach(el => {
+      observer.observe(el);
+    });
+  })();
+  </script>
+
+  <script defer>
+  // Chargement différé des vidéos
+  (function() {
+    const loadDeferredVideos = function() {
+      // Charger les vidéos avec data-src
+      document.querySelectorAll('video[data-src]').forEach(video => {
+        if(video.dataset.src) {
+          video.src = video.dataset.src;
+          video.removeAttribute('data-src');
+        }
+      });
+      
+      // Charger les sources de vidéos
+      document.querySelectorAll('source[data-src]').forEach(source => {
+        if(source.dataset.src) {
+          source.src = source.dataset.src;
+          source.removeAttribute('data-src');
+          // Rechargement de la vidéo parent
+          if(source.parentElement && source.parentElement.tagName === 'VIDEO') {
+            source.parentElement.load();
+          }
+        }
+      });
+    };
+    
+    if (document.readyState === 'complete') {
+      setTimeout(loadDeferredVideos, 1000); // Différer un peu pour laisser la page s'afficher
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(loadDeferredVideos, 1000);
+      });
+    }
+  })();
+  </script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7X5R88Q"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  
+
   <!-- HEADER -->
   <header class="header-container">
     <div class="header-content">
       <div class="logo">
-        <img alt="IPTV Pro Logo" src="images/IPTV_glpgxi.svg"/>
+        <img src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40" loading="lazy">
       </div>
       <!-- Menu hamburger pour mobile -->
       <div class="mobile-menu-toggle">
@@ -699,8 +767,11 @@
       muted 
       loop 
       playsinline 
-      preload="metadata"
+      loading="lazy" 
       poster="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.jpg"
+      preload="none"
+      data-src="images/video.mp4"
+      type="video/mp4"
     >
       <source 
         src="images/video.mp4" 
@@ -754,8 +825,8 @@
   <!-- OFFRES AVEC VIDEO DE FOND -->
   <section class="offers-section" id="offers-section">
     <!-- Vidéo de fond -->
-    <video class="offers-bg-video" autoplay muted loop playsinline preload="auto">
-      <source src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740847237/videocine.mp4" type="video/mp4">
+    <video class="offers-bg-video" autoplay muted loop playsinline loading="lazy" preload="none">
+      <source data-src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740847237/videocine.mp4" type="video/mp4">
       Votre navigateur ne supporte pas la vidéo.
     </video>
     <!-- Contenu par-dessus la vidéo -->
@@ -1143,7 +1214,7 @@
             <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn tiktok">
               <i class="fab fa-tiktok"></i> Suivre
             </a>
-          </div>
+      </div>
           <a href="concours.html" class="contest-rules">Voir les règles du concours</a>
         </div>
         
@@ -2127,7 +2198,9 @@
       deferNonCritical();
     } else {
       window.addEventListener('load', deferNonCritical);
-    }
+  }
   </script>
 </body>
+<!-- Script principal -->
+<script src="script.js" defer></script>
 </html>
