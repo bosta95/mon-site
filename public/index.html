@@ -196,8 +196,11 @@
   <style>
     .offers-section {
       position: relative;
+      padding: 60px 0 80px;
       overflow: hidden;
+      background-color: rgba(0, 0, 0, 0.5);
     }
+    
     .offers-bg-video {
       position: absolute;
       top: 0;
@@ -205,51 +208,118 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      /* z-index: -1; */
+      z-index: 1;
+      opacity: 0.6;
     }
+    
     .offers-content {
       position: relative;
-      z-index: 1;
-      padding: 50px 30px;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .offers-content h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
       text-align: center;
+      width: 100%;
     }
-    /* Modification des cartes d'offres pour un fond transparent avec encadrement */
+    
+    .offers-content h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #6c5498);
+      border-radius: 3px;
+    }
+    
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+      row-gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
     .offer-card {
-      width: 280px;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(30, 30, 50, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      padding: 20px;
-      text-align: left;
-      transition: transform 0.2s, box-shadow 0.2s;
+      padding: 25px 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      height: 100%;
+      min-height: 340px;
+      margin-bottom: 0;
     }
+    
     .offer-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 140, 140, 0.2);
+      border-color: rgba(255, 140, 140, 0.3);
     }
+    
     .offer-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      color: #ff8c8c;
-    }
-    .offer-card .price {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       margin-bottom: 10px;
+      color: #fff;
+      position: relative;
+      padding-bottom: 8px;
+    }
+    
+    .offer-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 2px;
+      background: #ff8c8c;
+      border-radius: 2px;
+    }
+    
+    .offer-card .price {
+      font-size: 1.8rem;
+      margin: 12px 0;
       font-weight: 700;
       color: #ff8c8c;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     }
+    
     .offer-card .benefits {
       list-style: none;
-      padding-left: 20px;
-      margin-bottom: 15px;
-      font-size: 0.95rem;
+      padding: 0;
+      margin: 0 0 20px;
+      font-size: 0.85rem;
       line-height: 1.4;
+      text-align: left;
+      flex-grow: 1;
     }
+    
     .offer-card .benefits li {
-      margin-bottom: 8px;
-      padding-left: 20px;
+      margin-bottom: 6px;
+      padding-left: 18px;
       position: relative;
     }
+    
     .offer-card .benefits li::before {
       content: '✓';
       position: absolute;
@@ -258,421 +328,170 @@
       font-weight: bold;
     }
     
-    /* Styles améliorés pour les boutons */
-    .offer-card .btn, .btn, .btn-primary {
+    .offer-card .btn {
       display: inline-block;
-      background: #6c5498;
+      background: linear-gradient(135deg, #6c5498, #ff6b6b);
       color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
+      padding: 12px 20px;
+      border-radius: 50px;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    .offer-card .btn:hover, .btn:hover, .btn-primary:hover {
-      background: #8269b2;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    .btn-primary {
-      background: #ff8c8c;
-    }
-    
-    .btn-primary:hover {
-      background: #ff7272;
-    }
-    
-    .offer-card .btn:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: linear-gradient(135deg, #ff6b6b, #6c5498);
-      transition: width 0.3s ease;
-      z-index: -1;
-    }
-    
-    .offer-card .btn:hover:before {
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(108, 84, 152, 0.3);
       width: 100%;
     }
     
     .offer-card .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4);
-    }
-    
-    /* Styles modernes pour les boutons */
-    .btn-primary, .btn-installation {
-      display: inline-block;
-      background: linear-gradient(135deg, #6c5498, #ff8c8c);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(108, 84, 152, 0.3);
-      border: none;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-    }
-    
-    .btn-primary:hover, .btn-installation:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(108, 84, 152, 0.4);
-      background: linear-gradient(135deg, #ff8c8c, #6c5498);
-    }
-    
-    .btn-installation {
-      background: linear-gradient(135deg, #4CAF50, #2E7D32);
-      margin-right: 10px;
-    }
-    
-    .btn-installation:hover {
-      background: linear-gradient(135deg, #2E7D32, #4CAF50);
-    }
-    
-    /* Style pour les badges et boutons selon la capture d'écran */
-    .badge-new {
-      background: #E74C3C;
-      color: white;
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 3px;
-      margin-left: 5px;
-      font-weight: 500;
-    }
-    
-    .btn-primary {
-      display: inline-block;
-      background: #E74C3C;
-      color: #fff;
-      padding: 8px 15px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-    }
-    
-    .btn-primary:hover {
-      background: #c0392b;
       transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(108, 84, 152, 0.4);
+      background: linear-gradient(135deg, #ff6b6b, #6c5498);
     }
     
-    /* Ajustements de la navigation selon la capture */
-    .header-container {
-      background: #111;
-    }
-    
-    .header-nav ul li a {
-      color: #fff;
-      font-size: 14px;
-      padding: 8px 15px;
-    }
-    
-    .header-nav ul li a:hover {
-      color: #E74C3C;
-    }
-  </style>
-
-  <!-- Style pour les séparateurs de section -->
-  <style>
-    .section-divider {
-      height: 2px;
-      background: linear-gradient(to right, transparent, #E74C3C, #6c5498, transparent);
-      margin: 0;
+    /* Ajout d'un badge pour les offres populaires */
+    .offer-card.popular {
+      border: 2px solid #ff8c8c;
       position: relative;
-      border: none;
-      z-index: 10;
+      transform: scale(1.02);
     }
     
-    .section-divider::before {
-      content: '';
+    .offer-card.popular::before {
+      content: 'POPULAIRE';
       position: absolute;
       top: -10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(135deg, #E74C3C, #6c5498);
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
-      z-index: 11;
+      background: #ff8c8c;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
     }
     
-    .section-divider::after {
-      content: '';
+    .offer-card.popular:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+    
+    /* Style pour la carte personnalisée */
+    .offer-card.custom {
+      background: linear-gradient(135deg, rgba(108, 84, 152, 0.6), rgba(255, 107, 107, 0.6));
+    }
+    
+    /* Style pour la carte concours */
+    .offer-card.contest {
+      background: linear-gradient(135deg, rgba(255, 0, 128, 0.6), rgba(91, 0, 220, 0.6));
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contest-ribbon {
       position: absolute;
-      top: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 10px;
-      height: 10px;
-      background: #111;
-      border-radius: 50%;
-      z-index: 12;
+      top: 0;
+      right: 0;
+      background: linear-gradient(135deg, #ff0080, #5b00dc);
+      color: white;
+      padding: 5px 10px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      transform: rotate(45deg) translateX(25%) translateY(-60%);
+      width: 120px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      letter-spacing: 1px;
     }
     
-    /* Variante 1 - Style minimal avec points lumineux */
-    .section-divider.style1 {
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(231, 76, 60, 0.5), rgba(108, 84, 152, 0.5), transparent);
+    .social-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
     }
     
-    .section-divider.style1::before {
-      width: 6px;
-      height: 6px;
-      top: -3px;
-      box-shadow: 0 0 10px rgba(231, 76, 60, 0.8);
+    .social-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 0;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.8rem;
     }
     
-    .section-divider.style1::after {
-      display: none;
+    .social-btn i {
+      margin-right: 4px;
+      font-size: 1rem;
     }
     
-    /* Variante 2 - Double ligne avec accent central */
-    .section-divider.style2 {
-      height: 1px;
-      background: linear-gradient(to right, transparent, #E74C3C, transparent);
+    .social-btn.youtube {
+      background: #FF0000;
     }
     
-    .section-divider.style2::before {
-      content: '•';
-      background: none;
-      width: auto;
-      height: auto;
-      top: -15px;
-      color: #6c5498;
-      font-size: 24px;
-      box-shadow: none;
+    .social-btn.tiktok {
+      background: #000000;
     }
     
-    .section-divider.style2::after {
-      top: 2px;
-      height: 1px;
-      width: 40%;
-      background: linear-gradient(to right, transparent, #6c5498, transparent);
-      border-radius: 0;
+    .contest-rules {
+      font-size: 0.7rem;
+      color: #fff;
+      text-decoration: underline;
+      margin-top: 5px;
+      display: block;
     }
     
-    /* Variante 3 - Motif en zigzag */
-    .section-divider.style3 {
-      background: linear-gradient(45deg, transparent 33.333%, #E74C3C 33.333%, #E74C3C 50%, transparent 50%, transparent 83.333%, #6c5498 83.333%, #6c5498 100%);
-      background-size: 6px 6px;
-      height: 3px;
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        row-gap: 30px;
+      }
     }
     
-    .section-divider.style3::before, 
-    .section-divider.style3::after {
-      display: none;
-    }
-    
-    /* Style pour le motif à points utilisé dans le footer fixe */
-    .fixed-footer-content:before {
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFEmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOCAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDIwLTA3LTEwVDEyOjM0OjM2KzAyOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyMC0wNy0xMFQxMjozNTowOCswMjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMC0wNy0xMFQxMjozNTowOCswMjowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpmZDhlNTljMC02NGJkLWQzNGMtYjUzZC1hZDEzOTE2ZTZjMzAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ZmQ4ZTU5YzAtNjRiZC1kMzRjLWI1M2QtYWQxMzkxNmU2YzMwIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6ZmQ4ZTU5YzAtNjRiZC1kMzRjLWI1M2QtYWQxMzkxNmU2YzMwIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDpmZDhlNTljMC02NGJkLWQzNGMtYjUzZC1hZDEzOTE2ZTZjMzAiIHN0RXZ0OndoZW49IjIwMjAtMDctMTBUMTI6MzQ6MzYrMDI6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE4IChXaW5kb3dzKSIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6+1EzSAAABfElEQVRoge2aoU4DQRCGP4wGgUHQBIUkSEIQmkcgTyB5AhweQR4DniAI8ggEg0IhSIMoQSAQiKK6ZJLLJhc2u9PdXfJPJjm13b3+uvvP7G6ztbPbaIEd4BY4A46LYyfAFfACjIEX4LUtQUNgDDQJxhgYtiEkCsRIGLY5H/mIBGElGBGQXEAYkRxAGJEcQBgRAYQVEUFYEQGEFakbhBURQFgREYQVqROEFRFAWBERhBWpC4QVEUBYERGEFakDhBURQFgREYQVqRqEFZkjbYSwIjMQTYBoMoQVmYJoEoQViYJIhbwDFwvOvwEHwGHk/j5wDFxm1ncF3AHvscKjIFIgBsAz8ATsJRZiJZyXBpEK0YsImRMGfyRqDyIVYi8irK5p3SuXID6BvcXulZQNVl+S6vbKJYjUTnE4UkQPeE24q1z1yi0SfeCR+E4ytVOsiABE3Ss3RfT5g0gFkaJTrIgIxHZGxgWQ0ilWRAhityBSQOR0ihURgdhj9SWp7kAQfwDt1p625cBYFwAAAABJRU5ErkJggg==");
-      background-repeat: repeat;
-      opacity: 0.05;
-    }
-  </style>
-
-  <!-- CSS amélioré pour le menu mobile -->
-  <style>
-    /* Mobile menu improvements */
     @media (max-width: 768px) {
-      .mobile-menu-toggle {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30px;
-        height: 20px;
-        cursor: pointer;
-        z-index: 1001;
+      .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        row-gap: 25px;
       }
       
-      .mobile-menu-toggle span {
-        height: 3px;
-        width: 100%;
-        background-color: #fff;
-        border-radius: 2px;
-        transition: transform 0.3s, opacity 0.3s;
+      .offers-content h2 {
+        font-size: 1.6rem;
       }
       
-      .header-nav {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background: rgba(15, 15, 25, 0.95);
-        padding: 0;
-        height: 0;
-        overflow: hidden;
-        transition: all 0.3s ease-out;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 1000;
+      .offer-card {
+        padding: 20px 15px;
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .offers-grid {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+        margin: 0 auto;
+        gap: 20px;
       }
       
-      .header-nav.active {
-        height: auto;
-        opacity: 1;
-        visibility: visible;
-        padding: 20px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      }
-      
-      .header-nav ul {
-        flex-direction: column;
-        width: 100%;
-        padding: 0;
-      }
-      
-      .header-nav ul li {
-        margin: 10px 0;
-        width: 100%;
-        text-align: center;
-      }
-      
-      .header-nav ul li a {
-        display: block;
-        padding: 12px;
-        font-size: 16px;
-      }
-      
-      .mobile-menu-toggle.active span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-      }
-      
-      .mobile-menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-      }
-      
-      .mobile-menu-toggle.active span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
+      .offer-card {
+        min-height: 300px;
       }
     }
   </style>
-
-  <!-- Scripts defer pour améliorer le chargement -->
-  <script defer>
-    // Fonction pour détecter la visibilité des éléments
-    function isInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.bottom >= 0
-      );
-    }
-    
-    // Chargement différé des vidéos
-    document.addEventListener('DOMContentLoaded', function() {
-      // Bannière fixe en bas
-      const fixedFooter = document.querySelector('.fixed-footer');
-      const closeFixedFooter = document.getElementById('hideFixedFooter');
-      
-      if (fixedFooter && closeFixedFooter) {
-        closeFixedFooter.addEventListener('click', function() {
-          fixedFooter.classList.add('hide');
-          // Enregistrer l'état dans localStorage
-          localStorage.setItem('fixedFooterHidden', 'true');
-        });
-        
-        // Vérifier si la bannière était précédemment masquée
-        if (localStorage.getItem('fixedFooterHidden') === 'true') {
-          fixedFooter.classList.add('hide');
-        }
-      }
-      
-      // Menu mobile - Géré dans script.js pour éviter les duplications
-      // const toggleButton = document.querySelector('.mobile-menu-toggle');
-      // const headerNav = document.querySelector('.header-nav');
-      
-      // if (toggleButton && headerNav) {
-      //   toggleButton.addEventListener('click', function() {
-      //     toggleButton.classList.toggle('active');
-      //     headerNav.classList.toggle('active');
-      //   });
-      // }
-    });
-  </script>
-
-  <script defer>
-  // Suppression de l'événement DOMContentLoaded qui est redondant avec l'attribut defer
-  (function() {
-    // Intersection Observer pour les images et sections
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const target = entry.target;
-          
-          // Traitement spécifique pour les images
-          if (target.tagName === 'IMG' && target.dataset.src) {
-            target.src = target.dataset.src;
-            target.removeAttribute('data-src');
-          }
-          
-          // Ajout de la classe visible pour les animations
-          target.classList.add('visible');
-          
-          // On arrête d'observer une fois que l'élément est visible
-          observer.unobserve(target);
-        }
-      });
-    }, {
-      rootMargin: '50px',
-      threshold: 0.1
-    });
-    
-    // Observer toutes les images avec data-src et les sections à animer
-    document.querySelectorAll('img[data-src], .fade-in, .slide-in').forEach(el => {
-      observer.observe(el);
-    });
-  })();
-  </script>
-
-  <script defer>
-  // Chargement différé des vidéos
-  (function() {
-    const loadDeferredVideos = function() {
-      // Charger les vidéos avec data-src
-      document.querySelectorAll('video[data-src]').forEach(video => {
-        if(video.dataset.src) {
-          video.src = video.dataset.src;
-          video.removeAttribute('data-src');
-        }
-      });
-      
-      // Charger les sources de vidéos
-      document.querySelectorAll('source[data-src]').forEach(source => {
-        if(source.dataset.src) {
-          source.src = source.dataset.src;
-          source.removeAttribute('data-src');
-          // Rechargement de la vidéo parent
-          if(source.parentElement && source.parentElement.tagName === 'VIDEO') {
-            source.parentElement.load();
-          }
-        }
-      });
-    };
-    
-    if (document.readyState === 'complete') {
-      setTimeout(loadDeferredVideos, 1000); // Différer un peu pour laisser la page s'afficher
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(loadDeferredVideos, 1000);
-      });
-    }
-  })();
-  </script>
+  
+  <!-- Fin amélioration des performances -->
+  
+  <!-- Préchargement des ressources critiques -->
+  <link rel="preload" href="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" as="video" fetchpriority="high">
 </head>
 <body>
   <!-- HEADER -->
@@ -748,14 +567,11 @@
       muted 
       loop 
       playsinline 
-      loading="lazy" 
-      poster="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.jpg"
-      preload="none"
-      data-src="images/video.mp4"
-      type="video/mp4"
+      poster="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.jpg" 
+      id="hero-video"
     >
       <source 
-        src="images/video.mp4" 
+        src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" 
         type="video/mp4"
       >
       Votre navigateur ne supporte pas la vidéo.
@@ -815,290 +631,25 @@
   <section class="offers-section" id="offers-section">
     <!-- Vidéo de fond -->
     <video class="offers-bg-video" autoplay muted loop playsinline loading="lazy" preload="none">
-      <source data-src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740847237/videocine.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740847237/videocine.mp4" type="video/mp4">
       Votre navigateur ne supporte pas la vidéo.
     </video>
     <!-- Contenu par-dessus la vidéo -->
     <div class="offers-content">
-      <h2>Abonnements IPTV Pas Cher | Test Gratuit | Smart TV, Android</h2>
-      
-      <style>
-        /* Styles améliorés pour la section offres */
-        .offers-content h2 {
-          font-size: 2.2rem;
-          margin-bottom: 40px;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-          position: relative;
-          display: inline-block;
-          padding-bottom: 15px;
-        }
-        
-        .offers-content h2::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 100px;
-          height: 3px;
-          background: linear-gradient(90deg, #ff6b6b, #6c5498);
-          border-radius: 3px;
-        }
-        
-        .offers-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 25px;
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 20px 0 40px;
-        }
-        
-        .offer-card {
-          width: 100%;
-          min-width: auto;
-          max-width: 220px;
-          min-height: 380px;
-          margin: 0 auto;
-          background: rgba(30, 30, 50, 0.6);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 15px;
-          padding: 20px;
-          text-align: center;
-          transition: transform 0.3s, box-shadow 0.3s;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .offer-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 15px 30px rgba(255, 140, 140, 0.2);
-          border-color: rgba(255, 140, 140, 0.3);
-        }
-        
-        .offer-card h3 {
-          font-size: 1.3rem;
-          margin-bottom: 10px;
-          color: #fff;
-          position: relative;
-          padding-bottom: 10px;
-        }
-        
-        .offer-card h3::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 50px;
-          height: 2px;
-          background: #ff8c8c;
-          border-radius: 2px;
-        }
-        
-        .offer-card .price {
-          font-size: 2.2rem;
-          margin: 15px 0;
-          font-weight: 700;
-          color: #ff8c8c;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .offer-card .benefits {
-          list-style: none;
-          padding: 0;
-          margin: 0 0 15px;
-          font-size: 0.9rem;
-          line-height: 1.5;
-          text-align: left;
-        }
-        
-        .offer-card .benefits li {
-          margin-bottom: 8px;
-          padding-left: 20px;
-          position: relative;
-        }
-        
-        .offer-card .benefits li::before {
-          content: '✓';
-          position: absolute;
-          left: 0;
-          color: #ff8c8c;
-          font-weight: bold;
-        }
-        
-        .offer-card .btn {
-          display: inline-block;
-          background: linear-gradient(135deg, #6c5498, #ff6b6b);
-          color: #fff;
-          padding: 12px 25px;
-          border-radius: 50px;
-          text-decoration: none;
-          font-size: 0.9rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          transition: all 0.3s ease;
-          border: none;
-          cursor: pointer;
-          box-shadow: 0 5px 15px rgba(108, 84, 152, 0.3);
-          margin-top: auto;
-          position: relative;
-          overflow: hidden;
-          z-index: 1;
-        }
-        
-        .offer-card .btn:before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 0;
-          height: 100%;
-          background: linear-gradient(135deg, #ff6b6b, #6c5498);
-          transition: width 0.3s ease;
-          z-index: -1;
-        }
-        
-        .offer-card .btn:hover:before {
-          width: 100%;
-        }
-        
-        .offer-card .btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4);
-        }
-        
-        /* Ajout d'un badge pour les offres populaires */
-        .offer-card.popular {
-          border: 2px solid #ff8c8c;
-          position: relative;
-          transform: scale(1.05);
-        }
-        
-        .offer-card.popular::before {
-          content: 'POPULAIRE';
-          position: absolute;
-          top: -12px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: #ff8c8c;
-          color: #fff;
-          padding: 5px 15px;
-          border-radius: 20px;
-          font-size: 0.8rem;
-          font-weight: bold;
-          letter-spacing: 1px;
-        }
-        
-        .offer-card.popular:hover {
-          transform: translateY(-10px) scale(1.05);
-        }
-        
-        /* Style pour la carte personnalisée */
-        .offer-card.custom {
-          background: linear-gradient(135deg, rgba(108, 84, 152, 0.4), rgba(255, 107, 107, 0.4));
-          border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .offer-card.custom h3 {
-          color: #fff;
-        }
-        
-        .offer-card.custom h3::after {
-          background: #fff;
-        }
-        
-        .offer-card.custom .price {
-          font-size: 1.8rem;
-          color: #fff;
-        }
-        
-        .offer-card.custom .benefits li::before {
-          color: #fff;
-        }
-        
-        .offer-card.custom .btn {
-          background: rgba(255, 255, 255, 0.2);
-          border: 1px solid #fff;
-        }
-        
-        .offer-card.custom .btn:before {
-          background: rgba(255, 255, 255, 0.3);
-        }
-        
-        @media (max-width: 1400px) {
-          .offers-grid {
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-          }
-          
-          .offer-card {
-            width: 100%;
-            min-width: auto;
-            max-width: 100%;
-          }
-        }
-        
-        @media (max-width: 1100px) {
-          .offers-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-          }
-        }
-        
-        @media (max-width: 768px) {
-          .offers-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 10px;
-          }
-          
-          .offer-card {
-            padding: 15px;
-            min-height: auto;
-            width: 100%;
-          }
-          
-          .offer-card.popular {
-            transform: scale(1);
-          }
-          
-          .offer-card.popular:hover {
-            transform: translateY(-10px) scale(1);
-          }
-          
-          .offers-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .offers-grid {
-            grid-template-columns: 1fr;
-            max-width: 280px;
-          }
-        }
-      </style>
+      <h2>Abonnements IPTV Pas Cher | Test Gratuit</h2>
       
       <div class="offers-grid">
+        <!-- Première ligne : 4 offres principales -->
         <!-- Offre 1 - 3 mois -->
         <div class="offer-card">
           <h3>Essentiel - 3 mois</h3>
           <p class="price">9.99€</p>
           <ul class="benefits">
             <li>+18 000 Chaînes TV HD</li>
-            <li>+30 000 Films & Séries VOD</li>
+            <li>+30 000 VOD</li>
             <li>Qualité HD garantie</li>
-            <li>+18 basiques</li>
             <li>Compatible tous appareils</li>
             <li>Mises à jour mensuelles</li>
-            <li>Support technique par email</li>
           </ul>
           <a class="btn" href="offer-details.html?product=Essentiel+IPTV+3+mois&price=9.99">Commander</a>
         </div>
@@ -1109,11 +660,9 @@
           <p class="price">19.99€</p>
           <ul class="benefits">
             <li>+20 000 Chaînes TV HD</li>
-            <li>+40 000 Films & Séries VOD</li>
-            <li>Qualité FHD/HD garantie</li>
-            <li>+18 HD</li>
+            <li>+40 000 VOD</li>
+            <li>Qualité FHD garantie</li>
             <li>Compatible tous appareils</li>
-            <li>Mises à jour bi-mensuelles</li>
             <li>Support technique 24/7</li>
           </ul>
           <a class="btn" href="offer-details.html?product=Standard+IPTV+6+mois&price=19.99">Commander</a>
@@ -1125,26 +674,46 @@
           <p class="price">29.99€</p>
           <ul class="benefits">
             <li>+22 000 Chaînes TV HD</li>
-            <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/FHD/HD garantie</li>
-            <li>+18 HD complètes</li>
+            <li>+50 000 VOD</li>
+            <li>Qualité 4K/FHD garantie</li>
             <li>Compatible tous appareils</li>
-            <li>Mises à jour hebdomadaires</li>
-            <li>Support technique prioritaire</li>
+            <li>Support prioritaire</li>
           </ul>
           <a class="btn" href="offer-details.html?product=Premium+IPTV+12+mois&price=29.99">Commander</a>
         </div>
         
+        <!-- Pack Concours -->
+        <div class="offer-card contest">
+          <div class="contest-ribbon">CONCOURS</div>
+          <h3>12 Mois GRATUITS</h3>
+          <p class="price">Tirage le 15</p>
+          <ul class="benefits">
+            <li>Premium 12 mois offert</li>
+            <li>1 gagnant chaque mois</li>
+            <li>S'abonner à YouTube</li>
+            <li>Suivre notre TikTok</li>
+            <li>Commenter "Je participe"</li>
+          </ul>
+          <div class="social-buttons">
+            <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-btn youtube">
+              <i class="fab fa-youtube"></i> S'abonner
+            </a>
+            <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn tiktok">
+              <i class="fab fa-tiktok"></i> Suivre
+            </a>
+          </div>
+          <a href="concours.html" class="contest-rules">Voir les règles</a>
+        </div>
+
+        <!-- Seconde ligne : 4 offres supplémentaires -->
         <!-- Offre multi-écrans - Niveau 1 -->
         <div class="offer-card">
           <h3>Famille - 2 écrans</h3>
           <p class="price">59.99€</p>
           <ul class="benefits">
             <li>+22 000 Chaînes TV HD</li>
-            <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/UHD garantie</li>
-            <li>+18 HD (contrôle)</li>
-            <li>Compatible tous appareils</li>
+            <li>+50 000 VOD</li>
+            <li>Qualité 4K garantie</li>
             <li>2 écrans simultanés</li>
             <li>Support prioritaire 24/7</li>
           </ul>
@@ -1157,10 +726,8 @@
           <p class="price">79.99€</p>
           <ul class="benefits">
             <li>+22 000 Chaînes TV HD/4K</li>
-            <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/UHD Premium</li>
-            <li>+18 HD complètes</li>
-            <li>Compatible tous appareils</li>
+            <li>+50 000 VOD</li>
+            <li>Qualité 4K Premium</li>
             <li>3 écrans simultanés</li>
             <li>Support VIP 24/7</li>
           </ul>
@@ -1173,38 +740,12 @@
           <p class="price">99.99€</p>
           <ul class="benefits">
             <li>+22 000 Chaînes TV HD/4K</li>
-            <li>+50 000 Films & Séries VOD</li>
-            <li>Qualité 4K/UHD Ultra-Premium</li>
-            <li>+18 HD complètes</li>
-            <li>Compatible tous appareils</li>
+            <li>+50 000 VOD</li>
+            <li>Qualité 4K Ultra-Premium</li>
             <li>4 écrans simultanés</li>
             <li>Support VIP dédié 24/7</li>
           </ul>
           <a class="btn" href="offer-details.html?product=Elite+IPTV+4+écrans&price=99.99">Commander</a>
-        </div>
-
-        <!-- Pack Concours -->
-        <div class="offer-card contest">
-          <div class="contest-ribbon">CONCOURS</div>
-          <h3>Gagnez 12 Mois GRATUITS</h3>
-          <p class="price">Tirage le 15 du mois</p>
-          <ul class="benefits contest-benefits">
-            <li>Abonnement Premium 12 mois offert</li>
-            <li>1 gagnant chaque mois</li>
-            <li>S'abonner à notre chaîne YouTube</li>
-            <li>Suivre notre compte TikTok</li>
-            <li>Commenter "Je participe"</li>
-            <li>Partager la publication</li>
-          </ul>
-          <div class="social-buttons">
-            <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-btn youtube">
-              <i class="fab fa-youtube"></i> S'abonner
-            </a>
-            <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn tiktok">
-              <i class="fab fa-tiktok"></i> Suivre
-            </a>
-      </div>
-          <a href="concours.html" class="contest-rules">Voir les règles du concours</a>
         </div>
         
         <!-- Offre personnalisable -->
@@ -1212,116 +753,21 @@
           <h3>Pack Personnalisé</h3>
           <p class="price">Sur devis</p>
           <ul class="benefits">
-            <li>Sélection de chaînes sur mesure</li>
-            <li>Catalogue VOD personnalisable</li>
-            <li>Qualité vidéo à la demande</li>
-            <li>Options +18 configurables</li>
+            <li>Chaînes sur mesure</li>
+            <li>VOD personnalisable</li>
+            <li>Qualité à la demande</li>
             <li>Nb d'écrans selon besoin</li>
-            <li>Mises à jour à votre rythme</li>
             <li>Support dédié personnalisé</li>
           </ul>
           <a class="btn" href="contact.html?subject=Pack+Personnalisé">Contactez-nous</a>
         </div>
       </div>
-
-      <style>
-        /* Style pour la carte concours */
-        .offer-card.contest {
-          background: linear-gradient(135deg, rgba(255, 0, 128, 0.3), rgba(91, 0, 220, 0.3));
-          border: 2px solid rgba(255, 255, 255, 0.4);
-          position: relative;
-          overflow: hidden;
-          transform: scale(1.05);
-        }
-        
-        .contest-ribbon {
-          position: absolute;
-          top: 0;
-          right: 0;
-          background: linear-gradient(135deg, #ff0080, #5b00dc);
-          color: white;
-          padding: 7px 15px;
-          font-size: 0.8rem;
-          font-weight: bold;
-          transform: rotate(45deg) translateX(25%) translateY(-60%);
-          width: 150px;
-          text-align: center;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-          letter-spacing: 1px;
-        }
-        
-        .offer-card.contest h3 {
-          margin-top: 5px;
-          color: #fff;
-          font-size: 1.4rem;
-        }
-        
-        .offer-card.contest h3::after {
-          background: white;
-        }
-        
-        .offer-card.contest .price {
-          color: #fff;
-          font-size: 1.5rem;
-        }
-        
-        .contest-benefits li {
-          font-weight: 500;
-        }
-        
-        .contest-benefits li::before {
-          color: white;
-        }
-        
-        .social-buttons {
-          display: flex;
-          gap: 10px;
-          margin-top: 15px;
-        }
-        
-        .social-btn {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 8px 0;
-          border-radius: 5px;
-          color: white;
-          font-weight: bold;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          font-size: 0.9rem;
-        }
-        
-        .social-btn i {
-          margin-right: 5px;
-          font-size: 1.1rem;
-        }
-        
-        .social-btn.youtube {
-          background: #FF0000;
-        }
-        
-        .social-btn.tiktok {
-          background: #000000;
-        }
-        
-        .social-btn:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .offer-card.contest:hover {
-          transform: translateY(-10px) scale(1.05);
-          box-shadow: 0 15px 30px rgba(255, 0, 128, 0.3);
-        }
-      </style>
     </div>
   </section>
   
   <!-- Séparateur de section -->
   <hr class="section-divider style3">
-  
+
   <!-- SECTION AVANTAGES -->
   <section class="advantages-section">
     <div class="advantages-container">
@@ -2177,6 +1623,19 @@
     } else {
       window.addEventListener('load', deferNonCritical);
   }
+  </script>
+
+  <script>
+    // Fonction pour vérifier si un élément est dans la viewport
+    function isElementInViewport(el) {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
   </script>
 </body>
 <!-- Script principal -->
