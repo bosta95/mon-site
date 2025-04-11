@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouveau Message de Contact</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin-top: 20px;">
+    <tr>
+      <td align="center" bgcolor="#E74C3C" style="padding: 20px;">
+        <img src="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" alt="IPTV Smarter Pros" style="width: 200px; height: auto;">
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff" style="padding: 30px 30px 20px 30px; border-radius: 0 0 4px 4px;">
+        <h2 style="color: #E74C3C; margin: 0; font-size: 24px;">📩 Nouveau message de contact</h2>
+        
+        <p style="margin: 20px 0; font-size: 16px; line-height: 1.5;">Un nouveau message a été envoyé depuis le formulaire de contact de votre site.</p>
+        
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+          <tr>
+            <td>
+              <h3 style="color: #2c3e50; margin-top: 0; font-size: 18px;">Détails du message</h3>
+              <p style="margin: 10px 0; font-size: 16px;"><strong>Nom :</strong> {{name}}</p>
+              <p style="margin: 10px 0; font-size: 16px;"><strong>Email :</strong> <a href="mailto:{{email}}" style="color: #3498db; text-decoration: none;">{{email}}</a></p>
+              <p style="margin: 10px 0; font-size: 16px;"><strong>Sujet :</strong> {{subject}}</p>
+              <p style="margin: 10px 0; font-size: 16px;"><strong>Date :</strong> {{date}}</p>
+              <p style="margin: 10px 0; font-size: 16px;"><strong>IP :</strong> {{clientIP}}</p>
+            </td>
+          </tr>
+        </table>
+        
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+          <h3 style="color: #2c3e50; margin-top: 0; font-size: 18px;">Message :</h3>
+          <p style="margin: 10px 0; font-size: 16px; white-space: pre-wrap; font-family: Arial, sans-serif;">{{message}}</p>
+        </div>
+        
+        <p style="margin: 20px 0; font-size: 16px; line-height: 1.5;">Pour répondre à ce message, cliquez simplement sur l'adresse email du contact.</p>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#222222" style="padding: 20px 30px; color: #999; font-size: 14px; text-align: center; line-height: 1.5;">
+        <p style="margin: 0;">&copy; 2025 IPTV Smarter Pros. Tous droits réservés.</p>
+        <p style="margin: 10px 0 0 0;">Email de notification automatique du formulaire de contact.</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html> 
