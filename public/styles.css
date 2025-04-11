@@ -91,6 +91,22 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Header compact pour le défilement */
+.header-container.compact {
+  height: 50px;
+  background: rgba(20, 18, 38, 0.97);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.header-container.compact .logo img {
+  height: 32px;
+}
+
+.header-container.compact .header-nav ul li a {
+  font-size: 13px;
+}
+
 .header-container::after {
   display: none;
 }
@@ -948,41 +964,99 @@ img.featured-image {
 }
 
 @media (max-width: 768px) {
-  .fixed-footer-content {
-    flex-direction: column;
-    padding: 15px;
-    text-align: center;
+  .fixed-footer {
+    display: none; /* Masquer complètement sur mobile */
   }
   
-  .fixed-footer-left {
+  /* Optimisation du menu mobile */
+  .mobile-menu-toggle {
+    display: flex !important;
     flex-direction: column;
-    margin-right: 0;
-    margin-bottom: 15px;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1002;
+    margin-left: auto;
+  }
+  
+  .header-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: rgba(20, 18, 38, 0.98);
+    transition: all 0.3s ease-in-out;
+    z-index: 1001;
+    padding-top: 60px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+  }
+  
+  .header-nav.active {
+    right: 0;
+  }
+  
+  .header-nav ul {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .header-nav ul li {
     width: 100%;
   }
   
-  .fixed-footer-logo {
-    margin-right: 0;
-    margin-bottom: 10px;
-    justify-content: center;
+  .header-nav ul li a {
+    display: block;
+    font-size: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Réduction de la taille de police et des espacements */
+  h1 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
   }
   
-  .fixed-footer-text {
-    margin-bottom: 12px;
+  h2 {
+    font-size: 20px !important;
   }
   
-  .fixed-footer-right {
-    margin-left: 0;
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 10px;
+  p {
+    font-size: 14px !important;
   }
   
-  .fixed-footer-btn {
-    min-width: 0;
-    padding: 8px 14px;
-    font-size: 0.8rem;
+  .offers-grid, .advantages-grid {
+    gap: 15px !important;
   }
+  
+  /* Optimisation des performances de rendu */
+  .header-content::before,
+  .hero-section::before {
+    content: none !important;
+  }
+}
+
+/* Optimisation des animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimisation pour le contenu important */
+.hero-section,
+.offers-section,
+.advantages-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
 }
 
 @media (max-width: 480px) {

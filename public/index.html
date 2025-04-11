@@ -21,6 +21,14 @@
   </script>
   <!-- End Google Analytics -->
   
+  <!-- Préchargement et optimisation des polices -->
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"></noscript>
+  
+  <!-- Préchargement des ressources critiques -->
+  <link rel="preload" href="styles.css?v=5" as="style">
+  <link rel="preload" href="images/IPTV_glpgxi.svg" as="image">
+  
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="images/IPTV_glpgxi.svg">
   <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
@@ -39,12 +47,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   
-  <!-- Préchargement des ressources critiques -->
-  <link rel="preload" href="styles.css?v=5" as="style">
-  <link rel="preload" href="images/IPTV_glpgxi.svg" as="image">
-  
-  <!-- Font Awesome pour les icônes -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Font Awesome pour les icônes - chargement optimisé -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
   
   <!-- Validation Bing Webmaster Tools -->
   <meta name="msvalidate.01" content="814819C9FA9F9A0AA228C561E5E96380" />
@@ -571,6 +576,49 @@
       }
     }
   </style>
+
+  <!-- Scripts defer pour améliorer le chargement -->
+  <script defer>
+    // Fonction pour détecter la visibilité des éléments
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.bottom >= 0
+      );
+    }
+    
+    // Chargement différé des vidéos
+    document.addEventListener('DOMContentLoaded', function() {
+      // Bannière fixe en bas
+      const fixedFooter = document.querySelector('.fixed-footer');
+      const closeFixedFooter = document.getElementById('hideFixedFooter');
+      
+      if (fixedFooter && closeFixedFooter) {
+        closeFixedFooter.addEventListener('click', function() {
+          fixedFooter.classList.add('hide');
+          // Enregistrer l'état dans localStorage
+          localStorage.setItem('fixedFooterHidden', 'true');
+        });
+        
+        // Vérifier si la bannière était précédemment masquée
+        if (localStorage.getItem('fixedFooterHidden') === 'true') {
+          fixedFooter.classList.add('hide');
+        }
+      }
+      
+      // Menu mobile
+      const toggleButton = document.querySelector('.mobile-menu-toggle');
+      const headerNav = document.querySelector('.header-nav');
+      
+      if (toggleButton && headerNav) {
+        toggleButton.addEventListener('click', function() {
+          toggleButton.classList.toggle('active');
+          headerNav.classList.toggle('active');
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -578,28 +626,6 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   
-  <!-- Bannière fixe en bas de page -->
-  <div class="fixed-footer">
-    <button class="fixed-footer-close" id="hideFixedFooter">×</button>
-    <div class="fixed-footer-content">
-      <div class="fixed-footer-left">
-        <div class="fixed-footer-logo">
-          <img src="images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
-        </div>
-        <div class="fixed-footer-text">
-          <p>Service IPTV pas cher avec chaînes sport en direct, films et séries</p>
-          <p class="highlight">Test gratuit disponible | Prix à partir de 9,99€/mois</p>
-        </div>
-      </div>
-      <div class="fixed-footer-right">
-        <div class="fixed-footer-buttons">
-          <a href="#offers-section" class="fixed-footer-btn">Voir les offres</a>
-          <a href="tutoriel.html" class="fixed-footer-btn secondary">Guide d'installation</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- HEADER -->
   <header class="header-container">
     <div class="header-content">
@@ -673,7 +699,7 @@
       muted 
       loop 
       playsinline 
-      preload="auto"
+      preload="metadata"
       poster="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.jpg"
     >
       <source 
@@ -1812,7 +1838,7 @@
     document.getElementById('hideFixedFooter').addEventListener('click', function() {
       document.querySelector('.fixed-footer').classList.add('hide');
       // Stocker dans localStorage pour ne pas réafficher pendant 1 heure seulement
-      localStorage.setItem('fixedFooterHidden', Date.now());
+      localStorage.setItem('fixedFooterHidden', 'true');
       
       // Programmer la réapparition de la bannière après 1 heure
       setTimeout(function() {
@@ -2021,6 +2047,87 @@
         fixedFooter.style.pointerEvents = 'auto';
       }
     });
+  </script>
+
+  <!-- Script d'optimisation des performances -->
+  <script>
+    // Fonction pour différer le chargement des éléments non critiques
+    function deferNonCritical() {
+      // Optimisation des scripts tiers
+      setTimeout(function() {
+        // Mettre en cache les sélecteurs fréquemment utilisés
+        const headerNav = document.querySelector('.header-nav');
+        const toggleButton = document.querySelector('.mobile-menu-toggle');
+        
+        // Ajouter les écouteurs d'événements pour le menu mobile
+        if (toggleButton && headerNav) {
+          toggleButton.addEventListener('click', function() {
+            toggleButton.classList.toggle('active');
+            headerNav.classList.toggle('active');
+          });
+        }
+        
+        // Utiliser l'API Intersection Observer pour charger les contenus au défilement
+        if ('IntersectionObserver' in window) {
+          const lazyLoadObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                const target = entry.target;
+                
+                // Si c'est une vidéo
+                if (target.tagName === 'VIDEO' && target.dataset.src) {
+                  target.src = target.dataset.src;
+                  target.removeAttribute('data-src');
+                }
+                
+                // Ajouter une classe pour les animations au défilement
+                target.classList.add('visible');
+                
+                // Arrêter d'observer une fois chargé
+                observer.unobserve(target);
+              }
+            });
+          }, {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+          });
+          
+          // Observer les sections principales
+          document.querySelectorAll('.hero-section, .offers-section, .advantages-section, .films-slider-section').forEach(function(element) {
+            lazyLoadObserver.observe(element);
+          });
+        }
+        
+        // Optimiser les événements de défilement
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+          // Annuler le délai précédent
+          clearTimeout(scrollTimeout);
+          
+          // Définir un nouveau délai
+          scrollTimeout = setTimeout(function() {
+            // Masquer/afficher le header selon le sens de défilement
+            const currentScroll = window.pageYOffset;
+            const header = document.querySelector('.header-container');
+            
+            if (header) {
+              if (currentScroll > 100) {
+                header.classList.add('compact');
+              } else {
+                header.classList.remove('compact');
+              }
+            }
+          }, 50);
+        }, { passive: true });
+      }, 100);
+    }
+    
+    // Exécuter après le chargement de la page
+    if (document.readyState === 'complete') {
+      deferNonCritical();
+    } else {
+      window.addEventListener('load', deferNonCritical);
+    }
   </script>
 </body>
 </html>
