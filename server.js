@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss');
+const emailUtils = require('./email-utils'); // Import du module email-utils
 require('dotenv').config();
 
 const app = express();
@@ -168,40 +169,30 @@ app.post('/api/contact', async (req, res) => {
     const sanitizedSubject = sanitizeInput(subject);
     const sanitizedMessage = sanitizeInput(message);
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      },
-      tls: {
-        minVersion: 'TLSv1.2',
-        ciphers: 'HIGH:!aNULL:!MD5'
-      }
-    });
+    console.log('Tentative d\'envoi d\'email - Formulaire de contact');
 
-    const mailOptions = {
-      from: process.env.SMTP_USER,
-      to: process.env.MERCHANT_EMAIL,
-      subject: `[Contact] ${sanitizedSubject}`,
-      text: `Nom: ${sanitizedName}\nEmail: ${email}\nSujet: ${sanitizedSubject}\nMessage: ${sanitizedMessage}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #E74C3C;">Nouveau message de contact</h1>
-          <p><strong>Nom:</strong> ${sanitizedName}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Sujet:</strong> ${sanitizedSubject}</p>
-          <p><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap;">${sanitizedMessage}</p>
-        </div>
-      `
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    return res.status(200).json({ success: 'Email envoyé avec succès !' });
+    try {
+      // Utiliser emailUtils pour envoyer un email avec le template
+      await emailUtils.sendTemplateEmail({
+        to: process.env.MERCHANT_EMAIL,
+        subject: `[Contact] ${sanitizedSubject}`,
+        templateName: 'contact-message',
+        data: {
+          name: sanitizedName,
+          email: email,
+          subject: sanitizedSubject,
+          message: sanitizedMessage,
+          date: new Date().toLocaleDateString(),
+          clientIP: req.ip || 'Inconnue'
+        }
+      });
+      
+      console.log('Email de contact envoyé avec succès');
+      return res.status(200).json({ success: 'Email envoyé avec succès !' });
+    } catch (sendError) {
+      console.error('Erreur lors de l\'envoi de l\'email:', sendError);
+      return res.status(500).json({ error: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.' });
+    }
 
   } catch (error) {
     return res.status(500).json({ error: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.' });
@@ -230,74 +221,59 @@ app.post('/api/order', async (req, res) => {
       return res.status(400).json({ error: 'Numéro de commande invalide' });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      },
-      tls: {
-        minVersion: 'TLSv1.2',
-        ciphers: 'HIGH:!aNULL:!MD5'
-      }
-    });
+    console.log('Tentative d\'envoi d\'email - Commande:', orderNumber);
 
-    // Email au client
-    await transporter.sendMail({
-      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: `Confirmation de commande N° ${orderNumber}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #2c3e50; text-align: center;">Confirmation de votre commande</h2>
-          
-          <p>Bonjour,</p>
-          
-          <p>Nous vous remercions pour votre confiance ! Votre commande a bien été enregistrée.</p>
-          
-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <h3 style="color: #2c3e50; margin-top: 0;">Détails de votre commande</h3>
-            <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
-            <p><strong>Produit :</strong> ${product}</p>
-          </div>
-          
-          <p>Pour toute question concernant votre commande, n'hésitez pas à nous contacter à <a href="mailto:${process.env.MERCHANT_EMAIL}" style="color: #3498db;">${process.env.MERCHANT_EMAIL}</a></p>
-          
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-            <p style="color: #666; font-size: 12px;">Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
-          </div>
-        </div>
-      `
-    });
+    try {
+      // Email au client avec le template
+      await emailUtils.sendTemplateEmail({
+        to: email,
+        subject: `Confirmation de commande N° ${orderNumber}`,
+        templateName: 'order-confirmation',
+        data: {
+          orderNumber: orderNumber,
+          productName: getProductName(product),
+          productDescription: getProductDescription(product),
+          productPrice: getProductPrice(product),
+          orderDate: new Date().toLocaleDateString(),
+          orderTotal: getProductPrice(product),
+          userName: email.split('@')[0],
+          paymentMethod: 'PayPal'
+        }
+      });
+      console.log('Email client envoyé avec succès');
 
-    // Email à l'administrateur
-    await transporter.sendMail({
-      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
-      to: process.env.MERCHANT_EMAIL,
-      subject: `[Nouvelle Commande] N° ${orderNumber}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #2c3e50;">Nouvelle commande reçue</h2>
-          
-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
-            <h3 style="color: #2c3e50; margin-top: 0;">Détails de la commande</h3>
-            <p><strong>Numéro de commande :</strong> ${orderNumber}</p>
-            <p><strong>Produit :</strong> ${product}</p>
-            <p><strong>Email du client :</strong> ${email}</p>
-          </div>
-          
-          <p>Cette commande nécessite votre attention pour le traitement.</p>
-        </div>
-      `
-    });
+      // Email à l'administrateur avec le template
+      await emailUtils.sendTemplateEmail({
+        to: process.env.MERCHANT_EMAIL,
+        subject: `[Nouvelle Commande] N° ${orderNumber}`,
+        templateName: 'admin-notification',
+        data: {
+          orderNumber: orderNumber,
+          productName: getProductName(product),
+          orderDate: new Date().toLocaleDateString(),
+          orderTime: new Date().toLocaleTimeString(),
+          productPrice: getProductPrice(product),
+          paymentMethod: 'PayPal',
+          clientEmail: email,
+          clientCountry: 'France',
+          clientIP: req.ip || 'Inconnue',
+          clientDevice: req.headers['user-agent'] || 'Inconnu',
+          clientPhone: '-'
+        }
+      });
+      console.log('Email admin envoyé avec succès');
 
-    return res.status(200).json({ 
-      success: 'Commande enregistrée et emails envoyés avec succès',
-      orderNumber,
-      timestamp: new Date().toISOString()
-    });
+      return res.status(200).json({ 
+        success: 'Commande enregistrée et emails envoyés avec succès',
+        orderNumber,
+        timestamp: new Date().toISOString()
+      });
+    } catch (sendError) {
+      console.error('Erreur lors de l\'envoi des emails de commande:', sendError);
+      return res.status(500).json({ 
+        error: 'Une erreur est survenue lors de l\'envoi des emails'
+      });
+    }
 
   } catch (error) {
     return res.status(500).json({ 
@@ -306,8 +282,39 @@ app.post('/api/order', async (req, res) => {
   }
 });
 
+// Fonctions auxiliaires pour les informations de produit
+function getProductName(productCode) {
+  const productNames = {
+    '1_mois': 'Abonnement IPTV Premium - 1 Mois',
+    '3_mois': 'Abonnement IPTV Premium - 3 Mois',
+    '6_mois': 'Abonnement IPTV Premium - 6 Mois',
+    '12_mois': 'Abonnement IPTV Premium - 12 Mois'
+  };
+  return productNames[productCode] || 'Abonnement IPTV Premium';
+}
+
+function getProductDescription(productCode) {
+  const productDescriptions = {
+    '1_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 1 mois',
+    '3_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 3 mois',
+    '6_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 6 mois',
+    '12_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 12 mois'
+  };
+  return productDescriptions[productCode] || 'Accès à notre service IPTV premium';
+}
+
+function getProductPrice(productCode) {
+  const productPrices = {
+    '1_mois': '14,99 €',
+    '3_mois': '34,99 €',
+    '6_mois': '59,99 €',
+    '12_mois': '99,99 €'
+  };
+  return productPrices[productCode] || 'Prix non spécifié';
+}
+
 // Démarrage du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
-});
+}); 
