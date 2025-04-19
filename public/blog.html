@@ -14,21 +14,21 @@
 <!-- Open Graph / Facebook -->
 <meta content="Les Tendances du Streaming IPTV en 2025 : Guide Complet | IPTV Pro" property="og:title"/>
 <meta content="Découvrez notre guide complet sur les tendances du streaming IPTV en 2025, avec des conseils sur abonnements et innovations pour un streaming premium inégalé." property="og:description"/>
-<meta content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" property="og:image"/>
+<meta content="/images/logo.webp" property="og:image"/>
 <meta content="https://www.iptvsmarterpros.com/blog/tendances-streaming-2025.html" property="og:url"/>
 <meta content="article" property="og:type"/>
 <!-- Twitter Card -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Les Tendances du Streaming IPTV en 2025 : Guide Complet | IPTV Pro" name="twitter:title"/>
 <meta content="Découvrez notre guide complet sur les tendances du streaming IPTV en 2025, des abonnements aux innovations technologiques pour un streaming premium inégalé." name="twitter:description"/>
-<meta content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp" name="twitter:image"/>
+<meta content="/images/logo.webp" name="twitter:image"/>
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "Les Tendances du Streaming IPTV en 2025 : Guide Complet",
-    "image": "https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp",
+    "image": "/images/logo.webp",
     "author": {
       "@type": "Person",
       "name": "L'équipe IPTV Pro"
@@ -38,7 +38,7 @@
       "name": "IPTV Pro",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.webp"
+        "url": "/images/logo.webp"
       }
     },
     "datePublished": "2025-01-01T08:00:00+00:00",
@@ -59,23 +59,24 @@
 <link href="css/styles.css?v=1" rel="stylesheet">
 
 <!-- Préchargement de la vidéo -->
-<link rel="preload" href="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" as="video" fetchpriority="high">
+<link rel="preload" href="/videos/header-video.mp4" as="video" fetchpriority="high">
 
 <style>
   /* Styles spécifiques à la page blog */
   .blog-header {
     position: relative;
     width: 100%;
-    height: 400px;
-    background-color: #000;
-    color: #fff;
-    margin-bottom: 60px;
+    height: 350px;
     overflow: hidden;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 50px;
   }
   
-  .hero-video {
+  .blog-header .hero-video {
     position: absolute;
     top: 0;
     left: 0;
@@ -83,45 +84,33 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
-    filter: brightness(0.6);
+    opacity: 0.7;
   }
   
-  .blog-header-content {
+  .blog-header .hero-overlay {
     position: relative;
     z-index: 2;
+    width: 100%;
+    padding: 0 20px;
+    background: rgba(0, 0, 0, 0.4);
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 2rem;
+    justify-content: center;
   }
   
-  .blog-header-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    animation: fadeInUp 1s ease-out;
+  .blog-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
   
-  .blog-header-content p {
+  .blog-header p {
     font-size: 1.2rem;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    animation: fadeInUp 1.2s ease-out;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   }
   
   .blog-container {
@@ -1534,13 +1523,11 @@
   
   @media (max-width: 768px) {
     .blog-header {
-      height: auto;
-      min-height: 350px;
-      padding: 100px 0 50px;
+      height: 300px;
     }
     
     .blog-header h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
     
     .blog-header p {
@@ -1569,6 +1556,57 @@
     
     .blog-top-section {
       padding: 20px 15px;
+    }
+    
+    .blog-categories {
+      justify-content: flex-start;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    
+    .category-pill {
+      scroll-snap-align: start;
+      white-space: nowrap;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .blog-header {
+      height: 250px;
+    }
+    
+    .blog-header h1 {
+      font-size: 1.8rem;
+    }
+    
+    .blog-header p {
+      font-size: 1rem;
+    }
+    
+    .blog-header-subtitle p {
+      font-size: 0.9rem;
+    }
+    
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .featured-article-image {
+      height: 200px;
+    }
+    
+    .featured-article-content h3 {
+      font-size: 1.4rem;
+    }
+    
+    .article-excerpt {
+      font-size: 0.9rem;
+    }
+    
+    .blog-top-section {
+      padding: 15px 10px;
     }
     
     .blog-categories {
@@ -1905,11 +1943,13 @@
   <!-- En-tête du blog -->
   <header class="blog-header">
     <video class="hero-video" autoplay muted loop playsinline>
-      <source src="/assets/videos/hero-video.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" type="video/mp4">
     </video>
-    <div class="blog-header-content">
-      <h1>Le Blog d'IPTV Smarters</h1>
-      <p>Toute l'actualité, les conseils et guides sur l'IPTV</p>
+    <div class="hero-overlay">
+      <div class="container">
+        <h1>Le Blog d'IPTV Smarters</h1>
+        <p>Toute l'actualité, les conseils et guides sur l'IPTV</p>
+      </div>
     </div>
   </header>
 

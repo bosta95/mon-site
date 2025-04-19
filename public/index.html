@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://res.cloudinary.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; media-src 'self' https://res.cloudinary.com; object-src 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self'; media-src 'self' blob:; object-src 'none';">
   
   <!-- Google Analytics supprimé pour économiser 51 Kio -->
   
@@ -16,22 +16,22 @@
   <link rel="preload" href="styles.css?v=5" as="style" fetchpriority="high">
   <link rel="stylesheet" href="styles.css?v=5" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css?v=1" media="print" onload="this.media='all'">
-  <link rel="preload" href="images/IPTV_glpgxi.svg" as="image" type="image/svg+xml" fetchpriority="high">
+  <link rel="preload" href="/images/IPTV_glpgxi.svg" as="image" type="image/svg+xml" fetchpriority="high">
   
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="images/IPTV_glpgxi.svg">
-  <link rel="icon" type="image/svg+xml" href="images/IPTV_glpgxi.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/IPTV_glpgxi.svg">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/IPTV_glpgxi.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-96x96.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="mask-icon" href="images/IPTV_glpgxi.svg" color="#6c5498">
-  <link rel="shortcut icon" href="images/IPTV_glpgxi.svg">
+  <link rel="mask-icon" href="/images/favicon.svg" color="#6c5498">
+  <link rel="shortcut icon" href="/images/favicon.ico">
   <meta name="msapplication-TileColor" content="#6c5498">
   <meta name="msapplication-config" content="browserconfig.xml">
   <meta name="theme-color" content="#6c5498">
   
   <!-- Préconnexion aux domaines externes -->
-  <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+  <!-- Cloudinary a été retiré -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -59,7 +59,7 @@
   <meta property="og:url" content="https://iptvsmarterpros.com/">
   <meta property="og:title" content="IPTV Pas Cher 2025 | Test Gratuit | +22 000 Chaînes TV & VOD | IPTV Smarter Pro">
   <meta property="og:description" content="Service IPTV pas cher stable avec +22 000 chaînes TV, films et séries VOD. Compatible Smart TV, Android, iPhone. Test gratuit disponible. Prix à partir de 9,99€/mois.">
-  <meta property="og:image" content="https://iptvsmarterpros.com/assets/logos/logo.svg">
+  <meta property="og:image" content="/images/logo.svg">
   <meta property="og:site_name" content="IPTV Smarter Pro">
   
   <!-- Twitter Card -->
@@ -67,7 +67,7 @@
   <meta name="twitter:url" content="https://iptvsmarterpros.com/">
   <meta name="twitter:title" content="IPTV Pas Cher 2025 | Test Gratuit | +22 000 Chaînes TV & VOD | IPTV Smarter Pro">
   <meta name="twitter:description" content="Service IPTV pas cher stable avec +22 000 chaînes TV, films et séries VOD. Compatible Smart TV, Android, iPhone. Test gratuit disponible. Prix à partir de 9,99€/mois.">
-  <meta name="twitter:image" content="https://iptvsmarterpros.com/assets/logos/logo.svg">
+  <meta name="twitter:image" content="/images/logo.svg">
   
   <!-- Schema.org / JSON-LD pour Google -->
   <script type="application/ld+json">
@@ -491,9 +491,27 @@
   <!-- Fin amélioration des performances -->
   
   <!-- Préchargement des ressources critiques -->
-  <link rel="preload" href="/assets/videos/hero-video.mp4" as="video" fetchpriority="high">
+  <link rel="preload" href="/images/video_ava71w.mp4" as="video" fetchpriority="high">
 
   <style>
+    /* Styles spécifiques pour éviter le flash de l'image pendant le chargement de la vidéo */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    
+    /* Animation pour rendre la vidéo visible une fois chargée */
+    .hero-video.loaded {
+      opacity: 1;
+    }
+    
     /* Styles pour l'image hero */
     .hero-img {
       position: absolute;
@@ -697,7 +715,7 @@
   <header class="header-container">
     <div class="header-content">
       <div class="logo">
-        <img src="/assets/logos/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40" loading="lazy">
+        <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40" loading="lazy">
       </div>
       <!-- Menu hamburger pour mobile -->
       <div class="mobile-menu-toggle">
@@ -723,38 +741,38 @@
   <div class="images-banner">
     <div class="slide-track">
       <!-- Premier groupe d'images avec loading lazy -->
-      <img alt="Canal+ IPTV en direct HD" src="assets/images/channels/image1.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="BeIN Sports IPTV chaînes sportives" src="assets/images/channels/image2.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="RMC Sport IPTV en streaming HD" src="assets/images/channels/image3.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Netflix en streaming via IPTV" src="assets/images/channels/image12.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Disney+ films et séries en IPTV" src="assets/images/channels/image8.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Prime Video intégré à l'IPTV" src="assets/images/channels/image11.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="TF1 en direct IPTV France" src="assets/images/channels/image9.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="France TV en direct IPTV" src="assets/images/channels/image10.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Sport IPTV premium en direct" src="assets/images/channels/image13.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Films récents en IPTV HD" src="assets/images/channels/image14.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Séries TV en IPTV streaming" src="assets/images/channels/image15.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes internationales IPTV" src="assets/images/channels/image16.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes enfants IPTV éducatives" src="assets/images/channels/image17.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes d'information IPTV 24/7" src="assets/images/channels/image18.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Documentaires IPTV en HD" src="assets/images/channels/image19.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Canal+ IPTV en direct HD" src="/images/image1.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="BeIN Sports IPTV chaînes sportives" src="/images/image2.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="RMC Sport IPTV en streaming HD" src="/images/image3.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Netflix en streaming via IPTV" src="/images/image12.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Disney+ films et séries en IPTV" src="/images/image8.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Prime Video intégré à l'IPTV" src="/images/image11.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="TF1 en direct IPTV France" src="/images/image9.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="France TV en direct IPTV" src="/images/image10.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Sport IPTV premium en direct" src="/images/image5.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Films récents en IPTV HD" src="/images/image14.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Séries TV en IPTV streaming" src="/images/image15.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes internationales IPTV" src="/images/image16.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes enfants IPTV éducatives" src="/images/image7.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes d'information IPTV 24/7" src="/images/image6.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Documentaires IPTV en HD" src="/images/image4.svg" loading="lazy" decoding="async" importance="low"/>
       
       <!-- Répétition des images pour un défilement infini - aussi avec lazy loading -->
-      <img alt="Canal+ IPTV en direct HD" src="assets/images/channels/image1.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="BeIN Sports IPTV chaînes sportives" src="assets/images/channels/image2.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="RMC Sport IPTV en streaming HD" src="assets/images/channels/image3.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Netflix en streaming via IPTV" src="assets/images/channels/image12.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Disney+ films et séries en IPTV" src="assets/images/channels/image8.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Prime Video intégré à l'IPTV" src="assets/images/channels/image11.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="TF1 en direct IPTV France" src="assets/images/channels/image9.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="France TV en direct IPTV" src="assets/images/channels/image10.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Sport IPTV premium en direct" src="assets/images/channels/image13.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Films récents en IPTV HD" src="assets/images/channels/image14.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Séries TV en IPTV streaming" src="assets/images/channels/image15.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes internationales IPTV" src="assets/images/channels/image16.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes enfants IPTV éducatives" src="assets/images/channels/image17.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes d'information IPTV 24/7" src="assets/images/channels/image18.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Documentaires IPTV en HD" src="assets/images/channels/image19.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Canal+ IPTV en direct HD" src="/images/image1.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="BeIN Sports IPTV chaînes sportives" src="/images/image2.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="RMC Sport IPTV en streaming HD" src="/images/image3.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Netflix en streaming via IPTV" src="/images/image12.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Disney+ films et séries en IPTV" src="/images/image8.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Prime Video intégré à l'IPTV" src="/images/image11.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="TF1 en direct IPTV France" src="/images/image9.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="France TV en direct IPTV" src="/images/image10.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Sport IPTV premium en direct" src="/images/image5.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Films récents en IPTV HD" src="/images/image14.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Séries TV en IPTV streaming" src="/images/image15.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes internationales IPTV" src="/images/image16.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes enfants IPTV éducatives" src="/images/image7.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes d'information IPTV 24/7" src="/images/image6.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Documentaires IPTV en HD" src="/images/image4.svg" loading="lazy" decoding="async" importance="low"/>
     </div>
   </div>
 
@@ -762,8 +780,7 @@
   <section class="hero-section">
     <div class="hero-content">
       <video class="hero-video" autoplay loop muted playsinline 
-        src="/assets/videos/hero-video.mp4"
-        poster="/assets/images/bg/header-bg.png">
+        src="/images/video_ava71w.mp4">
       </video>
       <div class="hero-overlay">
         <h1>IPTV Pas Cher | Test Gratuit | Smart TV, Android, iPhone</h1>
@@ -779,22 +796,110 @@
   <section class="films-slider-section" id="films">
     <h2>VOD IPTV | Films & Séries en HD | Mises à jour quotidiennes</h2>
     <div class="slider">
-      <div class="slider-wrapper">
+      <div class="slide-track">
         <!-- Images optimisées et stockées localement -->
-        <img alt="Image 1" class="slide" height="300" src="/assets/images/slider/movie1.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 2" class="slide" height="300" src="/assets/images/slider/movie2.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 3" class="slide" height="300" src="/assets/images/slider/movie3.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 4" class="slide" height="300" src="/assets/images/slider/movie4.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 5" class="slide" height="300" src="/assets/images/slider/movie5.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 6" class="slide" height="300" src="/assets/images/slider/fire.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <!-- Répétition de quelques images pour un défilement continu -->
-        <img alt="Image 1" class="slide" height="300" src="/assets/images/slider/movie1.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 2" class="slide" height="300" src="/assets/images/slider/movie2.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 3" class="slide" height="300" src="/assets/images/slider/movie3.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Image 4" class="slide" height="300" src="/assets/images/slider/movie4.webp" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 1" class="slide" height="300" src="/images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 2" class="slide" height="300" src="/images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 3" class="slide" height="300" src="/images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Dragon" class="slide" height="300" src="/images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Mufasa" class="slide" height="300" src="/images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Bianca" class="slide" height="300" src="/images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Squid Game" class="slide" height="300" src="/images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Stitch" class="slide" height="300" src="/images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Souly" class="slide" height="300" src="/images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Rig" class="slide" height="300" src="/images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <!-- Répétition pour l'effet de boucle infinie -->
+        <img alt="Films 1" class="slide" height="300" src="/images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 2" class="slide" height="300" src="/images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 3" class="slide" height="300" src="/images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Dragon" class="slide" height="300" src="/images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
       </div>
     </div>
   </section>
+
+  <style>
+  /* Style pour la section slider amélioré */
+  .slider {
+    overflow: hidden;
+    padding: 30px 0;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .slide-track {
+    display: flex;
+    width: calc(200px * 20); /* Largeur total = nombre d'images * largeur d'une image */
+    animation: scroll 40s linear infinite;
+  }
+
+  .slide {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .slide:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 140, 140, 0.3);
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-200px * 10)); /* Moitié de la largeur totale */
+    }
+  }
+
+  /* Effet de fondu sur les côtés */
+  .slider::before,
+  .slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .slider::before {
+    left: 0;
+    background: linear-gradient(to right, #141414, transparent);
+  }
+
+  .slider::after {
+    right: 0;
+    background: linear-gradient(to left, #141414, transparent);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .slide {
+      width: 150px;
+      height: 225px;
+      margin: 0 8px;
+    }
+    
+    .slide-track {
+      width: calc(150px * 20);
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-150px * 10));
+      }
+    }
+  }
+  </style>
 
   <!-- Séparateur de section -->
   <hr class="section-divider style2">
@@ -803,7 +908,7 @@
   <section class="offers-section" id="offers-section">
     <!-- Vidéo de fond -->
     <video class="offers-bg-video" autoplay muted loop playsinline loading="lazy" preload="none">
-      <source src="/assets/videos/cinema-video.mp4" type="video/mp4">
+      <source src="/images/cinema-video.mp4" type="video/mp4">
       Votre navigateur ne supporte pas la vidéo.
     </video>
     <!-- Contenu par-dessus la vidéo -->
@@ -1495,7 +1600,7 @@
     <div class="fixed-footer-content">
       <div class="fixed-footer-left">
         <div class="fixed-footer-logo">
-          <img src="/assets/logos/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
+          <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
         </div>
         <div class="fixed-footer-text">
           <p>Service IPTV pas cher avec chaînes sport en direct, films et séries</p>
@@ -1821,6 +1926,32 @@
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
       );
     }
+  </script>
+
+  <script>
+    // Script pour détecter quand la vidéo est chargée et prête à être affichée
+    document.addEventListener('DOMContentLoaded', function() {
+      const heroVideos = document.querySelectorAll('.hero-video');
+      
+      heroVideos.forEach(video => {
+        // Précharger la vidéo
+        video.preload = "auto";
+        
+        // Fonction pour marquer la vidéo comme chargée
+        function markVideoAsLoaded() {
+          video.classList.add('loaded');
+        }
+        
+        // Détecter quand la vidéo est suffisamment chargée pour commencer la lecture
+        video.addEventListener('loadeddata', markVideoAsLoaded);
+        video.addEventListener('canplay', markVideoAsLoaded);
+        
+        // Si la vidéo est déjà chargée au moment où on attache l'événement
+        if (video.readyState >= 3) {
+          markVideoAsLoaded();
+        }
+      });
+    });
   </script>
 </body>
 <!-- Script principal -->

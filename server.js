@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss');
 const emailUtils = require('./email-utils'); // Import du module email-utils
+const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
@@ -16,11 +17,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
+      imgSrc: ["'self'", "data:", "https:", "blob:"],
       connectSrc: ["'self'"],
-      fontSrc: ["'self'"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
       frameSrc: ["'none'"],
@@ -39,7 +40,7 @@ app.use(cors({
 // Rate limiting strict
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 20,
+  max: 100,
   message: { error: 'Trop de requêtes, veuillez réessayer plus tard.' }
 });
 app.use('/api/', apiLimiter);
@@ -47,7 +48,7 @@ app.use('/api/', apiLimiter);
 // Rate limiting pour les emails
 const emailLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 5,
+  max: 20,
   message: { error: 'Trop de tentatives d\'envoi d\'email, veuillez réessayer plus tard.' }
 });
 app.use('/api/contact', emailLimiter);
@@ -62,8 +63,8 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 // Protection contre les attaques par force brute
 const bruteForce = new Map();
-const MAX_ATTEMPTS = 5;
-const BLOCK_DURATION = 30 * 60 * 1000; // 30 minutes
+const MAX_ATTEMPTS = 20;
+const BLOCK_DURATION = 5 * 60 * 1000; // 5 minutes
 
 function checkBruteForce(ip) {
   const now = Date.now();
@@ -87,16 +88,16 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   
-  // Vérification de la protection contre la force brute
-  if (checkBruteForce(req.ip)) {
+  // Vérification de la protection contre la force brute - seulement en production
+  if (process.env.NODE_ENV === 'production' && checkBruteForce(req.ip)) {
     return res.status(429).json({ error: 'Trop de tentatives, veuillez réessayer plus tard.' });
   }
   
   next();
 });
 
-// Servir les fichiers statiques de manière sécurisée
-app.use(express.static(path.join(__dirname, 'public'), {
+// Middleware pour servir les fichiers statiques - AVANT la configuration des routes
+app.use('/', express.static(path.join(__dirname, 'public'), {
   maxAge: '1d',
   setHeaders: (res, path) => {
     if (path.endsWith('.html')) {
@@ -104,6 +105,93 @@ app.use(express.static(path.join(__dirname, 'public'), {
     }
   }
 }));
+
+// Middleware spécifique pour les vidéos avec les bons en-têtes Content-Type
+app.get('/videos/:filename', (req, res) => {
+  // Chercher d'abord dans le dossier videos s'il existe
+  let filePath = path.join(__dirname, 'public/videos', req.params.filename);
+  
+  // Si le fichier n'existe pas dans /videos, chercher dans /images
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(__dirname, 'public/images', req.params.filename);
+    
+    // Si toujours pas trouvé, renvoyer 404
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).send('Fichier non trouvé');
+    }
+  }
+
+  const stat = fs.statSync(filePath);
+  const fileSize = stat.size;
+  const range = req.headers.range;
+
+  if (range) {
+    // Si demande de streaming avec Range headers
+    const parts = range.replace(/bytes=/, "").split("-");
+    const start = parseInt(parts[0], 10);
+    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+    const chunksize = (end - start) + 1;
+    const file = fs.createReadStream(filePath, {start, end});
+    
+    res.writeHead(206, {
+      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4'
+    });
+    file.pipe(res);
+  } else {
+    // Si demande normale
+    res.writeHead(200, {
+      'Content-Length': fileSize,
+      'Content-Type': 'video/mp4'
+    });
+    fs.createReadStream(filePath).pipe(res);
+  }
+});
+
+// Ajout d'un endpoint pour faciliter l'accès aux vidéos dans le dossier /images
+app.get('/images/:filename', (req, res, next) => {
+  const filePath = path.join(__dirname, 'public/images', req.params.filename);
+  
+  // Vérifier si le fichier existe et s'il s'agit d'un fichier vidéo
+  if (fs.existsSync(filePath) && 
+      (req.params.filename.endsWith('.mp4') || 
+       req.params.filename.endsWith('.webm') || 
+       req.params.filename.endsWith('.ogg'))) {
+    
+    const stat = fs.statSync(filePath);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+
+    if (range) {
+      // Si demande de streaming avec Range headers
+      const parts = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
+      const chunksize = (end - start) + 1;
+      const file = fs.createReadStream(filePath, {start, end});
+      
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunksize,
+        'Content-Type': 'video/mp4'
+      });
+      file.pipe(res);
+    } else {
+      // Si demande normale
+      res.writeHead(200, {
+        'Content-Length': fileSize,
+        'Content-Type': 'video/mp4'
+      });
+      fs.createReadStream(filePath).pipe(res);
+    }
+  } else {
+    // Si ce n'est pas un fichier vidéo, passer au middleware suivant
+    next();
+  }
+});
 
 // Redirection favicon
 app.get('/favicon.ico', (req, res) => {

@@ -13,14 +13,14 @@
 <!-- Open Graph / Facebook -->
 <meta content="Guide d'Installation IPTV - Configuration Simple et Rapide" property="og:title"/>
 <meta content="Suivez notre guide détaillé pour installer IPTV Smarters Pro et configurer votre abonnement IPTV Pro afin de profiter d'un streaming premium inégalé." property="og:description"/>
-<meta content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" property="og:image"/>
+<meta content="/images/logo.png" property="og:image"/>
 <meta content="https://www.iptvsmarterpros.com/tutoriel.html" property="og:url"/>
 <meta content="website" property="og:type"/>
 <!-- Twitter Card -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Guide d'Installation IPTV - Configuration Simple et Rapide" name="twitter:title"/>
 <meta content="Suivez notre tutoriel complet pour installer IPTV Smarters Pro et configurer votre abonnement IPTV Pro pour profiter d'un streaming premium avec plus de 22 000 chaînes, films et séries." name="twitter:description"/>
-<meta content="https://res.cloudinary.com/dwcz1jp7j/image/upload/v1739378524/iptv_transparent_kazzld.png" name="twitter:image"/>
+<meta content="/images/logo.png" name="twitter:image"/>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="styles.css?v=6">
 
 <!-- Préchargement des ressources critiques -->
-<link rel="preload" href="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" as="video" fetchpriority="high">
+<link rel="preload" href="/videos/header-video.mp4" as="video" fetchpriority="high">
 
 <style>
     /* Styles spécifiques à la page du guide */
@@ -255,7 +255,12 @@
         height: 100%;
         object-fit: cover;
         z-index: 1;
-        filter: brightness(0.6);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .hero-video.loaded {
+        opacity: 1;
     }
 
     .tutorial-header-content {
@@ -1090,7 +1095,7 @@
 <header class="header-container">
 <div class="header-content">
 <div class="logo">
-<img alt="IPTV Pro Logo" src="/assets/logos/IPTV_glpgxi.svg"/>
+<img alt="IPTV Pro Logo" src="/images/IPTV_glpgxi.svg"/>
 </div>
 <!-- Menu hamburger pour mobile -->
 <div class="mobile-menu-toggle">
@@ -1115,8 +1120,8 @@
 
 <!-- EN-TÊTE DU TUTORIEL AVEC VIDÉO -->
 <div class="tutorial-header">
-    <video class="hero-video" autoplay muted loop playsinline>
-        <source src="https://res.cloudinary.com/dwcz1jp7j/video/upload/v1740830815/video1.mp4" type="video/mp4">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="/images/video_ava71w.mp4" type="video/mp4">
     </video>
     <div class="tutorial-header-content">
         <h1>Guide d'Installation IPTV</h1>
@@ -1136,7 +1141,7 @@
     <!-- Vidéo tutorial -->
     <div class="video-tutorial">
         <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/lpiRwbYmrzg?start=77" title="Tutoriel d'installation IPTV Smarters Pro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lpiRwbYmrzg?start=77" title="Tutoriel d'installation IPTV Smarters Pro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
         </div>
         <div class="video-description">
             <h3>Tutoriel vidéo explicatif</h3>
@@ -1153,7 +1158,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape1.webp" alt="Télécharger Downloader dans votre bibliothèque d'applications">
+                    <img src="/images/etape1.webp" alt="Télécharger Downloader dans votre bibliothèque d'applications">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1173,7 +1178,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape2.webp" alt="Activer les sources inconnues">
+                    <img src="/images/etape2.webp" alt="Activer les sources inconnues">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1196,7 +1201,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape3.webp" alt="Installation de l'application">
+                    <img src="/images/etape3.webp" alt="Installation de l'application">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1219,7 +1224,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape4.webp" alt="Ouverture de l'application">
+                    <img src="/images/etape4.webp" alt="Ouverture de l'application">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1238,7 +1243,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape5.webp" alt="Configuration de l'abonnement">
+                    <img src="/images/etape5.webp" alt="Configuration de l'abonnement">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1257,7 +1262,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape6.webp" alt="Personnalisation de l'interface">
+                    <img src="/images/etape6.webp" alt="Personnalisation de l'interface">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1276,7 +1281,7 @@
             </div>
             <div class="step-content-wrapper">
                 <div class="step-image">
-                    <img src="/assets/images/tutorial/etape7.webp" alt="Profiter de votre abonnement">
+                    <img src="/images/etape7.webp" alt="Profiter de votre abonnement">
                 </div>
                 <div class="step-content">
                     <p>
@@ -1432,5 +1437,31 @@
     .faq-item:nth-child(3) { transition-delay: 0.3s; }
     .faq-item:nth-child(4) { transition-delay: 0.4s; }
 </style>
+
+<script>
+    // Script pour détecter quand la vidéo est chargée et prête à être affichée
+    document.addEventListener('DOMContentLoaded', function() {
+        const heroVideos = document.querySelectorAll('.hero-video');
+        
+        heroVideos.forEach(video => {
+            // Précharger la vidéo
+            video.preload = "auto";
+            
+            // Fonction pour marquer la vidéo comme chargée
+            function markVideoAsLoaded() {
+                video.classList.add('loaded');
+            }
+            
+            // Détecter quand la vidéo est suffisamment chargée pour commencer la lecture
+            video.addEventListener('loadeddata', markVideoAsLoaded);
+            video.addEventListener('canplay', markVideoAsLoaded);
+            
+            // Si la vidéo est déjà chargée au moment où on attache l'événement
+            if (video.readyState >= 3) {
+                markVideoAsLoaded();
+            }
+        });
+    });
+</script>
 </body>
 </html>
