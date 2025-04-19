@@ -797,7 +797,7 @@
     <h2>VOD IPTV | Films & Séries en HD | Mises à jour quotidiennes</h2>
     <div class="slider">
       <div class="slide-track">
-        <!-- Images optimisées et stockées localement -->
+        <!-- Premier groupe d'images -->
         <img alt="Films 1" class="slide" height="300" src="/images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Films 2" class="slide" height="300" src="/images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Films 3" class="slide" height="300" src="/images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
@@ -808,11 +808,18 @@
         <img alt="Stitch" class="slide" height="300" src="/images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Souly" class="slide" height="300" src="/images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Rig" class="slide" height="300" src="/images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <!-- Répétition pour l'effet de boucle infinie -->
+        
+        <!-- Deuxième groupe d'images (répétition) -->
         <img alt="Films 1" class="slide" height="300" src="/images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Films 2" class="slide" height="300" src="/images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Films 3" class="slide" height="300" src="/images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         <img alt="Dragon" class="slide" height="300" src="/images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Mufasa" class="slide" height="300" src="/images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Bianca" class="slide" height="300" src="/images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Squid Game" class="slide" height="300" src="/images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Stitch" class="slide" height="300" src="/images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Souly" class="slide" height="300" src="/images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Rig" class="slide" height="300" src="/images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
       </div>
     </div>
   </section>
@@ -829,8 +836,19 @@
 
   .slide-track {
     display: flex;
-    width: calc(200px * 20); /* Largeur total = nombre d'images * largeur d'une image */
-    animation: scroll 40s linear infinite;
+    width: calc(200px * 20); /* Largeur totale = nombre d'images * largeur d'une image */
+    animation: scroll 60s linear infinite;
+    will-change: transform;
+  }
+  
+  /* Animation plus fluide avec effet de bobine infinie */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-200px * 10));
+    }
   }
 
   .slide {
@@ -841,20 +859,13 @@
     margin: 0 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
   }
 
   .slide:hover {
     transform: scale(1.05) translateY(-5px);
     box-shadow: 0 10px 20px rgba(255, 140, 140, 0.3);
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-200px * 10)); /* Moitié de la largeur totale */
-    }
+    z-index: 10;
   }
 
   /* Effet de fondu sur les côtés */
@@ -863,9 +874,10 @@
     content: "";
     position: absolute;
     top: 0;
-    width: 100px;
+    width: 120px;
     height: 100%;
     z-index: 2;
+    pointer-events: none;
   }
 
   .slider::before {
@@ -876,6 +888,11 @@
   .slider::after {
     right: 0;
     background: linear-gradient(to left, #141414, transparent);
+  }
+  
+  /* Animation pause au survol */
+  .slider:hover .slide-track {
+    animation-play-state: paused;
   }
 
   /* Responsive */
@@ -897,6 +914,11 @@
       100% {
         transform: translateX(calc(-150px * 10));
       }
+    }
+    
+    .slider::before,
+    .slider::after {
+      width: 60px;
     }
   }
   </style>
