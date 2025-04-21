@@ -7,26 +7,6 @@
   to = "/.netlify/functions/api/:splat"
   status = 200
 
-# Redirection de la version sans www vers la version avec www
-[[redirects]]
-  from = "https://iptvsmarterpros.com/*"
-  to = "https://www.iptvsmarterpros.com/:splat"
-  status = 301
-  force = true
-
-# Redirection HTTP vers HTTPS
-[[redirects]]
-  from = "http://iptvsmarterpros.com/*"
-  to = "https://www.iptvsmarterpros.com/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://www.iptvsmarterpros.com/*"
-  to = "https://www.iptvsmarterpros.com/:splat"
-  status = 301
-  force = true
-
 # Configuration des en-têtes pour le SEO et la sécurité
 [[headers]]
   for = "/*"

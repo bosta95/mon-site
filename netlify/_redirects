@@ -8,11 +8,8 @@ https://www.iptvsmarterpros.com/*/ https://www.iptvsmarterpros.com/:splat 301!
 # Redirection de index.html vers la racine (plus propre pour les moteurs de recherche)
 /index.html / 301!
 
-# Redirection des anciennes URL (si applicable)
-/old-page.html /nouvelle-page.html 301!
-
 # Page 404 personnalisée
-/* /index.html 404
+/* /404.html 404
 
 # Empêcher l'accès direct aux fichiers de template (si applicable)
 /templates/* /index.html 404 
