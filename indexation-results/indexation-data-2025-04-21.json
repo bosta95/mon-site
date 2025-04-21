@@ -1,0 +1,162 @@
+[
+  {
+    "url": "https://www.iptvsmarterpros.com/",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:20.900Z",
+    "priority": "1.0",
+    "lastmod": "2024-06-10",
+    "changefreq": "daily",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:22.446Z",
+    "priority": "0.9",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_mois&price=9.99",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:23.971Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_6_mois&price=19.99",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:25.500Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_12_mois&price=29.99",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:27.024Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_2_ecrans&price=59.99",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:28.550Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_ecrans&price=79.99",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:30.084Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_4_ecrans&price=99.99",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:31.616Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/tutoriel.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:33.149Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "monthly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/blog.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:34.679Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/concours.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:36.203Z",
+    "priority": "0.8",
+    "lastmod": "2024-06-10",
+    "changefreq": "weekly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/faq.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:37.736Z",
+    "priority": "0.7",
+    "lastmod": "2024-06-10",
+    "changefreq": "monthly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/about.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:39.260Z",
+    "priority": "0.7",
+    "lastmod": "2024-06-10",
+    "changefreq": "monthly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/contact.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:40.781Z",
+    "priority": "0.7",
+    "lastmod": "2024-06-10",
+    "changefreq": "monthly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/conditions-generales.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:42.304Z",
+    "priority": "0.6",
+    "lastmod": "2024-06-10",
+    "changefreq": "monthly",
+    "blockedByRobots": true
+  },
+  {
+    "url": "https://www.iptvsmarterpros.com/politique-confidentialite.html",
+    "indexed": false,
+    "error": "Request failed with status code 400",
+    "timestamp": "2025-04-21T10:32:43.828Z",
+    "priority": "0.6",
+    "lastmod": "2024-06-10",
+    "changefreq": "monthly",
+    "blockedByRobots": true
+  }
+]
