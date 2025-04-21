@@ -1,0 +1,15 @@
+# Redirection de la version sans www vers la version avec www
+http://iptvsmarterpros.com/* https://www.iptvsmarterpros.com/:splat 301!
+https://iptvsmarterpros.com/* https://www.iptvsmarterpros.com/:splat 301!
+
+# Redirection des URLs avec slash final vers celles sans slash final
+https://www.iptvsmarterpros.com/*/ https://www.iptvsmarterpros.com/:splat 301!
+
+# Redirection de index.html vers la racine (plus propre pour les moteurs de recherche)
+/index.html / 301!
+
+# Page 404 personnalisée
+/* /404.html 404
+
+# Empêcher l'accès direct aux fichiers de template (si applicable)
+/templates/* /index.html 404 

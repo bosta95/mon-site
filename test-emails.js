@@ -2,8 +2,8 @@ const axios = require('axios');
 require('dotenv').config();
 
 // Configuration
-const API_BASE_URL = 'http://localhost:3000'; // Modifier si nécessaire
-const TEST_EMAIL = 'contact@iptvsmarterpros.com'; // Utilisez votre propre email pour tester
+const API_BASE_URL = 'http://localhost:3000'; // URL de l'API locale
+const TEST_EMAIL = 'contact@iptvsmarterpros.com'; // Adresse pour les tests
 
 // Fonction de test pour le formulaire de contact
 async function testContactForm() {
@@ -13,23 +13,20 @@ async function testContactForm() {
       name: 'Test Utilisateur',
       email: TEST_EMAIL,
       subject: 'Test du formulaire de contact',
-      message: 'Ceci est un message de test pour vérifier que les emails du formulaire de contact fonctionnent correctement.'
+      message: 'Ceci est un message de test pour vérifier le fonctionnement du formulaire de contact.'
     });
     
     console.log('✅ Formulaire de contact - Réponse du serveur:', response.data);
-    console.log('📧 Vérifiez votre boîte de réception admin pour l\'email de contact.');
+    console.log('📧 Un email doit être reçu à l\'adresse admin et une confirmation à l\'adresse client.');
     return true;
   } catch (error) {
     console.error('❌ Erreur lors du test du formulaire de contact:');
     if (error.response) {
-      // La requête a été faite et le serveur a répondu avec un code d'état différent de 2xx
       console.error(`  Code d'erreur: ${error.response.status}`);
       console.error('  Réponse du serveur:', error.response.data);
     } else if (error.request) {
-      // La requête a été faite mais aucune réponse n'a été reçue
       console.error('  Pas de réponse du serveur. Vérifiez que le serveur est en cours d\'exécution.');
     } else {
-      // Une erreur s'est produite lors de la configuration de la requête
       console.error('  Erreur:', error.message);
     }
     return false;
@@ -45,8 +42,8 @@ async function testOrderConfirmation() {
   
   try {
     const response = await axios.post(`${API_BASE_URL}/api/order`, {
-      email: TEST_EMAIL, // Utilisez le même email pour tester
-      product: '1_mois', // Utilise un produit valide défini dans isValidProduct
+      email: TEST_EMAIL,
+      product: 'Premium_IPTV_3_mois', // Produit valide selon la nouvelle liste
       orderNumber: orderNumber
     });
     
@@ -72,14 +69,14 @@ async function testOrderConfirmation() {
 // Fonction principale qui exécute tous les tests
 async function runAllTests() {
   console.log('=== DÉMARRAGE DES TESTS D\'EMAILS ===');
-  console.log(`Date et heure du test: ${new Date().toLocaleString()}`);
+  console.log(`Date et heure du test: ${new Date().toLocaleString('fr-FR')}`);
   console.log('Server URL:', API_BASE_URL);
   
   let contactResult, orderResult;
   
   try {
     contactResult = await testContactForm();
-    // Attendre un peu entre les tests pour éviter de surcharger le serveur SMTP
+    // Attendre entre les tests pour éviter de surcharger le serveur SMTP
     await new Promise(resolve => setTimeout(resolve, 2000));
     orderResult = await testOrderConfirmation();
     

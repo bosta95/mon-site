@@ -1,35 +1,34 @@
 const express = require('express');
 const path = require('path');
-const nodemailer = require('nodemailer');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss');
-const emailUtils = require('./email-utils'); // Import du module email-utils
+const emailUtils = require('./email-utils');
 const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
 
-// Configuration de la sécurité
+// Configuration de la sécurité avec CSP optimisée
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://kit.fontawesome.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"],
       imgSrc: ["'self'", "data:", "https:", "blob:"],
       connectSrc: ["'self'"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
       objectSrc: ["'none'"],
-      mediaSrc: ["'self'"],
-      frameSrc: ["'none'"],
+      mediaSrc: ["'self'", "blob:"],
+      frameSrc: ["'self'", "https://www.youtube.com", "https://www.youtube-nocookie.com", "https://youtube.com"],
     },
   },
 }));
 
-// Configuration CORS pour Netlify
+// Configuration CORS
 app.use(cors({
   origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : '*',
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -37,7 +36,7 @@ app.use(cors({
   credentials: true
 }));
 
-// Rate limiting strict
+// Rate limiting pour l'API
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -67,6 +66,8 @@ const MAX_ATTEMPTS = 20;
 const BLOCK_DURATION = 5 * 60 * 1000; // 5 minutes
 
 function checkBruteForce(ip) {
+  if (process.env.NODE_ENV !== 'production') return false;
+  
   const now = Date.now();
   const attempt = bruteForce.get(ip) || { count: 0, timestamp: now };
   
@@ -83,89 +84,45 @@ function checkBruteForce(ip) {
 
 // Middleware de sécurité
 app.use((req, res, next) => {
-  // En-têtes de sécurité supplémentaires
+  // En-têtes de sécurité
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   
-  // Vérification de la protection contre la force brute - seulement en production
-  if (process.env.NODE_ENV === 'production' && checkBruteForce(req.ip)) {
+  // Vérification brute force en production
+  if (checkBruteForce(req.ip)) {
     return res.status(429).json({ error: 'Trop de tentatives, veuillez réessayer plus tard.' });
   }
   
   next();
 });
 
-// Middleware pour servir les fichiers statiques - AVANT la configuration des routes
-app.use('/', express.static(path.join(__dirname, 'public'), {
-  maxAge: '1d',
-  setHeaders: (res, path) => {
-    if (path.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'no-cache');
-    }
-  }
-}));
-
-// Middleware spécifique pour les vidéos avec les bons en-têtes Content-Type
-app.get('/videos/:filename', (req, res) => {
-  // Chercher d'abord dans le dossier videos s'il existe
-  let filePath = path.join(__dirname, 'public/videos', req.params.filename);
-  
-  // Si le fichier n'existe pas dans /videos, chercher dans /images
-  if (!fs.existsSync(filePath)) {
-    filePath = path.join(__dirname, 'public/images', req.params.filename);
-    
-    // Si toujours pas trouvé, renvoyer 404
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).send('Fichier non trouvé');
-    }
-  }
-
-  const stat = fs.statSync(filePath);
-  const fileSize = stat.size;
-  const range = req.headers.range;
-
-  if (range) {
-    // Si demande de streaming avec Range headers
-    const parts = range.replace(/bytes=/, "").split("-");
-    const start = parseInt(parts[0], 10);
-    const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-    const chunksize = (end - start) + 1;
-    const file = fs.createReadStream(filePath, {start, end});
-    
-    res.writeHead(206, {
-      'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-      'Accept-Ranges': 'bytes',
-      'Content-Length': chunksize,
-      'Content-Type': 'video/mp4'
-    });
-    file.pipe(res);
-  } else {
-    // Si demande normale
-    res.writeHead(200, {
-      'Content-Length': fileSize,
-      'Content-Type': 'video/mp4'
-    });
-    fs.createReadStream(filePath).pipe(res);
-  }
-});
-
-// Ajout d'un endpoint pour faciliter l'accès aux vidéos dans le dossier /images
+// GESTION OPTIMISÉE DES MÉDIAS
+// Middleware unifié pour les images et vidéos
 app.get('/images/:filename', (req, res, next) => {
   const filePath = path.join(__dirname, 'public/images', req.params.filename);
   
-  // Vérifier si le fichier existe et s'il s'agit d'un fichier vidéo
-  if (fs.existsSync(filePath) && 
-      (req.params.filename.endsWith('.mp4') || 
-       req.params.filename.endsWith('.webm') || 
-       req.params.filename.endsWith('.ogg'))) {
-    
+  // Vérifier si le fichier existe
+  if (!fs.existsSync(filePath)) {
+    return next(); // Passer au middleware suivant si fichier non trouvé
+  }
+  
+  // Déterminer le type de contenu basé sur l'extension du fichier
+  const ext = path.extname(filePath).toLowerCase();
+  
+  // Traitement spécial pour les vidéos
+  if (ext === '.mp4' || ext === '.webm' || ext === '.ogg') {
     const stat = fs.statSync(filePath);
     const fileSize = stat.size;
     const range = req.headers.range;
-
+    
+    let contentType = 'application/octet-stream';
+    if (ext === '.mp4') contentType = 'video/mp4';
+    else if (ext === '.webm') contentType = 'video/webm';
+    else if (ext === '.ogg') contentType = 'video/ogg';
+    
     if (range) {
-      // Si demande de streaming avec Range headers
+      // Streaming avec Range headers
       const parts = range.replace(/bytes=/, "").split("-");
       const start = parseInt(parts[0], 10);
       const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
@@ -176,57 +133,208 @@ app.get('/images/:filename', (req, res, next) => {
         'Content-Range': `bytes ${start}-${end}/${fileSize}`,
         'Accept-Ranges': 'bytes',
         'Content-Length': chunksize,
-        'Content-Type': 'video/mp4'
+        'Content-Type': contentType
       });
       file.pipe(res);
     } else {
-      // Si demande normale
+      // Requête normale pour vidéo
       res.writeHead(200, {
         'Content-Length': fileSize,
-        'Content-Type': 'video/mp4'
+        'Content-Type': contentType
       });
       fs.createReadStream(filePath).pipe(res);
     }
   } else {
-    // Si ce n'est pas un fichier vidéo, passer au middleware suivant
+    // Pour les images et autres fichiers, utiliser le middleware statique normal
     next();
   }
 });
+
+// Pour la compatibilité, rediriger /videos vers /images
+app.get('/videos/:filename', (req, res) => {
+  res.redirect(`/images/${req.params.filename}`);
+});
+
+// Middleware pour servir les fichiers statiques
+app.use('/', express.static(path.join(__dirname, 'public'), {
+  maxAge: '1d',
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  }
+}));
 
 // Redirection favicon
 app.get('/favicon.ico', (req, res) => {
   res.redirect('/favicon.svg');
 });
 
-// Fonction de validation d'email améliorée
-function isValidEmail(email) {
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  return emailRegex.test(email) && email.length <= 254;
+// Fonctions utilitaires
+function sanitizeInput(input) {
+  return typeof input === 'string' ? xss(input.trim()) : '';
 }
 
-// Fonction de validation des données
-function sanitizeInput(input) {
-  return xss(input.trim());
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 function isValidOrderNumber(orderNumber) {
-  return /^[A-Za-z0-9-]{8,32}$/.test(orderNumber);
+  return /^[A-Za-z0-9_-]{5,50}$/.test(orderNumber);
 }
 
 function isValidProduct(product) {
-  const validProducts = ['1_mois', '3_mois', '6_mois', '12_mois'];
+  const validProducts = ['Premium_IPTV_3_mois', 'Premium_IPTV_6_mois', 'Premium_IPTV_12_mois', 
+                          'Premium_IPTV_2_ecrans', 'Premium_IPTV_3_ecrans', 'Premium_IPTV_4_ecrans'];
   return validProducts.includes(product);
 }
 
-// Route principale
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Route pour les contacts
+app.post('/api/contact', async (req, res) => {
+  try {
+    // Validation et sanitization des entrées
+    const name = sanitizeInput(req.body.name);
+    const email = sanitizeInput(req.body.email);
+    const subject = sanitizeInput(req.body.subject);
+    const message = sanitizeInput(req.body.message);
+    
+    // Validation des données
+    if (!name || !email || !subject || !message) {
+      return res.status(400).json({ error: 'Tous les champs sont requis' });
+    }
+    
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Email invalide' });
+    }
+    
+    // Envoi de l'email à l'administrateur
+    await emailUtils.sendTemplateEmail({
+      to: process.env.ADMIN_EMAIL,
+      subject: `[Contact] ${subject}`,
+      templateName: 'contact-message',
+      data: {
+        name,
+        email,
+        subject,
+        message,
+        date: new Date().toLocaleString('fr-FR')
+      }
+    });
+    
+    // Envoi de l'email de confirmation au client
+    await emailUtils.sendTemplateEmail({
+      to: email,
+      subject: 'Votre message a bien été reçu',
+      templateName: 'contact-message',
+      data: {
+        name,
+        subject
+      }
+    });
+    
+    res.status(200).json({ success: 'Votre message a bien été envoyé' });
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi du message:', error);
+    res.status(500).json({ error: 'Une erreur est survenue lors de l\'envoi du message' });
+  }
 });
 
-// Route tutoriel
-app.get('/tutoriel.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'tutoriel.html'));
+// Route pour les commandes
+app.post('/api/order', async (req, res) => {
+  try {
+    // Validation et sanitization des entrées
+    const email = sanitizeInput(req.body.email);
+    const product = sanitizeInput(req.body.product);
+    const orderNumber = sanitizeInput(req.body.orderNumber);
+    
+    // Validation des données
+    if (!email || !product || !orderNumber) {
+      return res.status(400).json({ error: 'Tous les champs sont requis' });
+    }
+    
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Email invalide' });
+    }
+    
+    if (!isValidOrderNumber(orderNumber)) {
+      return res.status(400).json({ error: 'Numéro de commande invalide' });
+    }
+    
+    if (!isValidProduct(product)) {
+      return res.status(400).json({ error: 'Produit invalide' });
+    }
+    
+    // Envoi de l'email de confirmation au client
+    await emailUtils.sendTemplateEmail({
+      to: email,
+      subject: 'Confirmation de votre commande',
+      templateName: 'order-confirmation',
+      data: {
+        product: getProductName(product),
+        orderNumber,
+        description: getProductDescription(product),
+        price: getProductPrice(product)
+      }
+    });
+    
+    // Envoi de l'email de notification à l'administrateur
+    await emailUtils.sendTemplateEmail({
+      to: process.env.MERCHANT_EMAIL,
+      subject: 'Nouvelle commande reçue',
+      templateName: 'admin-notification',
+      data: {
+        email,
+        product: getProductName(product),
+        orderNumber,
+        description: getProductDescription(product),
+        price: getProductPrice(product),
+        date: new Date().toLocaleString('fr-FR')
+      }
+    });
+    
+    res.status(200).json({ success: 'Commande confirmée' });
+  } catch (error) {
+    console.error('Erreur lors de la confirmation de commande:', error);
+    res.status(500).json({ error: 'Une erreur est survenue lors de la confirmation de commande' });
+  }
 });
+
+// Fonctions pour obtenir les informations des produits
+function getProductName(productCode) {
+  const productNames = {
+    'Premium_IPTV_3_mois': 'Abonnement IPTV Premium 3 mois',
+    'Premium_IPTV_6_mois': 'Abonnement IPTV Premium 6 mois',
+    'Premium_IPTV_12_mois': 'Abonnement IPTV Premium 12 mois',
+    'Premium_IPTV_2_ecrans': 'Abonnement IPTV Premium 2 écrans',
+    'Premium_IPTV_3_ecrans': 'Abonnement IPTV Premium 3 écrans',
+    'Premium_IPTV_4_ecrans': 'Abonnement IPTV Premium 4 écrans'
+  };
+  return productNames[productCode] || 'Abonnement IPTV Premium';
+}
+
+function getProductDescription(productCode) {
+  const descriptions = {
+    'Premium_IPTV_3_mois': 'Accès à plus de 22 000 chaînes et 50 000 VOD pendant 3 mois',
+    'Premium_IPTV_6_mois': 'Accès à plus de 22 000 chaînes et 50 000 VOD pendant 6 mois',
+    'Premium_IPTV_12_mois': 'Accès à plus de 22 000 chaînes et 50 000 VOD pendant 12 mois',
+    'Premium_IPTV_2_ecrans': 'Accès à plus de 22 000 chaînes et 50 000 VOD pour 2 écrans pendant 12 mois',
+    'Premium_IPTV_3_ecrans': 'Accès à plus de 22 000 chaînes et 50 000 VOD pour 3 écrans pendant 12 mois',
+    'Premium_IPTV_4_ecrans': 'Accès à plus de 22 000 chaînes et 50 000 VOD pour 4 écrans pendant 12 mois'
+  };
+  return descriptions[productCode] || 'Accès à notre service IPTV Premium';
+}
+
+function getProductPrice(productCode) {
+  const prices = {
+    'Premium_IPTV_3_mois': '9,99 €',
+    'Premium_IPTV_6_mois': '19,99 €',
+    'Premium_IPTV_12_mois': '29,99 €',
+    'Premium_IPTV_2_ecrans': '59,99 €',
+    'Premium_IPTV_3_ecrans': '79,99 €',
+    'Premium_IPTV_4_ecrans': '99,99 €'
+  };
+  return prices[productCode] || 'Prix personnalisé';
+}
 
 // Route robots.txt
 app.get('/robots.txt', (req, res) => {
@@ -234,175 +342,29 @@ app.get('/robots.txt', (req, res) => {
   res.send(`User-agent: *\nDisallow: /checkout/\nSitemap: https://www.iptvsmarterpros.com/sitemap.xml`);
 });
 
-// Route API pour le formulaire de contact
-app.post('/api/contact', async (req, res) => {
-  try {
-    const { name, email, subject, message } = req.body;
-
-    // Validation des entrées
-    if (!name || !email || !subject || !message) {
-      return res.status(400).json({ error: 'Tous les champs sont requis' });
-    }
-
-    if (!isValidEmail(email)) {
-      return res.status(400).json({ error: 'Format d\'email invalide' });
-    }
-
-    if (message.length > 1000) {
-      return res.status(400).json({ error: 'Message trop long' });
-    }
-
-    // Assainissement des entrées
-    const sanitizedName = sanitizeInput(name);
-    const sanitizedSubject = sanitizeInput(subject);
-    const sanitizedMessage = sanitizeInput(message);
-
-    console.log('Tentative d\'envoi d\'email - Formulaire de contact');
-
-    try {
-      // Utiliser emailUtils pour envoyer un email avec le template
-      await emailUtils.sendTemplateEmail({
-        to: process.env.MERCHANT_EMAIL,
-        subject: `[Contact] ${sanitizedSubject}`,
-        templateName: 'contact-message',
-        data: {
-          name: sanitizedName,
-          email: email,
-          subject: sanitizedSubject,
-          message: sanitizedMessage,
-          date: new Date().toLocaleDateString(),
-          clientIP: req.ip || 'Inconnue'
-        }
-      });
-      
-      console.log('Email de contact envoyé avec succès');
-      return res.status(200).json({ success: 'Email envoyé avec succès !' });
-    } catch (sendError) {
-      console.error('Erreur lors de l\'envoi de l\'email:', sendError);
-      return res.status(500).json({ error: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.' });
-    }
-
-  } catch (error) {
-    return res.status(500).json({ error: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.' });
-  }
+// Route pour les pages HTML
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Route API pour les commandes
-app.post('/api/order', async (req, res) => {
-  try {
-    const { email, product, orderNumber } = req.body;
-
-    // Validation des entrées
-    if (!email || !product || !orderNumber) {
-      return res.status(400).json({ error: 'Tous les champs sont requis' });
-    }
-
-    if (!isValidEmail(email)) {
-      return res.status(400).json({ error: 'Format d\'email invalide' });
-    }
-
-    if (!isValidProduct(product)) {
-      return res.status(400).json({ error: 'Produit invalide' });
-    }
-
-    if (!isValidOrderNumber(orderNumber)) {
-      return res.status(400).json({ error: 'Numéro de commande invalide' });
-    }
-
-    console.log('Tentative d\'envoi d\'email - Commande:', orderNumber);
-
-    try {
-      // Email au client avec le template
-      await emailUtils.sendTemplateEmail({
-        to: email,
-        subject: `Confirmation de commande N° ${orderNumber}`,
-        templateName: 'order-confirmation',
-        data: {
-          orderNumber: orderNumber,
-          productName: getProductName(product),
-          productDescription: getProductDescription(product),
-          productPrice: getProductPrice(product),
-          orderDate: new Date().toLocaleDateString(),
-          orderTotal: getProductPrice(product),
-          userName: email.split('@')[0],
-          paymentMethod: 'PayPal'
-        }
-      });
-      console.log('Email client envoyé avec succès');
-
-      // Email à l'administrateur avec le template
-      await emailUtils.sendTemplateEmail({
-        to: process.env.MERCHANT_EMAIL,
-        subject: `[Nouvelle Commande] N° ${orderNumber}`,
-        templateName: 'admin-notification',
-        data: {
-          orderNumber: orderNumber,
-          productName: getProductName(product),
-          orderDate: new Date().toLocaleDateString(),
-          orderTime: new Date().toLocaleTimeString(),
-          productPrice: getProductPrice(product),
-          paymentMethod: 'PayPal',
-          clientEmail: email,
-          clientCountry: 'France',
-          clientIP: req.ip || 'Inconnue',
-          clientDevice: req.headers['user-agent'] || 'Inconnu',
-          clientPhone: '-'
-        }
-      });
-      console.log('Email admin envoyé avec succès');
-
-      return res.status(200).json({ 
-        success: 'Commande enregistrée et emails envoyés avec succès',
-        orderNumber,
-        timestamp: new Date().toISOString()
-      });
-    } catch (sendError) {
-      console.error('Erreur lors de l\'envoi des emails de commande:', sendError);
-      return res.status(500).json({ 
-        error: 'Une erreur est survenue lors de l\'envoi des emails'
-      });
-    }
-
-  } catch (error) {
-    return res.status(500).json({ 
-      error: 'Une erreur est survenue lors de l\'envoi des emails'
-    });
+app.get('/:page.html', (req, res) => {
+  const page = req.params.page;
+  const filePath = path.join(__dirname, 'public', `${page}.html`);
+  
+  // Vérifier si le fichier existe
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).send('Page non trouvée');
   }
 });
-
-// Fonctions auxiliaires pour les informations de produit
-function getProductName(productCode) {
-  const productNames = {
-    '1_mois': 'Abonnement IPTV Premium - 1 Mois',
-    '3_mois': 'Abonnement IPTV Premium - 3 Mois',
-    '6_mois': 'Abonnement IPTV Premium - 6 Mois',
-    '12_mois': 'Abonnement IPTV Premium - 12 Mois'
-  };
-  return productNames[productCode] || 'Abonnement IPTV Premium';
-}
-
-function getProductDescription(productCode) {
-  const productDescriptions = {
-    '1_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 1 mois',
-    '3_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 3 mois',
-    '6_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 6 mois',
-    '12_mois': 'Accès à plus de 10,000 chaînes TV et VOD pendant 12 mois'
-  };
-  return productDescriptions[productCode] || 'Accès à notre service IPTV premium';
-}
-
-function getProductPrice(productCode) {
-  const productPrices = {
-    '1_mois': '14,99 €',
-    '3_mois': '34,99 €',
-    '6_mois': '59,99 €',
-    '12_mois': '99,99 €'
-  };
-  return productPrices[productCode] || 'Prix non spécifié';
-}
 
 // Démarrage du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
+  console.log(`Mode: ${process.env.NODE_ENV}`);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`Ouvrez http://localhost:${PORT} dans votre navigateur`);
+  }
 }); 
