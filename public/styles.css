@@ -23,13 +23,11 @@
 body {
   margin: 0;
   padding: 0;
-  background: #000;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #111;
   color: #fff;
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
   overflow-x: hidden;
-  margin-top: 60px; /* Pour tenir compte du header fixe */
 }
 
 /* Animations */
@@ -261,7 +259,7 @@ body {
   display: flex;
   align-items: center;
   padding: 0;
-  margin-top: 60px;
+  margin-top: 0;
   overflow: hidden;
   background: transparent !important;
   border: none !important;
@@ -1060,10 +1058,35 @@ img.featured-image {
 }
 
 @media (max-width: 480px) {
-  .header-container { top: 0; height: 50px; }
-  .hero-overlay h1 { font-size: 1.5rem; }
-  .hero-section { height: 450px; }
-  .images-banner { margin-top: 50px; }
+  .header-container { 
+    top: 0; 
+    height: 50px; 
+  }
+  
+  .logo img {
+    height: 30px;
+  }
+  
+  .hero-overlay h1 { 
+    font-size: 1.5rem; 
+    text-align: center;
+    padding: 0 10px;
+  }
+  
+  .hero-overlay p {
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0 10px;
+  }
+  
+  .hero-section { 
+    height: 400px; 
+  }
+  
+  .images-banner { 
+    margin-top: 0; 
+    height: 40px;
+  }
   
   .offers-section, .advantages-section, .films-slider-section {
     padding: 40px 0;
@@ -1252,7 +1275,7 @@ img.featured-image {
   }
   
   .images-banner { 
-    margin-top: 50px; 
+    margin-top: 0; 
     height: 40px;
   }
   

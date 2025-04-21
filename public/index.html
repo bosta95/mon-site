@@ -16,6 +16,7 @@
   <link rel="preload" href="styles.css?v=5" as="style" fetchpriority="high">
   <link rel="stylesheet" href="styles.css?v=5" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css?v=1" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/navbar.css" fetchpriority="high">
   <link rel="preload" href="/images/IPTV_glpgxi.svg" as="image" type="image/svg+xml" fetchpriority="high">
   
   <!-- Favicons -->
@@ -29,9 +30,9 @@
   <meta name="msapplication-TileColor" content="#6c5498">
   <meta name="msapplication-config" content="browserconfig.xml">
   <meta name="theme-color" content="#6c5498">
+  <meta name="application-name" content="IPTV Smarters Pro">
   
   <!-- Préconnexion aux domaines externes -->
-  <!-- Cloudinary a été retiré -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -715,23 +716,24 @@
   <header class="header-container">
     <div class="header-content">
       <div class="logo">
-        <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40" loading="lazy">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="/assets/logos/IPTV_glpgxi.svg" width="150" height="40"/>
+        </a>
       </div>
       <!-- Menu hamburger pour mobile -->
-      <div class="mobile-menu-toggle">
+      <div class="mobile-menu-toggle" id="mobile-menu-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <!-- Navigation Desktop -->
-      <nav class="header-nav">
+      <nav class="header-nav" id="header-nav">
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="index.html#offers-section">OFFRES</a></li>
           <li><a href="tutoriel.html">Tutoriel</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="concours.html" class="highlight-btn"><span class="shine"></span>CONCOURS</a></li>
         </ul>
       </nav>
     </div>
@@ -1335,647 +1337,66 @@
   
   <!-- FOOTER -->
   <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>À propos de IPTV Pro</h3>
-        <p>Service IPTV pas cher avec chaînes sport en direct, films et séries. Installation simple, support technique réactif.</p>
+    <div class="container">
+      <div class="footer-content">
+        <!-- Section À propos de IPTV Pro -->
+        <div class="footer-section">
+          <h3>À propos de IPTV Pro</h3>
+          <p>Service IPTV pas cher avec chaînes sport en direct, films et séries. Installation simple, support technique réactif.</p>
+        </div>
+        
+        <!-- Section Liens Rapides -->
+        <div class="footer-section">
+          <h3>Liens Rapides</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#offers-section">Offres</a></li>
+            <li><a href="tutoriel.html">Tutoriel</a></li>
+            <li><a href="about.html">À Propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="concours.html">Concours</a></li>
+          </ul>
+        </div>
+        
+        <!-- Section Informations Légales -->
+        <div class="footer-section">
+          <h3>Informations Légales</h3>
+          <ul class="footer-links">
+            <li><a href="conditions-generales.html">Conditions Générales</a></li>
+            <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
+            <li><a href="about.html">À Propos</a></li>
+          </ul>
+        </div>
+        
+        <!-- Section Contactez-nous -->
+        <div class="footer-section">
+          <h3>Contactez-nous</h3>
+          <form id="footer-contact-form">
+            <input type="email" placeholder="Votre Email" required>
+            <input type="text" placeholder="Sujet">
+            <textarea placeholder="Votre message"></textarea>
+            <button type="submit" class="btn-primary">Envoyer</button>
+          </form>
+        </div>
       </div>
       
-      <div class="footer-section">
-        <h3>Liens Rapides</h3>
-        <ul class="footer-links">
-          <li><a href="#hero">Accueil</a></li>
-          <li><a href="#films">Films & Séries</a></li>
-          <li><a href="tutoriel.html">Guide Installation</a></li>
-          <li><a href="concours.html">Concours</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <p>&copy; 2025 IPTV Smarter Pro - Tous droits réservés</p>
       </div>
-      
-      <div class="footer-section">
-        <h3>Informations Légales</h3>
-        <ul class="footer-links">
-          <li><a href="conditions-generales.html">Conditions Générales</a></li>
-          <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
-          <li><a href="about.html">À Propos</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section" id="contact">
-        <h3>Contactez-nous</h3>
-        <form id="contactForm" class="footer-contact-form">
-          <div class="form-group">
-            <input type="email" id="email" placeholder="Votre Email" required>
-          </div>
-          <div class="form-group">
-            <input type="text" id="subject" placeholder="Sujet" required>
-          </div>
-          <div class="form-group">
-            <textarea id="message" placeholder="Votre message" required></textarea>
-          </div>
-          <button type="submit" class="contact-btn">Envoyer</button>
-        </form>
-        <div id="result"></div>
-        <style>
-          .footer-contact-form {
-            margin-top: 15px;
-          }
-          .footer-contact-form .form-group {
-            margin-bottom: 10px;
-          }
-          .footer-contact-form input,
-          .footer-contact-form textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 4px;
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-          }
-          .footer-contact-form textarea {
-            height: 100px;
-            resize: vertical;
-          }
-          .footer-contact-form .contact-btn {
-            background: linear-gradient(135deg, #6c5498, #ff6b6b);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-          }
-          .footer-contact-form .contact-btn:hover {
-            background: linear-gradient(135deg, #ff6b6b, #6c5498);
-          }
-          #result {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 4px;
-          }
-          #result.success {
-            background-color: rgba(40, 167, 69, 0.2);
-            color: #2ecc71;
-          }
-          #result.error {
-            background-color: rgba(220, 53, 69, 0.2);
-            color: #ff6b6b;
-          }
-        </style>
-        <script>
-          document.getElementById('contactForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = 'Envoi en cours...';
-            resultDiv.className = '';
-
-            try {
-              const response = await fetch('/.netlify/functions/contact', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  email: document.getElementById('email').value,
-                  subject: document.getElementById('subject').value,
-                  message: document.getElementById('message').value
-                })
-              });
-
-              const data = await response.json();
-              
-              if (response.ok) {
-                resultDiv.textContent = '✅ Message envoyé avec succès !';
-                resultDiv.className = 'success';
-                document.getElementById('contactForm').reset();
-              } else {
-                resultDiv.textContent = '❌ Erreur : ' + data.error;
-                resultDiv.className = 'error';
-              }
-            } catch (error) {
-              resultDiv.textContent = '❌ Erreur : ' + error.message;
-              resultDiv.className = 'error';
-            }
-          };
-        </script>
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <p>&copy; 2025 IPTV Pro - Tous droits réservés.</p>
     </div>
   </footer>
 
-  <!-- Pied de page fixe -->
-  <style>
-    .fixed-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 15, 25, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 1000;
-      padding: 10px 0;
-      box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
-      border-top: 1px solid rgba(231, 76, 60, 0.3);
-      transition: transform 0.3s ease;
-      width: 100%;
-      height: auto;
-      max-height: 80px;
-    }
-    
-    .fixed-footer.hide {
-      transform: translateY(100%);
-    }
-    
-    .fixed-footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 20px;
-      height: 100%;
-    }
-    
-    .fixed-footer-left {
-      display: flex;
-      align-items: center;
-      flex: 0 0 auto;
-    }
-    
-    .fixed-footer-left .fixed-footer-logo {
-      height: 35px;
-      margin-right: 10px;
-      max-width: 100%;
-    }
-    
-    .fixed-footer-text {
-      flex: 1;
-      color: #fff;
-      font-size: 0.9rem;
-      margin: 0 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    
-    .fixed-footer-text p {
-      margin: 0;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    
-    .fixed-footer-text p.highlight {
-      color: #E74C3C;
-      font-weight: bold;
-    }
-    
-    .fixed-footer-right {
-      display: flex;
-      gap: 10px;
-      flex-wrap: nowrap;
-      flex: 0 0 auto;
-    }
-    
-    .fixed-footer-btn {
-      display: inline-block;
-      padding: 8px 15px;
-      background: linear-gradient(135deg, #E74C3C, #6c5498);
-      color: #fff;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .fixed-footer-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
-    }
-    
-    .fixed-footer-btn.secondary {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .fixed-footer-close {
-      position: absolute;
-      top: -12px;
-      right: 20px;
-      background: #E74C3C;
-      color: white;
-      border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 12px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-    
-    @media (max-width: 768px) {
-      .fixed-footer {
-        display: none; /* Masquer complètement sur mobile */
-      }
-      
-      /* Styles suivants inutiles puisque l'élément est masqué */
-      /*.fixed-footer {
-        max-height: none;
-        padding: 15px 0;
-      }
-      
-      .fixed-footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-      }
-      
-      .fixed-footer-text {
-        margin: 10px 0;
-      }
-      
-      .fixed-footer-text p {
-        white-space: normal;
-      }
-      
-      .fixed-footer-right {
-        width: 100%;
-        justify-content: center;
-      }*/
-    }
-  </style>
-
-  <div class="fixed-footer">
-    <button class="fixed-footer-close" id="hideFixedFooter">×</button>
-    <div class="fixed-footer-content">
-      <div class="fixed-footer-left">
-        <div class="fixed-footer-logo">
-          <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo">
-        </div>
-        <div class="fixed-footer-text">
-          <p>Service IPTV pas cher avec chaînes sport en direct, films et séries</p>
-          <p class="highlight">Test gratuit disponible | Prix à partir de 9.99€ pour 3 mois</p>
-        </div>
-      </div>
-      <div class="fixed-footer-right">
-        <div class="fixed-footer-buttons">
-          <a href="#offers-section" class="fixed-footer-btn">Voir les offres</a>
-          <a href="tutoriel.html" class="fixed-footer-btn secondary">Guide d'installation</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <!-- Script pour charger la vidéo en différé -->
   <script>
-    // Gestion du pied de page fixe
-    document.getElementById('hideFixedFooter').addEventListener('click', function() {
-      document.querySelector('.fixed-footer').classList.add('hide');
-      // Stocker dans localStorage pour ne pas réafficher pendant 1 heure seulement
-      localStorage.setItem('fixedFooterHidden', 'true');
-      
-      // Programmer la réapparition de la bannière après 1 heure
-      setTimeout(function() {
-        const fixedFooter = document.querySelector('.fixed-footer');
-        if (fixedFooter) {
-          fixedFooter.classList.remove('hide');
-          localStorage.removeItem('fixedFooterHidden');
-        }
-      }, 60 * 60 * 1000); // 1 heure en millisecondes
-    });
-    
-    // Vérifier si le pied de page a été masqué récemment
-    document.addEventListener('DOMContentLoaded', function() {
-      const hiddenTime = localStorage.getItem('fixedFooterHidden');
-      if (hiddenTime) {
-        const now = Date.now();
-        const oneHour = 60 * 60 * 1000; // 1 heure en millisecondes
-        if (now - hiddenTime < oneHour) {
-          document.querySelector('.fixed-footer').classList.add('hide');
-          
-          // Programmer la réapparition après le temps restant
-          const timeRemaining = oneHour - (now - hiddenTime);
-          setTimeout(function() {
-            const fixedFooter = document.querySelector('.fixed-footer');
-            if (fixedFooter) {
-              fixedFooter.classList.remove('hide');
-              localStorage.removeItem('fixedFooterHidden');
-            }
-          }, timeRemaining);
-        } else {
-          localStorage.removeItem('fixedFooterHidden');
-        }
-      }
-      
-      // Masquer le pied de page fixe lors du défilement vers le bas
-      let lastScrollTop = 0;
-      window.addEventListener('scroll', function() {
-        const st = window.pageYOffset || document.documentElement.scrollTop;
-        const fixedFooter = document.querySelector('.fixed-footer');
-        if (!fixedFooter.classList.contains('hide')) {
-          if (st > lastScrollTop && st > 300) {
-            // Défilement vers le bas
-            fixedFooter.style.transform = 'translateY(100%)';
-          } else {
-            // Défilement vers le haut
-            fixedFooter.style.transform = 'translateY(0)';
-          }
-        }
-        lastScrollTop = st <= 0 ? 0 : st;
-      }, false);
-    });
-  </script>
-
-  <script>
-    // Suppression des événements dupliqués pour la manipulation du menu mobile
-    // const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    // const headerNav = document.querySelector('.header-nav');
-    
-    // if (mobileMenuToggle && headerNav) {
-    //   mobileMenuToggle.addEventListener('click', function() {
-    //     headerNav.classList.toggle('active');
-    //     this.classList.toggle('active');
-    //   });
-    // }
-  </script>
-
-  <!-- Ajouter un balisage pour les offres de produits -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "Product",
-          "name": "Abonnement IPTV 3 Jours Test",
-          "description": "Service IPTV premium avec +22 000 chaînes et +50 000 films & séries en HD",
-          "offers": {
-            "@type": "Offer",
-            "price": "0.99",
-            "currency": "EUR",
-            "availability": "https://schema.org/InStock",
-            "url": "https://iptvsmarterpros.com/offer.html?product=Premium+IPTV+10+jours&price=0.99"
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "Product",
-          "name": "Abonnement IPTV 3 Mois HD & Stable",
-          "description": "Service IPTV premium avec +22 000 chaînes et +50 000 films & séries en HD",
-          "offers": {
-            "@type": "Offer",
-            "price": "9.99",
-            "currency": "EUR",
-            "availability": "https://schema.org/InStock",
-            "url": "https://iptvsmarterpros.com/offer.html?product=Premium+IPTV+3+mois&price=9.99"
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@type": "Product",
-          "name": "Abonnement IPTV 6 Mois Ultra HD",
-          "description": "Service IPTV premium avec +22 000 chaînes et +50 000 films & séries en Ultra HD",
-          "offers": {
-            "@type": "Offer",
-            "price": "19.99",
-            "currency": "EUR",
-            "availability": "https://schema.org/InStock",
-            "url": "https://iptvsmarterpros.com/offer.html?product=Premium+IPTV+6+mois&price=19.99"
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@type": "Product",
-          "name": "Abonnement IPTV 12 Mois Premium",
-          "description": "Service IPTV premium avec +22 000 chaînes et +50 000 films & séries en HD/4K",
-          "offers": {
-            "@type": "Offer",
-            "price": "29.99",
-            "currency": "EUR",
-            "availability": "https://schema.org/InStock",
-            "url": "https://iptvsmarterpros.com/offer.html?product=Premium+IPTV+12+mois&price=29.99"
-          }
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Ajouter un balisage FAQPage pour améliorer la visibilité -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Qu'est-ce que IPTV Smarter Pro?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "IPTV Smarter Pro est un service premium d'abonnement IPTV français offrant plus de 22 000 chaînes TV en direct et 50 000 films et séries en VOD, disponibles en qualité HD et 4K."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Comment fonctionne l'abonnement IPTV?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Après votre souscription, vous recevez immédiatement vos identifiants par email. Installez l'application IPTV Smarters Pro sur votre appareil (Smart TV, smartphone, tablette ou ordinateur), entrez vos identifiants et profitez instantanément de tous vos contenus préférés."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Quels appareils sont compatibles avec votre service IPTV?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Notre service IPTV est compatible avec tous les appareils : Smart TV (Samsung, LG, etc.), Android Box, Fire Stick, iOS, Android, Mac, Windows, et plus encore. Un guide d'installation complet est fourni après l'achat."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Offrez-vous un support technique?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Oui, notre équipe de support client francophone est disponible 24h/24 et 7j/7 via WhatsApp, Snapchat et Facebook pour vous assister avec une réponse moyenne en moins de 5 minutes."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <script>
-    // Script pour réafficher la bannière fixe qui a été fermée
-    document.addEventListener('DOMContentLoaded', function() {
-      // Supprime l'information de localStorage pour permettre à la bannière de réapparaître
-      localStorage.removeItem('fixedFooterHidden');
-      
-      // S'assure que la bannière est visible
-      const fixedFooter = document.querySelector('.fixed-footer');
-      if (fixedFooter) {
-        fixedFooter.classList.remove('hide');
-        fixedFooter.style.transform = 'translateY(0)';
-        fixedFooter.style.opacity = '1';
-        fixedFooter.style.pointerEvents = 'auto';
-      }
-    });
-  </script>
-
-  <!-- Script d'optimisation des performances -->
-  <script>
-    // Fonction pour différer le chargement des éléments non critiques
-    function deferNonCritical() {
-      // Optimisation des scripts tiers
-      setTimeout(function() {
-        // Mettre en cache les sélecteurs fréquemment utilisés
-        const headerNav = document.querySelector('.header-nav');
-        const toggleButton = document.querySelector('.mobile-menu-toggle');
-        
-        // Ajouter les écouteurs d'événements pour le menu mobile
-        if (toggleButton && headerNav) {
-          console.log("Menu mobile trouvé et initialisé dans index.html");
-          toggleButton.addEventListener('click', function() {
-            console.log("Menu mobile cliqué dans index.html");
-            toggleButton.classList.toggle('active');
-            headerNav.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-          });
-          
-          // Fermer le menu quand on clique sur un lien
-          const navLinks = document.querySelectorAll('.header-nav ul li a');
-          navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-              toggleButton.classList.remove('active');
-              headerNav.classList.remove('active');
-              document.body.classList.remove('menu-open');
-            });
-          });
-        }
-        
-        // Utiliser l'API Intersection Observer pour charger les contenus au défilement
-        if ('IntersectionObserver' in window) {
-          const lazyLoadObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                const target = entry.target;
-                
-                // Si c'est une vidéo
-                if (target.tagName === 'VIDEO' && target.dataset.src) {
-                  target.src = target.dataset.src;
-                  target.removeAttribute('data-src');
-                }
-                
-                // Ajouter une classe pour les animations au défilement
-                target.classList.add('visible');
-                
-                // Arrêter d'observer une fois chargé
-                observer.unobserve(target);
-              }
-            });
-          }, {
-            rootMargin: '50px 0px',
-            threshold: 0.1
-          });
-          
-          // Observer les sections principales
-          document.querySelectorAll('.hero-section, .offers-section, .advantages-section, .films-slider-section').forEach(function(element) {
-            lazyLoadObserver.observe(element);
-          });
-        }
-        
-        // Optimiser les événements de défilement
-        let scrollTimeout;
-        window.addEventListener('scroll', function() {
-          // Annuler le délai précédent
-          clearTimeout(scrollTimeout);
-          
-          // Définir un nouveau délai
-          scrollTimeout = setTimeout(function() {
-            // Masquer/afficher le header selon le sens de défilement
-            const currentScroll = window.pageYOffset;
-            const header = document.querySelector('.header-container');
-            
-            if (header) {
-              if (currentScroll > 100) {
-                header.classList.add('compact');
-              } else {
-                header.classList.remove('compact');
-              }
-            }
-          }, 50);
-        }, { passive: true });
-      }, 100);
-    }
-    
-    // Exécuter après le chargement de la page
-    if (document.readyState === 'complete') {
-      deferNonCritical();
-    } else {
-      window.addEventListener('load', deferNonCritical);
-  }
-  </script>
-
-  <script>
-    // Fonction pour vérifier si un élément est dans la viewport
-    function isElementInViewport(el) {
-      const rect = el.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
-  </script>
-
-  <script>
-    // Script pour détecter quand la vidéo est chargée et prête à être affichée
-    document.addEventListener('DOMContentLoaded', function() {
-      const heroVideos = document.querySelectorAll('.hero-video');
-      
-      heroVideos.forEach(video => {
-        // Précharger la vidéo
-        video.preload = "auto";
-        
-        // Fonction pour marquer la vidéo comme chargée
-        function markVideoAsLoaded() {
-          video.classList.add('loaded');
-        }
-        
-        // Détecter quand la vidéo est suffisamment chargée pour commencer la lecture
-        video.addEventListener('loadeddata', markVideoAsLoaded);
-        video.addEventListener('canplay', markVideoAsLoaded);
-        
-        // Si la vidéo est déjà chargée au moment où on attache l'événement
-        if (video.readyState >= 3) {
-          markVideoAsLoaded();
-        }
+    // Détecter quand la vidéo est chargée
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo) {
+      heroVideo.addEventListener('loadeddata', function() {
+        heroVideo.classList.add('loaded');
       });
-    });
+    }
   </script>
+  <script src="js/navbar.js"></script>
 </body>
-<!-- Script principal -->
-<script src="script.js" defer></script>
 </html>

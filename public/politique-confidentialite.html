@@ -1,15 +1,19 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Politique de confidentialité - IPTV Smarter Pro</title>
+  <title>Politique de Confidentialité - IPTV Smarter Pro</title>
   
   <!-- Font Awesome optimisé -->
   <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
   
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="icon" type="image/svg+xml" href="/assets/logos/IPTV_glpgxi.svg">
-  <link href="css/styles.css?v=1" rel="stylesheet">
+  <link href="styles.css?v=9" rel="stylesheet">
+  <link href="css/navbar.css" rel="stylesheet">
   <style>
     :root {
       --primary-color: #6c5498;
@@ -35,28 +39,28 @@
       line-height: 1.6;
       padding: 0;
       margin: 0;
-      padding-top: 80px; /* Pour compenser la hauteur du header fixe */
     }
     
-    /* Header et navigation */
+    /* Header et navigation cohérents avec les autres pages */
     .header-container {
-      background: linear-gradient(180deg, rgba(12, 12, 24, 0.95), rgba(26, 26, 46, 0.95));
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      padding: 10px 0;
-      position: fixed;
+      position: sticky;
       top: 0;
       width: 100%;
       z-index: 1000;
+      background: rgba(20, 20, 30, 0.9);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(108, 84, 152, 0.3);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      padding: 15px 0;
+      transition: all 0.3s ease;
+      border-top: 0;
     }
     
     .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 0 20px;
     }
@@ -69,13 +73,29 @@
     .logo img {
       height: 40px;
       width: auto;
-      transition: transform 0.3s ease;
     }
     
-    .logo img:hover {
-      transform: scale(1.05);
+    /* Menu hamburger pour mobile */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 22px;
+      cursor: pointer;
+      z-index: 1010;
     }
     
+    .mobile-menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Navigation Desktop */
     .header-nav ul {
       display: flex;
       list-style: none;
@@ -118,77 +138,16 @@
       width: 80%;
     }
     
-    .header-nav ul li a.highlight-btn {
-      background: linear-gradient(135deg, #ff6b6b, #6c5498);
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(108, 84, 152, 0.3);
-      border: none;
-    }
-    
-    .header-nav ul li a.highlight-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(108, 84, 152, 0.4);
-      background: linear-gradient(135deg, #6c5498, #ff6b6b);
-      color: white;
-    }
-    
-    .header-nav ul li a.highlight-btn .shine {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: skewX(-20deg);
-      animation: shine 3s infinite;
-    }
-    
-    @keyframes shine {
-      0% { left: -100%; }
-      20% { left: 100%; }
-      100% { left: 100%; }
-    }
-    
-    /* Menu mobile */
-    .mobile-menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 30px;
-      height: 20px;
-      cursor: pointer;
-      z-index: 1010;
-    }
-    
-    .mobile-menu-toggle span {
-      height: 2px;
-      width: 100%;
-      background-color: #fff;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      border-radius: 2px;
-    }
-    
-    .page-header {
+    .privacy-header {
       background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/background-header.webp') center/cover no-repeat;
       padding: 80px 0 50px;
       text-align: center;
       position: relative;
       margin-bottom: 40px;
+      margin-top: 20px;
     }
     
-    .page-header::before {
+    .privacy-header::before {
       content: '';
       position: absolute;
       top: 0;
@@ -200,7 +159,7 @@
       z-index: 1;
     }
     
-    .page-header h1 {
+    .privacy-header h1 {
       font-size: 2.5rem;
       position: relative;
       z-index: 2;
@@ -209,35 +168,37 @@
       text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     }
     
-    .page-header p {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-    
     .container {
       max-width: 900px;
       margin: 0 auto;
       padding: 0 20px;
     }
     
-    .main-content {
-      padding: 40px 0;
+    .privacy-content {
+      padding: 20px 0 40px;
+    }
+    
+    .privacy-section {
+      background: var(--section-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     }
     
     .legal-document {
-      background: var(--section-bg);
+      background: transparent;
       border-radius: 10px;
       padding: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      margin-bottom: 30px;
+      box-shadow: none;
+      margin-bottom: 0;
     }
     
     .section {
       margin-bottom: 30px;
+      background: rgba(20, 20, 40, 0.3);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
     }
     
     .section:last-child {
@@ -261,6 +222,7 @@
     p {
       margin-bottom: 15px;
       font-size: 15px;
+      line-height: 1.7;
     }
     
     ul, ol {
@@ -269,7 +231,7 @@
     }
     
     li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-size: 15px;
     }
     
@@ -284,8 +246,10 @@
     .toc {
       background: rgba(30, 30, 50, 0.6);
       border-radius: 8px;
-      padding: 20px;
+      padding: 25px;
       margin-bottom: 30px;
+      position: sticky;
+      top: 90px;
     }
     
     .toc-title {
@@ -366,51 +330,69 @@
       transform: translateY(-5px);
     }
     
+    footer {
+      background: rgba(10, 10, 20, 0.8);
+      padding: 20px 0;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .footer-content {
+      font-size: 14px;
+      color: var(--muted-text);
+    }
+    
+    .footer-links {
+      margin-top: 10px;
+    }
+    
+    .footer-link {
+      color: var(--secondary-color);
+      text-decoration: none;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: var(--light-text);
+    }
+    
     /* Media queries pour le responsive */
     @media (max-width: 768px) {
-      body {
-        padding-top: 60px;
-      }
-      
       .mobile-menu-toggle {
         display: flex;
       }
       
       .header-nav {
         position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
         background: rgba(15, 15, 25, 0.95);
-        padding: 0;
-        height: 0;
-        overflow: hidden;
-        transition: all 0.3s ease-out;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 100;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        backdrop-filter: blur(10px);
       }
       
       .header-nav.active {
-        height: auto;
-        opacity: 1;
-        visibility: visible;
-        padding: 20px 0;
+        right: 0;
       }
       
       .header-nav ul {
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
+        padding: 20px;
       }
       
       .header-nav ul li {
         width: 100%;
         text-align: center;
-      }
-      
-      .header-nav ul li a {
-        padding: 12px 15px;
-        width: 100%;
       }
       
       .mobile-menu-toggle.active span:nth-child(1) {
@@ -425,12 +407,8 @@
         transform: translateY(-9px) rotate(-45deg);
       }
       
-      .page-header h1 {
+      .privacy-header h1 {
         font-size: 1.8rem;
-      }
-      
-      .page-header p {
-        font-size: 0.9rem;
       }
       
       .container {
@@ -444,11 +422,18 @@
       .legal-document {
         padding: 20px;
       }
+      
+      .section {
+        padding: 15px;
+      }
+      
+      .toc {
+        position: relative;
+        top: 0;
+        margin-top: 20px;
+      }
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- HEADER -->
@@ -456,7 +441,7 @@
     <div class="header-content">
       <div class="logo">
         <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="/assets/logos/IPTV_glpgxi.svg"/>
+          <img alt="IPTV Smarter Pro Logo" src="/assets/logos/IPTV_glpgxi.svg" width="150" height="40"/>
         </a>
       </div>
       <!-- Menu hamburger pour mobile -->
@@ -472,36 +457,28 @@
           <li><a href="index.html#offers-section">OFFRES</a></li>
           <li><a href="tutoriel.html">Tutoriel</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="about.html">À Propos</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="concours.html" class="highlight-btn"><span class="shine"></span>CONCOURS</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <div class="page-header">
-    <div class="container">
-      <h1>Politique de Confidentialité</h1>
-      <p>Comment nous protégeons vos données personnelles</p>
-    </div>
+  <div class="privacy-header">
+    <h1>Politique de Confidentialité</h1>
   </div>
-  
-  <div class="main-content">
-    <div class="container">
+
+  <div class="container privacy-content">
+    <div class="privacy-section">
       <div class="toc">
         <div class="toc-title">Table des matières</div>
         <ul class="toc-list">
           <li class="toc-item"><a href="#introduction" class="toc-link">Introduction</a></li>
-          <li class="toc-item"><a href="#collected-data" class="toc-link">Données collectées</a></li>
-          <li class="toc-item"><a href="#data-usage" class="toc-link">Utilisation des données</a></li>
-          <li class="toc-item"><a href="#data-sharing" class="toc-link">Partage des données</a></li>
+          <li class="toc-item"><a href="#data-collection" class="toc-link">Collecte des données</a></li>
+          <li class="toc-item"><a href="#data-use" class="toc-link">Utilisation des données</a></li>
           <li class="toc-item"><a href="#data-security" class="toc-link">Sécurité des données</a></li>
-          <li class="toc-item"><a href="#cookies" class="toc-link">Cookies et technologies similaires</a></li>
-          <li class="toc-item"><a href="#user-rights" class="toc-link">Vos droits sur vos données</a></li>
-          <li class="toc-item"><a href="#data-retention" class="toc-link">Conservation des données</a></li>
-          <li class="toc-item"><a href="#children" class="toc-link">Protection des mineurs</a></li>
-          <li class="toc-item"><a href="#policy-changes" class="toc-link">Modifications de la politique</a></li>
+          <li class="toc-item"><a href="#cookies" class="toc-link">Utilisation des cookies</a></li>
+          <li class="toc-item"><a href="#rights" class="toc-link">Vos droits</a></li>
+          <li class="toc-item"><a href="#changes" class="toc-link">Modifications de la politique</a></li>
           <li class="toc-item"><a href="#contact" class="toc-link">Contact</a></li>
         </ul>
       </div>
@@ -509,167 +486,134 @@
       <div class="legal-document">
         <section id="introduction" class="section">
           <h2>1. Introduction</h2>
-          <p>Chez IPTV Smarter Pro, nous accordons une grande importance à la protection de vos données personnelles. La présente politique de confidentialité (ci-après dénommée "Politique") vise à vous informer de nos pratiques concernant la collecte, l'utilisation et le partage des informations que vous nous fournissez lors de l'utilisation de notre service.</p>
-          <p>Cette Politique s'applique à tous les services proposés par IPTV Smarter Pro et est conforme au Règlement Général sur la Protection des Données (RGPD) et aux autres législations applicables en matière de protection des données.</p>
+          <p>La protection de vos données personnelles est une priorité pour IPTV Smarter Pro. La présente politique de confidentialité a pour but de vous informer sur la manière dont nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez notre service.</p>
+          <p>En utilisant notre service, vous acceptez les pratiques décrites dans la présente politique de confidentialité. Si vous n'êtes pas d'accord avec ces pratiques, veuillez ne pas utiliser notre service.</p>
+          <p>Cette politique s'applique à tous les utilisateurs de notre service, quel que soit le mode d'accès (site web, application, etc.).</p>
+        </section>
+        
+        <section id="data-collection" class="section">
+          <h2>2. Collecte des données</h2>
+          <p>Nous collectons différents types d'informations auprès de nos utilisateurs, notamment :</p>
+          
+          <h3>2.1 Informations que vous nous fournissez</h3>
+          <ul>
+            <li><strong>Informations de compte</strong> : nom, prénom, adresse e-mail, informations de paiement.</li>
+            <li><strong>Profil utilisateur</strong> : préférences, historique de visionnage, favoris.</li>
+            <li><strong>Communications</strong> : lorsque vous nous contactez par e-mail, formulaire de contact ou autres moyens.</li>
+          </ul>
+          
+          <h3>2.2 Informations collectées automatiquement</h3>
+          <ul>
+            <li><strong>Informations techniques</strong> : adresse IP, type d'appareil, navigateur, fournisseur d'accès Internet, système d'exploitation.</li>
+            <li><strong>Informations d'utilisation</strong> : pages visitées, temps passé sur chaque page, liens cliqués, contenus visionnés.</li>
+            <li><strong>Informations de localisation</strong> : pays d'origine déterminé par votre adresse IP.</li>
+          </ul>
+          
           <div class="highlighted">
-            <p>En utilisant notre service, vous acceptez les pratiques décrites dans la présente Politique. Si vous n'acceptez pas ces pratiques, nous vous invitons à ne pas utiliser notre service.</p>
+            <p>Nous ne collectons pas volontairement de données personnelles sensibles telles que des informations sur la race, l'origine ethnique, les opinions politiques, les croyances religieuses, la santé ou l'orientation sexuelle.</p>
           </div>
         </section>
         
-        <section id="collected-data" class="section">
-          <h2>2. Données collectées</h2>
-          <p>Nous collectons différents types de données afin de vous fournir nos services et d'améliorer votre expérience utilisateur :</p>
-          
-          <div class="data-category">
-            <h3>2.1 Données d'inscription</h3>
-            <p>Lorsque vous créez un compte sur notre plateforme, nous collectons :</p>
-            <ul>
-              <li>Votre adresse e-mail</li>
-              <li>Votre nom et prénom</li>
-              <li>Les informations de paiement (traitées par nos prestataires de paiement)</li>
-            </ul>
-          </div>
-          
-          <div class="data-category">
-            <h3>2.2 Données d'utilisation</h3>
-            <p>Lors de votre utilisation de notre service, nous pouvons collecter :</p>
-            <ul>
-              <li>Les contenus visionnés</li>
-              <li>Les heures et durées de visionnage</li>
-              <li>Les appareils utilisés pour accéder au service</li>
-              <li>Les préférences de contenu</li>
-              <li>Les interactions avec le service (recherches, filtres, etc.)</li>
-            </ul>
-          </div>
-          
-          <div class="data-category">
-            <h3>2.3 Données techniques</h3>
-            <p>Pour assurer le bon fonctionnement du service, nous collectons :</p>
-            <ul>
-              <li>L'adresse IP</li>
-              <li>Le type et la version du navigateur</li>
-              <li>Le type et le modèle de l'appareil</li>
-              <li>Le système d'exploitation</li>
-              <li>Les données de connexion et de navigation</li>
-              <li>Les journaux d'erreurs</li>
-            </ul>
-          </div>
-        </section>
-        
-        <section id="data-usage" class="section">
+        <section id="data-use" class="section">
           <h2>3. Utilisation des données</h2>
           <p>Nous utilisons vos données personnelles pour les finalités suivantes :</p>
+          
+          <h3>3.1 Fourniture et amélioration du service</h3>
           <ul>
-            <li><strong>Fournir et gérer le service</strong> : traitement des abonnements, accès aux contenus, assistance client</li>
-            <li><strong>Améliorer le service</strong> : analyse des usages, résolution des problèmes techniques, développement de nouvelles fonctionnalités</li>
-            <li><strong>Personnaliser l'expérience</strong> : recommandations de contenus, adaptation de l'interface</li>
-            <li><strong>Communication</strong> : informations importantes relatives au service, notifications techniques</li>
-            <li><strong>Sécurité</strong> : détection et prévention des activités frauduleuses ou abusives</li>
-            <li><strong>Obligations légales</strong> : respect des obligations légales et réglementaires</li>
+            <li>Gérer votre compte et vous fournir accès à notre service</li>
+            <li>Personnaliser votre expérience et vous proposer des contenus adaptés</li>
+            <li>Améliorer et optimiser notre service</li>
+            <li>Résoudre les problèmes techniques et assurer la maintenance</li>
           </ul>
-          <p>Nous traitons vos données sur la base des fondements juridiques suivants :</p>
+          
+          <h3>3.2 Communication</h3>
           <ul>
-            <li>L'exécution du contrat qui nous lie (conditions générales d'utilisation)</li>
-            <li>Notre intérêt légitime à améliorer et sécuriser notre service</li>
-            <li>Votre consentement, lorsque celui-ci est requis</li>
-            <li>Le respect de nos obligations légales</li>
+            <li>Vous envoyer des informations relatives à votre abonnement (confirmation, renouvellement, expiration)</li>
+            <li>Répondre à vos demandes et questions</li>
+            <li>Vous informer des mises à jour importantes de notre service ou de notre politique de confidentialité</li>
           </ul>
-        </section>
-        
-        <section id="data-sharing" class="section">
-          <h2>4. Partage des données</h2>
-          <p>Nous pouvons partager vos données personnelles avec les catégories de destinataires suivantes :</p>
+          
+          <h3>3.3 Marketing</h3>
+          <p>Avec votre consentement, nous pouvons utiliser vos données pour :</p>
           <ul>
-            <li><strong>Prestataires de services</strong> : sociétés qui nous aident à fournir nos services (hébergement, paiement, support client)</li>
-            <li><strong>Partenaires commerciaux</strong> : uniquement avec votre consentement explicite</li>
-            <li><strong>Autorités légales</strong> : en cas d'obligation légale, de décision de justice ou pour protéger nos droits</li>
+            <li>Vous envoyer des newsletters ou des informations sur nos offres spéciales</li>
+            <li>Vous proposer des contenus personnalisés en fonction de vos préférences</li>
           </ul>
-          <p>Nous nous engageons à ne pas vendre vos données personnelles à des tiers. Lorsque nous partageons des données avec des prestataires, nous nous assurons qu'ils respectent des standards élevés de protection des données.</p>
+          <p>Vous pouvez vous désabonner de ces communications à tout moment en utilisant le lien de désabonnement présent dans chaque e-mail ou en nous contactant directement.</p>
+          
+          <h3>3.4 Obligations légales</h3>
+          <p>Nous pouvons également utiliser vos données pour nous conformer à nos obligations légales, résoudre des litiges et faire respecter nos accords.</p>
         </section>
         
         <section id="data-security" class="section">
-          <h2>5. Sécurité des données</h2>
-          <p>Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre la perte, l'accès non autorisé, la divulgation ou la destruction :</p>
+          <h2>4. Sécurité des données</h2>
+          <p>Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles appropriées pour protéger vos données personnelles contre la perte, l'accès non autorisé, la divulgation, l'altération ou la destruction.</p>
+          
+          <p>Ces mesures comprennent notamment :</p>
           <ul>
-            <li>Chiffrement des données sensibles</li>
-            <li>Accès limité aux données sur la base du besoin d'en connaître</li>
-            <li>Surveillance des systèmes pour détecter d'éventuelles vulnérabilités</li>
-            <li>Formation de notre personnel aux bonnes pratiques de sécurité</li>
-            <li>Évaluation régulière de l'efficacité de nos mesures de sécurité</li>
+            <li>Le chiffrement des données sensibles</li>
+            <li>Des procédures de sauvegarde régulières</li>
+            <li>Des accès restreints aux informations personnelles</li>
+            <li>L'utilisation de protocoles sécurisés pour les transactions</li>
           </ul>
-          <p>Malgré ces précautions, aucune méthode de transmission ou de stockage électronique n'est totalement sécurisée. Nous ne pouvons donc garantir une sécurité absolue.</p>
-          <div class="highlighted">
-            <p>En cas de violation de données susceptible d'engendrer un risque élevé pour vos droits et libertés, nous vous en informerons dans les délais prévus par la loi.</p>
-          </div>
+          
+          <p>Bien que nous nous efforcions de protéger vos informations, aucune méthode de transmission sur Internet ou de stockage électronique n'est totalement sécurisée. Nous ne pouvons donc pas garantir une sécurité absolue.</p>
+          
+          <h3>4.1 Conservation des données</h3>
+          <p>Nous conservons vos données personnelles aussi longtemps que nécessaire pour vous fournir notre service et pour les finalités décrites dans cette politique. Lorsque vous supprimez votre compte, nous supprimons vos données personnelles, sauf si leur conservation est nécessaire pour des raisons légales ou de sécurité.</p>
         </section>
         
         <section id="cookies" class="section">
-          <h2>6. Cookies et technologies similaires</h2>
-          <p>Notre site web utilise des cookies et technologies similaires pour améliorer votre expérience, analyser le trafic et personnaliser le contenu.</p>
-          <h3>6.1 Types de cookies utilisés</h3>
+          <h2>5. Utilisation des cookies</h2>
+          <p>Notre site utilise des cookies et des technologies similaires pour améliorer votre expérience de navigation et nous aider à comprendre comment vous utilisez notre service.</p>
+          
+          <h3>5.1 Types de cookies utilisés</h3>
           <ul>
-            <li><strong>Cookies essentiels</strong> : nécessaires au fonctionnement du site</li>
-            <li><strong>Cookies de performance</strong> : pour analyser la manière dont les visiteurs utilisent le site</li>
-            <li><strong>Cookies de fonctionnalité</strong> : pour mémoriser vos préférences</li>
-            <li><strong>Cookies de ciblage</strong> : pour personnaliser le contenu en fonction de vos intérêts</li>
+            <li><strong>Cookies essentiels</strong> : nécessaires au fonctionnement du site.</li>
+            <li><strong>Cookies de préférences</strong> : permettent de mémoriser vos préférences.</li>
+            <li><strong>Cookies d'analyse</strong> : nous aident à comprendre comment les visiteurs interagissent avec notre site.</li>
+            <li><strong>Cookies marketing</strong> : utilisés pour vous proposer des publicités pertinentes.</li>
           </ul>
-          <h3>6.2 Gestion des cookies</h3>
-          <p>Vous pouvez contrôler et/ou supprimer les cookies à votre guise. Vous pouvez supprimer tous les cookies déjà présents sur votre ordinateur et paramétrer la plupart des navigateurs pour qu'ils les bloquent. Toutefois, si vous faites cela, vous devrez peut-être ajuster manuellement certaines préférences chaque fois que vous visiterez un site, et certaines fonctionnalités pourraient ne pas fonctionner.</p>
+          
+          <h3>5.2 Gestion des cookies</h3>
+          <p>Vous pouvez configurer votre navigateur pour refuser tous les cookies ou pour être informé lorsqu'un cookie est envoyé. Cependant, certaines fonctionnalités du site peuvent ne pas fonctionner correctement si vous désactivez les cookies.</p>
         </section>
         
-        <section id="user-rights" class="section">
-          <h2>7. Vos droits sur vos données</h2>
+        <section id="rights" class="section">
+          <h2>6. Vos droits</h2>
           <p>Conformément aux réglementations sur la protection des données, vous disposez des droits suivants concernant vos données personnelles :</p>
           
-          <div class="rights-section">
-            <h3>Droits d'accès et de contrôle</h3>
-            <ul>
-              <li><strong>Droit d'accès</strong> : obtenir une copie des données que nous détenons sur vous</li>
-              <li><strong>Droit de rectification</strong> : demander la correction des données inexactes</li>
-              <li><strong>Droit à l'effacement</strong> : demander la suppression de vos données dans certains cas</li>
-              <li><strong>Droit à la limitation du traitement</strong> : demander la restriction du traitement de vos données</li>
-              <li><strong>Droit à la portabilité</strong> : obtenir vos données dans un format structuré pour les transmettre à un autre responsable de traitement</li>
-              <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos données dans certains cas</li>
-            </ul>
-          </div>
-          
-          <p>Pour exercer ces droits, vous pouvez nous contacter aux coordonnées indiquées dans la section "Contact". Nous traiterons votre demande dans les délais prévus par la loi (généralement un mois, pouvant être prolongé de deux mois supplémentaires si nécessaire).</p>
-          <p>Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à l'autorité de contrôle de votre pays de résidence.</p>
-        </section>
-        
-        <section id="data-retention" class="section">
-          <h2>8. Conservation des données</h2>
-          <p>Nous conservons vos données personnelles aussi longtemps que nécessaire pour les finalités pour lesquelles elles ont été collectées, notamment pour satisfaire aux exigences légales, comptables et de reporting.</p>
-          <p>Les périodes de conservation spécifiques sont les suivantes :</p>
           <ul>
-            <li><strong>Données de compte</strong> : conservées tant que votre compte est actif et pendant une période de 12 mois après sa fermeture</li>
-            <li><strong>Données d'utilisation</strong> : conservées pendant 24 mois</li>
-            <li><strong>Données de paiement</strong> : conservées conformément aux exigences légales en matière comptable et fiscale (généralement 10 ans)</li>
-            <li><strong>Logs techniques</strong> : conservés pendant 12 mois</li>
+            <li><strong>Droit d'accès</strong> : vous pouvez demander une copie de vos données personnelles.</li>
+            <li><strong>Droit de rectification</strong> : vous pouvez demander la correction de données inexactes ou incomplètes.</li>
+            <li><strong>Droit à l'effacement</strong> : vous pouvez demander la suppression de vos données personnelles dans certaines circonstances.</li>
+            <li><strong>Droit à la limitation du traitement</strong> : vous pouvez demander de limiter le traitement de vos données.</li>
+            <li><strong>Droit à la portabilité des données</strong> : vous pouvez recevoir les données que vous nous avez fournies dans un format structuré.</li>
+            <li><strong>Droit d'opposition</strong> : vous pouvez vous opposer au traitement de vos données pour des motifs légitimes.</li>
           </ul>
-          <p>À l'issue de ces périodes, vos données sont soit supprimées, soit anonymisées de manière irréversible.</p>
+          
+          <p>Pour exercer ces droits, veuillez nous contacter via les coordonnées fournies dans la section "Contact" ci-dessous.</p>
+          
+          <div class="highlighted">
+            <p>Si vous estimez que notre traitement de vos données personnelles enfreint la législation sur la protection des données, vous avez également le droit de déposer une plainte auprès de l'autorité de contrôle compétente.</p>
+          </div>
         </section>
         
-        <section id="children" class="section">
-          <h2>9. Protection des mineurs</h2>
-          <p>Notre service n'est pas destiné aux personnes âgées de moins de 18 ans. Nous ne collectons pas sciemment des données personnelles concernant des enfants de moins de 18 ans. Si vous êtes un parent ou un tuteur et que vous pensez que votre enfant nous a fourni des données personnelles, veuillez nous contacter immédiatement. Si nous apprenons que nous avons collecté des données personnelles d'un enfant sans vérification du consentement parental, nous prenons des mesures pour supprimer ces informations de nos serveurs.</p>
-        </section>
-        
-        <section id="policy-changes" class="section">
-          <h2>10. Modifications de la politique</h2>
-          <p>Nous pouvons mettre à jour cette Politique de temps à autre pour refléter des changements dans nos pratiques ou pour d'autres raisons opérationnelles, légales ou réglementaires.</p>
-          <p>En cas de modifications importantes, nous vous en informerons par e-mail ou par une notification sur notre site avant que les modifications ne prennent effet. Nous vous encourageons à consulter régulièrement cette Politique pour prendre connaissance de toute mise à jour.</p>
-          <p>La poursuite de votre utilisation du service après la publication des modifications vaut acceptation de ces dernières.</p>
+        <section id="changes" class="section">
+          <h2>7. Modifications de la politique</h2>
+          <p>Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Toute modification sera publiée sur cette page avec une date de mise à jour.</p>
+          <p>Pour les modifications importantes, nous vous informerons par e-mail ou par une notification sur notre site. Nous vous encourageons à consulter régulièrement cette page pour rester informé des mises à jour.</p>
+          <p>Votre utilisation continue du service après la publication des modifications constitue votre acceptation de ces modifications.</p>
         </section>
         
         <section id="contact" class="section">
-          <h2>11. Contact</h2>
-          <p>Si vous avez des questions, des préoccupations ou des demandes concernant cette Politique de confidentialité ou la manière dont nous traitons vos données personnelles, veuillez nous contacter :</p>
+          <h2>8. Contact</h2>
+          <p>Si vous avez des questions concernant cette politique de confidentialité ou si vous souhaitez exercer vos droits concernant vos données personnelles, veuillez nous contacter :</p>
           <ul>
-            <li><strong>Par e-mail</strong> : support@iptvsmarterpros.com</li>
-            <li><strong>Via Snapchat</strong> : dyuka.953</li>
+            <li>Par e-mail : privacy@iptvsmarterpros.com</li>
+            <li>Via Snapchat : dyuka.953</li>
           </ul>
-          <p>Nous nous efforcerons de répondre à votre demande dans les meilleurs délais.</p>
+          <p>Nous nous efforcerons de répondre à toutes les demandes légitimes dans un délai d'un mois. Occasionnellement, cela peut prendre plus de temps si votre demande est particulièrement complexe ou si vous avez fait plusieurs demandes, auquel cas nous vous tiendrons informé.</p>
         </section>
         
         <div class="date-info">
@@ -693,52 +637,6 @@
     </div>
   </footer>
   
-  <script>
-    // Smooth scroll pour les liens de la table des matières
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-    
-    // Afficher/masquer le bouton "Retour en haut" en fonction du défilement
-    window.addEventListener('scroll', function() {
-      var backToTop = document.querySelector('.back-to-top');
-      if (window.pageYOffset > 300) {
-        backToTop.style.display = 'flex';
-      } else {
-        backToTop.style.display = 'none';
-      }
-    });
-    
-    // Action du bouton "Retour en haut"
-    document.querySelector('.back-to-top').addEventListener('click', function(e) {
-      e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // Menu mobile toggle
-    document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
-      this.classList.toggle('active');
-      document.getElementById('header-nav').classList.toggle('active');
-      document.body.classList.toggle('menu-open');
-    });
-    
-    // Fermer le menu mobile quand on clique sur un lien
-    document.querySelectorAll('#header-nav a').forEach(link => {
-      link.addEventListener('click', function() {
-        document.getElementById('mobile-menu-toggle').classList.remove('active');
-        document.getElementById('header-nav').classList.remove('active');
-        document.body.classList.remove('menu-open');
-      });
-    });
-  </script>
+  <script src="js/navbar.js"></script>
 </body>
 </html> 
