@@ -1,10 +1,16 @@
+/**
+ * Script de vérification de l'indexation Google
+ * Ce script analyse l'indexation des URLs du sitemap dans Google Search Console
+ * et génère un rapport détaillé sur l'état de l'indexation du site.
+ */
+
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const { parseString } = require('xml2js');
 require('dotenv').config();
 
-// Configuration
+// Configuration globale
 const CONFIG = {
   sitemapPath: path.join(__dirname, 'public', 'sitemap.xml'),
   robotsPath: path.join(__dirname, 'public', 'robots.txt'),
@@ -19,7 +25,10 @@ if (!fs.existsSync(CONFIG.resultsPath)) {
   fs.mkdirSync(CONFIG.resultsPath, { recursive: true });
 }
 
-// Fonction pour lire le sitemap
+/**
+ * Lit et analyse le fichier sitemap pour extraire les URLs
+ * @returns {Promise<Array>} Liste des URLs extraites du sitemap
+ */
 async function readSitemap() {
   try {
     console.log(`Lecture du sitemap: ${CONFIG.sitemapPath}`);
@@ -51,19 +60,26 @@ async function readSitemap() {
   }
 }
 
-// Fonction pour lire le fichier robots.txt
+/**
+ * Lit le fichier robots.txt
+ * @returns {string} Contenu du fichier robots.txt
+ */
 function readRobotsTxt() {
   try {
     console.log(`Lecture du fichier robots.txt: ${CONFIG.robotsPath}`);
-    const robotsContent = fs.readFileSync(CONFIG.robotsPath, 'utf8');
-    return robotsContent;
+    return fs.readFileSync(CONFIG.robotsPath, 'utf8');
   } catch (error) {
     console.error('Erreur lors de la lecture du fichier robots.txt:', error);
     return '';
   }
 }
 
-// Vérifier si une URL est bloquée par robots.txt
+/**
+ * Vérifie si une URL est bloquée par robots.txt
+ * @param {string} url - URL à vérifier
+ * @param {string} robotsContent - Contenu du fichier robots.txt
+ * @returns {boolean} True si l'URL est bloquée
+ */
 function isBlockedByRobotsTxt(url, robotsContent) {
   const urlPath = new URL(url).pathname;
   
@@ -84,9 +100,18 @@ function isBlockedByRobotsTxt(url, robotsContent) {
   });
 }
 
-// Fonction pour vérifier l'indexation Google avec l'API
+/**
+ * Vérifie l'indexation Google avec l'API Search Console
+ * @param {string} url - URL à vérifier
+ * @returns {Promise<Object>} Résultat de l'indexation
+ */
 async function checkGoogleIndexation(url) {
   try {
+    if (!CONFIG.googleApiKey || !CONFIG.googleSearchEngineId) {
+      console.warn('Clés API Google manquantes, utilisation du mode simulation');
+      return checkIndexationSimulation(url);
+    }
+
     const encodedUrl = encodeURIComponent(url);
     const searchUrl = `https://www.googleapis.com/customsearch/v1?key=${CONFIG.googleApiKey}&cx=${CONFIG.googleSearchEngineId}&q=site:${encodedUrl}`;
     console.log(`Vérification de l'indexation de: ${url}`);
@@ -120,18 +145,27 @@ async function checkGoogleIndexation(url) {
   }
 }
 
-// Fonction alternative pour vérifier l'indexation sans API (pour tests)
-async function checkIndexationWithoutApi(url) {
+/**
+ * Mode simulation pour tester sans API Google
+ * @param {string} url - URL à simuler
+ * @returns {Object} Résultat simulé de l'indexation
+ */
+function checkIndexationSimulation(url) {
   console.log(`Simulation de vérification pour: ${url}`);
   return {
     url,
-    indexed: Math.random() > 0.3, // 70% de chance d'être indexé (pour simulation)
+    indexed: Math.random() > 0.3, // 70% de chance d'être indexé
     totalResults: Math.floor(Math.random() * 10),
+    simulated: true,
     timestamp: new Date().toISOString()
   };
 }
 
-// Fonction pour analyser la qualité des URLs
+/**
+ * Analyse la qualité d'une URL
+ * @param {string} url - URL à analyser
+ * @returns {Object} Analyse de qualité de l'URL
+ */
 function analyzeUrlQuality(url) {
   const urlObj = new URL(url);
   const issues = [];
@@ -162,10 +196,16 @@ function analyzeUrlQuality(url) {
   };
 }
 
-// Fonction pour générer un rapport HTML
+/**
+ * Génère un rapport HTML des résultats d'indexation
+ * @param {Array} results - Résultats d'indexation
+ * @param {string} robotsContent - Contenu du fichier robots.txt
+ * @returns {string} HTML du rapport
+ */
 function generateHtmlReport(results, robotsContent) {
   const indexedCount = results.filter(r => r.indexed).length;
   const percentage = ((indexedCount / results.length) * 100).toFixed(1);
+  const date = new Date().toLocaleString('fr-FR');
   
   const html = `
 <!DOCTYPE html>
@@ -199,16 +239,18 @@ function generateHtmlReport(results, robotsContent) {
       margin: 10px 0;
     }
     .progress-bar {
-      height: 30px;
-      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      height: 24px;
       border-radius: 5px;
+      background-color: ${percentage > 70 ? '#28a745' : percentage > 40 ? '#ffc107' : '#dc3545'};
       text-align: center;
-      line-height: 30px;
       color: white;
       font-weight: bold;
+      line-height: 24px;
     }
-    .table-container {
-      overflow-x: auto;
+    .report-date {
+      color: #6c757d;
+      font-style: italic;
+      margin-bottom: 20px;
     }
     table {
       width: 100%;
@@ -217,222 +259,198 @@ function generateHtmlReport(results, robotsContent) {
     }
     th, td {
       padding: 12px 15px;
-      border-bottom: 1px solid #ddd;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
     th {
-      background-color: #4CAF50;
-      color: white;
+      background-color: #f8f9fa;
+      font-weight: bold;
     }
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .status {
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-weight: bold;
     }
     .indexed {
-      color: #4CAF50;
-      font-weight: bold;
+      background-color: #d4edda;
+      color: #155724;
     }
     .not-indexed {
-      color: #F44336;
-      font-weight: bold;
+      background-color: #f8d7da;
+      color: #721c24;
     }
-    .issue {
+    .blocked {
       background-color: #fff3cd;
-      padding: 2px 5px;
-      border-radius: 3px;
-      display: inline-block;
-      margin: 2px;
-      font-size: 0.85em;
+      color: #856404;
+    }
+    .quality-issues {
+      color: #dc3545;
+      margin-top: 5px;
     }
     .robots-content {
-      background-color: #f5f5f5;
+      background-color: #f8f9fa;
       padding: 15px;
       border-radius: 5px;
-      overflow-x: auto;
-      white-space: pre;
+      white-space: pre-wrap;
       font-family: monospace;
+      overflow-x: auto;
     }
     .recommendations {
       background-color: #e8f4f8;
-      padding: 20px;
+      padding: 15px;
       border-radius: 5px;
-      margin-top: 30px;
+      margin-top: 20px;
     }
-    .url-cell {
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    @media (max-width: 768px) {
-      th, td {
-        padding: 8px;
-      }
+    .recommendations ul {
+      margin: 10px 0;
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Rapport d'indexation Google - ${CONFIG.domainName}</h1>
+  <h1>Rapport d'indexation Google</h1>
+  <div class="report-date">Généré le ${date}</div>
+  
   <div class="summary">
     <h2>Résumé</h2>
-    <p>
-      <strong>Date du rapport:</strong> ${new Date().toLocaleDateString('fr-FR', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      })}
-    </p>
-    <p>
-      <strong>URLs analysées:</strong> ${results.length}<br>
-      <strong>URLs indexées:</strong> ${indexedCount}<br>
-      <strong>Taux d'indexation:</strong> ${percentage}%
-    </p>
+    <p>Domain: <strong>${CONFIG.domainName}</strong></p>
+    <p>URLs indexées: <strong>${indexedCount}/${results.length} (${percentage}%)</strong></p>
+    
     <div class="progress-container">
       <div class="progress-bar" style="width: ${percentage}%">${percentage}%</div>
     </div>
   </div>
-
-  <h2>Détails de l'indexation</h2>
-  <div class="table-container">
-    <table>
-      <thead>
-        <tr>
-          <th>URL</th>
-          <th>Indexée</th>
-          <th>Priorité</th>
-          <th>Dernière modification</th>
-          <th>Problèmes détectés</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${results.map(result => {
-          const urlAnalysis = analyzeUrlQuality(result.url);
-          return `
-            <tr>
-              <td class="url-cell"><a href="${result.url}" target="_blank">${result.url}</a></td>
-              <td class="${result.indexed ? 'indexed' : 'not-indexed'}">${result.indexed ? 'Oui' : 'Non'}</td>
-              <td>${result.priority || '-'}</td>
-              <td>${result.lastmod || '-'}</td>
-              <td>${urlAnalysis.issues.length > 0 ? 
-                urlAnalysis.issues.map(issue => `<span class="issue">${issue}</span>`).join(' ') : 
-                'Aucun'}</td>
-            </tr>
-          `;
-        }).join('')}
-      </tbody>
-    </table>
-  </div>
-
+  
+  <h2>Détails des URLs</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>URL</th>
+        <th>Statut</th>
+        <th>Priorité</th>
+        <th>Dernière modification</th>
+        <th>Fréquence</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${results.map(result => {
+        const urlQuality = analyzeUrlQuality(result.url);
+        const isBlocked = isBlockedByRobotsTxt(result.url, robotsContent);
+        
+        let statusClass = 'not-indexed';
+        let statusText = 'Non indexé';
+        
+        if (isBlocked) {
+          statusClass = 'blocked';
+          statusText = 'Bloqué par robots.txt';
+        } else if (result.indexed) {
+          statusClass = 'indexed';
+          statusText = 'Indexé';
+        }
+        
+        return `
+          <tr>
+            <td>
+              <a href="${result.url}" target="_blank">${result.url}</a>
+              ${urlQuality.hasIssues ? `<div class="quality-issues">Problèmes: ${urlQuality.issues.join(', ')}</div>` : ''}
+            </td>
+            <td><span class="status ${statusClass}">${statusText}</span></td>
+            <td>${result.priority || 'N/A'}</td>
+            <td>${result.lastmod || 'N/A'}</td>
+            <td>${result.changefreq || 'N/A'}</td>
+          </tr>
+        `;
+      }).join('')}
+    </tbody>
+  </table>
+  
+  <h2>Robots.txt</h2>
+  <div class="robots-content">${robotsContent.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+  
   <div class="recommendations">
-    <h2>Recommandations</h2>
+    <h2>Recommandations pour améliorer l'indexation</h2>
     <ul>
-      <li>Soumettre les URLs non indexées dans Google Search Console</li>
-      <li>Améliorer le maillage interne en liant les pages non indexées depuis les pages bien classées</li>
-      <li>Vérifier que les URLs non indexées ont un contenu unique et utile</li>
-      <li>S'assurer que les pages sont rapides et optimisées pour le mobile</li>
-      <li>Ajouter plus de contenu de qualité aux pages de faible priorité pour améliorer leur indexation</li>
+      <li>Assurez-vous que toutes les pages importantes ont une priorité élevée dans le sitemap</li>
+      <li>Vérifiez que vos pages sont accessibles aux robots de Google (pas de blocage dans robots.txt)</li>
+      <li>Créez des liens internes vers les pages importantes non indexées</li>
+      <li>Soumettez régulièrement votre sitemap à Google Search Console</li>
+      <li>Corrigez les URLs ayant des problèmes de qualité</li>
     </ul>
   </div>
-
-  <h2>Configuration robots.txt</h2>
-  <pre class="robots-content">${robotsContent}</pre>
-
-  <p style="margin-top: 50px; color: #777; text-align: center; font-size: 0.8em;">
-    Rapport généré automatiquement pour IPTV Smarter Pros
-  </p>
 </body>
 </html>`;
 
-  const filePath = path.join(CONFIG.resultsPath, `indexation-report-${new Date().toISOString().slice(0,10)}.html`);
-  fs.writeFileSync(filePath, html);
-  console.log(`Rapport HTML généré: ${filePath}`);
-  return filePath;
+  return html;
 }
 
-// Fonction pour générer un rapport JSON
+/**
+ * Sauvegarde les résultats au format JSON
+ * @param {Array} results - Résultats d'indexation
+ * @returns {string} Chemin du fichier sauvegardé
+ */
 function saveResultsAsJson(results) {
-  const filePath = path.join(CONFIG.resultsPath, `indexation-data-${new Date().toISOString().slice(0,10)}.json`);
+  const date = new Date().toISOString().slice(0, 10);
+  const filePath = path.join(CONFIG.resultsPath, `indexation-data-${date}.json`);
   fs.writeFileSync(filePath, JSON.stringify(results, null, 2));
-  console.log(`Rapport JSON généré: ${filePath}`);
+  console.log(`Données sauvegardées dans: ${filePath}`);
   return filePath;
 }
 
-// Fonction principale
+/**
+ * Fonction principale qui orchestre le processus de vérification
+ */
 async function main() {
-  console.log('=================================================');
-  console.log(`Vérification de l'indexation Google pour ${CONFIG.domainName}`);
-  console.log('=================================================');
-  
-  // Lire le sitemap et robots.txt
-  const urls = await readSitemap();
-  const robotsContent = readRobotsTxt();
-  
-  if (urls.length === 0) {
-    console.error("Erreur: Aucune URL trouvée dans le sitemap.");
-    process.exit(1);
-  }
-  
-  // Vérifier chaque URL
-  const results = [];
-  
-  for (const urlObj of urls) {
-    let result;
+  try {
+    // Étape 1: Lire le sitemap et robots.txt
+    const urls = await readSitemap();
+    const robotsContent = readRobotsTxt();
     
-    // Utiliser l'API Google si disponible, sinon la méthode alternative
-    if (CONFIG.googleApiKey && CONFIG.googleSearchEngineId) {
-      result = await checkGoogleIndexation(urlObj.url);
-    } else {
-      result = await checkIndexationWithoutApi(urlObj.url);
+    if (urls.length === 0) {
+      console.error("Erreur: Aucune URL trouvée dans le sitemap.");
+      return;
     }
     
-    // Compléter avec les informations du sitemap
-    results.push({
-      ...result,
-      priority: urlObj.priority,
-      lastmod: urlObj.lastmod,
-      changefreq: urlObj.changefreq,
-      blockedByRobots: isBlockedByRobotsTxt(urlObj.url, robotsContent)
-    });
+    console.log(`Analyse de ${urls.length} URLs...`);
     
-    // Pour éviter de dépasser le quota d'API
-    await new Promise(resolve => setTimeout(resolve, 1500));
-  }
-  
-  // Enregistrer les résultats
-  saveResultsAsJson(results);
-  const reportPath = generateHtmlReport(results, robotsContent);
-  
-  // Afficher les statistiques
-  const indexedCount = results.filter(r => r.indexed).length;
-  const blockedCount = results.filter(r => r.blockedByRobots).length;
-  const percentage = ((indexedCount / results.length) * 100).toFixed(1);
-  
-  console.log('\n=================================================');
-  console.log('Résultats de l\'indexation:');
-  console.log('=================================================');
-  console.log(`Total des URLs: ${results.length}`);
-  console.log(`URLs indexées: ${indexedCount} (${percentage}%)`);
-  console.log(`URLs bloquées par robots.txt: ${blockedCount}`);
-  
-  if (results.length - indexedCount > 0) {
-    console.log('\nURLs non indexées:');
-    results
-      .filter(r => !r.indexed)
-      .forEach(result => {
-        console.log(`- ${result.url} (priorité: ${result.priority})`);
+    // Étape 2: Vérifier l'indexation de chaque URL
+    const results = [];
+    for (const urlData of urls) {
+      // Pour éviter de surcharger l'API Google
+      if (results.length > 0) {
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+      
+      const indexationResult = await checkGoogleIndexation(urlData.url);
+      results.push({
+        ...indexationResult,
+        priority: urlData.priority,
+        lastmod: urlData.lastmod,
+        changefreq: urlData.changefreq
       });
+    }
     
-    console.log('\nRecommandations:');
-    console.log('1. Soumettez ces URLs dans Google Search Console');
-    console.log('2. Vérifiez le maillage interne de votre site');
-    console.log('3. Améliorez le contenu des pages non indexées');
+    // Étape 3: Générer et sauvegarder le rapport
+    console.log("Génération du rapport...");
+    
+    // Sauvegarder les données brutes en JSON
+    saveResultsAsJson(results);
+    
+    // Générer le rapport HTML
+    const htmlReport = generateHtmlReport(results, robotsContent);
+    const reportDate = new Date().toISOString().slice(0, 10);
+    const htmlPath = path.join(CONFIG.resultsPath, `indexation-report-${reportDate}.html`);
+    fs.writeFileSync(htmlPath, htmlReport);
+    
+    console.log(`Rapport HTML généré: ${htmlPath}`);
+    console.log("Analyse d'indexation terminée avec succès!");
+    
+  } catch (error) {
+    console.error("Erreur lors de l'exécution du processus d'analyse:", error);
   }
-  
-  console.log(`\nRapport complet disponible dans: ${reportPath}`);
 }
 
-// Exécuter le programme
-main().catch(error => {
-  console.error('Erreur lors de l\'exécution du programme:', error);
-  process.exit(1);
-}); 
+// Exécuter le programme principal
+main(); 
