@@ -188,6 +188,27 @@
         "@type": "Answer",
         "text": "Nos abonnements commencent à 9.99€ pour 3 mois. Nous proposons également des forfaits 6 mois à 19.99€ et 12 mois à 29.99€ avec des économies importantes."
       }
+    }, {
+      "@type": "Question",
+      "name": "Qu'est-ce que IPTV Smarter Pro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IPTV Smarter Pro est un service premium d'abonnement IPTV français offrant plus de 22 000 chaînes TV en direct et 50 000 films et séries en VOD, disponibles en qualité HD et 4K."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Comment fonctionne l'abonnement IPTV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Après votre souscription, vous recevez immédiatement vos identifiants par email. Installez l'application IPTV Smarters Pro sur votre appareil (Smart TV, smartphone, tablette ou ordinateur), entrez vos identifiants et profitez instantanément de tous vos contenus préférés."
+      }
+    }, {
+      "@type": "Question",
+      "name": "Offrez-vous un support technique?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, notre équipe de support client francophone est disponible 24h/24 et 7j/7 via WhatsApp, Snapchat et Facebook pour vous assister avec une réponse moyenne en moins de 5 minutes."
+      }
     }]
   }
   </script>
@@ -1784,63 +1805,22 @@
   }
   </script>
 
-  <!-- Ajouter un balisage FAQPage pour améliorer la visibilité -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Qu'est-ce que IPTV Smarter Pro?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "IPTV Smarter Pro est un service premium d'abonnement IPTV français offrant plus de 22 000 chaînes TV en direct et 50 000 films et séries en VOD, disponibles en qualité HD et 4K."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Comment fonctionne l'abonnement IPTV?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Après votre souscription, vous recevez immédiatement vos identifiants par email. Installez l'application IPTV Smarters Pro sur votre appareil (Smart TV, smartphone, tablette ou ordinateur), entrez vos identifiants et profitez instantanément de tous vos contenus préférés."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Quels appareils sont compatibles avec votre service IPTV?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Notre service IPTV est compatible avec tous les appareils : Smart TV (Samsung, LG, etc.), Android Box, Fire Stick, iOS, Android, Mac, Windows, et plus encore. Un guide d'installation complet est fourni après l'achat."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Offrez-vous un support technique?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Oui, notre équipe de support client francophone est disponible 24h/24 et 7j/7 via WhatsApp, Snapchat et Facebook pour vous assister avec une réponse moyenne en moins de 5 minutes."
-        }
-      }
-    ]
-  }
-  </script>
-
+  <!-- Script pour réafficher la bannière fixe qui a été fermée -->
   <script>
-    // Script pour réafficher la bannière fixe qui a été fermée
-    document.addEventListener('DOMContentLoaded', function() {
-      // Supprime l'information de localStorage pour permettre à la bannière de réapparaître
-      localStorage.removeItem('fixedFooterHidden');
-      
-      // S'assure que la bannière est visible
-      const fixedFooter = document.querySelector('.fixed-footer');
-      if (fixedFooter) {
-        fixedFooter.classList.remove('hide');
-        fixedFooter.style.transform = 'translateY(0)';
-        fixedFooter.style.opacity = '1';
-        fixedFooter.style.pointerEvents = 'auto';
-      }
-    });
+     // Script pour réafficher la bannière fixe qui a été fermée
+     document.addEventListener('DOMContentLoaded', function() {
+       // Supprime l'information de localStorage pour permettre à la bannière de réapparaître
+       localStorage.removeItem('fixedFooterHidden');
+       
+       // S'assure que la bannière est visible
+       const fixedFooter = document.querySelector('.fixed-footer');
+       if (fixedFooter) {
+         fixedFooter.classList.remove('hide');
+         fixedFooter.style.transform = 'translateY(0)';
+         fixedFooter.style.opacity = '1';
+         fixedFooter.style.pointerEvents = 'auto';
+       }
+     });
   </script>
 
   <!-- Script d'optimisation des performances -->

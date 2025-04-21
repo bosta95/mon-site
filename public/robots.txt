@@ -1,6 +1,8 @@
 # Configuration optimisée pour l'indexation Google
 User-agent: *
 Allow: /
+Allow: /offer-details.html
+Allow: /offer-details.html?*
 
 # Pages privées et administratives (ne pas indexer)
 Disallow: /payment.html
@@ -8,7 +10,7 @@ Disallow: /success.html
 Disallow: /cancel.html
 Disallow: /confirmation.html
 
-# Paramètres de tracking et UTM (ne pas indexer)
+# Paramètres de tracking et UTM uniquement (ne pas indexer)
 Disallow: /*?ref=*
 Disallow: /*?utm_*
 Disallow: /*?fbclid=*
@@ -19,6 +21,8 @@ Allow: /
 Allow: /*.js$
 Allow: /*.css$
 Allow: /images/
+Allow: /offer-details.html
+Allow: /offer-details.html?*
 Crawl-delay: 1
 
 # Paramètres spécifiques pour Googlebot-Image
@@ -37,6 +41,8 @@ User-agent: bingbot
 Allow: /
 Allow: /*.js$
 Allow: /*.css$
+Allow: /offer-details.html
+Allow: /offer-details.html?*
 Crawl-delay: 1
 
 # Blocage des robots indésirables
