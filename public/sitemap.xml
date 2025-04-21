@@ -9,75 +9,144 @@
     <!-- Page d'accueil principale -->
     <url>
         <loc>https://www.iptvsmarterpros.com/</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://www.iptvsmarterpros.com/images/logo.webp</image:loc>
+            <image:title>IPTV Pas Cher - Smart TV, Android, iPhone</image:title>
+        </image:image>
+        <video:video>
+            <video:thumbnail_loc>https://www.iptvsmarterpros.com/images/header-video-thumbnail.jpg</video:thumbnail_loc>
+            <video:title>IPTV Pas Cher - Test Gratuit</video:title>
+            <video:description>Service IPTV pas cher avec +22 000 chaînes et 50 000 films et séries. Test gratuit disponible.</video:description>
+            <video:content_loc>https://www.iptvsmarterpros.com/videos/header-video.mp4</video:content_loc>
+        </video:video>
     </url>
 
     <!-- Pages d'offres et d'abonnements -->
     <url>
         <loc>https://www.iptvsmarterpros.com/offer-details.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://www.iptvsmarterpros.com/images/logo.webp</image:loc>
+            <image:title>Offres IPTV Pas Cher - Abonnements à partir de 9.99€</image:title>
+        </image:image>
+    </url>
+
+    <!-- Offres individuelles avec paramètres -->
+    <url>
+        <loc>https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_mois&amp;price=9.99</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_6_mois&amp;price=19.99</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_12_mois&amp;price=29.99</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Abonnements multi-écrans -->
+    <url>
+        <loc>https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_2_ecrans&amp;price=59.99</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_ecrans&amp;price=79.99</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_4_ecrans&amp;price=99.99</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
 
     <!-- Pages de contenu principal -->
     <url>
         <loc>https://www.iptvsmarterpros.com/tutoriel.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
+        <video:video>
+            <video:thumbnail_loc>https://www.iptvsmarterpros.com/images/tutoriel-video-thumbnail.jpg</video:thumbnail_loc>
+            <video:title>Guide Installation IPTV - Smart TV, Android, iPhone</video:title>
+            <video:description>Guide d'installation simple et rapide de notre service IPTV pas cher sur tous vos appareils</video:description>
+            <video:content_loc>https://www.iptvsmarterpros.com/videos/tutoriel-video.mp4</video:content_loc>
+        </video:video>
     </url>
     
     <url>
         <loc>https://www.iptvsmarterpros.com/blog.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Page de concours -->
+    <url>
+        <loc>https://www.iptvsmarterpros.com/concours.html</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://www.iptvsmarterpros.com/images/concours-banner.webp</image:loc>
+            <image:title>Grand Concours IPTV - Gagnez un abonnement premium</image:title>
+        </image:image>
+    </url>
+    
+    <!-- Pages informatives -->
+    <url>
+        <loc>https://www.iptvsmarterpros.com/faq.html</loc>
+        <lastmod>2024-06-10</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://www.iptvsmarterpros.com/faq.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <loc>https://www.iptvsmarterpros.com/about.html</loc>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
-    </url>
-
-    <!-- Pages informatives -->
-    <url>
-        <loc>https://www.iptvsmarterpros.com/about.html</loc>
-        <lastmod>2024-04-18</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
     </url>
     
     <url>
         <loc>https://www.iptvsmarterpros.com/contact.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
+        <priority>0.7</priority>
     </url>
 
-    <url>
-        <loc>https://www.iptvsmarterpros.com/concours.html</loc>
-        <lastmod>2024-04-18</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Pages légales (obligatoires pour Google) -->
+    <!-- Pages légales (importantes pour Google) -->
     <url>
         <loc>https://www.iptvsmarterpros.com/conditions-generales.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.6</priority>
     </url>
     
     <url>
         <loc>https://www.iptvsmarterpros.com/politique-confidentialite.html</loc>
-        <lastmod>2024-04-18</lastmod>
+        <lastmod>2024-06-10</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
+        <priority>0.6</priority>
     </url>
 </urlset> 
