@@ -2,30 +2,32 @@
 
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1" name="viewport">
 
 <!-- Google Analytics supprimé pour économiser 51 Kio -->
 
 <!-- Titre SEO -->
-<title>À propos - IPTV Smarter Pro | Notre histoire et notre engagement</title>
+<title>À Propos de Nous | IPTV Smarter Pro</title>
 <!-- Description SEO -->
-<meta content="Découvrez qui nous sommes et pourquoi IPTV Smarter Pros est le premier choix pour un service IPTV premium avec plus de 22 000 chaînes TV et 50 000 films et séries en HD/4K." name="description"/>
+<meta name="description" content="À propos de notre service IPTV pas cher offrant plus de 22 000 chaînes, films et séries en HD/4K, compatible sur tous les appareils.">
 <!-- Balise Keywords (optionnelle) -->
-<meta content="IPTV, abonnement IPTV, streaming, films, séries, chaînes TV, télévision en ligne, streaming HD, 4K, IPTV Pro, divertissement, mises à jour, code IPTV" name="keywords"/>
+<meta name="keywords" content="IPTV pas cher, IPTV France, IPTV HD, IPTV premium, IPTV films, IPTV séries, IPTV sport, Smart TV IPTV, IPTV Android, IPTV stable">
 <!-- Balise Canonical -->
-<link href="https://www.iptvsmarterpros.com/about.html" rel="canonical"/>
+<link rel="canonical" href="https://www.iptvsmarterpros.com/about.html">
 <!-- Open Graph / Facebook -->
-<meta content="À propos - IPTV Smarter Pro | Notre histoire et notre engagement" property="og:title"/>
-<meta content="Découvrez IPTV Smarter Pro, le leader du streaming premium et de l'abonnement IPTV avec plus de 22 000 chaînes, films et séries en haute définition." property="og:description"/>
-<meta content="/images/logo.webp" property="og:image"/>
-<meta content="https://www.iptvsmarterpros.com/about.html" property="og:url"/>
-<meta content="website" property="og:type"/>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iptvsmarterpros.com/about.html">
+<meta property="og:title" content="À Propos de Notre Service IPTV | IPTV Smarter Pro">
+<meta property="og:description" content="À propos de notre service IPTV pas cher offrant plus de 22 000 chaînes, films et séries en HD/4K, compatible sur tous les appareils.">
+<meta property="og:image" content="/images/logo.svg">
+<meta property="og:site_name" content="IPTV Smarter Pro">
 <!-- Twitter Card -->
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="À propos - IPTV Smarter Pro | Notre histoire et notre engagement" name="twitter:title"/>
-<meta content="IPTV Smarter Pro vous offre une expérience de streaming exceptionnelle avec plus de 22 000 chaînes, films et séries. Découvrez nos offres premium et profitez du divertissement sans limite." name="twitter:description"/>
-<meta content="/images/logo.webp" name="twitter:image"/>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://iptvsmarterpros.com/about.html">
+<meta name="twitter:title" content="À Propos de Notre Service IPTV | IPTV Smarter Pro">
+<meta name="twitter:description" content="À propos de notre service IPTV pas cher offrant plus de 22 000 chaînes, films et séries en HD/4K, compatible sur tous les appareils.">
+<meta name="twitter:image" content="/images/logo.svg">
 
 <!-- Font Awesome pour les icônes -->
 <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
@@ -33,7 +35,7 @@
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="icon" type="image/svg+xml" href="/assets/logos/IPTV_glpgxi.svg">
+<link rel="icon" type="image/svg+xml" href="/images/IPTV_glpgxi.svg">
 <link href="styles.css?v=9" rel="stylesheet">
 <link href="css/navbar.css" rel="stylesheet">
 
@@ -95,11 +97,12 @@
   .about-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 0 20px;
   }
   
   .about-section {
-    margin-bottom: 80px;
+    padding: 40px 0;
+    margin-bottom: 0;
   }
   
   .section-title {
@@ -268,7 +271,7 @@
     padding: 80px 0;
     position: relative;
     text-align: center;
-    margin: 80px 0;
+    margin: 0;
   }
   
   .stats-section::before {
@@ -317,7 +320,7 @@
     border-radius: 10px;
     padding: 60px;
     text-align: center;
-    margin-top: 60px;
+    margin-top: 40px;
     position: relative;
     overflow: hidden;
   }
@@ -407,6 +410,49 @@
     margin-right: 10px;
   }
   
+  /* Séparateur de section en dégradé */
+  .section-divider {
+    height: 5px;
+    border: none;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: shine 3s infinite;
+  }
+  
+  @keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+  
+  .section-divider.style1 {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  }
+  
+  .section-divider.style2 {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  }
+  
+  .section-divider.style3 {
+    background: linear-gradient(90deg, #9C27B0, #3F51B5);
+  }
+  
+  .section-divider.style4 {
+    background: linear-gradient(90deg, #3F51B5, #00BCD4);
+  }
+  
   @media (max-width: 992px) {
     .about-content {
       grid-template-columns: 1fr;
@@ -436,11 +482,11 @@
     }
     
     .about-container {
-      padding: 40px 20px;
+      padding: 0 20px;
     }
     
     .about-section {
-      margin-bottom: 60px;
+      padding: 30px 0;
     }
     
     .cta-section {
@@ -452,6 +498,19 @@
     }
   }
 </style>
+
+<meta name="msvalidate.01" content="814819C9FA9F9A0AA228C561E5E96380">
+<meta name="application-name" content="IPTV Pro - À Propos">
+<meta name="theme-color" content="#6c5498">
+
+<!-- Préchargement des polices -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/images/IPTV_glpgxi.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="shortcut icon" href="/images/favicon.ico">
 </head>
 <body>
   <!-- En-tête -->
@@ -459,7 +518,7 @@
     <div class="header-content">
       <div class="logo">
         <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="/assets/logos/IPTV_glpgxi.svg" width="150" height="40"/>
+          <img alt="IPTV Smarter Pro Logo" src="/images/IPTV_glpgxi.svg" width="150" height="40"/>
         </a>
       </div>
       <!-- Menu hamburger pour mobile -->
@@ -504,6 +563,9 @@
       </div>
     </section>
 
+    <!-- Séparateur de section -->
+    <hr class="section-divider style1">
+
     <!-- Nos valeurs -->
     <section class="about-section">
       <h2 class="section-title">Nos Valeurs</h2>
@@ -536,6 +598,9 @@
       </div>
     </section>
 
+    <!-- Séparateur de section -->
+    <hr class="section-divider style2">
+
     <!-- Nos chiffres -->
     <section class="stats-section">
       <div class="stats-container">
@@ -563,6 +628,9 @@
       </div>
     </section>
     
+    <!-- Séparateur de section -->
+    <hr class="section-divider style3">
+    
     <!-- Notre Service -->
     <section class="about-section">
       <h2 class="section-title">Notre Service</h2>
@@ -578,6 +646,9 @@
       </div>
     </section>
 
+    <!-- Séparateur de section -->
+    <hr class="section-divider style4">
+
     <!-- Appel à l'action -->
     <section class="cta-section">
       <h2 class="cta-title">Prêt à transformer votre expérience de divertissement ?</h2>
@@ -586,7 +657,7 @@
     </section>
 
     <!-- Navigation -->
-    <div style="text-align: center;">
+    <div style="text-align: center; margin: 40px 0 20px;">
       <a href="index.html" class="navigation-btn"><i class="fas fa-home"></i> Retour à l'accueil</a>
     </div>
   </div>

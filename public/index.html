@@ -731,6 +731,67 @@
       }
     }
   </style>
+
+  <style>
+  /* Séparateur de section en dégradé */
+  .section-divider {
+    height: 5px;
+    border: none;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: shine 3s infinite;
+  }
+
+  @keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .section-divider.style1 {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  }
+
+  .section-divider.style2 {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  }
+
+  .section-divider.style3 {
+    background: linear-gradient(90deg, #9C27B0, #3F51B5);
+  }
+
+  .section-divider.style4 {
+    background: linear-gradient(90deg, #3F51B5, #00BCD4);
+  }
+
+  /* Ajustements des marges des sections */
+  section {
+    margin-bottom: 0 !important;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  #features-section, #offers-section, #testimonials-section, #faq-section {
+    margin: 0 !important;
+  }
+
+  .features-container, .offers-container, .testimonials-container, .faq-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -738,7 +799,7 @@
     <div class="header-content">
       <div class="logo">
         <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="/assets/logos/IPTV_glpgxi.svg" width="150" height="40"/>
+          <img alt="IPTV Smarter Pro Logo" src="/images/IPTV_glpgxi.svg" width="150" height="40"/>
         </a>
       </div>
       <!-- Menu hamburger pour mobile -->
