@@ -211,7 +211,7 @@ app.post('/api/contact', async (req, res) => {
     await emailUtils.sendTemplateEmail({
       to: process.env.ADMIN_EMAIL,
       subject: `[Contact] ${subject}`,
-      templateName: 'admin-contact',
+      templateName: 'contact-message',
       data: {
         name,
         email,
@@ -225,7 +225,7 @@ app.post('/api/contact', async (req, res) => {
     await emailUtils.sendTemplateEmail({
       to: email,
       subject: 'Votre message a bien été reçu',
-      templateName: 'contact-confirmation',
+      templateName: 'contact-message',
       data: {
         name,
         subject
@@ -281,7 +281,7 @@ app.post('/api/order', async (req, res) => {
     await emailUtils.sendTemplateEmail({
       to: process.env.MERCHANT_EMAIL,
       subject: 'Nouvelle commande reçue',
-      templateName: 'admin-order',
+      templateName: 'admin-notification',
       data: {
         email,
         product: getProductName(product),
