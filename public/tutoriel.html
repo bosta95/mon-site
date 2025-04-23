@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="fr">
 <head>
@@ -30,11 +30,12 @@
 <!-- Styles -->
 <link href="styles.css?v=12" rel="stylesheet">
 <!-- Font Awesome supprimé pour économiser 18 Kio -->
-<link href="css/styles.css?v=1" rel="stylesheet">
+<link href="./css/styles.css?v=1" rel="stylesheet">
 <!-- Chemin de navigation à facettes -->
 <link rel="stylesheet" href="styles.css?v=6">
 <!-- Barre de navigation -->
-<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
 
 <!-- Préchargement des ressources critiques -->
 <link rel="preload" href="/videos/header-video.mp4" as="video" fetchpriority="high">
@@ -1004,34 +1005,37 @@
 </head>
 <body>
 <!-- HEADER -->
-<header class="header-container">
-  <div class="header-content">
-    <div class="logo">
-      <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40" loading="lazy">
+    <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
+        </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#offers-section">OFFRES</a></li>
+          <li><a href="tutoriel.html">Tutoriel</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <!-- Menu hamburger pour mobile -->
-    <div class="mobile-menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <!-- Navigation Desktop -->
-    <nav class="header-nav">
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="index.html#offers-section">OFFRES</a></li>
-        <li><a href="tutoriel.html">Tutoriel</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
 <!-- En-tête du tutoriel -->
 <header class="tutorial-header">
   <video class="hero-video" autoplay muted loop playsinline>
-    <source src="/images/hero-video.mp4" type="video/mp4">
+    <source src="./images/hero-video.mp4" type="video/mp4">
   </video>
   <div class="tutorial-header-content">
     <h1>Guide d'Installation IPTV 2025</h1>
@@ -1078,7 +1082,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape1.webp" alt="Télécharger l'application">
+                <img src="./images/etape1.webp" alt="Télécharger l'application">
               </div>
               <div class="step-content">
                 <h3>1. Télécharger l'application</h3>
@@ -1090,7 +1094,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape4.webp" alt="Ouvrir l'application">
+                <img src="./images/etape4.webp" alt="Ouvrir l'application">
               </div>
               <div class="step-content">
                 <h3>2. Configurer l'application</h3>
@@ -1115,7 +1119,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape1.webp" alt="Télécharger sur App Store">
+                <img src="./images/etape1.webp" alt="Télécharger sur App Store">
               </div>
               <div class="step-content">
                 <h3>1. Installer depuis l'App Store</h3>
@@ -1127,7 +1131,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape5.webp" alt="Configuration iOS">
+                <img src="./images/etape5.webp" alt="Configuration iOS">
               </div>
               <div class="step-content">
                 <h3>2. Ajouter votre abonnement</h3>
@@ -1152,7 +1156,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape1.webp" alt="Downloader sur FireStick">
+                <img src="./images/etape1.webp" alt="Downloader sur FireStick">
               </div>
               <div class="step-content">
                 <h3>1. Installer Downloader</h3>
@@ -1164,7 +1168,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape2.webp" alt="Sources inconnues">
+                <img src="./images/etape2.webp" alt="Sources inconnues">
               </div>
               <div class="step-content">
                 <h3>2. Activer les sources inconnues</h3>
@@ -1176,7 +1180,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape3.webp" alt="Télécharger APK">
+                <img src="./images/etape3.webp" alt="Télécharger APK">
               </div>
               <div class="step-content">
                 <h3>3. Télécharger l'APK</h3>
@@ -1188,7 +1192,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape5.webp" alt="Configurer">
+                <img src="./images/etape5.webp" alt="Configurer">
               </div>
               <div class="step-content">
                 <h3>4. Configurer l'application</h3>
@@ -1213,7 +1217,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape1.webp" alt="Téléchargement Smart TV">
+                <img src="./images/etape1.webp" alt="Téléchargement Smart TV">
               </div>
               <div class="step-content">
                 <h3>1. Accéder au store</h3>
@@ -1225,7 +1229,7 @@
           <div class="step-container">
             <div class="step-content-wrapper">
               <div class="step-image">
-                <img src="/images/etape6.webp" alt="Configuration Smart TV">
+                <img src="./images/etape6.webp" alt="Configuration Smart TV">
               </div>
               <div class="step-content">
                 <h3>2. Configuration</h3>
@@ -1292,7 +1296,11 @@
     });
   </script>
   <!-- Script pour la barre de navigation -->
-  <script src="js/navbar.js"></script>
+  <script src="./js/navbar.js"></script>
 </div>
 </body>
 </html>
+
+
+
+

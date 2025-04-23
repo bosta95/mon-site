@@ -32,8 +32,8 @@ body {
 
 /* Animations */
 @keyframes scrollBanner {
-  0% { transform: translateX(calc(-35px * 15)); }
-  100% { transform: translateX(0); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-35px * 15)); }
 }
 
 @keyframes scrollFilms {
@@ -80,13 +80,14 @@ body {
   background: linear-gradient(90deg, #141226, #271e3d);
   height: 60px;
   border-radius: 0;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(231, 76, 60, 0.3);
   border-left: none;
   border-right: none;
   border-top: none;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
+  padding: 0;
 }
 
 /* Header compact pour le défilement */
@@ -110,13 +111,13 @@ body {
 }
 
 .header-content {
-  max-width: 1800px;
+  max-width: 1400px;
   margin: 0 auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 20px 0 0;
   position: relative;
 }
 
@@ -137,13 +138,23 @@ body {
 .logo {
   display: flex;
   align-items: center;
+  position: relative;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1001;
+  height: 45px;
 }
 
 .logo img {
-  height: 40px;
+  height: 70px;
   width: auto;
   transition: transform 0.3s ease;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  margin: 0;
+  padding: 0;
+  max-height: none;
+  transform: translateY(3px);
 }
 
 .logo:hover img {
@@ -731,36 +742,16 @@ footer {
 }
 
 .notification.error {
-  border-color: #dc3545;
-  background-color: rgba(220, 53, 69, 0.1);
-}
-
-/* Mobile Menu Toggle */
-.mobile-menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 30px;
-  height: 20px;
-  cursor: pointer;
-  z-index: 1001;
-  position: relative;
-}
-
-.mobile-menu-toggle span {
-  height: 3px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
+  background-color: #e74c3c;
+  color: white;
 }
 
 /* Blog Styles */
 .blog-featured {
-  padding: 60px 0;
-  background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(12, 12, 24, 0.9));
-  border-radius: 10px;
-  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+  margin-top: 40px;
 }
 
 .featured-article {
@@ -962,80 +953,61 @@ img.featured-image {
 }
 
 @media (max-width: 768px) {
-  .fixed-footer {
-    display: none; /* Masquer complètement sur mobile */
-  }
-  
-  /* Optimisation du menu mobile */
-  .mobile-menu-toggle {
-    display: flex !important;
+  .fixed-footer-content {
     flex-direction: column;
-    justify-content: space-between;
-    width: 30px;
-    height: 21px;
-    cursor: pointer;
-    z-index: 1002;
-    margin-left: auto;
+    align-items: center;
+    text-align: center;
+    padding: 15px 20px;
   }
   
-  .header-nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 300px;
-    height: 100vh;
-    background: rgba(20, 18, 38, 0.98);
-    transition: all 0.3s ease-in-out;
-    z-index: 1001;
-    padding-top: 60px;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-    overflow-y: auto;
+  .fixed-footer-left {
+    flex-direction: column;
+    margin-bottom: 15px;
+    align-items: center;
   }
   
-  .header-nav.active {
-    right: 0;
+  .fixed-footer-logo {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .fixed-footer-text {
+    text-align: center;
+  }
+  
+  .fixed-footer-right {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .fixed-footer-btn {
+    width: 100%;
+    margin: 5px 0;
   }
   
   .header-nav ul {
     flex-direction: column;
-    padding: 20px;
+    align-items: center;
     gap: 20px;
+    height: 100%;
+    justify-content: center;
+    padding: 0;
   }
   
   .header-nav ul li {
     width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
   }
   
   .header-nav ul li a {
-    display: block;
-    font-size: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Réduction de la taille de police et des espacements */
-  h1 {
-    font-size: 24px !important;
-    line-height: 1.3 !important;
+    font-size: 18px;
+    padding: 10px 20px;
+    width: 100%;
   }
   
-  h2 {
-    font-size: 20px !important;
-  }
-  
-  p {
-    font-size: 14px !important;
-  }
-  
-  .offers-grid, .advantages-grid {
-    gap: 15px !important;
-  }
-  
-  /* Optimisation des performances de rendu */
-  .header-content::before,
-  .hero-section::before {
-    content: none !important;
+  .header-nav ul li:last-child a {
+    margin-top: 10px;
   }
 }
 
@@ -1064,7 +1036,10 @@ img.featured-image {
   }
   
   .logo img {
-    height: 30px;
+    height: 60px;
+    margin-left: 0;
+    padding-left: 0;
+    transform: translateY(2px);
   }
   
   .hero-overlay h1 { 
@@ -1154,11 +1129,6 @@ img.featured-image {
     font-size: 0.8rem;
   }
   
-  /* Affichage du menu mobile */
-  .mobile-menu-toggle {
-    display: flex !important;
-  }
-  
   .header-nav {
     position: fixed;
     top: 60px;
@@ -1212,18 +1182,6 @@ img.featured-image {
   .header-nav ul li:last-child a {
     border-bottom: none;
   }
-  
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
 }
 
 /* Tablettes */
@@ -1255,7 +1213,10 @@ img.featured-image {
   }
   
   .logo img {
-    height: 30px;
+    height: 60px;
+    margin-left: 0;
+    padding-left: 0;
+    transform: translateY(2px);
   }
   
   .hero-overlay h1 { 
@@ -1330,4 +1291,31 @@ img.featured-image {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Mise à jour des médias queries */
+@media (min-width: 1400px) {
+  .header-content {
+    width: 95%;
+    max-width: 1800px;
+    padding: 0 20px 0 20px;
+  }
+  
+  .logo {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 1800px) {
+  .header-content {
+    width: 90%;
+    max-width: 2000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0 10px 0 0;
+  }
 }

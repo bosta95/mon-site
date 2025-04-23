@@ -13,7 +13,8 @@
   
   <link rel="icon" type="image/svg+xml" href="/images/IPTV_glpgxi.svg">
   <link href="styles.css?v=9" rel="stylesheet">
-  <link href="css/navbar.css" rel="stylesheet">
+  <link href="./css/navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
   <style>
     :root {
       --primary-color: #6c5498;
@@ -263,7 +264,9 @@
     }
     
     .toc-title::before {
-      content: '📋';
+      content: '\f02d';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
     }
     
     .toc-list {
@@ -437,21 +440,21 @@
 </head>
 <body>
   <!-- HEADER -->
-  <header class="header-container">
+      <header class="header-container">
     <div class="header-content">
       <div class="logo">
         <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="/images/IPTV_glpgxi.svg" width="150" height="40"/>
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
         </a>
       </div>
       <!-- Menu hamburger pour mobile -->
-      <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+      <div class="mobile-menu-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <!-- Navigation Desktop -->
-      <nav class="header-nav" id="header-nav">
+      <nav class="header-nav">
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="index.html#offers-section">OFFRES</a></li>
@@ -482,7 +485,7 @@
           <li class="toc-item"><a href="#limitation" class="toc-link">Limitation de responsabilité</a></li>
           <li class="toc-item"><a href="#termination" class="toc-link">Résiliation</a></li>
           <li class="toc-item"><a href="#modifications" class="toc-link">Modifications des conditions</a></li>
-          <li class="toc-item"><a href="#disputes" class="toc-link">Règlement des litiges</a></li>
+          <li class="toc-item"><a href="#disputes" class="toc-link">Réglement des litiges</a></li>
           <li class="toc-item"><a href="#contact" class="toc-link">Contact</a></li>
         </ul>
       </div>
@@ -593,7 +596,7 @@
         </section>
         
         <section id="disputes" class="section">
-          <h2>11. Règlement des litiges</h2>
+          <h2>11. Réglement des litiges</h2>
           <p>Les présentes CGU sont régies par la loi française.</p>
           <p>En cas de litige, une solution amiable sera recherchée avant tout recours judiciaire. Toute réclamation doit nous être adressée par e-mail à l'adresse indiquée dans la section "Contact".</p>
           <p>À défaut de résolution amiable, tout litige relatif à l'interprétation ou à l'exécution des présentes CGU sera soumis aux tribunaux compétents.</p>
@@ -615,12 +618,12 @@
     </div>
   </div>
   
-  <a href="#" class="back-to-top">↑</a>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
   
   <footer>
     <div class="container">
       <div class="footer-content">
-        <p>© 2023 IPTV Smarter Pro - Tous droits réservés</p>
+        <p>© 2025 IPTV Smarter Pro - Tous droits réservés</p>
         <div class="footer-links">
           <a href="index.html" class="footer-link">Accueil</a>
           <a href="politique-confidentialite.html" class="footer-link">Politique de Confidentialité</a>
@@ -629,6 +632,9 @@
     </div>
   </footer>
   
-  <script src="js/navbar.js"></script>
+  <script src="./js/navbar.js"></script>
 </body>
 </html> 
+
+
+

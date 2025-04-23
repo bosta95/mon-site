@@ -222,27 +222,55 @@
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary-color), rgba(0, 0, 0, 0));
 }
 
-/* Footer Styles */
+/* Footer Styles - Refonte pour plus d'harmonie */
 footer {
-  background-color: #222;
+  background: linear-gradient(180deg, #1c1c30 0%, #10102a 100%);
   color: #fff;
   padding: 60px 0 20px;
   position: relative;
+  overflow: hidden;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #ff6b6b, #6c5498, #ff6b6b);
+  background-size: 200% 100%;
+  animation: gradientAnimation 5s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .footer-content {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 40px;
+  margin-bottom: 50px;
+  position: relative;
 }
 
 .footer-section h3 {
-  color: var(--primary-color);
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+  color: #ff8c8c;
+  font-size: 1.3rem;
+  margin-bottom: 25px;
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
+  font-weight: 600;
 }
 
 .footer-section h3:after {
@@ -250,15 +278,17 @@ footer {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 50px;
-  height: 2px;
-  background-color: var(--primary-color);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b6b, #6c5498);
+  border-radius: 10px;
 }
 
 .footer-section p {
   color: #ccc;
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 20px;
+  font-size: 0.95rem;
 }
 
 .footer-links {
@@ -268,74 +298,182 @@ footer {
 }
 
 .footer-links li {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
 }
 
 .footer-links a {
   color: #ccc;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   position: relative;
-  padding-left: 15px;
+  padding-left: 20px;
+  display: block;
+  font-size: 0.95rem;
 }
 
 .footer-links a:before {
   content: '›';
   position: absolute;
   left: 0;
-  color: var(--primary-color);
+  color: #ff8c8c;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
 }
 
 .footer-links a:hover {
-  color: var(--primary-color);
+  color: #ff8c8c;
+  transform: translateX(5px);
+}
+
+.footer-links a:hover:before {
+  transform: translateX(3px);
+}
+
+.footer-section.contact-info {
+  position: relative;
+}
+
+.footer-section.contact-info:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 100%);
 }
 
 #footer-contact-form {
   display: flex;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #footer-contact-form input,
 #footer-contact-form textarea {
   background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #fff;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+#footer-contact-form input:focus,
+#footer-contact-form textarea:focus {
+  border-color: rgba(255, 140, 140, 0.5);
+  background-color: rgba(255, 255, 255, 0.15);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
 }
 
 #footer-contact-form input::placeholder,
 #footer-contact-form textarea::placeholder {
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 #footer-contact-form textarea {
-  height: 80px;
+  height: 100px;
   resize: vertical;
 }
 
 #footer-contact-form .btn-primary {
-  background-color: var(--primary-color);
+  background: linear-gradient(90deg, #ff6b6b, #6c5498);
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 12px 20px;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
   align-self: flex-start;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
 }
 
 #footer-contact-form .btn-primary:hover {
-  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+#footer-contact-form .btn-primary::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-15deg);
+  transition: all 0.5s ease;
+}
+
+#footer-contact-form .btn-primary:hover::after {
+  left: 100%;
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 20px;
+  padding-top: 25px;
+  margin-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
+  position: relative;
+}
+
+.footer-bottom p {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.footer-social {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #ff6b6b, #6c5498);
+  color: white;
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Logo footer */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  max-width: 150px;
+  height: auto;
 }
 
 /* Responsive Footer */
@@ -343,14 +481,27 @@ footer {
   .footer-content {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .footer-section.contact-info:after {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
   .footer-content {
     grid-template-columns: 1fr;
+    gap: 30px;
   }
   
   .footer-section {
-    margin-bottom: 30px;
+    margin-bottom: 0;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.2rem;
+  }
+  
+  #footer-contact-form {
+    padding: 15px;
   }
 } 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   
-  <!-- Google Analytics supprimé pour économiser 51 Kio -->
+  <!-- Google Analytics supprim� pour �conomiser 51 Kio -->
   
   <title>Paiement - IPTV Smarter Pros</title>
   <style>
@@ -66,7 +66,9 @@
       pointer-events: none;
     }
   </style>
-</head>
+
+  <link rel="stylesheet" href="./css/navbar.css"></head>
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
 <body>
   <div class="payment-form">
     <h1>Paiement IPTV Smarter Pros</h1>
@@ -80,7 +82,7 @@
         <input type="text" id="product" required>
       </div>
       <div class="form-group">
-        <label>Numéro de commande :</label>
+        <label>Num�ro de commande :</label>
         <input type="text" id="orderNumber" required>
       </div>
       <button type="submit" id="submitButton">Confirmer la commande</button>
@@ -96,7 +98,7 @@
       const submitButton = document.getElementById('submitButton');
       const resultDiv = document.getElementById('result');
       
-      // Désactiver le formulaire pendant l'envoi
+      // D�sactiver le formulaire pendant l'envoi
       form.classList.add('loading');
       submitButton.disabled = true;
       resultDiv.textContent = 'Traitement en cours...';
@@ -118,24 +120,28 @@
         const data = await response.json();
         
         if (response.ok) {
-          resultDiv.textContent = '✅ Commande confirmée ! Un email de confirmation a été envoyé à votre adresse.';
+          resultDiv.textContent = '? Commande confirm�e ! Un email de confirmation a �t� envoy� � votre adresse.';
           resultDiv.className = 'success';
-          // Réinitialiser le formulaire après succès
+          // R�initialiser le formulaire apr�s succ�s
           form.reset();
         } else {
-          resultDiv.textContent = '❌ Erreur : ' + (data.error || 'Une erreur est survenue');
+          resultDiv.textContent = '? Erreur : ' + (data.error || 'Une erreur est survenue');
           resultDiv.className = 'error';
         }
       } catch (error) {
-        resultDiv.textContent = '❌ Erreur : ' + error.message;
+        resultDiv.textContent = '? Erreur : ' + error.message;
         resultDiv.className = 'error';
-        console.error('Erreur détaillée:', error);
+        console.error('Erreur d�taill�e:', error);
       } finally {
-        // Réactiver le formulaire
+        // R�activer le formulaire
         form.classList.remove('loading');
         submitButton.disabled = false;
       }
     };
   </script>
-<script src="js/navbar.js"></script>`n</body>
+<script src="./js/navbar.js"></script>`n</body>
 </html>
+
+
+
+

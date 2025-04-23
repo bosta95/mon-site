@@ -1,0 +1,81 @@
+/* Styles spécifiques pour le logo - à inclure sur toutes les pages */
+.logo {
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 45px !important;
+    z-index: 1001 !important;
+}
+
+.logo a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.logo img {
+    height: 70px !important;
+    width: auto !important;
+    max-height: none !important;
+    max-width: none !important;
+    transition: filter 0.3s ease !important;
+    filter: brightness(1.1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.2)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateY(3px) !important;
+}
+
+/* Header content pour aligner correctement le logo */
+.header-content {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 20px 0 0 !important; /* Padding seulement à droite */
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+/* Navigation - pour compenser la position du logo */
+.header-nav {
+    margin-left: auto !important;
+    padding-left: 65px !important; /* Pour compenser le logo */
+}
+
+/* Media queries pour le responsive */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 5px 0 !important;
+    }
+    
+    .header-content {
+        padding: 0 10px 0 0 !important;
+    }
+    
+    .logo img {
+        height: 60px !important;
+        transform: translateY(2px) !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .header-content {
+        width: 95% !important;
+        max-width: 1800px !important;
+        padding: 0 20px 0 20px !important;
+    }
+}
+
+@media (min-width: 1800px) {
+    .header-content {
+        width: 90% !important;
+        max-width: 2000px !important;
+    }
+} 

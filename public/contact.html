@@ -17,8 +17,9 @@
     
     <!-- CSS Principal -->
     <link href="styles.css" rel="stylesheet">
-    <link href="css/styles.css?v=1" rel="stylesheet">
-    <link href="css/navbar.css" rel="stylesheet">
+    <link href="./css/styles.css?v=1" rel="stylesheet">
+    <link href="./css/navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
     
     <style>
         /* Styles de base */
@@ -591,29 +592,31 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="header-container">
-        <div class="header-content">
-            <div class="logo">
-                <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40">
-            </div>
-            <!-- Menu hamburger pour mobile -->
-            <div class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <!-- Navigation Desktop -->
-            <nav class="header-nav">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="index.html#offers-section">OFFRES</a></li>
-                    <li><a href="tutoriel.html">Tutoriel</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+        <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
+        </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#offers-section">OFFRES</a></li>
+          <li><a href="tutoriel.html">Tutoriel</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
     <!-- Titre de la page élégant -->
     <div class="page-title-container">
@@ -734,6 +737,10 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="js/navbar.js"></script>
+    <script src="./js/navbar.js"></script>
 </body>
 </html>
+
+
+
+

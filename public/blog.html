@@ -51,15 +51,16 @@
   </script>
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap" rel="stylesheet"/>
-<link href="css/navbar.css" rel="stylesheet">
+<link href="./css/navbar.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
 <!-- Font Awesome optimisé -->
 <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
 <!-- Fichier CSS -->
-<link href="styles.css?v=11" rel="stylesheet">
-<link href="css/styles.css?v=1" rel="stylesheet">
+<link href="styles.css?v=11" rel="stylesheet"/>
+<link href="./css/styles.css?v=1" rel="stylesheet"/>
 
 <!-- Préchargement de la vidéo -->
-<link rel="preload" href="/images/hero-video.mp4" as="video" fetchpriority="high">
+<link rel="preload" href="/images/hero-video.mp4" as="video" fetchpriority="high"/>
 
 <style>
   /* Styles spécifiques à la page blog */
@@ -646,7 +647,9 @@
   <header class="header-container">
     <div class="header-content">
       <div class="logo">
-        <img src="/images/IPTV_glpgxi.svg" alt="IPTV Pro Logo" width="150" height="40" loading="lazy">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
+        </a>
       </div>
       <!-- Menu hamburger pour mobile -->
       <div class="mobile-menu-toggle">
@@ -660,6 +663,7 @@
           <li><a href="index.html">Accueil</a></li>
           <li><a href="index.html#offers-section">OFFRES</a></li>
           <li><a href="tutoriel.html">Tutoriel</a></li>
+          <li><a href="about.html">À propos</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -670,7 +674,7 @@
   <!-- En-tête du blog -->
   <header class="blog-header">
     <video class="hero-video" autoplay muted loop playsinline>
-      <source src="/images/hero-video.mp4" type="video/mp4">
+      <source src="./images/hero-video.mp4" type="video/mp4"/>
     </video>
     <div class="hero-overlay">
       <div class="container">
@@ -684,14 +688,14 @@
   <!-- SECTION BLOG - À LA UNE -->
   <section class="blog-featured">
     <div class="container">
-      <h2 class="section-title"><span class="title-highlight">Article à la Une</span></h2>
+      <h2 class="section-title"><span class="title-highlight">Article À la Une</span></h2>
       <div class="featured-article">
         <div class="featured-article-image">
-          <img src="https://images.unsplash.com/photo-1601944179066-29786cb9d32a?q=80&w=1000" alt="IPTV en 2025: Les Tendances Futures">
+          <img src="https://images.unsplash.com/photo-1601944179066-29786cb9d32a?q=80&w=1000" alt="IPTV en 2025: Les Tendances Futures"/>
         </div>
         <div class="featured-article-content">
           <span class="premium-badge">PREMIUM</span>
-          <h2>IPTV en 2025: Les Tendances Futures et l'Évolution des Services de Streaming</h2>
+          <h2>IPTV en 2025: Les Tendances Futures et l'évolution des Services de Streaming</h2>
           <p class="featured-article-meta">
             <span class="featured-article-date"><i class="far fa-calendar-alt"></i> 28 Mai 2025</span>
             <span class="featured-article-author"><i class="far fa-user"></i> Jean Dupont</span>
@@ -711,7 +715,7 @@
       <!-- ARTICLE 1 -->
       <article class="blog-card" data-category="innovation">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000" alt="Innovations Technologiques en Streaming">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000" alt="Innovations Technologiques en Streaming"/>
           <div class="blog-card-date-badge">
             <span class="day">15</span>
             <span class="month">MAI</span>
@@ -731,7 +735,7 @@
       <!-- ARTICLE 2 -->
       <article class="blog-card" data-category="securite">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1000" alt="Sécurité et Confidentialité">
+          <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=1000" alt="Sécurité et Confidentialité"/>
           <div class="blog-card-date-badge">
             <span class="day">02</span>
             <span class="month">MAI</span>
@@ -751,7 +755,7 @@
       <!-- ARTICLE 3 -->
       <article class="blog-card" data-category="accessibilite">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1000" alt="Flexibilité et Accessibilité">
+          <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=1000" alt="Flexibilité et Accessibilité"/>
           <div class="blog-card-date-badge">
             <span class="day">27</span>
             <span class="month">AVR</span>
@@ -771,7 +775,7 @@
       <!-- ARTICLE 4 - NOUVEAU -->
       <article class="blog-card new-article" data-category="technologie">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1000" alt="Perspectives Futures du Streaming">
+          <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=1000" alt="Perspectives Futures du Streaming"/>
           <div class="blog-card-date-badge">
             <span class="day">24</span>
             <span class="month">MAI</span>
@@ -792,7 +796,7 @@
       <!-- ARTICLE 5 - NOUVEAU -->
       <article class="blog-card" data-category="guides">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1580706483913-b6ea7db483a0?q=80&w=1000" alt="Guide d'Optimisation IPTV">
+          <img src="https://images.unsplash.com/photo-1580706483913-b6ea7db483a0?q=80&w=1000" alt="Guide d'Optimisation IPTV"/>
           <div class="blog-card-date-badge">
             <span class="day">10</span>
             <span class="month">MAI</span>
@@ -813,7 +817,7 @@
       <!-- ARTICLE 6 -->
       <article class="blog-card" data-category="comparatifs">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=1000" alt="Comparatif des Services IPTV">
+          <img src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=1000" alt="Comparatif des Services IPTV"/>
           <div class="blog-card-date-badge">
             <span class="day">05</span>
             <span class="month">MAI</span>
@@ -834,7 +838,7 @@
       <!-- ARTICLE 7 -->
       <article class="blog-card" data-category="sport">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1591117207239-788bf8de6c3b?q=80&w=1000" alt="Sport et IPTV">
+          <img src="https://images.unsplash.com/photo-1591117207239-788bf8de6c3b?q=80&w=1000" alt="Sport et IPTV"/>
           <div class="blog-card-date-badge">
             <span class="day">01</span>
             <span class="month">MAI</span>
@@ -854,7 +858,7 @@
       <!-- ARTICLE 8 -->
       <article class="blog-card" data-category="legalite">
         <div class="blog-card-image">
-          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000" alt="Aspects Légaux IPTV">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1000" alt="Aspects Légaux IPTV"/>
           <div class="blog-card-date-badge">
             <span class="day">29</span>
             <span class="month">AVR</span>
@@ -889,7 +893,7 @@
         <a href="https://www.expertreviews.co.uk/tvs/1413997/best-android-tv-box" target="_blank" rel="noopener noreferrer" class="trending-topic">
           <i class="fas fa-box"></i>
           <div class="topic-content">
-            <h4>Android Box & IPTV</h4>
+            <h4>Android Box &amp; IPTV</h4>
             <p>Les meilleurs boîtiers pour votre installation</p>
           </div>
           <span class="topic-count">423K vues</span>
@@ -897,7 +901,7 @@
         <a href="https://www.cnet.com/tech/services-and-software/best-sports-streaming-service/" target="_blank" rel="noopener noreferrer" class="trending-topic">
           <i class="fas fa-futbol"></i>
           <div class="topic-content">
-            <h4>Football & Sports en Direct</h4>
+            <h4>Football &amp; Sports en Direct</h4>
             <p>Les meilleures solutions pour les événements sportifs</p>
           </div>
           <span class="topic-count">287K vues</span>
@@ -905,7 +909,7 @@
         <a href="https://nordvpn.com/fr/blog/securite-streaming/" target="_blank" rel="noopener noreferrer" class="trending-topic">
           <i class="fas fa-shield-alt"></i>
           <div class="topic-content">
-            <h4>Sécurité & Confidentialité</h4>
+            <h4>Sécurité &amp; Confidentialité</h4>
             <p>Protection de vos données pendant le streaming</p>
           </div>
           <span class="topic-count">198K vues</span>
@@ -1045,6 +1049,46 @@
 
 <!-- Script du curseur personnalisé -->
 <script src="cursor.js"></script>
-<script src="js/navbar.js"></script>
+<script>
+  // Script pour la barre de navigation
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionner les éléments
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const headerNav = document.querySelector('.header-nav');
+    const body = document.body;
+    
+    // Fonction pour basculer le menu mobile
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        headerNav.classList.toggle('active');
+        body.classList.toggle('menu-open');
+      });
+    }
+    
+    // Fermer le menu quand on clique sur un lien
+    const navLinks = document.querySelectorAll('.header-nav ul li a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenuToggle.classList.remove('active');
+        headerNav.classList.remove('active');
+        body.classList.remove('menu-open');
+      });
+    });
+    
+    // Marquer le lien actif
+    const currentPage = window.location.pathname.split('/').pop();
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
 </body>
 </html>
+
+
+
+

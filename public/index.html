@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
@@ -15,8 +15,9 @@
   <!-- Préchargement des ressources critiques -->
   <link rel="preload" href="styles.css?v=5" as="style" fetchpriority="high">
   <link rel="stylesheet" href="styles.css?v=5" fetchpriority="high">
-  <link rel="stylesheet" href="css/styles.css?v=1" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="css/navbar.css" fetchpriority="high">
+  <link rel="stylesheet" href="./css/styles.css?v=1" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="./css/navbar.css" fetchpriority="high">
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
   <link rel="preload" href="/images/IPTV_glpgxi.svg" as="image" type="image/svg+xml" fetchpriority="high">
   
   <!-- Favicons -->
@@ -216,11 +217,63 @@
   
   <!-- Styles supplémentaires pour la vidéo de fond dans la section OFFRES et les cartes transparentes -->
   <style>
+    body {
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      background-color: black;
+    }
+  
+    section {
+      margin: 0;
+      padding: 0;
+    }
+  
+    /* Style personnalisé pour les séparateurs de section - réduit à 1px */
+    .section-divider {
+      height: 1px;
+      border: none;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(90deg, #ff6b6b, #6c5498, #ff6b6b);
+      background-size: 200% 100%;
+      animation: gradientAnimation 5s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .section-divider.style1 {
+      background: linear-gradient(90deg, #6c5498, #ff6b6b, #6c5498);
+    }
+
+    .section-divider.style2 {
+      background: linear-gradient(90deg, #ff6b6b, #E74C3C, #ff6b6b);
+    }
+
+    .section-divider.style3 {
+      background: linear-gradient(90deg, #E74C3C, #6c5498, #E74C3C);
+    }
+    
     .offers-section {
       position: relative;
-      padding: 60px 0 80px;
+      padding: 0;
       overflow: hidden;
-      background-color: rgba(0, 0, 0, 0.5);
+      margin: 0;
+      width: 100vw;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     
     .offers-bg-video {
@@ -231,15 +284,20 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     
     .offers-content {
       position: relative;
       z-index: 10;
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 60px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
     .offers-content h2 {
@@ -265,14 +323,21 @@
       border-radius: 3px;
     }
     
+    .offers-grid-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    
     .offers-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 25px;
-      row-gap: 40px;
+      gap: 30px;
+      row-gap: 50px;
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 15px;
+      padding: 0;
     }
     
     .offer-card {
@@ -474,16 +539,18 @@
     @media (max-width: 1100px) {
       .offers-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        row-gap: 30px;
+        gap: 30px;
+        row-gap: 40px;
+        max-width: 800px;
       }
     }
     
     @media (max-width: 768px) {
       .offers-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        row-gap: 25px;
+        gap: 25px;
+        row-gap: 35px;
+        max-width: 600px;
       }
       
       .offers-content h2 {
@@ -495,13 +562,13 @@
         min-height: 320px;
       }
     }
-
+    
     @media (max-width: 576px) {
       .offers-grid {
         grid-template-columns: 1fr;
         max-width: 320px;
         margin: 0 auto;
-        gap: 20px;
+        gap: 30px;
       }
       
       .offer-card {
@@ -565,7 +632,7 @@
       height: 100%;
       object-fit: cover;
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     
     /* S'assurer que le contenu est au-dessus de l'image et de la vidéo */
@@ -795,25 +862,26 @@
 </head>
 <body>
   <!-- HEADER -->
-  <header class="header-container">
+      <header class="header-container">
     <div class="header-content">
       <div class="logo">
         <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="/images/IPTV_glpgxi.svg" width="150" height="40"/>
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg"/>
         </a>
       </div>
       <!-- Menu hamburger pour mobile -->
-      <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+      <div class="mobile-menu-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
       <!-- Navigation Desktop -->
-      <nav class="header-nav" id="header-nav">
+      <nav class="header-nav">
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="index.html#offers-section">OFFRES</a></li>
           <li><a href="tutoriel.html">Tutoriel</a></li>
+          <li><a href="about.html">À propos</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -825,38 +893,38 @@
   <div class="images-banner">
     <div class="slide-track">
       <!-- Premier groupe d'images avec loading lazy -->
-      <img alt="Canal+ IPTV en direct HD" src="/images/image1.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="BeIN Sports IPTV chaînes sportives" src="/images/image2.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="RMC Sport IPTV en streaming HD" src="/images/image3.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Netflix en streaming via IPTV" src="/images/image12.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Disney+ films et séries en IPTV" src="/images/image8.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Prime Video intégré à l'IPTV" src="/images/image11.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="TF1 en direct IPTV France" src="/images/image9.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="France TV en direct IPTV" src="/images/image10.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Sport IPTV premium en direct" src="/images/image5.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Films récents en IPTV HD" src="/images/image14.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Séries TV en IPTV streaming" src="/images/image15.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes internationales IPTV" src="/images/image16.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes enfants IPTV éducatives" src="/images/image7.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes d'information IPTV 24/7" src="/images/image6.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Documentaires IPTV en HD" src="/images/image4.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Canal+ IPTV en direct HD" src="./images/image1.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="BeIN Sports IPTV chaînes sportives" src="./images/image2.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="RMC Sport IPTV en streaming HD" src="./images/image3.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Netflix en streaming via IPTV" src="./images/image12.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Disney+ films et séries en IPTV" src="./images/image8.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Prime Video intégré à l'IPTV" src="./images/image11.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="TF1 en direct IPTV France" src="./images/image9.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="France TV en direct IPTV" src="./images/image10.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Sport IPTV premium en direct" src="./images/image5.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Films récents en IPTV HD" src="./images/image14.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Séries TV en IPTV streaming" src="./images/image15.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes internationales IPTV" src="./images/image16.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes enfants IPTV éducatives" src="./images/image7.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes d'information IPTV 24/7" src="./images/image6.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Documentaires IPTV en HD" src="./images/image4.svg" loading="lazy" decoding="async" importance="low"/>
       
       <!-- Répétition des images pour un défilement infini - aussi avec lazy loading -->
-      <img alt="Canal+ IPTV en direct HD" src="/images/image1.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="BeIN Sports IPTV chaînes sportives" src="/images/image2.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="RMC Sport IPTV en streaming HD" src="/images/image3.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Netflix en streaming via IPTV" src="/images/image12.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Disney+ films et séries en IPTV" src="/images/image8.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Prime Video intégré à l'IPTV" src="/images/image11.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="TF1 en direct IPTV France" src="/images/image9.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="France TV en direct IPTV" src="/images/image10.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Sport IPTV premium en direct" src="/images/image5.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Films récents en IPTV HD" src="/images/image14.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Séries TV en IPTV streaming" src="/images/image15.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes internationales IPTV" src="/images/image16.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes enfants IPTV éducatives" src="/images/image7.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Chaînes d'information IPTV 24/7" src="/images/image6.svg" loading="lazy" decoding="async" importance="low"/>
-      <img alt="Documentaires IPTV en HD" src="/images/image4.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Canal+ IPTV en direct HD" src="./images/image1.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="BeIN Sports IPTV chaînes sportives" src="./images/image2.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="RMC Sport IPTV en streaming HD" src="./images/image3.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Netflix en streaming via IPTV" src="./images/image12.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Disney+ films et séries en IPTV" src="./images/image8.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Prime Video intégré à l'IPTV" src="./images/image11.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="TF1 en direct IPTV France" src="./images/image9.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="France TV en direct IPTV" src="./images/image10.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Sport IPTV premium en direct" src="./images/image5.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Films récents en IPTV HD" src="./images/image14.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Séries TV en IPTV streaming" src="./images/image15.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes internationales IPTV" src="./images/image16.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes enfants IPTV éducatives" src="./images/image7.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Chaînes d'information IPTV 24/7" src="./images/image6.svg" loading="lazy" decoding="async" importance="low"/>
+      <img alt="Documentaires IPTV en HD" src="./images/image4.svg" loading="lazy" decoding="async" importance="low"/>
     </div>
   </div>
 
@@ -864,7 +932,7 @@
   <section class="hero-section">
     <div class="hero-content">
       <video class="hero-video" autoplay loop muted playsinline 
-        src="/images/video_ava71w.mp4">
+        src="./images/video_ava71w.mp4">
       </video>
       <div class="hero-overlay">
         <h1>IPTV Pas Cher | Test Gratuit | Smart TV, Android, iPhone</h1>
@@ -873,7 +941,7 @@
     </div>
   </section>
 
-  <!-- Séparateur de section -->
+  <!-- Séparateur de section minimal -->
   <hr class="section-divider style1">
 
   <!-- FILMS & SÉRIES (SLIDER) -->
@@ -882,28 +950,28 @@
     <div class="slider">
       <div class="slide-track">
         <!-- Premier groupe d'images -->
-        <img alt="Films 1" class="slide" height="300" src="/images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 2" class="slide" height="300" src="/images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 3" class="slide" height="300" src="/images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Dragon" class="slide" height="300" src="/images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Mufasa" class="slide" height="300" src="/images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Bianca" class="slide" height="300" src="/images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Squid Game" class="slide" height="300" src="/images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Stitch" class="slide" height="300" src="/images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Souly" class="slide" height="300" src="/images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Rig" class="slide" height="300" src="/images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 1" class="slide" height="300" src="./images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 2" class="slide" height="300" src="./images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 3" class="slide" height="300" src="./images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Dragon" class="slide" height="300" src="./images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Mufasa" class="slide" height="300" src="./images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Bianca" class="slide" height="300" src="./images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Squid Game" class="slide" height="300" src="./images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Stitch" class="slide" height="300" src="./images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Souly" class="slide" height="300" src="./images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Rig" class="slide" height="300" src="./images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
         
         <!-- Deuxième groupe d'images (répétition) -->
-        <img alt="Films 1" class="slide" height="300" src="/images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 2" class="slide" height="300" src="/images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 3" class="slide" height="300" src="/images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Dragon" class="slide" height="300" src="/images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Mufasa" class="slide" height="300" src="/images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Bianca" class="slide" height="300" src="/images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Squid Game" class="slide" height="300" src="/images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Stitch" class="slide" height="300" src="/images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Souly" class="slide" height="300" src="/images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Rig" class="slide" height="300" src="/images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 1" class="slide" height="300" src="./images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 2" class="slide" height="300" src="./images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Films 3" class="slide" height="300" src="./images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Dragon" class="slide" height="300" src="./images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Mufasa" class="slide" height="300" src="./images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Bianca" class="slide" height="300" src="./images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Squid Game" class="slide" height="300" src="./images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Stitch" class="slide" height="300" src="./images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Souly" class="slide" height="300" src="./images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <img alt="Rig" class="slide" height="300" src="./images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
       </div>
     </div>
   </section>
@@ -912,10 +980,11 @@
   /* Style pour la section slider amélioré */
   .slider {
     overflow: hidden;
-    padding: 30px 0;
+    padding: 10px 0 0 0;
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
     position: relative;
+    background-color: black;
   }
 
   .slide-track {
@@ -966,17 +1035,35 @@
 
   .slider::before {
     left: 0;
-    background: linear-gradient(to right, #141414, transparent);
+    background: linear-gradient(to right, black, transparent);
   }
 
   .slider::after {
     right: 0;
-    background: linear-gradient(to left, #141414, transparent);
+    background: linear-gradient(to left, black, transparent);
   }
   
   /* Animation pause au survol */
   .slider:hover .slide-track {
     animation-play-state: paused;
+  }
+
+  .films-slider-section {
+    padding: 0 0 0 0;
+    margin: 0;
+    text-align: center;
+    background-color: black;
+  }
+  
+  .films-slider-section h2 {
+    margin: 0 0 5px 0;
+    padding: 20px 20px 0;
+  }
+  
+  .hero-section {
+    margin: 0;
+    padding: 0;
+    position: relative;
   }
 
   /* Responsive */
@@ -1007,148 +1094,150 @@
   }
   </style>
 
-  <!-- Séparateur de section -->
+  <!-- Séparateur de section minimal -->
   <hr class="section-divider style2">
 
   <!-- OFFRES AVEC VIDEO DE FOND -->
   <section class="offers-section" id="offers-section">
     <!-- Vidéo de fond -->
     <video class="offers-bg-video" autoplay muted loop playsinline loading="lazy" preload="none">
-      <source src="/images/cinema-video.mp4" type="video/mp4">
+      <source src="./images/cinema-video.mp4" type="video/mp4">
       Votre navigateur ne supporte pas la vidéo.
     </video>
     <!-- Contenu par-dessus la vidéo -->
     <div class="offers-content">
       <h2>Abonnements IPTV Pas Cher | Test Gratuit</h2>
       
-      <div class="offers-grid">
-        <!-- Première ligne : 4 offres principales -->
-        <!-- Offre 1 - 3 mois -->
-        <div class="offer-card">
-          <h3>Essentiel - 3 mois</h3>
-          <p class="price">9.99€</p>
-          <ul class="benefits">
-            <li>+18 000 Chaînes TV HD</li>
-            <li>+30 000 VOD</li>
-            <li>Qualité HD garantie</li>
-            <li>Compatible tous appareils</li>
-            <li>Mises à jour mensuelles</li>
-          </ul>
-          <a class="btn" href="offer-details.html?product=Essentiel+IPTV+3+mois&price=9.99">Commander</a>
-        </div>
-        
-        <!-- Offre 2 - 6 mois -->
-        <div class="offer-card">
-          <h3>Standard - 6 mois</h3>
-          <p class="price">19.99€</p>
-          <ul class="benefits">
-            <li>+20 000 Chaînes TV HD</li>
-            <li>+40 000 VOD</li>
-            <li>Qualité FHD garantie</li>
-            <li>Compatible tous appareils</li>
-            <li>Support technique 24/7</li>
-          </ul>
-          <a class="btn" href="offer-details.html?product=Standard+IPTV+6+mois&price=19.99">Commander</a>
-        </div>
-        
-        <!-- Offre 3 - 12 mois (populaire) -->
-        <div class="offer-card popular">
-          <h3>Premium - 12 mois</h3>
-          <p class="price">29.99€</p>
-          <ul class="benefits">
-            <li>+22 000 Chaînes TV HD</li>
-            <li>+50 000 VOD</li>
-            <li>Qualité 4K/FHD garantie</li>
-            <li>Compatible tous appareils</li>
-            <li>Support prioritaire</li>
-          </ul>
-          <a class="btn" href="offer-details.html?product=Premium+IPTV+12+mois&price=29.99">Commander</a>
-        </div>
-        
-        <!-- Pack Concours -->
-        <div class="offer-card contest">
-          <div class="contest-ribbon">CONCOURS</div>
-          <h3>12 Mois GRATUITS</h3>
-          <p class="price">Tirage le 15</p>
-          <ul class="benefits">
-            <li>Premium 12 mois offert</li>
-            <li>1 gagnant chaque mois</li>
-            <li>S'abonner à YouTube</li>
-            <li>Suivre notre TikTok</li>
-            <li>Commenter "Je participe"</li>
-          </ul>
-          <div class="social-buttons">
-            <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-btn youtube">
-              <i class="fab fa-youtube"></i> S'abonner
-            </a>
-            <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn tiktok">
-              <i class="fab fa-tiktok"></i> Suivre
-            </a>
+      <div class="offers-grid-container">
+        <div class="offers-grid">
+          <!-- Première ligne : 4 offres principales -->
+          <!-- Offre 1 - 3 mois -->
+          <div class="offer-card">
+            <h3>Essentiel - 3 mois</h3>
+            <p class="price">9.99€</p>
+            <ul class="benefits">
+              <li>+18 000 Chaînes TV HD</li>
+              <li>+30 000 VOD</li>
+              <li>Qualité HD garantie</li>
+              <li>Compatible tous appareils</li>
+              <li>Mises à jour mensuelles</li>
+            </ul>
+            <a class="btn" href="offer-details.html?product=Essentiel+IPTV+3+mois&price=9.99">Commander</a>
           </div>
-          <a href="concours.html" class="contest-rules">Voir les règles</a>
-        </div>
+          
+          <!-- Offre 2 - 6 mois -->
+          <div class="offer-card">
+            <h3>Standard - 6 mois</h3>
+            <p class="price">19.99€</p>
+            <ul class="benefits">
+              <li>+20 000 Chaînes TV HD</li>
+              <li>+40 000 VOD</li>
+              <li>Qualité FHD garantie</li>
+              <li>Compatible tous appareils</li>
+              <li>Support technique 24/7</li>
+            </ul>
+            <a class="btn" href="offer-details.html?product=Standard+IPTV+6+mois&price=19.99">Commander</a>
+          </div>
+          
+          <!-- Offre 3 - 12 mois (populaire) -->
+          <div class="offer-card popular">
+            <h3>Premium - 12 mois</h3>
+            <p class="price">29.99€</p>
+            <ul class="benefits">
+              <li>+22 000 Chaînes TV HD</li>
+              <li>+50 000 VOD</li>
+              <li>Qualité 4K/FHD garantie</li>
+              <li>Compatible tous appareils</li>
+              <li>Support prioritaire</li>
+            </ul>
+            <a class="btn" href="offer-details.html?product=Premium+IPTV+12+mois&price=29.99">Commander</a>
+          </div>
+          
+          <!-- Pack Concours -->
+          <div class="offer-card contest">
+            <div class="contest-ribbon">CONCOURS</div>
+            <h3>12 Mois GRATUITS</h3>
+            <p class="price">Tirage le 15</p>
+            <ul class="benefits">
+              <li>Premium 12 mois offert</li>
+              <li>1 gagnant chaque mois</li>
+              <li>S'abonner à YouTube</li>
+              <li>Suivre notre TikTok</li>
+              <li>Commenter "Je participe"</li>
+            </ul>
+            <div class="social-buttons">
+              <a href="https://www.youtube.com/@bosta8131" target="_blank" class="social-btn youtube">
+                <i class="fab fa-youtube"></i> S'abonner
+              </a>
+              <a href="https://www.tiktok.com/@xeeroxx2" target="_blank" class="social-btn tiktok">
+                <i class="fab fa-tiktok"></i> Suivre
+              </a>
+            </div>
+            <a href="concours.html" class="contest-rules">Voir les règles</a>
+          </div>
 
-        <!-- Seconde ligne : 4 offres supplémentaires -->
-        <!-- Offre multi-écrans - Niveau 1 -->
-        <div class="offer-card">
-          <h3>Famille - 2 écrans</h3>
-          <p class="price">59.99€</p>
-          <ul class="benefits">
-            <li>+22 000 Chaînes TV HD</li>
-            <li>+50 000 VOD</li>
-            <li>Qualité 4K garantie</li>
-            <li>2 écrans simultanés</li>
-            <li>Support prioritaire 24/7</li>
-          </ul>
-          <a class="btn" href="offer-details.html?product=Famille+IPTV+2+écrans&price=59.99">Commander</a>
-        </div>
-        
-        <!-- Offre multi-écrans - Niveau 2 -->
-        <div class="offer-card">
-          <h3>Pro - 3 écrans</h3>
-          <p class="price">79.99€</p>
-          <ul class="benefits">
-            <li>+22 000 Chaînes TV HD/4K</li>
-            <li>+50 000 VOD</li>
-            <li>Qualité 4K Premium</li>
-            <li>3 écrans simultanés</li>
-            <li>Support VIP 24/7</li>
-          </ul>
-          <a class="btn" href="offer-details.html?product=Pro+IPTV+3+écrans&price=79.99">Commander</a>
-        </div>
-        
-        <!-- Offre multi-écrans - Niveau 3 -->
-        <div class="offer-card">
-          <h3>Elite - 4 écrans</h3>
-          <p class="price">99.99€</p>
-          <ul class="benefits">
-            <li>+22 000 Chaînes TV HD/4K</li>
-            <li>+50 000 VOD</li>
-            <li>Qualité 4K Ultra-Premium</li>
-            <li>4 écrans simultanés</li>
-            <li>Support VIP dédié 24/7</li>
-          </ul>
-          <a class="btn" href="offer-details.html?product=Elite+IPTV+4+écrans&price=99.99">Commander</a>
-        </div>
-        
-        <!-- Offre personnalisable -->
-        <div class="offer-card custom">
-          <h3>Pack Personnalisé</h3>
-          <p class="price">Sur devis</p>
-          <ul class="benefits">
-            <li>Chaînes sur mesure</li>
-            <li>VOD personnalisable</li>
-            <li>Qualité à la demande</li>
-            <li>Nb d'écrans selon besoin</li>
-            <li>Support dédié personnalisé</li>
-          </ul>
-          <a class="btn" href="contact.html?subject=Pack+Personnalisé">Contactez-nous</a>
+          <!-- Seconde ligne : 4 offres supplémentaires -->
+          <!-- Offre multi-écrans - Niveau 1 -->
+          <div class="offer-card">
+            <h3>Famille - 2 écrans</h3>
+            <p class="price">59.99€</p>
+            <ul class="benefits">
+              <li>+22 000 Chaînes TV HD</li>
+              <li>+50 000 VOD</li>
+              <li>Qualité 4K garantie</li>
+              <li>2 écrans simultanés</li>
+              <li>Support prioritaire 24/7</li>
+            </ul>
+            <a class="btn" href="offer-details.html?product=Famille+IPTV+2+écrans&price=59.99">Commander</a>
+          </div>
+          
+          <!-- Offre multi-écrans - Niveau 2 -->
+          <div class="offer-card">
+            <h3>Pro - 3 écrans</h3>
+            <p class="price">79.99€</p>
+            <ul class="benefits">
+              <li>+22 000 Chaînes TV HD/4K</li>
+              <li>+50 000 VOD</li>
+              <li>Qualité 4K Premium</li>
+              <li>3 écrans simultanés</li>
+              <li>Support VIP 24/7</li>
+            </ul>
+            <a class="btn" href="offer-details.html?product=Pro+IPTV+3+écrans&price=79.99">Commander</a>
+          </div>
+          
+          <!-- Offre multi-écrans - Niveau 3 -->
+          <div class="offer-card">
+            <h3>Elite - 4 écrans</h3>
+            <p class="price">99.99€</p>
+            <ul class="benefits">
+              <li>+22 000 Chaînes TV HD/4K</li>
+              <li>+50 000 VOD</li>
+              <li>Qualité 4K Ultra-Premium</li>
+              <li>4 écrans simultanés</li>
+              <li>Support VIP dédié 24/7</li>
+            </ul>
+            <a class="btn" href="offer-details.html?product=Elite+IPTV+4+écrans&price=99.99">Commander</a>
+          </div>
+          
+          <!-- Offre personnalisable -->
+          <div class="offer-card custom">
+            <h3>Pack Personnalisé</h3>
+            <p class="price">Sur devis</p>
+            <ul class="benefits">
+              <li>Chaînes sur mesure</li>
+              <li>VOD personnalisable</li>
+              <li>Qualité à la demande</li>
+              <li>Nb d'écrans selon besoin</li>
+              <li>Support dédié personnalisé</li>
+            </ul>
+            <a class="btn" href="contact.html?subject=Pack+Personnalisé">Contactez-nous</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
   
-  <!-- Séparateur de section -->
+  <!-- Séparateur de section minimal -->
   <hr class="section-divider style3">
 
   <!-- SECTION AVANTAGES -->
@@ -1262,7 +1351,8 @@
         }
         
         .advantages-section {
-          padding: 80px 0;
+          padding: 60px 0;
+          margin: 0;
           background: linear-gradient(to bottom, #0a0a0a, #141414);
         }
         
@@ -1414,57 +1504,61 @@
     </div>
   </section>
   
-  <!-- Séparateur de section -->
+  <!-- Séparateur de section minimal -->
   <hr class="section-divider style1">
   
   <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-content">
-        <!-- Section À propos de IPTV Pro -->
         <div class="footer-section">
-          <h3>À propos de IPTV Pro</h3>
-          <p>Service IPTV pas cher avec chaînes sport en direct, films et séries. Installation simple, support technique réactif.</p>
+          <div class="footer-logo">
+            <img src="./images/logo.svg" alt="IPTV Smarter Pro Logo" width="150">
+          </div>
+          <p>Le meilleur service d'IPTV en France et en Europe. Profitez de plus de 22 000 chaînes TV et 50 000 films & séries en HD/4K sur tous vos appareils.</p>
+          <div class="footer-social">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+          </div>
         </div>
         
-        <!-- Section Liens Rapides -->
         <div class="footer-section">
           <h3>Liens Rapides</h3>
           <ul class="footer-links">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="index.html#offers-section">Offres</a></li>
+            <li><a href="index.html#offers-section">Nos Offres</a></li>
             <li><a href="tutoriel.html">Tutoriel</a></li>
             <li><a href="about.html">À Propos</a></li>
-            <li><a href="contact.html">Contact</a></li>
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="concours.html">Concours</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
         
-        <!-- Section Informations Légales -->
         <div class="footer-section">
-          <h3>Informations Légales</h3>
+          <h3>Informations</h3>
           <ul class="footer-links">
             <li><a href="conditions-generales.html">Conditions Générales</a></li>
             <li><a href="politique-confidentialite.html">Politique de Confidentialité</a></li>
-            <li><a href="about.html">À Propos</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Support Technique</a></li>
+            <li><a href="payment.html">Méthodes de Paiement</a></li>
           </ul>
         </div>
         
-        <!-- Section Contactez-nous -->
-        <div class="footer-section">
+        <div class="footer-section contact-info">
           <h3>Contactez-nous</h3>
           <form id="footer-contact-form">
-            <input type="email" placeholder="Votre Email" required>
-            <input type="text" placeholder="Sujet">
-            <textarea placeholder="Votre message"></textarea>
-            <button type="submit" class="btn-primary">Envoyer</button>
+            <input type="email" placeholder="Votre email" required>
+            <textarea placeholder="Votre message" required></textarea>
+            <button type="submit" class="btn-primary">Envoyer <i class="fas fa-paper-plane"></i></button>
           </form>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2025 IPTV Smarter Pro - Tous droits réservés</p>
+        <p>&copy; 2023 IPTV Smarter Pro. Tous droits réservés.</p>
       </div>
     </div>
   </footer>
@@ -1759,6 +1853,10 @@
       );
     }
   </script>
-  <script src="js/navbar.js"></script>
+  <script src="./js/navbar.js"></script>
 </body>
 </html>
+
+
+
+
