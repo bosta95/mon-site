@@ -65,6 +65,11 @@ function createTransporter() {
  */
 async function sendTemplateEmail({ to, subject, templateName, data = {} }) {
   try {
+    // Afficher plus d'informations pour le débogage
+    console.log(`Préparation de l'envoi d'un email "${templateName}" à: ${to}`);
+    console.log(`Sujet: ${subject}`);
+    console.log(`Variables de template:`, JSON.stringify(data, null, 2));
+    
     // Obtenir le template
     const template = getEmailTemplate(templateName);
     
@@ -74,18 +79,31 @@ async function sendTemplateEmail({ to, subject, templateName, data = {} }) {
     // Créer le transporteur
     const transporter = createTransporter();
     
-    // Envoyer l'email
-    const info = await transporter.sendMail({
-      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
+    // Ajouter des en-têtes pour éviter le filtrage anti-spam
+    const emailOptions = {
+      from: `"IPTV Smarters Pro" <${process.env.SMTP_USER}>`,
       to,
       subject,
-      html
-    });
+      html,
+      headers: {
+        'X-Priority': '1',
+        'Importance': 'high',
+        'X-IPTV-Notification': templateName === 'admin-notification' ? 'admin' : 'client'
+      }
+    };
+    
+    console.log(`Configuration SMTP utilisée: ${process.env.SMTP_HOST}:${process.env.SMTP_PORT}`);
+    
+    // Envoyer l'email
+    const info = await transporter.sendMail(emailOptions);
     
     console.log(`Email ${templateName} envoyé à ${to}: ${info.messageId}`);
+    console.log(`Réponse du serveur SMTP:`, info.response);
+    
     return info;
   } catch (error) {
     console.error(`Erreur lors de l'envoi de l'email ${templateName}:`, error);
+    console.error(`Détails supplémentaires: ${error.stack}`);
     throw error;
   }
 }

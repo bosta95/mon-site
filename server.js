@@ -277,10 +277,10 @@ app.post('/api/order', async (req, res) => {
       }
     });
     
-    // Envoi de l'email de notification à l'administrateur
+    // Envoi de l'email de notification à l'administrateur - Modifié pour éviter le spam
     await emailUtils.sendTemplateEmail({
       to: process.env.MERCHANT_EMAIL,
-      subject: 'Nouvelle commande reçue',
+      subject: `IPTV - Commande #${orderNumber} - ${getProductName(product)}`,
       templateName: 'admin-notification',
       data: {
         email,
@@ -288,7 +288,15 @@ app.post('/api/order', async (req, res) => {
         orderNumber,
         description: getProductDescription(product),
         price: getProductPrice(product),
-        date: new Date().toLocaleString('fr-FR')
+        date: new Date().toLocaleString('fr-FR'),
+        orderDate: new Date().toLocaleDateString('fr-FR'),
+        orderTime: new Date().toLocaleTimeString('fr-FR'),
+        clientEmail: email,
+        clientPhone: req.body.phone || 'Non fourni',
+        clientIP: req.ip || 'Inconnu',
+        clientCountry: req.body.country || 'Inconnu',
+        clientDevice: req.headers['user-agent'] || 'Inconnu',
+        paymentMethod: req.body.paymentMethod || 'PayPal'
       }
     });
     

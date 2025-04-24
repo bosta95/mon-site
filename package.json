@@ -1,7 +1,7 @@
 {
-  "name": "iptv-smarter-pros",
+  "name": "iptv-smarters-pros",
   "version": "1.0.0",
-  "description": "Site web IPTV Smarter Pros",
+  "description": "Site web IPTV Smarters Pros",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

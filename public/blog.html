@@ -856,6 +856,83 @@
     color: #ff6b6b;
     margin-right: 3px;
   }
+
+  /* Styles pour les nouvelles cartes d'articles */
+  .blog-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #6c5ce7;
+  }
+  
+  .blog-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #a29bfe;
+  }
+  
+  .blog-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .blog-card {
+    background: #2d2d3a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #6c5ce7;
+  }
+  
+  .blog-card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .blog-card-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .blog-card-content p {
+    margin-bottom: 1.5rem;
+    color: #ddd;
+    flex: 1;
+  }
+  
+  .blog-card-content .btn {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .blog-cards-container {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 </head>
 <body>
@@ -901,170 +978,49 @@
   </header>
 
 <div class="blog-container">
-  <!-- SECTION BLOG - À LA UNE -->
-  <section class="blog-featured">
-    <div class="container">
-      <h2 class="section-title"><span class="title-highlight">Article À la Une</span></h2>
-      <div class="featured-article">
-        <div class="featured-article-image">
-          <img src="https://images.unsplash.com/photo-1601944179066-29786cb9d32a?q=80&w=1000" alt="IPTV en 2025: Les Tendances Futures"/>
-        </div>
-        <div class="featured-article-content">
-          <span class="premium-badge">PREMIUM</span>
-          <h2>IPTV en 2025: Les Tendances Futures et l'évolution des Services de Streaming</h2>
-          <p class="featured-article-meta">
-            <span class="featured-article-date"><i class="far fa-calendar-alt"></i> 28 Mai 2025</span>
-            <span class="featured-article-author"><i class="far fa-user"></i> Jean Dupont</span>
-          </p>
-          <p class="featured-article-excerpt">L'IPTV continue d'évoluer rapidement, transformant notre façon de consommer les médias. Cet article explore les innovations technologiques qui façonneront l'IPTV en 2025, de l'intégration de l'IA à la personnalisation avancée, en passant par les résolutions 8K et les expériences interactives. Découvrez comment ces tendances redéfiniront l'avenir du divertissement à domicile.</p>
-          <a href="https://www.digitaltrends.com/home-theater/what-is-iptv/" target="_blank" rel="noopener noreferrer" class="btn btn-primary featured-article-button">Lire l'article <i class="fas fa-arrow-right"></i></a>
-        </div>
+  <h1 class="blog-title">Notre Blog</h1>
+  <p class="blog-subtitle">Découvrez nos derniers articles et actualités sur l'IPTV</p>
+  
+  <div class="blog-cards-container">
+    <!-- Article 1 -->
+    <div class="blog-card">
+      <img src="./images/blog/tendances-streaming.jpg" alt="Tendances du Streaming IPTV en 2025" loading="lazy">
+      <div class="blog-card-content">
+        <h3>Les Tendances du Streaming IPTV en 2025</h3>
+        <p>Découvrez les dernières tendances du streaming IPTV, incluant les guides électroniques des programmes améliorés et les technologies anti-buffering.</p>
+        <a href="blog/tendances-streaming-2025.html" class="btn btn-primary">Lire l'article</a>
       </div>
     </div>
-  </section>
-  
-  <!-- DERNIERS ARTICLES -->
-  <div class="blog-search">
-    <input type="text" placeholder="Rechercher un article...">
-    <button><i class="fas fa-search"></i></button>
-  </div>
-  
-  <div class="blog-categories">
-    <div class="blog-category active">Tous</div>
-    <div class="blog-category">Guides EPG</div>
-    <div class="blog-category">Sans Buffering</div>
-    <div class="blog-category">Tutoriels</div>
-    <div class="blog-category">Tendances</div>
-    <div class="blog-category">Applications</div>
-  </div>
-  
-  <div class="blog-latest-section">
-    <h2 class="section-title"><span class="title-highlight">Derniers Articles</span></h2>
-    
-    <div class="blog-grid">
-      <!-- ARTICLE 1 -->
-      <a href="#" class="blog-card animate-fade-in" data-article-id="tendances-streaming-2025" onclick="showArticle('tendances-streaming-2025'); return false;">
-        <div class="blog-card-img">
-          <img src="./images/films1_cqypoc.png" alt="Tendances du Streaming IPTV en 2025" loading="lazy" width="400" height="225">
-        </div>
-        <div class="blog-card-content">
-          <h3>Les Tendances du Streaming IPTV en 2025</h3>
-          <p>Découvrez les dernières tendances en matière d'abonnement IPTV Smarters Pro, de technologies 4K HD et des innovations pour votre expérience TV.</p>
-          <div class="blog-card-date">
-            <i class="far fa-calendar"></i> 1 janvier 2025
-          </div>
-        </div>
-      </a>
-      
-      <!-- ARTICLE 2 -->
-      <a href="#" class="blog-card animate-fade-in" data-article-id="eliminer-buffering">
-        <div class="blog-card-img">
-          <img src="./images/films2_i3gbly.png" alt="Éliminer le Buffering sur IPTV" loading="lazy" width="400" height="225">
-        </div>
-        <div class="blog-card-content">
-          <h3>Comment Éliminer le Buffering sur Votre Application IPTV</h3>
-          <p>Conseils et astuces pour profiter d'une application IPTV sans buffering et d'un streaming 4K HD stable sur tous vos appareils.</p>
-          <div class="blog-card-date">
-            <i class="far fa-calendar"></i> 10 janvier 2025
-          </div>
-        </div>
-      </a>
-      
-      <!-- ARTICLE 3 -->
-      <a href="#" class="blog-card animate-fade-in" data-article-id="guide-epg">
-        <div class="blog-card-img">
-          <img src="./images/filmsf_bwiian.png" alt="Guide EPG pour IPTV" loading="lazy" width="400" height="225">
-        </div>
-        <div class="blog-card-content">
-          <h3>Guide Complet du Guide Électronique des Programmes (EPG) pour IPTV</h3>
-          <p>Tout ce que vous devez savoir sur le guide électronique des programmes (EPG) dans IPTV Smarters Pro, ses fonctionnalités et comment l'optimiser.</p>
-          <div class="blog-card-date">
-            <i class="far fa-calendar"></i> 15 janvier 2025
-          </div>
-        </div>
-      </a>
-      
-      <!-- ARTICLE 4 -->
-      <a href="#" class="blog-card animate-fade-in" data-article-id="codes-xtream">
-        <div class="blog-card-img">
-          <img src="./images/brea_pd3cdn.png" alt="Codes Xtream IPTV" loading="lazy" width="400" height="225">
-        </div>
-        <div class="blog-card-content">
-          <h3>Comment Configurer Vos Codes Xtream pour un IPTV Performant</h3>
-          <p>Guide étape par étape pour configurer correctement vos codes Xtream et optimiser votre connexion IPTV pour un streaming sans interruption.</p>
-          <div class="blog-card-date">
-            <i class="far fa-calendar"></i> 22 janvier 2025
-          </div>
-        </div>
-      </a>
-      
-      <!-- ARTICLE 5 -->
-      <a href="#" class="blog-card animate-fade-in" data-article-id="iptv-smart-tv">
-        <div class="blog-card-img">
-          <img src="./images/smarttv.png" alt="IPTV sur Smart TV" loading="lazy" width="400" height="225">
-        </div>
-        <div class="blog-card-content">
-          <h3>Installation et Configuration d'IPTV sur Smart TV</h3>
-          <p>Guide complet pour installer et configurer votre service IPTV Smarters Pro sur toutes les marques de Smart TV populaires.</p>
-          <div class="blog-card-date">
-            <i class="far fa-calendar"></i> 5 février 2025
-          </div>
-        </div>
-      </a>
-      
-      <!-- ARTICLE 6 -->
-      <a href="#" class="blog-card animate-fade-in" data-article-id="vpn-iptv">
-        <div class="blog-card-img">
-          <img src="./images/dragon_dulfu3.png" alt="VPN pour IPTV" loading="lazy" width="400" height="225">
-        </div>
-        <div class="blog-card-content">
-          <h3>Pourquoi Utiliser un VPN avec Votre IPTV et Comment le Configurer</h3>
-          <p>Les avantages d'utiliser un VPN avec votre service IPTV et comment le configurer correctement pour une expérience optimale.</p>
-          <div class="blog-card-date">
-            <i class="far fa-calendar"></i> 18 février 2025
-          </div>
-        </div>
-      </a>
+
+    <!-- Article 2 -->
+    <div class="blog-card">
+      <img src="./images/blog/buffering.jpg" alt="Éliminer le buffering IPTV" loading="lazy">
+      <div class="blog-card-content">
+        <h3>Comment Éliminer le Buffering sur Votre IPTV</h3>
+        <p>Guide complet pour résoudre les problèmes de buffering et profiter d'un streaming fluide sur tous vos appareils IPTV.</p>
+        <a href="blog/eliminer-buffering-iptv.html" class="btn btn-primary">Lire l'article</a>
+      </div>
     </div>
-  </div>
-  
-  <!-- SUJETS POPULAIRES -->
-    <div class="trending-topics-section">
-    <h2 class="section-title"><span class="title-highlight">Sujets Populaires</span></h2>
-    <div class="trending-topics-container">
-      <div class="trending-topics">
-        <a href="https://www.t3.com/news/best-iptv-service" target="_blank" rel="noopener noreferrer" class="trending-topic">
-          <i class="fas fa-trophy"></i>
-          <div class="topic-content">
-            <h4>Meilleurs Services IPTV</h4>
-            <p>Comparatif des services les mieux notés en 2025</p>
-          </div>
-          <span class="topic-count">542K vues</span>
-        </a>
-        <a href="https://www.expertreviews.co.uk/tvs/1413997/best-android-tv-box" target="_blank" rel="noopener noreferrer" class="trending-topic">
-          <i class="fas fa-box"></i>
-          <div class="topic-content">
-            <h4>Android Box &amp; IPTV</h4>
-            <p>Les meilleurs boîtiers pour votre installation</p>
-          </div>
-          <span class="topic-count">423K vues</span>
-        </a>
-        <a href="https://www.cnet.com/tech/services-and-software/best-sports-streaming-service/" target="_blank" rel="noopener noreferrer" class="trending-topic">
-          <i class="fas fa-futbol"></i>
-          <div class="topic-content">
-            <h4>Football &amp; Sports en Direct</h4>
-            <p>Les meilleures solutions pour les événements sportifs</p>
-          </div>
-          <span class="topic-count">287K vues</span>
-        </a>
-        <a href="https://nordvpn.com/fr/blog/securite-streaming/" target="_blank" rel="noopener noreferrer" class="trending-topic">
-          <i class="fas fa-shield-alt"></i>
-          <div class="topic-content">
-            <h4>Sécurité &amp; Confidentialité</h4>
-            <p>Protection de vos données pendant le streaming</p>
-          </div>
-          <span class="topic-count">198K vues</span>
-        </a>
+
+    <!-- Article 3 -->
+    <div class="blog-card">
+      <img src="./images/blog/guide-epg.jpg" alt="Guide EPG IPTV" loading="lazy">
+      <div class="blog-card-content">
+        <h3>Tout savoir sur les Guides Électroniques des Programmes (EPG)</h3>
+        <p>Comprendre et utiliser efficacement les guides EPG pour améliorer votre expérience IPTV.</p>
+        <a href="blog/guide-epg-iptv.html" class="btn btn-primary">Lire l'article</a>
+      </div>
+    </div>
+    
+    <!-- Article 4 existant -->
+    <div class="blog-card" data-article-id="meilleurs-services-iptv">
+      <img src="./images/brea_pd3cdn.png" alt="Codes Xtream IPTV" loading="lazy" width="400" height="225">
+      <div class="blog-card-content">
+        <h3>Comment Configurer Vos Codes Xtream pour un IPTV Performant</h3>
+        <p>Guide étape par étape pour configurer correctement vos codes Xtream et optimiser votre connexion IPTV pour un streaming sans interruption.</p>
+        <div class="blog-card-date">
+          <i class="far fa-calendar"></i> 22 janvier 2025
+        </div>
       </div>
     </div>
   </div>
@@ -1232,7 +1188,7 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     // Ajouter les écouteurs d'événements pour les cartes d'articles
-    const articleCards = document.querySelectorAll('.blog-card');
+    const articleCards = document.querySelectorAll('.blog-card[data-article-id]');
     articleCards.forEach(card => {
       card.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1249,21 +1205,27 @@
     document.querySelector('.blog-container').style.display = 'none';
     
     // Afficher l'article spécifique
-    document.getElementById(articleId).style.display = 'block';
-    
-    // Faire défiler vers le haut
-    window.scrollTo(0, 0);
+    const articleElement = document.getElementById(articleId);
+    if (articleElement) {
+      articleElement.style.display = 'block';
+      
+      // Faire défiler vers le haut
+      window.scrollTo(0, 0);
+    }
   }
   
   function hideArticle(articleId) {
     // Masquer l'article
-    document.getElementById(articleId).style.display = 'none';
-    
-    // Afficher le conteneur principal du blog
-    document.querySelector('.blog-container').style.display = 'block';
-    
-    // Faire défiler vers le haut
-    window.scrollTo(0, 0);
+    const articleElement = document.getElementById(articleId);
+    if (articleElement) {
+      articleElement.style.display = 'none';
+      
+      // Afficher le conteneur principal du blog
+      document.querySelector('.blog-container').style.display = 'block';
+      
+      // Faire défiler vers le haut
+      window.scrollTo(0, 0);
+    }
   }
 </script>
 </body>
