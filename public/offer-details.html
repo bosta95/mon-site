@@ -49,6 +49,7 @@
   <link href="./css/styles.css?v=1" rel="stylesheet">
   <link href="./css/navbar.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
+  <link rel="stylesheet" href="./css/mobile-fix.css" fetchpriority="high">
   <style>
     body {
       margin: 0;
@@ -505,6 +506,79 @@
         width: 100%;
       }
     }
+    
+    /* Style inline pour corriger spécifiquement le problème de hauteur sur la capture d'écran */
+    @media (max-width: 480px) {
+      /* Reset forcé de la hauteur pour les cartes d'offre */
+      .offer-card {
+        height: auto !important;
+        min-height: initial !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 12px !important;
+        margin: 10px auto !important;
+        width: 90% !important;
+        box-sizing: border-box !important;
+      }
+      
+      /* Réduire la taille de la police et les marges */
+      .offer-card * {
+        box-sizing: border-box !important;
+      }
+      
+      .offer-card h3 {
+        font-size: 18px !important;
+        margin: 0 0 5px !important;
+      }
+      
+      .offer-card .price {
+        font-size: 22px !important;
+        margin: 5px 0 !important;
+      }
+      
+      /* Liste des avantages plus compacte */
+      .offer-card .benefits {
+        margin: 5px 0 !important;
+        padding-left: 5px !important;
+        list-style: none !important;
+      }
+      
+      .offer-card .benefits li {
+        font-size: 13px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 2px !important;
+        padding-left: 15px !important;
+        position: relative !important;
+      }
+      
+      /* Sélecteur d'écrans plus compact */
+      .screens-selector {
+        margin: 5px 0 !important;
+      }
+      
+      .screens-selector label {
+        font-size: 13px !important;
+        margin-bottom: 3px !important;
+        display: block !important;
+      }
+      
+      /* Bouton */
+      .offer-card .btn {
+        font-size: 14px !important;
+        padding: 6px 12px !important;
+        margin-top: 5px !important;
+      }
+      
+      /* Contraindre la hauteur au maximum */
+      .offer-details, 
+      .main-content,
+      .offer-image,
+      .offer-info {
+        height: auto !important;
+        min-height: initial !important;
+        padding: 15px !important;
+      }
+    }
   </style>
   
   <!-- Script pour récupérer les paramètres de l'URL -->
@@ -768,6 +842,46 @@
       }
     });
   </script>
+  
+  <!-- Script pour ajouter des styles spécifiques à cette page -->
+  <script>
+    // Ajouter une classe pour cibler spécifiquement cette page dans les CSS
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.add('product-detail-page');
+      
+      // Script pour forcer la hauteur correcte sur mobile
+      if (window.innerWidth <= 480) {
+        const fixMobileLayout = function() {
+          // Limiter la hauteur de la carte d'offre
+          const offerCards = document.querySelectorAll('.offer-card');
+          offerCards.forEach(card => {
+            card.style.maxHeight = '350px';
+            card.style.overflow = 'visible';
+            card.style.height = 'auto';
+          });
+          
+          // Réduire l'espace des éléments dans la carte
+          const benefits = document.querySelectorAll('.benefits');
+          benefits.forEach(list => {
+            list.style.margin = '5px 0';
+            list.style.paddingLeft = '5px';
+          });
+          
+          // Ajuster les éléments de liste
+          const benefitItems = document.querySelectorAll('.benefits li');
+          benefitItems.forEach(item => {
+            item.style.fontSize = '13px';
+            item.style.lineHeight = '1.3';
+            item.style.marginBottom = '2px';
+          });
+        };
+        
+        // Exécuter au chargement et après un petit délai pour s'assurer que tous les styles sont appliqués
+        fixMobileLayout();
+        setTimeout(fixMobileLayout, 500);
+      }
+    });
+  </script>
 </head>
 <body>
   <!-- HEADER -->
@@ -987,6 +1101,9 @@
       });
     });
   </script>
+
+  <!-- Script de correction mobile -->
+  <script src="./js/mobile-fix.js"></script>
 </body>
 </html>
 

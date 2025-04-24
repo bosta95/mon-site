@@ -18,7 +18,10 @@
 }
 
 /* Reset et styles de base */
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  -webkit-tap-highlight-color: transparent;
+}
 
 body {
   margin: 0;
@@ -28,6 +31,8 @@ body {
   color: #fff;
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 /* Animations */
@@ -406,16 +411,17 @@ body {
 
 .offers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 30px 0;
+  padding: 30px 15px;
 }
 
 /* Cartes d'offres */
 .offer-card {
-  width: 280px;
+  width: 100%;
+  max-width: 320px;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 12px;
@@ -423,6 +429,12 @@ body {
   text-align: left;
   transition: transform 0.2s, box-shadow 0.2s;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  max-height: none;
+  height: auto;
+  min-height: 515px;
 }
 
 .offer-card:hover {
@@ -449,34 +461,26 @@ body {
   margin-bottom: 15px;
   font-size: 0.95rem;
   line-height: 1.4;
+  max-height: none;
+  overflow: visible;
 }
 
 .offer-card .benefits li {
   margin-bottom: 5px;
+  position: relative;
+  padding-left: 5px;
 }
 
-.offer-card .btn, .btn {
-  display: inline-block;
-  background: #6c5498;
-  color: #fff;
-  padding: 8px 15px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-  border: none;
-  cursor: pointer;
+.offer-card .benefits li:before {
+  content: "✓";
+  position: absolute;
+  left: -15px;
+  color: #ff8c8c;
 }
 
-.offer-card .btn:hover, .btn:hover {
-  background: #7f66b5;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(108, 84, 152, 0.3);
-}
-
-.offer-card .btn:active, .btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(108, 84, 152, 0.2);
+.offer-card .btn {
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 /* AVANTAGES SECTION */
@@ -514,6 +518,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   margin-bottom: 50px;
+  padding: 0 15px;
 }
 
 .advantage-card {
@@ -1009,6 +1014,33 @@ img.featured-image {
   .header-nav ul li:last-child a {
     margin-top: 10px;
   }
+  
+  .offers-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 20px 15px;
+  }
+  
+  .offer-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .advantages-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 0 15px;
+  }
+  
+  .advantage-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .features-list {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
 }
 
 /* Optimisation des animations */
@@ -1064,15 +1096,95 @@ img.featured-image {
   }
   
   .offers-section, .advantages-section, .films-slider-section {
-    padding: 40px 0;
+    padding: 30px 15px;
   }
   
   .advantage-card, .offer-card {
+    width: 100%;
+    margin: 0 auto 20px;
+    max-width: 100%;
+  }
+  
+  .offer-card {
     padding: 15px;
+  }
+  
+  .offer-card .benefits {
+    padding-left: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .offer-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .offer-card .price {
+    font-size: 1rem;
+  }
+  
+  .offers-grid {
+    gap: 15px;
+    padding: 15px 0;
   }
   
   img {
     max-width: 100%;
+  }
+  
+  .advantages-grid {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .advantage-card {
+    padding: 15px;
+  }
+  
+  .advantage-card p {
+    font-size: 0.9rem;
+  }
+  
+  .advantage-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .features-list li {
+    padding: 15px;
+  }
+  
+  .features-list strong {
+    font-size: 1rem;
+  }
+  
+  .header-nav.active {
+    max-height: calc(100vh - 50px);
+  }
+  
+  /* Assurer que les images ne débordent pas sur les petits écrans */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Réduire l'espace excessif sur mobile */
+  .section {
+    padding: 30px 15px;
+  }
+  
+  /* Améliorer la lisibilité des textes */
+  p, li {
+    font-size: 0.9rem;
+  }
+  
+  /* Réduire la taille des titres */
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  /* Réduire la taille des sous-titres */
+  h3 {
+    font-size: 1.2rem;
   }
 }
 
@@ -1092,8 +1204,24 @@ img.featured-image {
   .header-nav ul { gap: 10px; }
   .hero-overlay h1 { font-size: 2.2rem; }
   .hero-overlay p { font-size: 1rem; }
-  .offers-grid { grid-template-columns: repeat(2, 1fr); }
-  .advantages-grid { grid-template-columns: repeat(2, 1fr); }
+  .offers-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+    padding: 20px 15px;
+  }
+  
+  .offer-card {
+    padding: 15px;
+  }
+  
+  .advantage-card {
+    padding: 20px;
+  }
+  
+  .advantages-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1317,5 +1445,271 @@ img.featured-image {
 @media (max-width: 768px) {
   .header-content {
     padding: 0 10px 0 0;
+  }
+}
+
+/* Assurer que les images ne dépassent pas leur conteneur */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .offers-grid,
+  .advantages-grid { 
+    grid-template-columns: 1fr; 
+  }
+  
+  .offer-card,
+  .advantage-card {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .films-slider-section .slide-track {
+    animation: none;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  
+  .slide {
+    flex: 0 0 auto;
+    width: 200px;
+    margin-right: 15px;
+  }
+}
+
+/* Fix pour iOS */
+@supports (-webkit-touch-callout: none) {
+  .header-container,
+  .header-nav.active {
+    backdrop-filter: blur(10px);
+  }
+  
+  input, 
+  textarea {
+    font-size: 16px; /* Évite le zoom automatique sur iOS lors de la saisie */
+  }
+}
+
+/* Assurer que les media queries s'appliquent correctement */
+@media screen and (max-width: 480px) {
+  .offer-card {
+    min-width: 0;
+    width: 100%;
+    margin: 0 auto 15px;
+    min-height: auto;
+    height: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .offer-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+  
+  .offer-card .price {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .offer-card .benefits {
+    margin-bottom: 15px;
+    padding-left: 15px;
+  }
+  
+  .offer-card .benefits li {
+    padding-left: 15px;
+    margin-bottom: 2px;
+    font-size: 0.85rem;
+  }
+  
+  .offer-card .benefits li:before {
+    left: 0;
+    font-size: 0.8rem;
+  }
+  
+  .offer-card .btn {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+  
+  /* Réduire l'espacement excessif */
+  .offers-section {
+    padding: 20px 0;
+  }
+  
+  .offers-grid {
+    gap: 15px;
+    padding: 10px 15px;
+  }
+  
+  /* Ajouter une hauteur max pour éviter le scroll excessif */
+  .offer-card {
+    max-height: none;
+    overflow: visible;
+  }
+  
+  /* Styles du footer fixe */
+  .fixed-footer {
+    padding: 10px;
+  }
+  
+  .fixed-footer-content {
+    flex-direction: column;
+  }
+  
+  .fixed-footer-logo {
+    display: none;
+  }
+  
+  .fixed-footer-text p {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .fixed-footer-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .offer-card {
+    max-width: 100%;
+    margin: 0 auto 15px;
+    height: auto;
+  }
+}
+
+/* Correction spécifique pour les mobiles */
+@media (max-width: 480px) {
+  /* Réduire davantage l'espace entre les éléments */
+  .offer-card .benefits {
+    margin: 5px 0;
+    padding-left: 5px;
+  }
+  
+  /* Bouton plus petit sur mobile */
+  .offer-card .btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    margin-top: 5px;
+  }
+  
+  /* Ajuster la hauteur maximale */
+  .offer-card {
+    max-height: 320px; /* Limiter la hauteur maximale */
+    overflow: auto; /* Permettre de scroller si nécessaire */
+  }
+}
+
+/* Styles pour les boutons d'offre */
+.offer-card .btn, .btn {
+  display: inline-block;
+  background: #6c5498;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  border: none;
+  cursor: pointer;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.offer-card .btn:hover, .btn:hover {
+  background: #7f66b5;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(108, 84, 152, 0.3);
+}
+
+.offer-card .btn:active, .btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(108, 84, 152, 0.2);
+}
+
+/* Correction pour réduire l'espace excessif dans les cartes d'offres */
+@media (max-width: 480px) {
+  /* Réduire la hauteur excessive des cartes */
+  .offer-card {
+    padding: 12px;
+    margin-bottom: 15px;
+    min-height: unset;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Mise en page compacte et espacements réduits */
+  .offer-card h3 {
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  
+  .offer-card .price {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  
+  /* Liste des avantages */
+  .offer-card .benefits {
+    padding-left: 5px;
+    margin: 5px 0 8px;
+    font-size: 0.85rem;
+  }
+  
+  .offer-card .benefits li {
+    line-height: 1.3;
+    padding-left: 15px;
+    margin-bottom: 2px;
+    position: relative;
+  }
+  
+  .offer-card .benefits li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #ff8c8c;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  
+  /* Bouton */
+  .offer-card .btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    align-self: flex-start;
+  }
+  
+  /* Section globale */
+  .offers-section {
+    padding: 15px;
+  }
+  
+  .offers-grid {
+    gap: 15px;
+    padding: 10px 5px;
   }
 }

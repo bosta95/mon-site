@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="./css/styles.css?v=1" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="./css/navbar.css" fetchpriority="high">
   <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
+  <link rel="stylesheet" href="./css/mobile-fix.css" fetchpriority="high">
   <link rel="preload" href="/images/IPTV_glpgxi.svg" as="image" type="image/svg+xml" fetchpriority="high">
   
   <!-- Favicons -->
@@ -215,20 +216,8 @@
   }
   </script>
   
-  <!-- Styles supplémentaires pour la vidéo de fond dans la section OFFRES et les cartes transparentes -->
+  <!-- Les styles sont maintenant tous chargés depuis les fichiers CSS externes -->
   <style>
-    body {
-      overflow-x: hidden;
-      margin: 0;
-      padding: 0;
-      background-color: black;
-    }
-  
-    section {
-      margin: 0;
-      padding: 0;
-    }
-  
     /* Style personnalisé pour les séparateurs de section - uniforme sur toutes les séparations */
     .section-divider {
       height: 1px;
@@ -355,278 +344,11 @@
       justify-content: center;
     }
     
-    .offer-card {
-      flex: 0 0 23%;
-      width: 23%;
-      max-width: 320px;
-      min-width: 270px;
-      background: rgba(30, 30, 50, 0.85);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 30px 25px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      min-height: 500px;
-      height: 100%;
-      position: relative;
-      overflow: visible;
-      margin: 0 5px;
-    }
-    
-    .offer-card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(231, 76, 60, 0.5);
-      box-shadow: 0 15px 35px rgba(231, 76, 60, 0.25);
-      z-index: 5;
-    }
-    
-    .offer-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 15px;
-      font-weight: 700;
-      padding-bottom: 10px;
-      position: relative;
-      color: #fff;
-    }
-    
-    .offer-card h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 2px;
-      background: #E74C3C;
-    }
-    
-    .offer-card .price {
-      font-size: 1.8rem;
-      margin: 15px 0;
-      font-weight: 700;
-      color: #E74C3C;
-    }
-    
-    .offer-card .benefits {
-      font-size: 0.95rem;
-      padding: 0 5px;
-      margin: 20px 0;
-      list-style: none;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    
-    .offer-card .benefits li {
-      margin-bottom: 12px;
-      text-align: left;
-      padding-left: 25px;
-      position: relative;
-      line-height: 1.4;
-      color: #ddd;
-    }
-    
-    .offer-card .benefits li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: #E74C3C;
-      font-weight: bold;
-    }
+    /* Les styles pour .offer-card sont déjà définis dans les fichiers CSS externes */
     
     .screens-selector {
       margin: 15px 0;
       margin-top: auto;
-    }
-    
-    .offer-card .btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #6c5498, #ff6b6b);
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(108, 84, 152, 0.3);
-      width: 100%;
-    }
-    
-    .offer-card .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(108, 84, 152, 0.4);
-      background: linear-gradient(135deg, #ff6b6b, #6c5498);
-    }
-    
-    /* Style pour la carte populaire */
-    .offer-card.popular {
-      border: 2px solid #ff8c8c;
-      box-shadow: 0 10px 30px rgba(255, 140, 140, 0.25);
-      transform: none;
-      z-index: 4;
-      position: relative;
-    }
-    
-    .offer-card.popular:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(255, 140, 140, 0.3);
-    }
-    
-    .offer-card.popular::before {
-      content: 'POPULAIRE';
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff8c8c;
-      color: #fff;
-      padding: 5px 15px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      z-index: 2;
-    }
-    
-    /* Style pour la carte personnalisée */
-    .offer-card.custom {
-      background: linear-gradient(135deg, rgba(108, 84, 152, 0.7), rgba(255, 107, 107, 0.7));
-      border: 2px solid rgba(108, 84, 152, 0.5);
-    }
-    
-    /* Style pour la carte concours */
-    .offer-card.contest {
-      background: linear-gradient(135deg, rgba(255, 0, 128, 0.6), rgba(91, 0, 220, 0.6));
-      position: relative;
-      overflow: hidden;
-      border: 2px solid #ff0080;
-      box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
-      animation: pulse 3s infinite;
-    }
-    
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
-      }
-      50% {
-        box-shadow: 0 10px 40px rgba(255, 0, 128, 0.6);
-      }
-      100% {
-        box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
-      }
-    }
-    
-    .contest-ribbon {
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: linear-gradient(135deg, #ff0080, #5b00dc);
-      color: white;
-      padding: 8px 15px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      transform: rotate(45deg) translateX(25%) translateY(-60%);
-      width: 150px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      letter-spacing: 1px;
-      z-index: 2;
-    }
-    
-    .social-buttons {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    
-    .social-btn {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 0;
-      border-radius: 5px;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 0.8rem;
-    }
-    
-    .social-btn i {
-      margin-right: 4px;
-      font-size: 1rem;
-    }
-    
-    .social-btn.youtube {
-      background: #FF0000;
-    }
-    
-    .social-btn.tiktok {
-      background: #000000;
-    }
-    
-    .contest-rules {
-      font-size: 0.7rem;
-      color: #fff;
-      text-decoration: underline;
-      margin-top: 5px;
-      display: block;
-    }
-    
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .offer-card {
-        padding: 15px 10px;
-      }
-      
-      .offer-card .benefits {
-        font-size: 0.75rem;
-      }
-      
-      .offer-card h3 {
-        font-size: 1.1rem;
-      }
-      
-      .offer-card .price {
-        font-size: 1.4rem;
-      }
-    }
-    
-    @media (max-width: 900px) {
-      .offers-grid {
-        flex-wrap: wrap;
-      }
-      
-      .offer-card {
-        flex: 0 0 48%;
-        max-width: 48%;
-        margin-bottom: 20px;
-      }
-    }
-    
-    @media (max-width: 576px) {
-      .offers-grid {
-        flex-wrap: wrap;
-      }
-      
-      .offer-card {
-        flex: 0 0 100%;
-        max-width: 100%;
-        margin-bottom: 20px;
-      }
     }
   </style>
   
@@ -2083,6 +1805,14 @@
     });
   });
 </script>
+
+  <!-- OFFRES SECTION -->
+  <section class="offers-section" id="offers-section">
+    <h2>Abonnements IPTV Pas Cher | Test Gratuit</h2>
+    <div class="offers-grid">
+      <!-- Les styles pour les cartes d'offres sont déjà définis dans la section HEAD -->
+    </div>
+  </section>
 </body>
 </html>
 

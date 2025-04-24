@@ -1,0 +1,324 @@
+/* Correctifs spécifiques pour mobile - IPTV */
+
+/* Réinitialisation des propriétés problématiques */
+@media (max-width: 768px) {
+  /* Carte d'offre globale */
+  .offer-card {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: 400px !important;
+    padding: 12px !important;
+    margin: 0 0 15px 0 !important;
+    display: block !important;
+    width: auto !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Titre de la carte */
+  .offer-card h3 {
+    font-size: 1.1rem !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Prix */
+  .offer-card .price {
+    font-size: 1.1rem !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Liste des avantages */
+  .offer-card .benefits {
+    padding-left: 5px !important;
+    margin: 5px 0 8px 0 !important;
+    max-height: 150px !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Éléments de la liste */
+  .offer-card .benefits li {
+    font-size: 0.8rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+    padding-left: 18px !important;
+    position: relative !important;
+  }
+  
+  /* Coches */
+  .offer-card .benefits li:before {
+    content: '✓' !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    color: #ff8c8c !important;
+  }
+  
+  /* Bouton */
+  .offer-card .btn {
+    font-size: 0.8rem !important;
+    padding: 5px 10px !important;
+    margin-top: 5px !important;
+    display: inline-block !important;
+  }
+  
+  /* Global fixes */
+  .offer-card * {
+    box-sizing: border-box !important;
+  }
+  
+  /* Container */
+  .offers-grid {
+    display: block !important;
+    padding: 10px !important;
+  }
+  
+  /* Section offres */
+  .offers-section {
+    padding: 10px 0 !important;
+  }
+}
+
+/* Correctifs spécifiques pour la page détails d'offre (page vue sur la capture d'écran) */
+@media (max-width: 480px) {
+  /* Détails d'offre */
+  select, input {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 10px !important;
+    padding: 8px !important;
+    font-size: 14px !important;
+  }
+  
+  label {
+    font-size: 14px !important;
+    margin-bottom: 5px !important;
+    display: block !important;
+  }
+  
+  /* Page de détail d'offre - régler la hauteur */
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    padding-top: 70px !important;
+    padding-bottom: 30px !important;
+    flex-grow: 1;
+  }
+  
+  .screens-selector {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Limiter la hauteur de la carte */
+  .offer-card {
+    max-height: 350px !important;
+    overflow-y: auto !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Styles supplémentaires pour les éléments de la capture d'écran */
+  h3 {
+    font-size: 1.2rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .price {
+    font-size: 1.5rem !important;
+    color: #ff8c8c !important;
+    margin: 5px 0 !important;
+  }
+  
+  .benefits {
+    padding-left: 0 !important;
+    margin: 8px 0 !important;
+    list-style-type: none !important;
+  }
+  
+  .benefits li {
+    padding-left: 20px !important;
+    position: relative !important;
+    line-height: 1.3 !important;
+    margin-bottom: 3px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .benefits li:before {
+    content: '✓' !important;
+    position: absolute !important;
+    left: 0 !important;
+    color: #ff8c8c !important;
+    font-weight: bold !important;
+  }
+  
+  /* Bouton commander */
+  .btn, button {
+    display: inline-block !important;
+    background: #6c5498 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    padding: 8px 15px !important;
+    border-radius: 5px !important;
+    border: none !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    margin-top: 5px !important;
+    font-weight: normal !important;
+  }
+  
+  /* Page de détail complète */
+  body.product-detail-page {
+    display: block !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    min-height: 100vh !important;
+  }
+  
+  /* Container de l'offre */
+  .offer-card {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 12px !important;
+    margin: 10px auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: auto !important;
+    max-width: 90% !important;
+    overflow: visible !important;
+    background-color: rgba(31, 31, 50, 0.8) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+  }
+  
+  /* Titre avec une taille et un espacement contrôlés */
+  h3 {
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+    color: #ff8c8c !important;
+  }
+  
+  /* Prix avec taille réduite */
+  .price {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+    margin: 5px 0 !important;
+    padding: 0 !important;
+    color: #ff8c8c !important;
+  }
+  
+  /* Liste plus compacte */
+  .benefits {
+    list-style: none !important;
+    padding: 0 0 0 5px !important;
+    margin: 5px 0 10px 0 !important;
+    max-height: none !important;
+  }
+  
+  /* Éléments de liste avec icônes de check */
+  .benefits li {
+    padding-left: 18px !important;
+    position: relative !important;
+    margin-bottom: 3px !important;
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+  }
+  
+  /* Sélecteur d'écrans */
+  .screens-selector {
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  /* Étiquette pour le sélecteur */
+  .screens-selector label {
+    display: block !important;
+    margin-bottom: 5px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Sélecteur dropdown */
+  select {
+    width: 100% !important;
+    padding: 5px 8px !important;
+    background-color: rgba(255,255,255,0.1) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    border-radius: 4px !important;
+    color: white !important;
+    font-size: 13px !important;
+  }
+  
+  /* Bouton Commander */
+  .btn, button {
+    font-size: 14px !important;
+    padding: 8px 15px !important;
+    margin-top: 8px !important;
+    width: auto !important;
+    display: inline-block !important;
+  }
+}
+
+/* Correctifs spécifiques pour les très petits écrans */
+@media (max-width: 375px) {
+  .offer-card {
+    max-height: 320px !important;
+    padding: 10px !important;
+  }
+  
+  .offer-card .benefits {
+    max-height: 120px !important;
+  }
+  
+  .offer-card .benefits li {
+    font-size: 0.75rem !important;
+    margin-bottom: 1px !important;
+  }
+  
+  .price {
+    font-size: 1.3rem !important;
+  }
+  
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Correction pour les cartes d'offres en version desktop */
+/* Suppression des barres de défilement et ajustement de la hauteur */
+@media (min-width: 769px) {
+  .offer-card {
+    overflow: visible !important;
+    overflow-y: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: 515px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .offer-card .btn {
+    margin-top: auto !important;
+  }
+  
+  .offer-card .benefits {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+  
+  /* Assurer que tous les contenus sont visibles */
+  .offer-card * {
+    overflow: visible !important;
+  }
+}
+
+/* Hauteur maximale forcée - surcharger pour désactiver le défilement */
+.offer-card {
+  max-height: none !important;
+  overflow: visible !important;
+} 
