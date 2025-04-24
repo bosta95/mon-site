@@ -3,6 +3,7 @@ User-agent: *
 Allow: /
 Allow: /offer-details.html
 Allow: /offer-details.html?*
+Allow: /index.html#offers-section
 
 # Pages techniques et de paiement (ne pas indexer)
 Disallow: /payment.html
@@ -39,6 +40,7 @@ Allow: /images/
 Allow: /videos/
 Allow: /offer-details.html
 Allow: /offer-details.html?*
+Allow: /index.html#offers-section
 Crawl-delay: 1
 
 # Paramètres spécifiques pour Googlebot-Image
@@ -67,10 +69,12 @@ Allow: /*.js$
 Allow: /*.css$
 Allow: /offer-details.html
 Allow: /offer-details.html?*
+Allow: /index.html#offers-section
 Crawl-delay: 1
 
 User-agent: DuckDuckBot
 Allow: /
+Allow: /index.html#offers-section
 Crawl-delay: 1
 
 # Blocage des robots indésirables ou trop agressifs

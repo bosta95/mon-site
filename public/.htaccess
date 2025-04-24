@@ -4,6 +4,9 @@ RewriteEngine On
 # Base du site
 RewriteBase /
 
+# Permettre l'accès aux fichiers index.html par défaut
+DirectoryIndex index.html
+
 # Règles pour éviter les problèmes de duplicate content
 # Redirection vers la version canonique sans www
 RewriteCond %{HTTP_HOST} ^www\.iptvsmarterpros\.com [NC]
@@ -18,6 +21,53 @@ RewriteRule ^blog/(.*)\.html$ /blog.html [R=301,L]
 
 # Redirection de l'ancienne page flyer vers la page d'accueil
 RewriteRule ^flyer\.html$ / [R=301,L]
+
+# Redirection des anciennes URLs d'offres avec paramètres vers les nouvelles URLs propres
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_2_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-2-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-3-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_4_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-4-ecrans/? [R=301,L]
+
+# Redirection des URLs combinées
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois_2_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois-2-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_2_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois-2-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_2_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois-2-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois_3_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois-3-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_3_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois-3-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_3_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois-3-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois_4_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois-4-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_4_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois-4-ecrans/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_4_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois-4-ecrans/? [R=301,L]
 
 # Redirection des anciens paramètres d'URL d'offres qui ne sont plus valides
 RewriteCond %{QUERY_STRING} ^product=([^&]*)&price=([^&]*)$ [NC]

@@ -42,3 +42,6 @@ users.json
 *.pem
 *.key
 *.cert
+
+# Batch files
+*.bat

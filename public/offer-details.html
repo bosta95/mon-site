@@ -515,6 +515,7 @@
       const product = urlParams.get('product');
       const price = urlParams.get('price');
       const duration = urlParams.get('duration');
+      const offerType = urlParams.get('type'); // Nouveau paramètre explicite pour le type d'offre
       
       // Définir les détails spécifiques pour chaque offre
       const offerDetails = {
@@ -569,55 +570,21 @@
             'Support technique prioritaire 24/7'
           ]
         },
-        'famille': {
-          title: 'Abonnement Famille - 2 écrans',
-          type: 'Famille',
-          duration: '12 mois',
-          price: '59,99',
-          description: 'Idéal pour les familles qui souhaitent partager l\'expérience IPTV. Notre forfait famille vous permet de regarder sur 2 écrans différents simultanément, parfait pour un usage à domicile partagé.',
-          features: [
-            'Plus de 22 000 chaînes TV internationales en HD/4K',
-            'Plus de 50 000 films et séries à la demande',
-            'Qualité 4K/UHD garantie sur tous les appareils',
-            'Chaînes familiales renforcées',
-            'Section +18 HD avec contrôle parental avancé',
-            'Utilisation simultanée sur 2 écrans différents',
-            'Mises à jour hebdomadaires',
-            'Support prioritaire 24/7 par téléphone et chat'
-          ]
-        },
-        'pro': {
-          title: 'Abonnement Pro - 3 écrans',
-          type: 'Pro',
-          duration: '12 mois',
-          price: '79,99',
-          description: 'Solution avancée pour les utilisateurs exigeants. Le forfait Pro offre une qualité de streaming exceptionnelle et permet l\'utilisation simultanée sur 3 écrans, idéal pour une utilisation intensive.',
+        'personnalise': {
+          title: 'Pack Personnalisé',
+          type: 'Personnalisé',
+          duration: 'Variable',
+          price: 'Variable',
+          description: 'Notre solution sur mesure qui s\'adapte à vos besoins. Choisissez le nombre d\'écrans, la durée et les fonctionnalités qui vous conviennent. Idéal pour les utilisations familiales ou professionnelles.',
           features: [
             'Plus de 22 000 chaînes TV en HD/4K Premium',
             'Plus de 50 000 films et séries VOD en haute qualité',
-            'Streaming en 4K/UHD optimisé et stable',
-            'Chaînes premium et spécialisées',
-            'Section +18 HD complète avec options avancées',
-            'Utilisation simultanée sur 3 écrans différents',
-            'Mises à jour hebdomadaires prioritaires',
-            'Support VIP 24/7 avec assistance dédiée'
-          ]
-        },
-        'elite': {
-          title: 'Abonnement Elite - 4 écrans',
-          type: 'Elite',
-          duration: '12 mois',
-          price: '99,99',
-          description: 'Notre offre ultime pour les passionnés de divertissement. L\'abonnement Elite offre une expérience sans compromis avec l\'utilisation simultanée sur 4 écrans et un accès prioritaire à toutes nos fonctionnalités.',
-          features: [
-            'Plus de 22 000 chaînes TV en HD/4K Ultra-Premium',
-            'Plus de 50 000 films et séries VOD en qualité maximale',
-            'Streaming en 4K/UHD Ultra-Premium sans buffering',
-            'Chaînes exclusives et événements spéciaux',
-            'Section +18 HD complète avec toutes options',
-            'Utilisation simultanée sur 4 écrans différents',
-            'Mises à jour instantanées',
-            'Support VIP dédié 24/7 avec assistance personnalisée'
+            'Nombre d\'écrans personnalisable (2 à 10)',
+            'Durée d\'abonnement personnalisable',
+            'Chaînes et contenus spécifiques sur demande',
+            'Support technique prioritaire et personnalisé',
+            'Mises à jour en temps réel',
+            'Facturation adaptée à vos besoins'
           ]
         }
       };
@@ -625,22 +592,70 @@
       // Déterminer quelle offre est sélectionnée
       let selectedOffer = 'premium'; // Par défaut, utiliser l'offre premium
       
-      if (product) {
+      // Si le type d'offre est explicitement spécifié dans l'URL, l'utiliser directement
+      if (offerType && offerDetails[offerType]) {
+        selectedOffer = offerType;
+      } else if (product) {
         const productLower = product.toLowerCase().replace(/\+/g, ' ');
         
-        if (productLower.includes('essentiel') || productLower.includes('3 mois')) {
-          selectedOffer = 'essentiel';
-        } else if (productLower.includes('standard') || productLower.includes('6 mois')) {
-          selectedOffer = 'standard';
-        } else if (productLower.includes('premium') || productLower.includes('12 mois')) {
-          selectedOffer = 'premium';
-        } else if (productLower.includes('famille') || productLower.includes('2 écrans')) {
-          selectedOffer = 'famille';
-        } else if (productLower.includes('pro') || productLower.includes('3 écrans')) {
-          selectedOffer = 'pro';
-        } else if (productLower.includes('elite') || productLower.includes('4 écrans')) {
-          selectedOffer = 'elite';
+        // Gérer les paramètres multi-écrans - rediriger vers le pack personnalisé
+        if (productLower.includes('_ecrans') || productLower.includes('famille') || 
+            productLower.includes('pro') || productLower.includes('elite')) {
+          selectedOffer = 'personnalise';
+          
+          // Extraire le nombre d'écrans si précisé
+          const ecransMatch = productLower.match(/(\d+)_ecrans/);
+          const nbEcrans = ecransMatch ? ecransMatch[1] : '2+';
+          
+          // Extraire la durée si précisée
+          let duree = '12 mois';
+          if (productLower.includes('_3_mois')) duree = '3 mois';
+          if (productLower.includes('_6_mois')) duree = '6 mois';
+          
+          offerDetails['personnalise'].title = `Pack Personnalisé - ${duree} (${nbEcrans} écrans)`;
+          offerDetails['personnalise'].duration = duree;
+          
+          // Calculer un prix approximatif basé sur le nombre d'écrans et la durée
+          let prixBase = 29.99;
+          if (duree === '3 mois') prixBase = 19.99;
+          if (duree === '6 mois') prixBase = 24.99;
+          
+          const multiplicateur = nbEcrans === '2+' ? 2 : parseInt(nbEcrans);
+          const prix = (prixBase * (1 + (multiplicateur-1) * 0.5)).toFixed(2);
+          
+          offerDetails['personnalise'].price = prix;
         }
+        // Produits standards
+        else if (productLower === 'premium_iptv_3_mois') {
+          selectedOffer = 'essentiel';
+        } else if (productLower === 'premium_iptv_6_mois') {
+          selectedOffer = 'standard';
+        } else if (productLower === 'premium_iptv_12_mois') {
+          selectedOffer = 'premium';
+        }
+        // Puis vérifier les inclusions simples
+        else if (productLower.includes('_3_mois')) {
+          selectedOffer = 'essentiel';
+        } else if (productLower.includes('_6_mois')) {
+          selectedOffer = 'standard';
+        } else if (productLower.includes('_12_mois')) {
+          selectedOffer = 'premium';
+        }
+        // Enfin, les mots-clés génériques en dernier recours
+        else if (productLower.includes('essentiel')) {
+          selectedOffer = 'essentiel';
+        } else if (productLower.includes('standard')) {
+          selectedOffer = 'standard';
+        } else if (productLower.includes('premium')) {
+          selectedOffer = 'premium';
+        } else if (productLower.includes('personnalise')) {
+          selectedOffer = 'personnalise';
+        }
+      }
+      
+      // Si un prix spécifique est fourni dans l'URL, mettre à jour le prix de l'offre sélectionnée
+      if (price) {
+        offerDetails[selectedOffer].price = price.replace(',', '.');
       }
       
       // Utiliser les détails de l'offre sélectionnée
@@ -784,9 +799,7 @@
 
   <!-- CONTENU PRINCIPAL -->
   <div class="main-content">
-    <!-- Détails de l'offre -->
     <div class="offer-details">
-      <!-- Image et titre/prix de l'offre -->
       <div class="offer-image">
         <h3>Finaliser votre commande</h3>
         
@@ -830,35 +843,35 @@
         <!-- Liste des fonctionnalités -->
         <div class="features-list">
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Plus de 22 000 chaînes TV internationales en HD/4K</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Plus de 50 000 films et séries à la demande</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Qualité d'image 4K/FHD/HD/SD adaptative</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Chaînes françaises et internationales</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">+18 HD disponibles</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Compatible avec tous vos appareils</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Mises à jour hebdomadaires gratuites</div>
           </div>
           <div class="feature-item">
-            <div class="feature-icon">?</div>
+            <div class="feature-icon">✓</div>
             <div class="feature-text">Support technique 24/7 en français</div>
           </div>
         </div>
