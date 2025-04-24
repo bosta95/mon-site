@@ -77,6 +77,63 @@
   .offers-section {
     padding: 10px 0 !important;
   }
+  
+  /* Fix pour le menu mobile */
+  body.menu-open {
+    overflow: auto !important; /* Permettre le défilement */
+    position: static !important; /* Ne pas fixer la position */
+    width: auto !important;
+    height: auto !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Supprimer l'overlay qui bloque les clics */
+  body.menu-open::before {
+    display: none !important;
+  }
+  
+  .header-nav {
+    background: #0f0f19 !important; /* Fond noir solide sans transparence */
+    backdrop-filter: none !important; /* Supprimer tout effet de flou */
+    -webkit-backdrop-filter: none !important;
+    overflow-y: auto !important;
+    padding: 70px 20px 20px !important;
+    z-index: 9999 !important;
+  }
+
+  .header-nav.active {
+    background-color: #0f0f19 !important; /* Fond noir solide */
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .header-nav ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .header-nav ul li {
+    width: 100% !important;
+  }
+
+  .header-nav ul li a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 15px !important;
+    font-size: 16px !important;
+    text-align: left !important;
+    border-radius: 5px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: white !important;
+  }
+
+  .header-nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
 }
 
 /* Correctifs spécifiques pour la page détails d'offre (page vue sur la capture d'écran) */

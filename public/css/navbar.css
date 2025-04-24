@@ -210,6 +210,8 @@
 @media (max-width: 768px) {
     .header-container {
         padding: 5px 0;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
     
     .header-content {
@@ -220,7 +222,7 @@
         display: flex;
         margin-left: auto;
         margin-right: 10px;
-        z-index: 1002;
+        z-index: 9999; /* Augmenté pour être au-dessus de tout */
     }
     
     .logo {
@@ -231,70 +233,60 @@
     }
     
     .logo img {
-        height: 60px; /* Un peu plus petit sur mobile mais toujours bien visible */
+        height: 60px;
         margin: 0;
         padding: 0;
         transform: translateY(2px);
     }
     
+    /* Nouvelle approche pour le menu mobile - drawer latéral */
     .header-nav {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: rgba(15, 15, 25, 0.98);
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-        z-index: 1050;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        top: 0;
-        bottom: 0;
-        margin-left: 0;
+        right: -300px; /* Complètement en dehors de l'écran */
+        width: 250px;
+        height: 100%;
+        background-color: #0f0f19; /* Fond opaque */
+        z-index: 9990;
+        transition: right 0.3s ease;
+        padding: 60px 20px 20px;
+        box-shadow: none;
         border-left: 1px solid rgba(255, 107, 107, 0.2);
     }
     
     .header-nav.active {
-        right: 0;
+        right: 0; /* Slide in from right */
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
     }
     
     .header-nav ul {
         flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-        margin-top: 60px;
+        padding: 0;
+        margin: 0;
     }
     
     .header-nav ul li {
+        margin-bottom: 15px;
         width: 100%;
-        text-align: center;
     }
-
+    
     .header-nav ul li a {
-        padding: 12px 15px;
-        font-size: 1rem;
-        width: 100%;
         display: block;
+        padding: 10px 15px;
+        color: white;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 5px;
     }
     
-    .header-nav ul li a::after {
-        bottom: -2px;
-    }
-    
-    .header-nav ul li:last-child a {
-        margin-top: 10px;
-        background: rgba(255, 107, 107, 0.15);
-        padding: 12px 15px;
+    /* Animation du hamburger */
+    .mobile-menu-toggle span {
+        background-color: white;
+        transition: all 0.3s ease;
     }
     
     .mobile-menu-toggle.active span:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
-        box-shadow: 0 0 8px rgba(255, 107, 107, 0.8);
     }
     
     .mobile-menu-toggle.active span:nth-child(2) {
@@ -307,17 +299,18 @@
     }
     
     body.menu-open::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(3px);
-        -webkit-backdrop-filter: blur(3px);
-        z-index: 1030;
-        pointer-events: auto;
+        display: none !important; /* Supprimer complètement l'overlay */
+    }
+    
+    /* Supprimer tout effet de flou sur l'ensemble du site */
+    body.menu-open {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+    
+    body.menu-open * {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 }
 
