@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>Avis Clients | IPTV Smarters Pro</title>
+  <meta name="description" content="Consultez les avis de nos clients sur notre service IPTV. Partagez votre expérience avec notre service d'IPTV pas cher à +22 000 chaînes et +50 000 films et séries en HD/4K.">
+  <meta name="keywords" content="avis IPTV, témoignages clients IPTV, IPTV Smarters Pro avis, commentaires IPTV">
+  
+  <link rel="canonical" href="https://iptvsmarterpros.com/reviews.html">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/logo.css">
+  <link rel="stylesheet" href="./css/mobile-fix.css">
+  
+  <!-- Font Awesome pour les étoiles et icônes -->
+  <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous"></script>
+  
+  <style>
+    .reviews-container {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .reviews-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+    }
+    
+    .reviews-header h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #E74C3C, #6c5498);
+      border-radius: 3px;
+    }
+    
+    .reviews-header p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .review-card {
+      background: rgba(25, 25, 35, 0.8);
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(231, 76, 60, 0.2);
+    }
+    
+    .review-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #E74C3C, #6c5498);
+    }
+    
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .review-author {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    
+    .review-date {
+      font-size: 0.85rem;
+      color: #999;
+    }
+    
+    .review-rating {
+      margin-bottom: 15px;
+    }
+    
+    .stars {
+      color: #E74C3C;
+      font-size: 1.2rem;
+    }
+    
+    .review-content {
+      color: #ddd;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    
+    .review-product {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: #aaa;
+      font-style: italic;
+    }
+    
+    .submit-review-container {
+      background: rgba(30, 30, 50, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .submit-review-heading {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: #fff;
+      position: relative;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+    
+    .submit-review-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: #E74C3C;
+    }
+    
+    .review-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-group label {
+      font-size: 0.95rem;
+      color: #ddd;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(15, 15, 25, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      padding: 12px 15px;
+      color: #fff;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #E74C3C;
+      outline: none;
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .rating-select {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .rating-select label {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #555;
+      transition: color 0.2s ease;
+    }
+    
+    .rating-select input[type="radio"] {
+      display: none;
+    }
+    
+    .rating-select label:hover,
+    .rating-select label:hover ~ label,
+    .rating-select input[type="radio"]:checked ~ label {
+      color: #E74C3C;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(135deg, #E74C3C, #6c5498);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 14px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+    }
+    
+    .success-message,
+    .error-message {
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    
+    .success-message {
+      background: rgba(39, 174, 96, 0.2);
+      border: 1px solid #27ae60;
+      color: #2ecc71;
+    }
+    
+    .error-message {
+      background: rgba(231, 76, 60, 0.2);
+      border: 1px solid #e74c3c;
+      color: #e74c3c;
+    }
+    
+    @media (max-width: 768px) {
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .review-card {
+        padding: 20px;
+      }
+      
+      .submit-review-container {
+        padding: 20px;
+      }
+      
+      .submit-btn {
+        width: 100%;
+      }
+    }
+    
+    /* Animation de chargement */
+    .loading {
+      display: none;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .loading div {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #E74C3C;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+    
+    .loading div:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+    
+    .loading div:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+    
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: scale(0);
+      }
+      40% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg"/>
+        </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#offers-section">OFFRES</a></li>
+          <li><a href="tutoriel.html">Tutoriel</a></li>
+          <li><a href="about.html">À propos</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="reviews.html" class="active">Avis</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="reviews-container">
+    <div class="reviews-header">
+      <h1>Avis de nos clients</h1>
+      <p>Découvrez ce que nos clients pensent de notre service IPTV. Des milliers d'utilisateurs satisfaits profitent chaque jour de nos +22 000 chaînes et +50 000 films et séries en qualité HD/4K.</p>
+      <div id="admin-link" style="display: none; margin-top: 15px;">
+        <a href="admin-reviews.html" style="display: inline-block; background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #e74c3c; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9rem;">
+          <i class="fas fa-lock"></i> Administration des avis
+        </a>
+      </div>
+    </div>
+    
+    <!-- Conteneur des avis (rempli par JavaScript) -->
+    <div class="reviews-grid" id="reviews-grid">
+      <!-- Le contenu sera ajouté dynamiquement -->
+      <div class="loading" id="reviews-loading">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    
+    <!-- Formulaire de soumission d'avis -->
+    <div class="submit-review-container">
+      <h2 class="submit-review-heading">Partagez votre expérience</h2>
+      
+      <div class="success-message" id="success-message">
+        Merci pour votre avis ! Il sera affiché après modération.
+      </div>
+      
+      <div class="error-message" id="error-message">
+        Une erreur s'est produite. Veuillez réessayer.
+      </div>
+      
+      <form class="review-form" id="review-form">
+        <div class="form-group">
+          <label for="name">Votre nom</label>
+          <input type="text" id="name" name="name" required placeholder="Prénom N." maxlength="50">
+        </div>
+        
+        <div class="form-group">
+          <label>Votre évaluation</label>
+          <div class="rating-select" id="rating-stars">
+            <input type="radio" name="rating" id="star5" value="5" checked>
+            <label for="star5" class="fas fa-star"></label>
+            
+            <input type="radio" name="rating" id="star4" value="4">
+            <label for="star4" class="fas fa-star"></label>
+            
+            <input type="radio" name="rating" id="star3" value="3">
+            <label for="star3" class="fas fa-star"></label>
+            
+            <input type="radio" name="rating" id="star2" value="2">
+            <label for="star2" class="fas fa-star"></label>
+            
+            <input type="radio" name="rating" id="star1" value="1">
+            <label for="star1" class="fas fa-star"></label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="product">Votre abonnement</label>
+          <select id="product" name="product" required>
+            <option value="">Sélectionnez votre abonnement</option>
+            <option value="Premium_IPTV_3_mois">Abonnement 3 mois</option>
+            <option value="Premium_IPTV_6_mois">Abonnement 6 mois</option>
+            <option value="Premium_IPTV_12_mois">Abonnement 12 mois</option>
+            <option value="Premium_IPTV_2_ecrans">Abonnement 2 écrans</option>
+            <option value="Premium_IPTV_3_ecrans">Abonnement 3 écrans</option>
+            <option value="Premium_IPTV_4_ecrans">Abonnement 4 écrans</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="comment">Votre commentaire</label>
+          <textarea id="comment" name="comment" required placeholder="Partagez votre expérience avec notre service..." maxlength="500"></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">Soumettre mon avis</button>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Récupérer les éléments du DOM
+      const reviewsGrid = document.getElementById('reviews-grid');
+      const reviewForm = document.getElementById('review-form');
+      const successMessage = document.getElementById('success-message');
+      const errorMessage = document.getElementById('error-message');
+      const loadingIndicator = document.getElementById('reviews-loading');
+      
+      // Fonction pour afficher les étoiles selon la note
+      function getStarsHTML(rating) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= rating) {
+            stars += '<i class="fas fa-star"></i>';
+          } else {
+            stars += '<i class="far fa-star"></i>';
+          }
+        }
+        return stars;
+      }
+      
+      // Fonction pour formater les noms de produit
+      function formatProductName(productCode) {
+        switch(productCode) {
+          case 'Premium_IPTV_3_mois':
+            return 'Abonnement 3 mois';
+          case 'Premium_IPTV_6_mois':
+            return 'Abonnement 6 mois';
+          case 'Premium_IPTV_12_mois':
+            return 'Abonnement 12 mois';
+          case 'Premium_IPTV_2_ecrans':
+            return 'Abonnement 2 écrans';
+          case 'Premium_IPTV_3_ecrans':
+            return 'Abonnement 3 écrans';
+          case 'Premium_IPTV_4_ecrans':
+            return 'Abonnement 4 écrans';
+          default:
+            return productCode;
+        }
+      }
+      
+      // Fonction pour charger et afficher les avis
+      async function loadReviews() {
+        try {
+          // Afficher l'indicateur de chargement
+          loadingIndicator.style.display = 'flex';
+          reviewsGrid.innerHTML = '';
+          
+          // Récupérer les avis depuis l'API
+          const response = await fetch('/api/reviews');
+          const data = await response.json();
+          
+          // Masquer l'indicateur de chargement
+          loadingIndicator.style.display = 'none';
+          
+          // Si aucun avis n'est disponible
+          if (!data.reviews || data.reviews.length === 0) {
+            reviewsGrid.innerHTML = `
+              <div class="no-reviews">
+                <p>Aucun avis disponible pour le moment. Soyez le premier à partager votre expérience !</p>
+              </div>
+            `;
+            return;
+          }
+          
+          // Afficher les avis dans la grille
+          data.reviews.forEach(review => {
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            reviewCard.innerHTML = `
+              <div class="review-header">
+                <span class="review-author">${review.name}</span>
+                <span class="review-date">${review.date}</span>
+              </div>
+              <div class="review-rating stars">
+                ${getStarsHTML(review.rating)}
+              </div>
+              <div class="review-content">
+                "${review.comment}"
+              </div>
+              <div class="review-product">
+                Abonnement : ${formatProductName(review.product)}
+              </div>
+            `;
+            reviewsGrid.appendChild(reviewCard);
+          });
+        } catch (error) {
+          console.error('Erreur lors du chargement des avis:', error);
+          loadingIndicator.style.display = 'none';
+          reviewsGrid.innerHTML = `
+            <div class="error-message" style="display: block; width: 100%;">
+              Une erreur s'est produite lors du chargement des avis. Veuillez réessayer.
+            </div>
+          `;
+        }
+      }
+      
+      // Soumission d'un nouvel avis
+      reviewForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Récupération des valeurs du formulaire
+        const name = document.getElementById('name').value;
+        const comment = document.getElementById('comment').value;
+        const product = document.getElementById('product').value;
+        const ratingRadio = document.querySelector('input[name="rating"]:checked');
+        const rating = ratingRadio ? ratingRadio.value : 5;
+        
+        // Validation basique
+        if (!name || !comment || !product) {
+          errorMessage.textContent = 'Tous les champs sont obligatoires.';
+          errorMessage.style.display = 'block';
+          successMessage.style.display = 'none';
+          return;
+        }
+        
+        // Préparation des données pour l'API
+        const reviewData = {
+          name,
+          comment,
+          product,
+          rating: parseInt(rating)
+        };
+        
+        try {
+          // Envoi de l'avis
+          const response = await fetch('/api/reviews/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reviewData)
+          });
+          
+          const result = await response.json();
+          
+          if (response.ok) {
+            // Affichage du message de succès
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            
+            // Réinitialisation du formulaire
+            reviewForm.reset();
+            
+            // Rechargement des avis après un court délai
+            setTimeout(() => {
+              loadReviews();
+            }, 1000);
+          } else {
+            // Affichage du message d'erreur
+            errorMessage.textContent = result.error || 'Une erreur s\'est produite. Veuillez réessayer.';
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+          }
+        } catch (error) {
+          console.error('Erreur lors de la soumission de l\'avis:', error);
+          errorMessage.textContent = 'Une erreur s\'est produite. Veuillez réessayer.';
+          errorMessage.style.display = 'block';
+          successMessage.style.display = 'none';
+        }
+      });
+      
+      // Charger les avis au chargement de la page
+      loadReviews();
+      
+      // Vérifier si l'utilisateur est administrateur
+      const adminToken = sessionStorage.getItem('adminToken');
+      if (adminToken) {
+        // Afficher le lien d'administration
+        document.getElementById('admin-link').style.display = 'block';
+      }
+      
+      // Gestion de la navigation mobile
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const headerNav = document.querySelector('.header-nav');
+      
+      if (mobileMenuToggle && headerNav) {
+        mobileMenuToggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          headerNav.classList.toggle('active');
+          document.body.classList.toggle('menu-open');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        const navLinks = document.querySelectorAll('.header-nav ul li a');
+        navLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenuToggle.classList.remove('active');
+            headerNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

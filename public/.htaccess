@@ -12,17 +12,18 @@ DirectoryIndex index.html
 RewriteCond %{HTTP_HOST} ^www\.iptvsmarterpros\.com [NC]
 RewriteRule ^(.*)$ https://iptvsmarterpros.com/$1 [L,R=301]
 
-# Rediriger index.php vers /
+# Rediriger index.html vers /
 RewriteCond %{THE_REQUEST} ^.*/index\.html
 RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 
-# Redirection des anciennes URL du blog vers la page principale du blog
+# Redirection des anciennes URLs du blog vers la page principale du blog
 RewriteRule ^blog/(.*)\.html$ /blog.html [R=301,L]
 
 # Redirection de l'ancienne page flyer vers la page d'accueil
 RewriteRule ^flyer\.html$ / [R=301,L]
 
-# Redirection des anciennes URLs d'offres avec paramètres vers les nouvelles URLs propres
+# Redirection des anciennes URLs d'offres avec paramètres vers les nouvelles URLs canoniques
+# Format: Premium_IPTV_X_mois_Y_ecrans -> premium-X-mois avec écrans pré-sélectionnés
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois [NC]
 RewriteRule ^offer-details\.html$ /offres/premium-3-mois/? [R=301,L]
 
@@ -32,49 +33,44 @@ RewriteRule ^offer-details\.html$ /offres/premium-6-mois/? [R=301,L]
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois [NC]
 RewriteRule ^offer-details\.html$ /offres/premium-12-mois/? [R=301,L]
 
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_2_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-2-ecrans/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-3-ecrans/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_4_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-4-ecrans/? [R=301,L]
-
-# Redirection des URLs combinées
+# Redirection des offres multi-écrans vers la page principale avec paramètre d'écrans
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois_2_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-3-mois-2-ecrans/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_2_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-6-mois-2-ecrans/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_2_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-12-mois-2-ecrans/? [R=301,L]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois/?screens=2 [R=301,L]
 
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois_3_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-3-mois-3-ecrans/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_3_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-6-mois-3-ecrans/? [R=301,L]
-
-RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_3_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-12-mois-3-ecrans/? [R=301,L]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois/?screens=3 [R=301,L]
 
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_3_mois_4_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-3-mois-4-ecrans/? [R=301,L]
+RewriteRule ^offer-details\.html$ /offres/premium-3-mois/?screens=4 [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_2_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois/?screens=2 [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_3_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois/?screens=3 [R=301,L]
 
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_6_mois_4_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-6-mois-4-ecrans/? [R=301,L]
+RewriteRule ^offer-details\.html$ /offres/premium-6-mois/?screens=4 [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_2_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois/?screens=2 [R=301,L]
+
+RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_3_ecrans [NC]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois/?screens=3 [R=301,L]
 
 RewriteCond %{QUERY_STRING} product=Premium_IPTV_12_mois_4_ecrans [NC]
-RewriteRule ^offer-details\.html$ /offres/premium-12-mois-4-ecrans/? [R=301,L]
+RewriteRule ^offer-details\.html$ /offres/premium-12-mois/?screens=4 [R=301,L]
 
-# Redirection des anciens paramètres d'URL d'offres qui ne sont plus valides
-RewriteCond %{QUERY_STRING} ^product=([^&]*)&price=([^&]*)$ [NC]
-RewriteRule ^offer-details\.html$ /offer-details.html? [R=301,L]
+# Redirection des anciennes URLs avec abonnementXmois vers les nouvelles URLs canoniques
+RewriteRule ^abonnement3mois$ /offres/premium-3-mois/ [R=301,L]
+RewriteRule ^abonnement6mois$ /offres/premium-6-mois/ [R=301,L]
+RewriteRule ^abonnement12mois$ /offres/premium-12-mois/ [R=301,L]
+RewriteRule ^abonnement2ecrans$ /offres/premium-3-mois/?screens=2 [R=301,L]
+RewriteRule ^abonnement3ecrans$ /offres/premium-3-mois/?screens=3 [R=301,L]
+RewriteRule ^abonnement4ecrans$ /offres/premium-3-mois/?screens=4 [R=301,L]
 
-# Gestion des erreurs 404 - Redirection vers la page d'accueil
-ErrorDocument 404 /index.html
+# Gestion des erreurs 404 - Utilisation de la page d'erreur personnalisée
+ErrorDocument 404 /404.html
 
 # Compression Gzip
 <IfModule mod_deflate.c>
@@ -106,4 +102,14 @@ ErrorDocument 404 /index.html
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-</IfModule> 
+</IfModule>
+
+# Protection de la page d'administration
+<Files "admin-reviews.html">
+  Order allow,deny
+  Deny from all
+  # Autorisations exclusives pour votre IP si nécessaire
+  # Allow from xx.xx.xx.xx
+</Files>
+
+# Fin du fichier htaccess 

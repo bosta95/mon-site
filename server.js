@@ -7,6 +7,7 @@ const cors = require('cors');
 const xss = require('xss');
 const emailUtils = require('./email-utils');
 const fs = require('fs');
+const reviewsRouter = require('./reviews-api');
 require('dotenv').config();
 
 const app = express();
@@ -55,6 +56,9 @@ app.use('/api/order', emailLimiter);
 
 // Configuration de la compression
 app.use(compression());
+
+// Intégration du router des avis
+app.use(reviewsRouter);
 
 // Middleware pour parser les requêtes JSON avec limite de taille
 app.use(express.json({ limit: '10kb' }));
