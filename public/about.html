@@ -705,35 +705,14 @@
     </div>
   </div>
 
+  <!-- Script de gestion de menu -->
+  <script src="./js/navbar.js"></script>
+  
   <script>
-    // Script pour la barre de navigation
+    // Marquer le lien actif spécifique à cette page
     document.addEventListener('DOMContentLoaded', function() {
-      // Sélectionner les éléments
-      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-      const headerNav = document.querySelector('.header-nav');
-      const body = document.body;
-      
-      // Fonction pour basculer le menu mobile
-      if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function() {
-          this.classList.toggle('active');
-          headerNav.classList.toggle('active');
-          body.classList.toggle('menu-open');
-        });
-      }
-      
-      // Fermer le menu quand on clique sur un lien
-      const navLinks = document.querySelectorAll('.header-nav ul li a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenuToggle.classList.remove('active');
-          headerNav.classList.remove('active');
-          body.classList.remove('menu-open');
-        });
-      });
-      
-      // Marquer le lien actif
       const currentPage = window.location.pathname.split('/').pop();
+      const navLinks = document.querySelectorAll('.header-nav ul li a');
       navLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (href === currentPage || (currentPage === '' && href === 'index.html')) {

@@ -341,6 +341,7 @@ body {
   padding: 0 20px;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .hero-overlay h1 {
@@ -348,12 +349,17 @@ body {
   font-weight: 700;
   margin-bottom: 20px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  line-height: 1.2;
 }
 
 .hero-overlay p {
   font-size: 1.2rem;
   margin-bottom: 30px;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Films Slider */
@@ -1127,318 +1133,43 @@ img.featured-image {
     transform: translateY(2px);
   }
   
-  .hero-overlay h1 { 
-    font-size: 1.5rem; 
-    text-align: center;
-    padding: 0 10px;
-  }
-  
-  .hero-overlay p {
-    font-size: 0.9rem;
-    text-align: center;
-    padding: 0 10px;
-  }
-  
   .hero-section { 
     height: 400px; 
+    min-height: 350px;
   }
   
-  .images-banner { 
-    margin-top: 0; 
-    height: 40px;
-  }
-  
-  .offers-section, .advantages-section, .films-slider-section {
-    padding: 30px 15px;
-  }
-  
-  .advantage-card, .offer-card {
+  .hero-overlay {
+    padding: 0 15px;
     width: 100%;
-    margin: 0 auto 20px;
-    max-width: 100%;
-  }
-  
-  .offer-card {
-    padding: 15px;
-  }
-  
-  .offer-card .benefits {
-    padding-left: 10px;
-    font-size: 0.9rem;
-  }
-  
-  .offer-card h3 {
-    font-size: 1.2rem;
-  }
-  
-  .offer-card .price {
-    font-size: 1rem;
-  }
-  
-  .offers-grid {
-    gap: 15px;
-    padding: 15px 0;
-  }
-  
-  img {
-    max-width: 100%;
-  }
-  
-  .advantages-grid {
-    gap: 15px;
-    margin-bottom: 30px;
-  }
-  
-  .advantage-card {
-    padding: 15px;
-  }
-  
-  .advantage-card p {
-    font-size: 0.9rem;
-  }
-  
-  .advantage-card h3 {
-    font-size: 1.2rem;
-  }
-  
-  .features-list li {
-    padding: 15px;
-  }
-  
-  .features-list strong {
-    font-size: 1rem;
-  }
-  
-  .header-nav.active {
-    max-height: calc(100vh - 50px);
-  }
-  
-  /* Assurer que les images ne débordent pas sur les petits écrans */
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* Réduire l'espace excessif sur mobile */
-  .section {
-    padding: 30px 15px;
-  }
-  
-  /* Améliorer la lisibilité des textes */
-  p, li {
-    font-size: 0.9rem;
-  }
-  
-  /* Réduire la taille des titres */
-  h2 {
-    font-size: 1.5rem;
-  }
-  
-  /* Réduire la taille des sous-titres */
-  h3 {
-    font-size: 1.2rem;
-  }
-  
-  /* Réinitialiser la transformation pour la carte populaire sur mobile pour éviter les problèmes de mise en page */
-  .offer-card.popular {
-    transform: none;
-  }
-  
-  /* Ajuster l'épaisseur de la bordure pour le mobile */
-  .offer-card::before {
-    padding: 1px;
-  }
-  
-  /* Correction pour les mobiles : largeur des cartes, hauteur, etc. */
-  .offer-card {
-    max-height: none;
-    overflow: visible;
-  }
-  
-  /* Ajustement pour les cartes populaires en mobile */
-  .offer-card.popular {
-    transform: none;
-  }
-  
-  .offer-card.popular:hover {
-    transform: translateY(-3px);
-  }
-}
-
-/* Media Queries - Regroupées et optimisées */
-@media (max-width: 1200px) {
-  .header-nav ul { gap: 15px; }
-  .header-nav ul li a { font-size: 13px; }
-  .images-banner { height: 50px; }
-  .images-banner img { height: 30px; margin: 0 10px; }
-  .footer-content { grid-template-columns: repeat(2, 1fr); }
-  .offers-grid { grid-template-columns: repeat(3, 1fr); }
-  .hero-section { height: 600px; }
-}
-
-@media (max-width: 900px) {
-  .header-container { padding: 0 15px; }
-  .header-nav ul { gap: 10px; }
-  .hero-overlay h1 { font-size: 2.2rem; }
-  .hero-overlay p { font-size: 1rem; }
-  .offers-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 15px;
-    padding: 20px 15px;
-  }
-  
-  .offer-card {
-    padding: 15px;
-  }
-  
-  .advantage-card {
-    padding: 20px;
-  }
-  
-  .advantages-grid { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .fixed-footer-content {
+    display: flex;
     flex-direction: column;
-    padding: 15px;
-    gap: 15px;
-  }
-  
-  .fixed-footer-left {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .fixed-footer-logo {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-  
-  .fixed-footer-text {
-    text-align: center;
-  }
-  
-  .fixed-footer-right {
-    width: 100%;
     justify-content: center;
-  }
-  
-  .fixed-footer-btn {
-    padding: 8px 15px;
-    font-size: 0.8rem;
-  }
-  
-  .header-nav {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-    background: rgba(20, 18, 38, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    padding: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(231, 76, 60, 0.3);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .header-nav.active {
-    height: auto;
-    max-height: calc(100vh - 60px);
-    opacity: 1;
-    visibility: visible;
-    padding: 20px 0;
-    overflow-y: auto;
-  }
-  
-  .header-nav ul {
-    flex-direction: column;
     align-items: center;
-    padding: 10px 0;
-    gap: 0;
-  }
-  
-  .header-nav ul li {
-    width: 100%;
     text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .header-nav ul li a {
-    display: block;
-    padding: 15px 20px;
-    font-size: 16px;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .header-nav ul li:last-child a {
-    border-bottom: none;
-  }
-}
-
-/* Tablettes */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .header-nav ul {
-    gap: 15px;
-  }
-  
-  .header-nav ul li a {
-    font-size: 14px;
-  }
-  
-  .offers-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .advantages-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-}
-
-/* Petits écrans - smartphones */
-@media (max-width: 480px) {
-  .header-container { 
-    top: 0; 
-    height: 50px; 
-  }
-  
-  .logo img {
-    height: 60px;
-    margin-left: 0;
-    padding-left: 0;
-    transform: translateY(2px);
   }
   
   .hero-overlay h1 { 
-    font-size: 1.5rem; 
-    text-align: center;
-    padding: 0 10px;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    padding: 0;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
   }
   
   .hero-overlay p {
     font-size: 0.9rem;
-    text-align: center;
-    padding: 0 10px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    padding: 0;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+    max-width: 100%;
   }
   
-  .hero-section { 
-    height: 400px; 
+  /* Amélioration de la lisibilité du texte gradient sur mobile */
+  .premium-gradient {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
   }
   
   .images-banner { 

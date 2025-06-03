@@ -215,14 +215,15 @@
     }
     
     .header-content {
-        padding: 0 10px 0 0;
+        padding: 0 15px 0 0;
     }
     
     .mobile-menu-toggle {
         display: flex;
         margin-left: auto;
-        margin-right: 10px;
-        z-index: 9999; /* Augmenté pour être au-dessus de tout */
+        margin-right: 15px;
+        z-index: 9999;
+        position: relative;
     }
     
     .logo {
@@ -239,78 +240,125 @@
         transform: translateY(2px);
     }
     
-    /* Nouvelle approche pour le menu mobile - drawer latéral */
+    /* Menu mobile - drawer latéral AMÉLIORÉ */
     .header-nav {
         position: fixed;
         top: 0;
-        right: -300px; /* Complètement en dehors de l'écran */
+        right: -300px;
         width: 250px;
-        height: 100%;
-        background-color: #0f0f19; /* Fond opaque */
+        height: 100vh;
+        background: linear-gradient(180deg, #0f0f19 0%, #1a1a2e 100%);
         z-index: 9990;
-        transition: right 0.3s ease;
-        padding: 60px 20px 20px;
-        box-shadow: none;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 80px 20px 20px;
+        box-shadow: -2px 0 15px rgba(0, 0, 0, 0.5);
         border-left: 1px solid rgba(255, 107, 107, 0.2);
+        overflow-y: auto;
     }
     
     .header-nav.active {
-        right: 0; /* Slide in from right */
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        right: 0;
     }
     
     .header-nav ul {
         flex-direction: column;
         padding: 0;
         margin: 0;
+        gap: 0;
     }
     
     .header-nav ul li {
-        margin-bottom: 15px;
+        margin-bottom: 0;
         width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .header-nav ul li:last-child {
+        border-bottom: none;
     }
     
     .header-nav ul li a {
         display: block;
-        padding: 10px 15px;
+        padding: 18px 15px;
         color: white;
         font-size: 16px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 5px;
+        font-weight: 500;
+        background: transparent;
+        border-radius: 0;
+        transition: all 0.3s ease;
+        position: relative;
+        text-align: left;
     }
     
-    /* Animation du hamburger */
+    .header-nav ul li a:hover,
+    .header-nav ul li a:focus {
+        background: rgba(255, 107, 107, 0.1);
+        color: #ff6b6b;
+        transform: translateX(5px);
+    }
+    
+    .header-nav ul li a.active {
+        background: rgba(255, 107, 107, 0.2);
+        color: #ff6b6b;
+    }
+    
+    /* Animation améliorée du hamburger */
     .mobile-menu-toggle span {
         background-color: white;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
     }
     
     .mobile-menu-toggle.active span:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
+        background-color: #ff6b6b;
     }
     
     .mobile-menu-toggle.active span:nth-child(2) {
         opacity: 0;
+        transform: scaleX(0);
     }
     
     .mobile-menu-toggle.active span:nth-child(3) {
         transform: translateY(-9px) rotate(-45deg);
-        box-shadow: 0 0 8px rgba(255, 107, 107, 0.8);
+        background-color: #ff6b6b;
     }
     
-    body.menu-open::after {
-        display: none !important; /* Supprimer complètement l'overlay */
+    /* Overlay pour fermer le menu en cliquant en dehors */
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9980;
+        opacity: 1;
+        transition: opacity 0.3s ease;
     }
     
-    /* Supprimer tout effet de flou sur l'ensemble du site */
+    /* Empêcher le scroll du body quand le menu est ouvert */
     body.menu-open {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+}
+
+/* Media queries pour écrans très petits */
+@media (max-width: 480px) {
+    .header-nav {
+        width: 280px;
+        right: -300px;
     }
     
-    body.menu-open * {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
+    .header-content {
+        padding: 0 10px 0 0;
+    }
+    
+    .mobile-menu-toggle {
+        margin-right: 10px;
     }
 }
 
