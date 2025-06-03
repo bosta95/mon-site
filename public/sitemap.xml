@@ -22,13 +22,14 @@
             <video:description>Service IPTV Premium avec +22 000 chaînes et 50 000 films et séries en 4K. Compatible Samsung Smart TV, Android Box, iPhone</video:description>
             <video:content_loc>https://iptvsmarterpros.com/images/video_ava71w.mp4</video:content_loc>
         </video:video>
-        <!-- Section Codes Xtream sur la page d'accueil -->
-        <url>
-            <loc>https://iptvsmarterpros.com/index.html#xtream-codes</loc>
-            <lastmod>2025-06-03</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>0.9</priority>
-        </url>
+    </url>
+
+    <!-- Section Codes Xtream sur la page d'accueil -->
+    <url>
+        <loc>https://iptvsmarterpros.com/index.html#xtream-codes</loc>
+        <lastmod>2025-06-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
     </url>
 
     <!-- Pages d'offres et d'abonnements -->
@@ -120,7 +121,7 @@
     <url>
         <loc>https://iptvsmarterpros.com/contact.html</loc>
         <lastmod>2025-06-03</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
