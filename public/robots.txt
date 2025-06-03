@@ -112,4 +112,4 @@ User-agent: YandexBot
 Disallow: /
 
 # Lien vers le sitemap (URL complète pour une meilleure compatibilité)
-Sitemap: https://www.iptvsmarterpros.com/sitemap.xml
+Sitemap: https://iptvsmarterpros.com/sitemap.xml
