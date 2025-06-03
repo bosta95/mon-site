@@ -1,146 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-    <!-- Page d'accueil principale -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://iptvsmarterpros.com/</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
-        <image:image>
-            <image:loc>https://iptvsmarterpros.com/images/logo.svg</image:loc>
-            <image:title>IPTV Smarters Pro Samsung Smart TV Android Box</image:title>
-        </image:image>
-        <video:video>
-            <video:thumbnail_loc>https://iptvsmarterpros.com/images/video_ava71w.mp4</video:thumbnail_loc>
-            <video:title>IPTV Smarters Pro</video:title>
-            <video:description>Service IPTV Premium avec +22 000 chaînes et 50 000 films et séries en 4K. Compatible Samsung Smart TV, Android Box, iPhone</video:description>
-            <video:content_loc>https://iptvsmarterpros.com/images/video_ava71w.mp4</video:content_loc>
-        </video:video>
     </url>
-
-    <!-- Section Codes Xtream sur la page d'accueil -->
-    <url>
-        <loc>https://iptvsmarterpros.com/index.html#xtream-codes</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-
-    <!-- Pages d'offres et d'abonnements -->
     <url>
         <loc>https://iptvsmarterpros.com/offer-details.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://iptvsmarterpros.com/images/logo.svg</image:loc>
-            <image:title>Offres IPTV Premium - Abonnements à partir de 9.99€</image:title>
-        </image:image>
     </url>
-    
-    <!-- Pages d'offres individuelles -->
     <url>
         <loc>https://iptvsmarterpros.com/offres/premium-3-mois/</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/offres/premium-6-mois/</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/offres/premium-12-mois/</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-
-    <!-- Pages de contenu principal -->
     <url>
         <loc>https://iptvsmarterpros.com/tutoriel.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/blog.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
-    <!-- Articles de blog individuels -->
     <url>
         <loc>https://iptvsmarterpros.com/blog/tendances-streaming-2025.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/blog/eliminer-buffering-iptv.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/blog/guide-epg-iptv.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
-    <!-- Pages informatives -->
     <url>
         <loc>https://iptvsmarterpros.com/faq.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/about.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/contact.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-
-    <!-- Pages légales (importantes pour Google) -->
     <url>
         <loc>https://iptvsmarterpros.com/conditions-generales.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
-    
     <url>
         <loc>https://iptvsmarterpros.com/politique-confidentialite.html</loc>
         <lastmod>2025-01-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
-
-    <!-- Page d'avis -->
     <url>
         <loc>https://iptvsmarterpros.com/reviews.html</loc>
         <lastmod>2025-01-24</lastmod>

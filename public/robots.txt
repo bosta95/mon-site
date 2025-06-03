@@ -1,6 +1,6 @@
-# Configuration optimisée pour l'indexation Google
-# Mots-clés principaux: IPTV Smarters Pro, codes Xtream IPTV, IPTV sans buffering, 
-# chaînes sport IPTV, guide EPG IPTV, IPTV Samsung Smart TV, IPTV Android Box, 
+# Configuration optimisee pour l'indexation Google
+# Mots-cles principaux: IPTV Smarters Pro, codes Xtream IPTV, IPTV sans buffering, 
+# chaines sport IPTV, guide EPG IPTV, IPTV Samsung Smart TV, IPTV Android Box, 
 # IPTV M3U, abonnement IPTV stable, VOD 4K HD, test IPTV gratuit
 
 User-agent: *
@@ -19,7 +19,7 @@ Disallow: /404.html
 Disallow: /maintenance.html
 Disallow: /admin-reviews.html
 
-# Paramètres de tracking et UTM uniquement (ne pas indexer)
+# Parametres de tracking et UTM uniquement (ne pas indexer)
 Disallow: /*?ref=*
 Disallow: /*?utm_*
 Disallow: /*?fbclid=*
@@ -46,7 +46,7 @@ Allow: /offres/premium-3-mois/
 Allow: /offres/premium-6-mois/
 Allow: /offres/premium-12-mois/
 
-# Paramètres spécifiques pour Googlebot
+# Parametres specifiques pour Googlebot
 User-agent: Googlebot
 Allow: /
 Allow: /*.js$
@@ -58,7 +58,7 @@ Allow: /offer-details.html?*
 Allow: /index.html#offers-section
 Crawl-delay: 1
 
-# Paramètres spécifiques pour Googlebot-Image
+# Parametres specifiques pour Googlebot-Image
 User-agent: Googlebot-Image
 Allow: /
 Allow: /images/
@@ -69,7 +69,7 @@ Allow: /*.webp$
 Allow: /*.svg$
 Crawl-delay: 1
 
-# Paramètres pour Googlebot-Video
+# Parametres pour Googlebot-Video
 User-agent: Googlebot-Video
 Allow: /
 Allow: /videos/
@@ -77,7 +77,7 @@ Allow: /*.mp4$
 Allow: /*.webm$
 Crawl-delay: 1
 
-# Paramètres spécifiques pour les autres robots importants
+# Parametres specifiques pour les autres robots importants
 User-agent: bingbot
 Allow: /
 Allow: /*.js$
@@ -101,7 +101,7 @@ User-agent: SemrushBot
 Allow: /
 Crawl-delay: 10
 
-# Blocage des robots indésirables ou trop agressifs
+# Blocage des robots indesirables ou trop agressifs
 User-agent: MJ12bot
 Disallow: /
 
@@ -111,5 +111,5 @@ Disallow: /
 User-agent: YandexBot
 Disallow: /
 
-# Lien vers le sitemap (URL complète pour une meilleure compatibilité)
+# Lien vers le sitemap
 Sitemap: https://iptvsmarterpros.com/sitemap.xml
