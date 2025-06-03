@@ -1,0 +1,7 @@
+# Redirections Netlify pour IPTV Smarters Pro
+
+# Redirection www vers non-www (force)
+https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
+
+# Page 404 personnalisée
+/*  /404.html  404 

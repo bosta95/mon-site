@@ -1,0 +1,20 @@
+# Headers Netlify - IPTV Smarters Pro
+
+# Headers pour sitemap.xml
+/sitemap.xml
+  Content-Type: application/xml; charset=UTF-8
+  Cache-Control: public, max-age=86400
+  X-Robots-Tag: all
+
+# Headers pour robots.txt
+/robots.txt
+  Content-Type: text/plain; charset=UTF-8
+  Cache-Control: public, max-age=3600
+  X-Robots-Tag: all
+
+# Headers de sécurité pour tout le site
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin 

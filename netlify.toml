@@ -1,23 +1,25 @@
 [build]
   publish = "public"
-  command = "echo 'Site déjà prêt'"
+  command = "echo 'Static site ready'"
 
 [build.environment]
   NODE_VERSION = "18"
 
-# Configuration des headers pour sitemap.xml
+# Headers spécifiques pour sitemap.xml
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=UTF-8"
     Cache-Control = "public, max-age=86400"
+    X-Robots-Tag = "all"
 
-# Configuration des headers pour robots.txt
+# Headers spécifiques pour robots.txt  
 [[headers]]
   for = "/robots.txt"
   [headers.values]
     Content-Type = "text/plain; charset=UTF-8"
     Cache-Control = "public, max-age=3600"
+    X-Robots-Tag = "all"
 
 # Configuration générale des headers de sécurité
 [[headers]]
