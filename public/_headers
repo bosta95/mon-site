@@ -45,10 +45,10 @@
 # Spécifications pour le sitemap et robots.txt
 /sitemap.xml
   X-Robots-Tag: all
-  Content-Type: application/xml
+  Content-Type: application/xml; charset=UTF-8
   Cache-Control: public, max-age=86400
 
 /robots.txt
   X-Robots-Tag: all
-  Content-Type: text/plain
-  Cache-Control: public, max-age=86400 
+  Content-Type: text/plain; charset=UTF-8
+  Cache-Control: public, max-age=3600 

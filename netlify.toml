@@ -1,13 +1,25 @@
 [build]
-  command = "npm install"
   publish = "public"
+  command = "echo 'Site déjà prêt'"
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
+[build.environment]
+  NODE_VERSION = "18"
 
-# Configuration des en-têtes pour le SEO et la sécurité
+# Configuration des headers pour sitemap.xml
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+    Cache-Control = "public, max-age=86400"
+
+# Configuration des headers pour robots.txt
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Cache-Control = "public, max-age=3600"
+
+# Configuration générale des headers de sécurité
 [[headers]]
   for = "/*"
   [headers.values]
@@ -15,18 +27,16 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "upgrade-insecure-requests"
 
-# Configuration spécifique pour le sitemap et robots.txt
-[[headers]]
-  for = "/sitemap.xml"
-  [headers.values]
-    Content-Type = "application/xml"
-    X-Robots-Tag = "all"
+# Redirection www vers non-www
+[[redirects]]
+  from = "https://www.iptvsmarterpros.com/*"
+  to = "https://iptvsmarterpros.com/:splat"
+  status = 301
+  force = true
 
-[[headers]]
-  for = "/robots.txt"
-  [headers.values]
-    Content-Type = "text/plain"
-    X-Robots-Tag = "all" 
+# Page 404 personnalisée
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404 
