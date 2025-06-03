@@ -1,23 +1,51 @@
+# Règles d'optimisation et redirections pour IPTV Smarters Pros
+
+# Protection du fichier .htaccess
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
 # Activation du moteur de réécriture
 RewriteEngine On
 
 # Base du site
 RewriteBase /
 
+# NOTE IMPORTANTE: Ce fichier est utilisé uniquement en cas d'hébergement sur un serveur Apache.
+# Sur Netlify, utilisez les fichiers _redirects et _headers dans le répertoire racine.
+
 # Permettre l'accès aux fichiers index.html par défaut
 DirectoryIndex index.html
 
+# Redirections 301 pour les anciennes URLs
+# Redirection vers HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirection du www vers non-www
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [L,R=301]
+
 # Règles pour éviter les problèmes de duplicate content
-# Redirection vers la version canonique sans www
-RewriteCond %{HTTP_HOST} ^www\.iptvsmarterpros\.com [NC]
-RewriteRule ^(.*)$ https://iptvsmarterpros.com/$1 [L,R=301]
+# Redirection vers la version canonique avec www (cohérent avec la configuration Netlify)
+RewriteCond %{HTTP_HOST} ^iptvsmarterpros\.com [NC]
+RewriteRule ^(.*)$ https://www.iptvsmarterpros.com/$1 [L,R=301]
 
 # Rediriger index.html vers /
 RewriteCond %{THE_REQUEST} ^.*/index\.html
 RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
 
-# Redirection des anciennes URLs du blog vers la page principale du blog
-RewriteRule ^blog/(.*)\.html$ /blog.html [R=301,L]
+# Redirection des URLs avec slash final vers celles sans slash final (sauf pour les dossiers réels)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Conservation des pages de blog individuelles (pas de redirection)
+# Ces règles annulent la redirection précédente qui envoyait tous les articles vers la page principale
+RewriteRule ^blog/tendances-streaming-2025\.html$ /blog/tendances-streaming-2025.html [L]
+RewriteRule ^blog/eliminer-buffering-iptv\.html$ /blog/eliminer-buffering-iptv.html [L]
+RewriteRule ^blog/guide-epg-iptv\.html$ /blog/guide-epg-iptv.html [L]
 
 # Redirection de l'ancienne page flyer vers la page d'accueil
 RewriteRule ^flyer\.html$ / [R=301,L]
@@ -69,33 +97,54 @@ RewriteRule ^abonnement2ecrans$ /offres/premium-3-mois/?screens=2 [R=301,L]
 RewriteRule ^abonnement3ecrans$ /offres/premium-3-mois/?screens=3 [R=301,L]
 RewriteRule ^abonnement4ecrans$ /offres/premium-3-mois/?screens=4 [R=301,L]
 
-# Gestion des erreurs 404 - Utilisation de la page d'erreur personnalisée
-ErrorDocument 404 /404.html
-
-# Compression Gzip
+# Compression GZIP
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json
+  # Compression pour les fichiers texte
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
 
-# Cache control
+# Cache Control
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/jpg "access plus 1 year"
+  
+  # Images
   ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/gif "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/pdf "access plus 1 month"
-  ExpiresByType text/x-javascript "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType application/x-javascript "access plus 1 month"
-  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType image/x-icon "access plus 1 year"
-  ExpiresDefault "access plus 2 days"
+  
+  # CSS, JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  
+  # Fonts
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  
+  # HTML (pas de cache pour les pages HTML)
+  ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
-# Protection contre les attaques XSS
+# Protection contre le hotlinking des images
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?iptvsmarterpros\.com/.*$ [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC]
+
+# Gestion des erreurs
+ErrorDocument 404 /404.html
+
+# Désactiver l'affichage des répertoires
+Options -Indexes
+
+# Protection contre les attaques XSS - Cohérent avec les règles dans _headers
 <IfModule mod_headers.c>
   Header set X-XSS-Protection "1; mode=block"
   Header set X-Content-Type-Options "nosniff"

@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     
-    <title>Support 24/7 | IPTV Smarters Pro | Contact</title>
-    <meta name="description" content="Contactez notre équipe de support IPTV disponible 24h/24 et 7j/7 pour toute assistance technique ou question sur votre abonnement.">
+    <!-- Titre SEO -->
+    <title>Contact - IPTV Smarters Pros | Support & Assistance</title>
+    <!-- Description SEO -->
+    <meta content="Contactez notre équipe de support IPTV Smarters Pros pour toute question ou assistance concernant votre abonnement. Support rapide et efficace 7j/7." name="description">
+    <!-- Mots-clés SEO -->
+    <meta content="contact IPTV, support IPTV, assistance IPTV, aide IPTV, problème IPTV, service client IPTV, support technique IPTV" name="keywords">
+    <!-- Balise Canonical -->
+    <link href="https://www.iptvsmarterpros.com/contact.html" rel="canonical">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.iptvsmarterpros.com/contact.html">
+    <meta property="og:title" content="Contact - IPTV Smarters Pros | Support rapide 7j/7">
+    <meta property="og:description" content="Contactez notre équipe de support pour toute question ou assistance. Support disponible par email et WhatsApp.">
+    <meta property="og:image" content="/images/logo.svg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.iptvsmarterpros.com/contact.html">
+    <meta name="twitter:title" content="Contact - IPTV Smarters Pros | Support rapide 7j/7">
+    <meta name="twitter:description" content="Contactez notre équipe de support pour toute question ou assistance. Support disponible par email et WhatsApp.">
+    <meta name="twitter:image" content="/images/logo.svg">
     
     <!-- Font Awesome optimisé -->
     <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
@@ -19,7 +39,7 @@
     <link href="styles.css" rel="stylesheet">
     <link href="./css/styles.css?v=1" rel="stylesheet">
     <link href="./css/navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
+    <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
     
     <style>
         /* Styles de base */
@@ -592,36 +612,38 @@
 </head>
 <body>
     <!-- Header -->
-        <header class="header-container">
-    <div class="header-content">
-      <div class="logo">
-        <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
-        </a>
-      </div>
-      <!-- Menu hamburger pour mobile -->
-      <div class="mobile-menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <!-- Navigation Desktop -->
-      <nav class="header-nav">
-        <ul>
-          <li><a href="index.html">Accueil</a></li>
-          <li><a href="index.html#offers-section">OFFRES</a></li>
-          <li><a href="tutoriel.html">Tutoriel</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header class="header-container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
+                </a>
+            </div>
+            <!-- Menu hamburger pour mobile -->
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <!-- Navigation Desktop -->
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#offers-section">OFFRES</a></li>
+                    <li><a href="tutoriel.html">Installation</a></li>
+                    <li><a href="index.html#xtream-codes">Codes Xtream</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <!-- Titre de la page élégant -->
     <div class="page-title-container">
-        <h1 class="page-title">Contactez-nous</h1>
-        <p class="subtitle">Notre équipe de support est disponible 24/7 pour répondre à toutes vos questions</p>
+        <h1 class="page-title">Contactez Notre Support IPTV</h1>
+        <p class="subtitle">Vous avez des questions ou besoin d'assistance ? Notre équipe est disponible 7j/7 pour vous aider. Utilisez le formulaire ci-dessous ou contactez-nous directement par WhatsApp ou email.</p>
     </div>
 
     <!-- Contenu principal -->
@@ -632,17 +654,29 @@
                 <h2>Envoyez-nous un message</h2>
                 <form id="contactForm">
                     <div class="form-group">
-                        <label for="name">Votre nom</label>
+                        <label for="name">Nom*</label>
                         <input type="text" id="name" name="name" class="form-control" required placeholder="Entrez votre nom complet">
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">Votre adresse email</label>
+                        <label for="email">Email*</label>
                         <input type="email" id="email" name="email" class="form-control" required placeholder="Entrez votre adresse email">
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Votre message</label>
+                        <label for="subject">Sujet*</label>
+                        <select id="subject" name="subject" class="form-control" required>
+                            <option value="" disabled selected>Sélectionnez un sujet</option>
+                            <option value="question">Question générale</option>
+                            <option value="test">Demande de test gratuit</option>
+                            <option value="support">Support technique</option>
+                            <option value="billing">Question sur facturation</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message*</label>
                         <textarea id="message" name="message" class="form-control" required placeholder="Comment pouvons-nous vous aider ?"></textarea>
                     </div>
                     
@@ -661,32 +695,35 @@
                     <ul class="contact-list">
                         <li class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>Support technique</h3>
-                                <p>Disponible 24/7 pour résoudre vos problèmes techniques et questions sur l'installation ou la configuration.</p>
-                            </div>
-                        </li>
-                        
-                        <li class="contact-item">
-                            <div class="contact-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-details">
                                 <h3>Email</h3>
-                                <p>contact@iptvsmarterpros.com</p>
-                                <p>Nous répondons généralement dans les 24 heures.</p>
+                                <p>Pour toute demande générale ou assistance</p>
+                                <p><a href="mailto:contact@iptvsmarterpros.com">contact@iptvsmarterpros.com</a></p>
                             </div>
                         </li>
                         
                         <li class="contact-item">
                             <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
+                                <i class="fab fa-whatsapp"></i>
                             </div>
                             <div class="contact-details">
-                                <h3>Disponibilité</h3>
-                                <p>Notre équipe de support est disponible 24h/24 et 7j/7 pour assurer une assistance continue à nos clients.</p>
+                                <h3>WhatsApp</h3>
+                                <p>Support rapide et assistance technique</p>
+                                <p>Réponse garantie en moins de 2 heures</p>
+                                <a href="https://wa.me/33612345678" class="contact-btn">Contacter sur WhatsApp</a>
+                            </div>
+                        </li>
+                        
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <i class="far fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Heures de support</h3>
+                                <p>7j/7, de 9h à 22h</p>
+                                <p>Réponse rapide garantie</p>
                             </div>
                         </li>
                     </ul>

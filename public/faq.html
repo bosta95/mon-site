@@ -6,67 +6,246 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
 <!-- Titre SEO -->
-<title>FAQ - Questions Fr�quentes sur IPTV Smarters Pros</title>
+<title>FAQ - Questions Fréquentes sur IPTV Smarters Pros</title>
 <!-- Description SEO -->
-<meta content="Trouvez des r�ponses aux questions les plus fr�quentes sur IPTV Smarters Pros et nos abonnements." name="description"/>
-<!-- Mots-cl�s SEO -->
-<meta content="IPTV, FAQ, abonnement IPTV, streaming premium, films, s�ries, cha�nes TV, t�l�vision en ligne, streaming HD, 4K, IPTV Pro, divertissement, code IPTV" name="keywords"/>
+<meta content="Trouvez des réponses aux questions les plus fréquentes sur IPTV Smarters Pros et nos abonnements." name="description"/>
+<!-- Mots-clés SEO -->
+<meta content="IPTV, FAQ, abonnement IPTV, streaming premium, films, séries, chaînes TV, télévision en ligne, streaming HD, 4K, IPTV Pro, divertissement, code IPTV" name="keywords"/>
 <!-- Balise Canonical -->
 <link href="https://www.iptvsmarterpros.com/faq.html" rel="canonical"/>
 <!-- Open Graph / Facebook -->
 <meta content="FAQ - IPTV Pro | Tout savoir sur le streaming premium" property="og:title"/>
-<meta content="Toutes les r�ponses � vos questions sur IPTV Pro. D�couvrez comment profiter d'un streaming premium avec plus de 22 000 cha�nes, films et s�ries en haute d�finition." property="og:description"/>
-<meta content="/images/logo.webp" property="og:image"/>
+<meta content="Toutes les réponses à vos questions sur IPTV Pro. Découvrez comment profiter d'un streaming premium avec plus de 22 000 chaînes, films et séries en haute définition." property="og:description"/>
+<meta content="/images/logo.svg" property="og:image"/>
 <meta content="https://www.iptvsmarterpros.com/faq.html" property="og:url"/>
 <meta content="website" property="og:type"/>
 <!-- Twitter Card -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="FAQ - IPTV Pro | Tout savoir sur le streaming premium" name="twitter:title"/>
-<meta content="D�couvrez l'univers magique d'IPTV Pro, votre solution premium pour le streaming avec plus de 22 000 cha�nes, films et s�ries. Toutes les r�ponses � vos questions ici." name="twitter:description"/>
-<meta content="/images/logo.webp" name="twitter:image"/>
+<meta content="Découvrez l'univers magique d'IPTV Pro, votre solution premium pour le streaming avec plus de 22 000 chaînes, films et séries. Toutes les réponses à vos questions ici." name="twitter:description"/>
+<meta content="/images/logo.svg" name="twitter:image"/>
 <link href="styles.css?v=10" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="./css/navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
+<link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
 
 <style>
+  body {
+    background-color: #0a0a0a;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 20px 60px;
+  }
+  
+  .faq-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .faq-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background-image: linear-gradient(90deg, #E74C3C, #6c5498);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .faq-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  details {
+    background: rgba(30, 30, 50, 0.7);
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  details:hover {
+    border-color: rgba(231, 76, 60, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  summary {
+    padding: 20px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  summary::after {
+    content: '\f107';
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    color: #E74C3C;
+  }
+  
+  details[open] summary::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  
+  details p {
+    padding: 0 20px 20px;
+    margin: 0;
+    line-height: 1.6;
+    color: #ddd;
+  }
+  
+  .return {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #E74C3C, #6c5498);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+  }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+  }
+  
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
+  <!-- HEADER -->
+  <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg"/>
+        </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#offers-section">OFFRES</a></li>
+          <li><a href="tutoriel.html">Installation</a></li>
+          <li><a href="index.html#xtream-codes">Codes Xtream</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
 <div class="container">
 <div class="faq-header animate-fade-in">
-<h1>FAQ - R�ponses � Vos Questions sur IPTV Smarters Pros</h1>
+<h1>FAQ - Réponses à Vos Questions sur IPTV Smarters Pros</h1>
 </div>
 <div class="faq-content animate-on-scroll">
 <details>
 <summary>Qu'est-ce que IPTV Pro ?</summary>
-<p>IPTV Pro est un service de streaming premium qui vous ouvre les portes d'un univers de divertissement in�gal�. Avec plus de 22 000 cha�nes, films et s�ries en haute d�finition, nous r�volutionnons l'acc�s � la t�l�vision en ligne, en offrant une exp�rience magique et immersive pour tous vos moments de d�tente.</p>
+<p>IPTV Pro est un service de streaming premium qui vous ouvre les portes d'un univers de divertissement inégalé. Avec plus de 22 000 chaînes, films et séries en haute définition, nous révolutionnons l'accès à la télévision en ligne, en offrant une expérience magique et immersive pour tous vos moments de détente.</p>
 </details>
 <details>
-<summary>Comment souscrire � un abonnement IPTV Pro ?</summary>
-<p>Pour rejoindre l'aventure IPTV Pro, s�lectionnez l'offre qui vous convient sur notre page d'accueil et cliquez sur "Commander". Vous serez redirig� vers une page de paiement s�curis�e via PayPal. Une fois le paiement valid�, vous recevrez vos identifiants par email en moins d'une heure, pour commencer imm�diatement votre exp�rience de streaming.</p>
+<summary>Comment souscrire à un abonnement IPTV Pro ?</summary>
+<p>Pour rejoindre l'aventure IPTV Pro, sélectionnez l'offre qui vous convient sur notre page d'accueil et cliquez sur "Commander". Vous serez redirigé vers une page de paiement sécurisée via PayPal. Une fois le paiement validé, vous recevrez vos identifiants par email en moins d'une heure, pour commencer immédiatement votre expérience de streaming.</p>
 </details>
 <details>
 <summary>Quels appareils sont compatibles avec IPTV Pro ?</summary>
-<p>Que vous soyez � la maison ou en d�placement, IPTV Pro fonctionne sur tous vos appareils modernes. Profitez de notre service sur votre Smart TV, ordinateur, smartphone ou tablette, et vivez une exp�rience de streaming fluide et de haute qualit� o� que vous soyez.</p>
+<p>Que vous soyez à la maison ou en déplacement, IPTV Pro fonctionne sur tous vos appareils modernes. Profitez de notre service sur votre Smart TV, ordinateur, smartphone ou tablette, et vivez une expérience de streaming fluide et de haute qualité où que vous soyez.</p>
 </details>
 <details>
-<summary>Que faire en cas de probl�me avec mon abonnement ?</summary>
-<p>Si vous rencontrez des difficult�s ou avez des questions concernant votre abonnement, notre �quipe de support client est l� pour vous. Rendez-vous sur la page "Contact" et envoyez-nous un message. Nous nous engageons � vous r�pondre rapidement pour r�soudre tout probl�me et vous garantir une exp�rience sans interruption.</p>
+<summary>Que faire en cas de problème avec mon abonnement ?</summary>
+<p>Si vous rencontrez des difficultés ou avez des questions concernant votre abonnement, notre équipe de support client est là pour vous. Rendez-vous sur la page "Contact" et envoyez-nous un message. Nous nous engageons à vous répondre rapidement pour résoudre tout problème et vous garantir une expérience sans interruption.</p>
 </details>
 <details>
-<summary>Comment r�silier mon abonnement IPTV Pro ?</summary>
-<p>Pour r�silier votre abonnement, veuillez contacter notre service client via la page "Contact". Nous vous accompagnerons tout au long du processus de r�siliation et r�pondrons � toutes vos questions pour une transition en toute s�r�nit�.</p>
+<summary>Comment résilier mon abonnement IPTV Pro ?</summary>
+<p>Pour résilier votre abonnement, veuillez contacter notre service client via la page "Contact". Nous vous accompagnerons tout au long du processus de résiliation et répondrons à toutes vos questions pour une transition en toute sérénité.</p>
 </details>
 </div>
 <div class="return animate-fade-in">
-<a class="btn" href="index.html">Retour � l'accueil</a>
+<a class="btn" href="index.html">Retour à l'accueil</a>
 </div>
 </div>
-<script src="./js/navbar.js"></script>`n</body>
+
+<script>
+  // Script pour animer les éléments au défilement
+  document.addEventListener('DOMContentLoaded', function() {
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    function checkIfInView() {
+      animateElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }
+    
+    // Exécuter au chargement
+    checkIfInView();
+    
+    // Ajouter l'événement de défilement
+    window.addEventListener('scroll', checkIfInView);
+  });
+</script>
+
+<script src="./js/navbar.js"></script>
+</body>
 </html>
 
 

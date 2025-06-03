@@ -1,9 +1,14 @@
 # Configuration optimisée pour l'indexation Google
+# Mots-clés principaux: IPTV Smarters Pro, codes Xtream IPTV, IPTV sans buffering, 
+# chaînes sport IPTV, guide EPG IPTV, IPTV Samsung Smart TV, IPTV Android Box, 
+# IPTV M3U, abonnement IPTV stable, VOD 4K HD, test IPTV gratuit
+
 User-agent: *
 Allow: /
 Allow: /offer-details.html
 Allow: /offer-details.html?*
 Allow: /index.html#offers-section
+Allow: /index.html#xtream-codes
 
 # Pages techniques et de paiement (ne pas indexer)
 Disallow: /payment.html
@@ -12,6 +17,7 @@ Disallow: /cancel.html
 Disallow: /confirmation.html
 Disallow: /404.html
 Disallow: /maintenance.html
+Disallow: /admin-reviews.html
 
 # Paramètres de tracking et UTM uniquement (ne pas indexer)
 Disallow: /*?ref=*
@@ -24,12 +30,21 @@ Allow: /index.html
 Allow: /tutoriel.html
 Allow: /blog.html
 Allow: /offer-details.html
-Allow: /concours.html
+Allow: /reviews.html
 Allow: /faq.html
 Allow: /about.html
 Allow: /contact.html
 Allow: /conditions-generales.html
 Allow: /politique-confidentialite.html
+
+# Autoriser l'indexation du dossier blog
+Allow: /blog/*.html
+
+# Autoriser explicitement le dossier des offres
+Allow: /offres/
+Allow: /offres/premium-3-mois/
+Allow: /offres/premium-6-mois/
+Allow: /offres/premium-12-mois/
 
 # Paramètres spécifiques pour Googlebot
 User-agent: Googlebot
@@ -77,14 +92,17 @@ Allow: /
 Allow: /index.html#offers-section
 Crawl-delay: 1
 
-# Blocage des robots indésirables ou trop agressifs
-User-agent: MJ12bot
-Disallow: /
-
+# Autoriser certains bots d'analyse SEO avec limites
 User-agent: AhrefsBot
-Disallow: /
+Allow: /
+Crawl-delay: 10
 
 User-agent: SemrushBot
+Allow: /
+Crawl-delay: 10
+
+# Blocage des robots indésirables ou trop agressifs
+User-agent: MJ12bot
 Disallow: /
 
 User-agent: PetalBot
@@ -95,6 +113,3 @@ Disallow: /
 
 # Lien vers le sitemap (URL complète pour une meilleure compatibilité)
 Sitemap: https://www.iptvsmarterpros.com/sitemap.xml
-
-# Directives de cache pour améliorer les performances
-# Cache-Control: max-age=3600

@@ -6,10 +6,19 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Content-Security-Policy: upgrade-insecure-requests
   Permissions-Policy: geolocation=(), microphone=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
 # En-têtes pour les pages HTML avec cache court
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# En-têtes pour les articles de blog avec cache un peu plus long
+/blog/*.html
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# En-têtes pour les pages d'offres
+/offres/*
+  Cache-Control: public, max-age=3600, must-revalidate
 
 # En-têtes pour les ressources statiques avec cache long
 /images/*
@@ -37,7 +46,9 @@
 /sitemap.xml
   X-Robots-Tag: all
   Content-Type: application/xml
+  Cache-Control: public, max-age=86400
 
 /robots.txt
   X-Robots-Tag: all
-  Content-Type: text/plain 
+  Content-Type: text/plain
+  Cache-Control: public, max-age=86400 
