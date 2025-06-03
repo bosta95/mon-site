@@ -872,37 +872,72 @@
   <!-- Séparateur de section minimal -->
   <hr class="section-divider style1">
 
-  <!-- FILMS & SÉRIES (SLIDER) -->
+  <!-- FILMS & SÉRIES (SLIDER OPTIMISÉ) -->
   <section class="films-slider-section" id="films">
     <h2>IPTV CHAINES EN DIRECT  Films Séries  SPORT FOOT CANAL BEIN</h2>
     <div class="slider">
-      <div class="slide-track">
-        <!-- Premier groupe d'images -->
-        <img alt="Films 1" class="slide" height="300" src="./images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 2" class="slide" height="300" src="./images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 3" class="slide" height="300" src="./images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Dragon" class="slide" height="300" src="./images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Mufasa" class="slide" height="300" src="./images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Bianca" class="slide" height="300" src="./images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Squid Game" class="slide" height="300" src="./images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Stitch" class="slide" height="300" src="./images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Souly" class="slide" height="300" src="./images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Rig" class="slide" height="300" src="./images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+      <div class="slide-track" id="filmsSlideTrack">
+        <!-- Images avec lazy loading et placeholders optimisés -->
+        <img alt="Films nouveautés 2025" class="slide lazy-film" data-src="./images/films1_cqypoc.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Séries populaires HD" class="slide lazy-film" data-src="./images/films2_i3gbly.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Films français HD" class="slide lazy-film" data-src="./images/filmsf_bwiian.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Dragon animation 4K" class="slide lazy-film" data-src="./images/dragon_dulfu3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Mufasa Le Roi Lion" class="slide lazy-film" data-src="./images/mufasa_viogzz.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Bianca film HD" class="slide lazy-film" data-src="./images/bianca_bhrcz6.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Squid Game saison 2" class="slide lazy-film" data-src="./images/squidgame_vrxvcz.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Stitch Disney+" class="slide lazy-film" data-src="./images/stitch_uv0vct.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Soul Pixar 4K" class="slide lazy-film" data-src="./images/souly_b9oz40.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Rig action thriller" class="slide lazy-film" data-src="./images/rig_l1bub4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
         
-        <!-- Deuxième groupe d'images (répétition) -->
-        <img alt="Films 1" class="slide" height="300" src="./images/films1_cqypoc.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 2" class="slide" height="300" src="./images/films2_i3gbly.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Films 3" class="slide" height="300" src="./images/filmsf_bwiian.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Dragon" class="slide" height="300" src="./images/dragon_dulfu3.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Mufasa" class="slide" height="300" src="./images/mufasa_viogzz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Bianca" class="slide" height="300" src="./images/bianca_bhrcz6.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Squid Game" class="slide" height="300" src="./images/squidgame_vrxvcz.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Stitch" class="slide" height="300" src="./images/stitch_uv0vct.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Souly" class="slide" height="300" src="./images/souly_b9oz40.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
-        <img alt="Rig" class="slide" height="300" src="./images/rig_l1bub4.png" width="200" loading="lazy" decoding="async" fetchpriority="low"/>
+        <!-- Répétition optimisée -->
+        <img alt="Films 2025" class="slide lazy-film" data-src="./images/films1_cqypoc.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Séries HD" class="slide lazy-film" data-src="./images/films2_i3gbly.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Cinéma français" class="slide lazy-film" data-src="./images/filmsf_bwiian.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Animation Dragon" class="slide lazy-film" data-src="./images/dragon_dulfu3.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Mufasa Disney" class="slide lazy-film" data-src="./images/mufasa_viogzz.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Film Bianca" class="slide lazy-film" data-src="./images/bianca_bhrcz6.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Série Squid Game" class="slide lazy-film" data-src="./images/squidgame_vrxvcz.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Stitch animation" class="slide lazy-film" data-src="./images/stitch_uv0vct.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Soul film Pixar" class="slide lazy-film" data-src="./images/souly_b9oz40.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
+        <img alt="Rig thriller" class="slide lazy-film" data-src="./images/rig_l1bub4.png" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='300'%3E%3Crect width='200' height='300' fill='%23333'/%3E%3C/svg%3E" height="300" width="200"/>
       </div>
     </div>
   </section>
+
+  <!-- Script de lazy loading ultra-optimisé -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const lazyFilms = document.querySelectorAll('.lazy-film');
+      const filmsSection = document.querySelector('.films-slider-section');
+      
+      const filmObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const tempImg = new Image();
+            tempImg.onload = function() {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy-film');
+              img.classList.add('loaded');
+            };
+            tempImg.src = img.dataset.src;
+            filmObserver.unobserve(img);
+          }
+        });
+      }, { rootMargin: '50px', threshold: 0.1 });
+      
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            lazyFilms.forEach(img => filmObserver.observe(img));
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '100px', threshold: 0.1 });
+      
+      if (filmsSection) sectionObserver.observe(filmsSection);
+    });
+  </script>
 
   <!-- Élément tampon noir pour éliminer la bande grise -->
   <div class="black-buffer"></div>
@@ -2241,87 +2276,186 @@
     </div>
   </footer>
   
-  <!-- Script de gestion de menu -->
-  <script src="./js/navbar.js"></script>
+  <!-- Script de gestion de menu optimisé -->
+  <script src="./js/navbar.js" async defer></script>
 
-  <!-- Script pour mettre à jour les prix en fonction du nombre d'écrans -->
+  <!-- Script pour mettre à jour les prix - VERSION CORRIGÉE -->
   <script>
+    // Script optimisé et fonctionnel pour les prix
     document.addEventListener('DOMContentLoaded', function() {
-      // Sélectionner tous les sélecteurs d'écrans
-      const screenSelectors = document.querySelectorAll('.screens-select');
+      console.log('Initialisation du script prix...');
       
-      // Pour chaque sélecteur d'écrans, ajouter un événement de changement
-      screenSelectors.forEach(selector => {
-        selector.addEventListener('change', function() {
-          // Trouver la carte d'offre parente
-          const offerCard = this.closest('.offer-card');
-          if (!offerCard) return;
+      // Attendre que tous les éléments soient chargés
+      setTimeout(() => {
+        const screenSelectors = document.querySelectorAll('.screens-select');
+        console.log('Sélecteurs trouvés:', screenSelectors.length);
+        
+        screenSelectors.forEach((selector, index) => {
+          console.log(`Sélecteur ${index}:`, selector.id);
           
-          // Trouver l'élément de prix et le bouton de commande
-          const priceElement = offerCard.querySelector('.price');
-          const commandButton = offerCard.querySelector('.offer-command-btn');
-          if (!priceElement || !commandButton) return;
-          
-          // Récupérer le prix de base depuis l'attribut du bouton
-          const basePrice = parseFloat(commandButton.getAttribute('data-base-price') || '0');
-          const baseUrl = commandButton.getAttribute('data-base-url') || '';
-          
-          // Récupérer le nombre d'écrans sélectionné
-          const screens = parseInt(this.value);
-          
-          // Déterminer le supplément de prix en fonction du nombre d'écrans et du plan
-          let additionalPrice = 0;
-          let screenParam = '';
-          
-          // Détecter le type d'offre
-          const offerTitle = offerCard.querySelector('h3').textContent;
-          const selectId = selector.id;
-          
-          if (selectId === 'screens-3mois' || offerTitle.includes('3 mois') || basePrice === 9.99) {
-            // Plan 3 mois ou offre à 9.99€
-            if (screens === 2) additionalPrice = 10;
-            else if (screens === 3) additionalPrice = 20;
-            else if (screens === 4) additionalPrice = 30;
-            screenParam = screens > 1 ? `&screens=${screens}` : '';
-          } else if (selectId === 'screens-6mois' || offerTitle.includes('6 mois') || basePrice === 19.99) {
-            // Plan 6 mois
-            if (screens === 2) additionalPrice = 20;
-            else if (screens === 3) additionalPrice = 40;
-            else if (screens === 4) additionalPrice = 60;
-            screenParam = screens > 1 ? `&screens=${screens}` : '';
-          } else if (selectId === 'screens-12mois' || offerTitle.includes('12 mois') || basePrice === 29.99) {
-            // Plan 12 mois
-            if (screens === 2) additionalPrice = 30;
-            else if (screens === 3) additionalPrice = 50;
-            else if (screens === 4) additionalPrice = 70;
-            screenParam = screens > 1 ? `&screens=${screens}` : '';
-          }
-          
-          // Calculer le nouveau prix
-          const newPrice = basePrice + additionalPrice;
-          
-          // Mettre à jour l'affichage du prix
-          priceElement.textContent = `${newPrice.toFixed(2)}€`;
-          
-          // Mettre à jour l'URL du bouton de commande
-          if (baseUrl && commandButton.hasAttribute('href')) {
-            const price = `&price=${newPrice.toFixed(2)}`;
-            commandButton.setAttribute('href', `${baseUrl}${price}${screenParam}`);
-          }
-          
-          // Log pour le débogage
-          console.log('Mise à jour prix:', {
-            offre: offerTitle,
-            selectId: selectId,
-            basePrice: basePrice,
-            écrans: screens,
-            supplément: additionalPrice,
-            nouveauPrix: newPrice
+          selector.addEventListener('change', function() {
+            console.log('Changement détecté sur:', this.id, 'Valeur:', this.value);
+            
+            const offerCard = this.closest('.offer-card');
+            if (!offerCard) {
+              console.error('Carte d\'offre non trouvée');
+              return;
+            }
+            
+            const priceElement = offerCard.querySelector('.price');
+            const commandButton = offerCard.querySelector('.offer-command-btn');
+            
+            if (!priceElement || !commandButton) {
+              console.error('Éléments prix ou bouton non trouvés');
+              return;
+            }
+            
+            // Récupérer le prix de base depuis l'attribut du bouton
+            const basePrice = parseFloat(commandButton.getAttribute('data-base-price') || '0');
+            const baseUrl = commandButton.getAttribute('data-base-url') || '';
+            const screens = parseInt(this.value);
+            
+            console.log('Prix de base:', basePrice, 'Écrans:', screens);
+            
+            let additionalPrice = 0;
+            let screenParam = '';
+            
+            // Déterminer le supplément selon l'offre
+            if (this.id === 'screens-3mois' || basePrice === 9.99) {
+              // Plan 3 mois
+              if (screens === 2) additionalPrice = 10;
+              else if (screens === 3) additionalPrice = 20;
+              else if (screens === 4) additionalPrice = 30;
+            } else if (this.id === 'screens-6mois' || basePrice === 19.99) {
+              // Plan 6 mois
+              if (screens === 2) additionalPrice = 20;
+              else if (screens === 3) additionalPrice = 40;
+              else if (screens === 4) additionalPrice = 60;
+            } else if (this.id === 'screens-12mois' || basePrice === 29.99) {
+              // Plan 12 mois
+              if (screens === 2) additionalPrice = 30;
+              else if (screens === 3) additionalPrice = 50;
+              else if (screens === 4) additionalPrice = 70;
+            }
+            
+            const newPrice = basePrice + additionalPrice;
+            
+            console.log('Nouveau prix calculé:', newPrice);
+            
+            // Mettre à jour l'affichage du prix avec animation
+            priceElement.style.transform = 'scale(1.1)';
+            priceElement.style.color = '#E74C3C';
+            
+            setTimeout(() => {
+              priceElement.textContent = `${newPrice.toFixed(2)}€`;
+              priceElement.style.transform = 'scale(1)';
+              priceElement.style.color = '#ff8c8c';
+            }, 150);
+            
+            // Mettre à jour l'URL du bouton
+            if (baseUrl && commandButton.hasAttribute('href')) {
+              screenParam = screens > 1 ? `&screens=${screens}` : '';
+              const price = `&price=${newPrice.toFixed(2)}`;
+              commandButton.setAttribute('href', `${baseUrl}${price}${screenParam}`);
+              console.log('URL mise à jour:', `${baseUrl}${price}${screenParam}`);
+            }
           });
         });
-      });
+      }, 500); // Délai pour s'assurer que tout est chargé
     });
   </script>
+
+  <!-- Suppression de l'effet de reflet sur les boutons -->
+  <style>
+    /* Suppression complète des effets de reflet et brillance */
+    .btn, .btn-primary, .offer-card .btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      /* SUPPRESSION DE L'EFFET DE REFLET */
+      background: #6c5498 !important;
+      box-shadow: 0 4px 10px rgba(108, 84, 152, 0.3) !important;
+    }
+    
+    /* Suppression de tous les pseudo-éléments de brillance */
+    .btn::before, 
+    .btn-primary::before,
+    .offer-card .btn::before {
+      display: none !important;
+    }
+    
+    /* Nouveau hover sans reflet */
+    .btn:hover, 
+    .btn-primary:hover,
+    .offer-card .btn:hover {
+      background: #7f66b5 !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4) !important;
+    }
+    
+    .btn:active, 
+    .btn-primary:active,
+    .offer-card .btn:active {
+      transform: translateY(-1px) scale(0.98);
+      transition: transform 0.1s ease;
+    }
+    
+    /* Correction spécifique pour les boutons d'offre */
+    .offer-command-btn {
+      background: #6c5498 !important;
+      color: #fff !important;
+      padding: 10px 20px !important;
+      border-radius: 6px !important;
+      text-decoration: none !important;
+      font-size: 0.9rem !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+      border: none !important;
+      cursor: pointer !important;
+      display: inline-block !important;
+      text-align: center !important;
+      box-shadow: 0 4px 10px rgba(108, 84, 152, 0.3) !important;
+    }
+    
+    .offer-command-btn:hover {
+      background: #7f66b5 !important;
+      transform: translateY(-3px) !important;
+      box-shadow: 0 8px 20px rgba(108, 84, 152, 0.4) !important;
+      color: #fff !important;
+    }
+    
+    /* Animation du prix lors du changement */
+    .price {
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    /* Suppression globale des effets de brillance */
+    .shine,
+    *::before[content*="shine"],
+    .btn .shine,
+    .highlight-btn .shine {
+      display: none !important;
+      opacity: 0 !important;
+    }
+  </style>
+
+  <style>
+    /* Suppression de l'effet de brillance sur les liens de navigation */
+    .header-nav ul li a.highlight-btn::before {
+      display: none !important;
+    }
+    
+    /* Suppression de l'effet de brillance */
+    .header-nav ul li a.highlight-btn .shine {
+      display: none !important;
+    }
+    
+    /* Désactivation de l'animation shine */
+    @keyframes shine {
+      0% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+  </style>
 </body>
 </html>
 
