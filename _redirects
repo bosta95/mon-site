@@ -3,5 +3,22 @@
 # Redirection www vers non-www (force)
 https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 
+# Redirections des anciennes URLs d'offres vers les nouvelles
+/offer-details.html?product=Premium_IPTV_3_mois /offres/premium-3-mois/ 301!
+/offer-details.html?product=Premium_IPTV_6_mois /offres/premium-6-mois/ 301!
+/offer-details.html?product=Premium_IPTV_12_mois /offres/premium-12-mois/ 301!
+
+# Redirections des anciennes URLs d'abonnements
+/abonnement3mois /offres/premium-3-mois/ 301!
+/abonnement6mois /offres/premium-6-mois/ 301!  
+/abonnement12mois /offres/premium-12-mois/ 301!
+
+# Redirection index.html vers racine
+/index.html / 301!
+
+# Redirections des pages supprimées vers l'accueil
+/flyer.html / 301!
+/maintenance.html / 301!
+
 # Page 404 personnalisée
 /*  /404.html  404 
