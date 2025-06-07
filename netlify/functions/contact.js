@@ -1,8 +1,11 @@
 const nodemailer = require('nodemailer');
 
+function isValidEmail(email) {
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  return emailRegex.test(email);
+}
+
 exports.handler = async function(event, context) {
-  console.log('=== TEST PORT 587 NAMECHEAP ===');
-  
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
@@ -12,66 +15,71 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    console.log('📧 Test spécifique port 587 + STARTTLS...');
-    
-    // Configuration spéciale port 587 (souvent moins bloqué)
+    const { name, email, subject, message } = JSON.parse(event.body);
+
+    // Validation
+    if (!name || !email || !subject || !message) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Tous les champs sont requis' }),
+        headers: { 'Content-Type': 'application/json' }
+      };
+    }
+
+    if (!isValidEmail(email)) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Format d\'email invalide' }),
+        headers: { 'Content-Type': 'application/json' }
+      };
+    }
+
+    // Configuration SMTP Namecheap
     const transporter = nodemailer.createTransporter({
-      host: 'mail.privateemail.com',
-      port: 587, // Port 587 au lieu de 465
-      secure: false, // false pour port 587
-      requireTLS: true, // Force STARTTLS
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
+      secure: process.env.SMTP_PORT == '465',
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
-      },
-      tls: {
-        ciphers: 'SSLv3',
-        rejectUnauthorized: false
       }
     });
 
-    console.log('🔍 Test connexion port 587...');
-    await transporter.verify();
-    console.log('✅ Port 587 fonctionne !');
-
-    // Test envoi
-    const result = await transporter.sendMail({
+    // Envoi de l'email
+    await transporter.sendMail({
       from: `"IPTV Smarter Pro" <${process.env.SMTP_USER}>`,
-      to: process.env.SMTP_USER,
-      subject: 'Test port 587 depuis Netlify',
-      text: 'Si tu reçois ceci, le port 587 passe les restrictions Netlify !',
+      to: process.env.ADMIN_EMAIL || process.env.SMTP_USER,
+      subject: `[Contact] ${subject}`,
       html: `
-        <h2>🎉 Port 587 réussi !</h2>
-        <p>Ta messagerie Namecheap (40€/an) fonctionne avec Netlify via le port 587 !</p>
-        <p>Date: ${new Date().toLocaleString('fr-FR')}</p>
-      `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">Nouveau message de contact</h2>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+            <p><strong>Nom:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Sujet:</strong> ${subject}</p>
+            <p><strong>Message:</strong></p>
+            <div style="background: white; padding: 15px; border-radius: 4px; margin: 10px 0;">
+              ${message.replace(/\n/g, '<br>')}
+            </div>
+            <p><strong>Date:</strong> ${new Date().toLocaleString('fr-FR')}</p>
+          </div>
+        </div>
+      `,
+      replyTo: email
     });
-
-    console.log('✅ EMAIL ENVOYÉ via port 587 !');
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
-        message: '🎉 SUCCÈS ! Port 587 contourne les restrictions Netlify !',
-        messageId: result.messageId,
-        solution: 'Utiliser port 587 au lieu de 465'
-      }),
+      body: JSON.stringify({ message: 'Message envoyé avec succès' }),
       headers: { 'Content-Type': 'application/json' }
     };
 
   } catch (error) {
-    console.error('❌ Port 587 échoue aussi:', error.message);
-    
+    console.error('Erreur envoi email:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ 
-        error: 'Port 587 bloqué aussi - Netlify bloque vraiment SMTP',
-        solution: 'Utiliser Zapier webhook vers ta messagerie Namecheap',
-        webhook_info: {
-          principe: 'Formulaire → Zapier → Email via Namecheap',
-          cout: 'Gratuit (100 emails/mois)',
-          resultat: 'Tu reçois dans contact@iptvsmarterpros.com'
-        }
+        error: 'Erreur lors de l\'envoi du message'
       }),
       headers: { 'Content-Type': 'application/json' }
     };

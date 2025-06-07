@@ -1,9 +1,0 @@
-{
-  "name": "netlify-functions",
-  "version": "1.0.0",
-  "description": "Fonctions Netlify pour IPTV Smarters Pro",
-  "dependencies": {
-    "nodemailer": "^6.9.7",
-    "handlebars": "^4.7.8"
-  }
-} 
