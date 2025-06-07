@@ -70,86 +70,103 @@ exports.handler = async function(event, context) {
 
     // Test 3: Création du transporteur (sans envoi)
     console.log('🚛 TEST CREATION TRANSPORTEUR:');
+    const testResults = [];
+    
     try {
       const nodemailer = require('nodemailer');
       
       // Test avec différentes configurations
-      console.log('🔧 Test configuration 1: Port 465 SSL');
-      try {
-        const transporter1 = nodemailer.createTransporter({
-          host: process.env.SMTP_HOST,
-          port: 465,
-          secure: true,
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS
-          }
-        });
-        await transporter1.verify();
-        console.log('✅ Port 465 SSL: OK');
-      } catch (err465) {
-        console.log('❌ Port 465 SSL:', err465.message);
-        
-        // Test port 587 avec STARTTLS
-        console.log('🔧 Test configuration 2: Port 587 STARTTLS');
+      const configurations = [
+        { name: 'Port 465 SSL', port: 465, secure: true, requireTLS: false },
+        { name: 'Port 587 STARTTLS', port: 587, secure: false, requireTLS: true },
+        { name: 'Port 25 Plain', port: 25, secure: false, requireTLS: false }
+      ];
+      
+      for (const config of configurations) {
+        console.log(`🔧 Test ${config.name}...`);
         try {
-          const transporter2 = nodemailer.createTransporter({
+          const transporter = nodemailer.createTransporter({
             host: process.env.SMTP_HOST,
-            port: 587,
-            secure: false,
-            requireTLS: true,
+            port: config.port,
+            secure: config.secure,
+            requireTLS: config.requireTLS,
             auth: {
               user: process.env.SMTP_USER,
               pass: process.env.SMTP_PASS
-            }
+            },
+            timeout: 10000, // 10 secondes de timeout
+            debug: true
           });
-          await transporter2.verify();
-          console.log('✅ Port 587 STARTTLS: OK');
-        } catch (err587) {
-          console.log('❌ Port 587 STARTTLS:', err587.message);
           
-          // Test port 25
-          console.log('🔧 Test configuration 3: Port 25');
-          try {
-            const transporter3 = nodemailer.createTransporter({
-              host: process.env.SMTP_HOST,
-              port: 25,
-              secure: false,
-              auth: {
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASS
-              }
-            });
-            await transporter3.verify();
-            console.log('✅ Port 25: OK');
-          } catch (err25) {
-            console.log('❌ Port 25:', err25.message);
-            
-            // Échec de toutes les configurations
-            throw new Error(`Tous les ports échouent - 465: ${err465.code}, 587: ${err587.code}, 25: ${err25.code}`);
-          }
+          await transporter.verify();
+          console.log(`✅ ${config.name}: SUCCÈS`);
+          testResults.push({ config: config.name, status: 'SUCCESS' });
+          break; // Si une config marche, on s'arrête
+          
+        } catch (err) {
+          console.log(`❌ ${config.name}: ${err.message}`);
+          console.log(`📍 Code: ${err.code}`);
+          console.log(`📍 Errno: ${err.errno}`);
+          console.log(`📍 Syscall: ${err.syscall}`);
+          
+          testResults.push({ 
+            config: config.name, 
+            status: 'FAILED',
+            code: err.code,
+            message: err.message,
+            errno: err.errno,
+            syscall: err.syscall
+          });
         }
+      }
+      
+      // Si aucune config ne marche
+      if (testResults.every(r => r.status === 'FAILED')) {
+        console.error('❌ TOUTES LES CONFIGURATIONS ÉCHOUENT');
+        console.log('📊 Résumé des tests:', JSON.stringify(testResults, null, 2));
+        
+        // Analysons les erreurs
+        const errorAnalysis = [];
+        if (testResults.some(r => r.code === 'ECONNREFUSED')) {
+          errorAnalysis.push('🚫 ECONNREFUSED: Netlify bloque probablement les connexions SMTP sortantes');
+        }
+        if (testResults.some(r => r.code === 'ETIMEDOUT')) {
+          errorAnalysis.push('⏰ ETIMEDOUT: Timeout réseau, possible restriction firewall');
+        }
+        if (testResults.some(r => r.code === 'ENOTFOUND')) {
+          errorAnalysis.push('🔍 ENOTFOUND: Serveur SMTP introuvable, vérifiez SMTP_HOST');
+        }
+        if (testResults.some(r => r.code === 'EAUTH')) {
+          errorAnalysis.push('🔐 EAUTH: Problème d\'authentification, vérifiez SMTP_USER/SMTP_PASS');
+        }
+        
+        return {
+          statusCode: 500,
+          body: JSON.stringify({ 
+            error: 'Toutes les configurations SMTP échouent',
+            testResults: testResults,
+            analysis: errorAnalysis,
+            solution: 'Netlify bloque probablement SMTP. Solutions: 1) Utiliser SendGrid/Mailgun, 2) Contacter Netlify support, 3) Utiliser un webhook Zapier',
+            smtp_host: process.env.SMTP_HOST,
+            smtp_user: process.env.SMTP_USER
+          }),
+          headers: { 'Content-Type': 'application/json' }
+        };
       }
       
       console.log('✅ Au moins une configuration fonctionne');
       
     } catch (err) {
-      console.error('❌ Erreur transporteur/connexion:', err.message);
-      console.error('📍 Code erreur:', err.code);
-      console.error('📍 Errno:', err.errno);
+      console.error('❌ Erreur globale transporteur:', err.message);
+      console.error('📍 Stack:', err.stack);
       
       return {
         statusCode: 500,
         body: JSON.stringify({ 
-          error: 'Erreur connexion SMTP',
+          error: 'Erreur globale lors des tests SMTP',
           details: err.message,
-          code: err.code || 'UNKNOWN',
-          host: process.env.SMTP_HOST,
-          suggestions: [
-            'Vérifiez que SMTP_HOST = mail.privateemail.com',
-            'Vérifiez SMTP_USER et SMTP_PASS',
-            'Contactez Namecheap pour les restrictions IP'
-          ]
+          stack: err.stack,
+          testResults: testResults
         }),
         headers: { 'Content-Type': 'application/json' }
       };
