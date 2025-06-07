@@ -1,5 +1,9 @@
 # Redirections Netlify pour IPTV Smarters Pro
 
+# API Redirections vers les fonctions Netlify
+/api/contact /.netlify/functions/contact 200
+/api/order /.netlify/functions/order 200
+
 # Redirection www vers non-www (force)
 https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 

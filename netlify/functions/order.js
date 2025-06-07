@@ -56,31 +56,49 @@ function generateOrderNumber() {
 }
 
 exports.handler = async function(event, context) {
+  console.log('=== DÉBUT TRAITEMENT COMMANDE ===');
+  console.log('Méthode HTTP:', event.httpMethod);
+  console.log('Headers:', JSON.stringify(event.headers, null, 2));
+  
   if (event.httpMethod !== 'POST') {
+    console.log('❌ Méthode non autorisée:', event.httpMethod);
     return {
       statusCode: 405,
       body: JSON.stringify({ error: 'Method Not Allowed' }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      }
     };
   }
 
   try {
     const { email, product, orderNumber, paymentDetails } = JSON.parse(event.body);
+    console.log('Données reçues:', { email, product, orderNumber, paymentDetails });
 
     // Validation des entrées
     if (!email || !product) {
+      console.log('❌ Champs manquants');
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Email et produit requis' }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
       };
     }
 
     if (!isValidEmail(email)) {
+      console.log('❌ Email invalide:', email);
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Format d\'email invalide' }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        }
       };
     }
 
@@ -91,8 +109,18 @@ exports.handler = async function(event, context) {
       price: 'N/A' 
     };
     const finalOrderNumber = orderNumber || generateOrderNumber();
+    
+    console.log('📦 Produit:', productInfo);
+    console.log('🔢 Numéro de commande:', finalOrderNumber);
+
+    console.log('🔧 Configuration SMTP:', {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '***' : 'NON CONFIGURÉ'
+    });
 
     // Email de confirmation au client
+    console.log('📧 Envoi confirmation client à:', email);
     await emailUtils.sendTemplateEmail({
       to: email,
       subject: 'Confirmation de votre commande IPTV Smarter Pros',
@@ -106,8 +134,10 @@ exports.handler = async function(event, context) {
     });
 
     // Email de notification à l'administrateur
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || 'contact@iptvsmarterpros.com';
+    console.log('📧 Envoi notification admin à:', adminEmail);
     await emailUtils.sendTemplateEmail({
-      to: process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || 'contact@iptvsmarterpros.com',
+      to: adminEmail,
       subject: `🚨 Nouvelle commande #${finalOrderNumber} - ${productInfo.name}`,
       templateName: 'admin-notification',
       data: {
@@ -128,21 +158,34 @@ exports.handler = async function(event, context) {
       }
     });
 
+    console.log('✅ Commande traitée avec succès');
+
     return {
       statusCode: 200,
       body: JSON.stringify({ 
         message: 'Commande confirmée avec succès',
         orderNumber: finalOrderNumber
       }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
     };
 
   } catch (error) {
-    console.error('Erreur lors du traitement de la commande:', error);
+    console.error('❌ ERREUR lors du traitement de la commande:', error);
+    console.error('Stack trace:', error.stack);
+    
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erreur lors du traitement de la commande' }),
-      headers: { 'Content-Type': 'application/json' }
+      body: JSON.stringify({ 
+        error: 'Erreur lors du traitement de la commande',
+        details: error.message
+      }),
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
     };
   }
 }; 
