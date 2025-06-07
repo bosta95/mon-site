@@ -6,19 +6,6 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Configuration des fonctions serverless
-[functions]
-  directory = "netlify/functions"
-
-# Configuration spécifique pour les fonctions email
-[[functions]]
-  function = "contact"
-  timeout = 30
-
-[[functions]]
-  function = "order"
-  timeout = 30
-
 # Headers spécifiques pour sitemap.xml
 [[headers]]
   for = "/sitemap.xml"
