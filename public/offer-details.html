@@ -819,7 +819,52 @@
           
           // Finaliser la transaction
           onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
+            return actions.order.capture().then(async function(details) {
+              try {
+                // Récupérer les informations nécessaires
+                const productName = window.selectedProductName || document.getElementById('payment-product-name').textContent;
+                const productPrice = window.selectedProductPrice || document.getElementById('payment-total').textContent;
+                const customerEmail = details.payer.email_address;
+                
+                // Générer un numéro de commande unique
+                const orderNumber = 'IPTV-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
+                
+                // Déterminer le type de produit basé sur le nom
+                let productKey = '3months'; // par défaut
+                if (productName.includes('1 Mois')) productKey = '1month';
+                else if (productName.includes('3 Mois')) productKey = '3months';
+                else if (productName.includes('6 Mois')) productKey = '6months';
+                else if (productName.includes('12 Mois')) productKey = '12months';
+                
+                // Envoyer les emails de confirmation
+                const emailResponse = await fetch('/.netlify/functions/order', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    email: customerEmail,
+                    product: productKey,
+                    orderNumber: orderNumber,
+                    paymentDetails: {
+                      paypalOrderId: data.orderID,
+                      payerName: details.payer.name.given_name + ' ' + details.payer.name.surname,
+                      amount: productPrice,
+                      currency: 'EUR'
+                    }
+                  })
+                });
+                
+                if (emailResponse.ok) {
+                  console.log('Emails de confirmation envoyés avec succès');
+                } else {
+                  console.error('Erreur lors de l\'envoi des emails:', await emailResponse.text());
+                }
+                
+              } catch (error) {
+                console.error('Erreur lors du traitement post-paiement:', error);
+              }
+              
               // Afficher un message de succès
               alert('Paiement réussi! Merci ' + details.payer.name.given_name + '. Vous recevrez vos identifiants par email dans quelques instants.');
               

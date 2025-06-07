@@ -1,136 +1,392 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nouvelle Commande</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+    }
+    
+    .email-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+      padding: 32px;
+      text-align: center;
+    }
+    
+    .logo {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .alert-badge {
+      background: #ffffff;
+      color: #dc2626;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-block;
+      margin: 12px 0;
+    }
+    
+    .content {
+      padding: 40px 32px;
+    }
+    
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    
+    .order-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .card-title::before {
+      content: "📋";
+      margin-right: 8px;
+    }
+    
+    .order-row {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    
+    .order-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .order-label {
+      font-weight: 500;
+      color: #64748b;
+      min-width: 120px;
+      margin-right: 16px;
+    }
+    
+    .order-value {
+      color: #1e293b;
+      flex: 1;
+    }
+    
+    .price {
+      color: #10b981;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    .order-number {
+      font-family: 'SF Mono', Monaco, monospace;
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .email-link {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    
+    .email-link:hover {
+      text-decoration: underline;
+    }
+    
+    .status-badge {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .actions-card {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid #dc2626;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    
+    .actions-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #991b1b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .actions-title::before {
+      content: "⚡";
+      margin-right: 8px;
+    }
+    
+    .action-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .action-item {
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+      color: #7f1d1d;
+      font-weight: 500;
+    }
+    
+    .action-item::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #dc2626;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    .action-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .buttons-container {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    
+    .button {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    
+    .button-primary {
+      background: #dc2626;
+      color: #ffffff;
+    }
+    
+    .button-primary:hover {
+      background: #b91c1c;
+    }
+    
+    .button-secondary {
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .button-secondary:hover {
+      background: #f1f5f9;
+    }
+    
+    .footer {
+      background: #f8fafc;
+      padding: 24px 32px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .footer-text {
+      color: #64748b;
+      font-size: 14px;
+    }
+    
+    .urgent-notice {
+      background: #fef3c7;
+      border: 1px solid #fbbf24;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    
+    .urgent-text {
+      color: #92400e;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 640px) {
+      .email-container {
+        margin: 20px;
+        border-radius: 12px;
+      }
+      
+      .header, .content {
+        padding: 24px 20px;
+      }
+      
+      .title {
+        font-size: 24px;
+      }
+      
+      .order-row, .buttons-container {
+        flex-direction: column;
+      }
+      
+      .order-label {
+        margin-bottom: 4px;
+        margin-right: 0;
+      }
+      
+      .button {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Montserrat', Arial, sans-serif; background-color: #0b0b15; color: #fff;">
-  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px; margin: 20px auto; border-spacing: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-    <!-- HEADER -->
-    <tr>
-      <td align="center" bgcolor="#141226" style="padding: 0;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-          <tr>
-            <td align="center" style="padding: 25px 0; background: linear-gradient(90deg, #141226, #271e3d);">
-              <img src="https://iptvsmarterpros.com/images/logo.svg" alt="IPTV Smarter Pros" style="width: 220px; height: auto;">
-            </td>
-          </tr>
-          <tr>
-            <td height="5" style="padding: 0; background: linear-gradient(90deg, #E74C3C, #ff8c8c); line-height: 5px; font-size: 0;">&nbsp;</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+<body>
+  <div class="email-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">🔔 IPTV Smarter Pros - Admin</div>
+      <div class="alert-badge">🚨 Nouvelle Commande</div>
+    </div>
     
-    <!-- CONTENT -->
-    <tr>
-      <td bgcolor="#111" style="padding: 0; background: linear-gradient(to bottom, #0b0b15, #111);">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-          <!-- NOTIFICATION BANNER -->
-          <tr>
-            <td bgcolor="#E74C3C" style="padding: 15px 30px; text-align: center; color: #fff; background: linear-gradient(90deg, #E74C3C, #ff3e2f);">
-              <h2 style="margin: 0; font-size: 22px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
-                Nouvelle commande #{{orderNumber}}
-              </h2>
-            </td>
-          </tr>
-          
-          <!-- MAIN CONTENT -->
-          <tr>
-            <td style="padding: 30px 35px;">
-              <p style="margin: 0 0 25px 0; font-size: 16px; line-height: 1.6; color: #fff;">Une nouvelle commande a été passée. Voici les informations essentielles :</p>
-              
-              <!-- ORDER DETAILS - SIMPLIFIED -->
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
-                <tr>
-                  <td colspan="2" bgcolor="#141226" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 18px; font-weight: 600; color: #ff8c8c;">
-                    Détails de la commande
-                  </td>
-                </tr>
-                <tr>
-                  <td width="40%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; color: #ccc;">Numéro</td>
-                  <td width="60%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><span style="font-family: monospace; font-size: 15px; color: #E74C3C; font-weight: 600;">{{orderNumber}}</span></td>
-                </tr>
-                <tr>
-                  <td width="40%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; color: #ccc;">Date</td>
-                  <td width="60%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff;">{{orderDate}}</td>
-                </tr>
-                <tr>
-                  <td width="40%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; color: #ccc;">Produit</td>
-                  <td width="60%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff;">{{productName}}</td>
-                </tr>
-                <tr>
-                  <td width="40%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; color: #ccc;">Prix</td>
-                  <td width="60%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);"><strong style="color: #ff8c8c;">{{productPrice}}</strong></td>
-                </tr>
-                <tr>
-                  <td width="40%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 500; color: #ccc;">Client</td>
-                  <td width="60%" style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <a href="mailto:{{clientEmail}}" style="color: #E74C3C; text-decoration: none;">{{clientEmail}}</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="40%" style="padding: 15px; font-weight: 500; color: #ccc;">Paiement</td>
-                  <td width="60%" style="padding: 15px;">
-                    <span style="display: inline-block; padding: 5px 10px; background: rgba(255, 140, 140, 0.1); color: #ff8c8c; border-radius: 4px; font-size: 14px; font-weight: 500; border: 1px solid rgba(255, 140, 140, 0.3);">À vérifier</span>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- ACTIONS NEEDED - SIMPLIFIED -->
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin: 0 0 25px 0; background: rgba(231, 76, 60, 0.1); padding: 20px; border-radius: 12px; border: 1px solid rgba(231, 76, 60, 0.2);">
-                <tr>
-                  <td>
-                    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #ff8c8c;">Actions à effectuer</h3>
-                    <ol style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 1.6; color: #ddd;">
-                      <li style="margin-bottom: 12px;">Vérifier le paiement dans votre espace PayPal</li>
-                      <li style="margin-bottom: 12px;">Générer les identifiants d'accès pour le client</li>
-                      <li>Envoyer les identifiants au client</li>
-                    </ol>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- QUICK ACTION BUTTONS -->
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-                <tr>
-                  <td width="50%" style="padding: 5px;">
-                    <a href="https://iptvsmarterpros.com/admin/generate-account" target="_blank" style="display: block; text-align: center; background: linear-gradient(90deg, #E74C3C, #ff3e2f); color: white; padding: 15px; border-radius: 25px; text-decoration: none; margin: 15px 0; font-weight: bold;">
-                      Générer compte
-                    </a>
-                  </td>
-                  <td width="50%" style="padding: 5px;">
-                    <a href="https://iptvsmarterpros.com/admin/send-credentials/{{orderNumber}}" target="_blank" style="display: block; text-align: center; background: linear-gradient(90deg, #271e3d, #141226); color: white; padding: 15px; border-radius: 25px; text-decoration: none; margin: 15px 0; font-weight: bold;">
-                      Envoyer identifiants
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+    <!-- Content -->
+    <div class="content">
+      <h1 class="title">Nouvelle Commande Reçue</h1>
+      <p class="subtitle">Une commande vient d'être passée et nécessite votre attention</p>
+      
+      <!-- Urgent Notice -->
+      <div class="urgent-notice">
+        <p class="urgent-text">⏰ Action requise - Traitement dans les plus brefs délais</p>
+      </div>
+      
+      <!-- Order Details -->
+      <div class="order-card">
+        <div class="card-title">Détails de la commande</div>
+        
+        <div class="order-row">
+          <div class="order-label">N° Commande :</div>
+          <div class="order-value">
+            <span class="order-number">{{orderNumber}}</span>
+          </div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">Date :</div>
+          <div class="order-value">{{orderDate}} à {{orderTime}}</div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">Produit :</div>
+          <div class="order-value">
+            <strong>{{productName}}</strong>
+            <div style="font-size: 14px; color: #64748b; margin-top: 4px;">
+              {{productDescription}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">Prix :</div>
+          <div class="order-value">
+            <span class="price">{{productPrice}}</span>
+          </div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">Client :</div>
+          <div class="order-value">
+            <a href="mailto:{{clientEmail}}" class="email-link">{{clientEmail}}</a>
+          </div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">Paiement :</div>
+          <div class="order-value">
+            <span class="status-badge">À vérifier</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Actions Required -->
+      <div class="actions-card">
+        <div class="actions-title">Actions à effectuer</div>
+        <ol class="action-list">
+          <li class="action-item">Vérifier le paiement PayPal</li>
+          <li class="action-item">Générer les identifiants d'accès</li>
+          <li class="action-item">Envoyer les identifiants au client</li>
+        </ol>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="buttons-container">
+        <a href="https://iptvsmarterpros.com/admin/generate-account" class="button button-primary">
+          🔑 Générer Compte
+        </a>
+        <a href="https://iptvsmarterpros.com/admin/send-credentials/{{orderNumber}}" class="button button-secondary">
+          📧 Envoyer Identifiants
+        </a>
+      </div>
+    </div>
     
-    <!-- FOOTER -->
-    <tr>
-      <td style="padding: 0;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-          <tr>
-            <td height="5" style="padding: 0; background: linear-gradient(90deg, #E74C3C, #ff8c8c); line-height: 5px; font-size: 0;">&nbsp;</td>
-          </tr>
-          <tr>
-            <td bgcolor="#141226" style="padding: 20px; text-align: center; background: linear-gradient(90deg, #141226, #271e3d);">
-              <p style="margin: 0; font-size: 14px; color: #aaa;">
-                &copy; 2025 IPTV Smarter Pros - Tous droits réservés
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+    <!-- Footer -->
+    <div class="footer">
+      <p class="footer-text">
+        © 2025 IPTV Smarter Pros • Notification automatique
+      </p>
+    </div>
+  </div>
 </body>
-</html> 
+</html>

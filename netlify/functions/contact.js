@@ -1,14 +1,16 @@
-const nodemailer = require('nodemailer');
-const xss = require('xss');
+const path = require('path');
 
-// Validation des entrées
+// Chemin vers email-utils depuis le dossier netlify/functions
+const emailUtils = require('../../email-utils');
+
 function isValidEmail(email) {
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   return emailRegex.test(email) && email.length <= 254;
 }
 
 function sanitizeInput(input) {
-  return xss(input.trim());
+  if (!input) return '';
+  return input.toString().trim().slice(0, 1000); // Limiter la longueur
 }
 
 exports.handler = async function(event, context) {
@@ -17,10 +19,7 @@ exports.handler = async function(event, context) {
     return { 
       statusCode: 405, 
       body: JSON.stringify({ error: 'Method Not Allowed' }),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Content-Type-Options': 'nosniff'
-      }
+      headers: { 'Content-Type': 'application/json' }
     };
   }
 
@@ -35,10 +34,10 @@ exports.handler = async function(event, context) {
       };
     }
 
-    const { email, subject, message } = JSON.parse(event.body);
+    const { name, email, subject, message } = JSON.parse(event.body);
 
     // Validation des entrées
-    if (!email || !subject || !message) {
+    if (!name || !email || !subject || !message) {
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Tous les champs sont requis' }),
@@ -54,86 +53,51 @@ exports.handler = async function(event, context) {
       };
     }
 
-    if (message.length > 1000 || subject.length > 200) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Message ou sujet trop long' }),
-        headers: { 'Content-Type': 'application/json' }
-      };
-    }
-
     // Assainissement des entrées
+    const sanitizedName = sanitizeInput(name);
     const sanitizedSubject = sanitizeInput(subject);
     const sanitizedMessage = sanitizeInput(message);
 
-    // Configuration du transporteur email
-    const smtpConfig = {
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      },
-      tls: {
-        minVersion: 'TLSv1.2',
-        ciphers: 'HIGH:!aNULL:!MD5'
+    // Utiliser email-utils pour envoyer l'email de contact à l'admin
+    await emailUtils.sendTemplateEmail({
+      to: process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || 'contact@iptvsmarterpros.com',
+      subject: `[Contact] ${sanitizedSubject}`,
+      templateName: 'contact-message',
+      data: {
+        name: sanitizedName,
+        email: email,
+        subject: sanitizedSubject,
+        message: sanitizedMessage,
+        date: new Date().toLocaleString('fr-FR')
       }
-    };
-
-    const transporter = nodemailer.createTransport(smtpConfig);
-
-    // Vérification de la connexion SMTP
-    await transporter.verify();
-
-    // Email à l'administrateur
-    await transporter.sendMail({
-      from: `"IPTV Contact" <${process.env.SMTP_USER}>`,
-      to: process.env.MERCHANT_EMAIL,
-      subject: `Nouveau message de contact - ${sanitizedSubject}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #2c3e50;">Nouveau message de contact</h1>
-          <p><strong>De :</strong> ${email}</p>
-          <p><strong>Sujet :</strong> ${sanitizedSubject}</p>
-          <p><strong>Message :</strong></p>
-          <p style="white-space: pre-wrap;">${sanitizedMessage}</p>
-        </div>
-      `
     });
 
-    // Email de confirmation au client
-    await transporter.sendMail({
-      from: `"IPTV Smarter Pros" <${process.env.SMTP_USER}>`,
+    // Optionnel : Envoyer un email de confirmation au client
+    // (Vous pouvez décommenter si vous voulez une confirmation automatique)
+    /*
+    await emailUtils.sendTemplateEmail({
       to: email,
-      subject: 'Confirmation de réception de votre message - IPTV Smarter Pros',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #2c3e50;">Nous avons bien reçu votre message</h1>
-          <p>Cher client,</p>
-          <p>Nous confirmons la réception de votre message concernant "${sanitizedSubject}".</p>
-          <p>Notre équipe vous répondra dans les plus brefs délais.</p>
-          <p>Cordialement,<br>L'équipe IPTV Smarter Pros</p>
-        </div>
-      `
+      subject: 'Confirmation de réception - IPTV Smarter Pros',
+      templateName: 'contact-confirmation',
+      data: {
+        name: sanitizedName,
+        subject: sanitizedSubject
+      }
     });
+    */
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Emails envoyés avec succès' }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-store'
-      }
+      body: JSON.stringify({ message: 'Message envoyé avec succès' }),
+      headers: { 'Content-Type': 'application/json' }
     };
+
   } catch (error) {
+    console.error('Erreur lors de l\'envoi du message de contact:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erreur lors de l\'envoi des emails' }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-store'
-      }
+      body: JSON.stringify({ error: 'Erreur lors de l\'envoi du message' }),
+      headers: { 'Content-Type': 'application/json' }
     };
   }
 }; 

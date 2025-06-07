@@ -1,140 +1,361 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmation de Commande - IPTV Smarter Pros</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+    }
+    
+    .email-container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      padding: 32px;
+      text-align: center;
+    }
+    
+    .logo {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .tagline {
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    
+    .success-badge {
+      background: #10b981;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-block;
+      margin: 16px 0 8px 0;
+    }
+    
+    .content {
+      padding: 40px 32px;
+    }
+    
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    
+    .order-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .card-title::before {
+      content: "📦";
+      margin-right: 8px;
+    }
+    
+    .order-row {
+      display: flex;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    
+    .order-row:last-child {
+      margin-bottom: 0;
+    }
+    
+    .order-label {
+      font-weight: 500;
+      color: #64748b;
+      min-width: 100px;
+      margin-right: 16px;
+    }
+    
+    .order-value {
+      color: #1e293b;
+      flex: 1;
+    }
+    
+    .price {
+      color: #10b981;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    
+    .order-number {
+      font-family: 'SF Mono', Monaco, monospace;
+      background: #f1f5f9;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #475569;
+    }
+    
+    .next-steps {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-left: 4px solid #0ea5e9;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+    
+    .steps-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0c4a6e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .steps-title::before {
+      content: "✨";
+      margin-right: 8px;
+    }
+    
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .step-item {
+      margin-bottom: 12px;
+      padding-left: 24px;
+      position: relative;
+      color: #475569;
+    }
+    
+    .step-item::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #0ea5e9;
+      font-weight: bold;
+    }
+    
+    .step-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .highlight {
+      font-weight: 600;
+      color: #1e293b;
+    }
+    
+    .buttons-container {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    
+    .button {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    
+    .button-primary {
+      background: #3b82f6;
+      color: #ffffff;
+    }
+    
+    .button-primary:hover {
+      background: #2563eb;
+    }
+    
+    .button-secondary {
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .button-secondary:hover {
+      background: #f1f5f9;
+    }
+    
+    .footer {
+      background: #f8fafc;
+      padding: 24px 32px;
+      text-align: center;
+      border-top: 1px solid #e2e8f0;
+    }
+    
+    .footer-text {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .support-link {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    
+    .support-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 640px) {
+      .email-container {
+        margin: 20px;
+        border-radius: 12px;
+      }
+      
+      .header, .content {
+        padding: 24px 20px;
+      }
+      
+      .title {
+        font-size: 24px;
+      }
+      
+      .order-row, .buttons-container {
+        flex-direction: column;
+      }
+      
+      .order-label {
+        margin-bottom: 4px;
+        margin-right: 0;
+      }
+      
+      .button {
+        margin-bottom: 12px;
+      }
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Montserrat', Arial, sans-serif; background-color: #0b0b15; color: #fff;">
-  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 650px; margin: 20px auto; border-spacing: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-    <!-- HEADER -->
-    <tr>
-      <td align="center" bgcolor="#141226" style="padding: 0;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-          <tr>
-            <td align="center" style="padding: 25px 0; background: linear-gradient(90deg, #141226, #271e3d);">
-              <img src="https://iptvsmarterpros.com/images/logo.svg" alt="IPTV Smarter Pros" style="width: 220px; height: auto;">
-            </td>
-          </tr>
-          <tr>
-            <td height="5" style="padding: 0; background: linear-gradient(90deg, #E74C3C, #ff8c8c); line-height: 5px; font-size: 0;">&nbsp;</td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+<body>
+  <div class="email-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">IPTV Smarter Pros</div>
+      <div class="tagline">Votre service IPTV premium</div>
+      <div class="success-badge">✅ Commande confirmée</div>
+    </div>
     
-    <!-- CONTENT -->
-    <tr>
-      <td bgcolor="#111" style="padding: 0; background: linear-gradient(to bottom, #0b0b15, #111);">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-          <!-- ORDER CONFIRMATION BANNER -->
-          <tr>
-            <td bgcolor="#27ae60" style="padding: 15px 30px; text-align: center; color: #fff; background: linear-gradient(90deg, #27ae60, #2ecc71);">
-              <h2 style="margin: 0; font-size: 22px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
-                Commande Confirmée
-              </h2>
-            </td>
-          </tr>
-          
-          <!-- MAIN CONTENT -->
-          <tr>
-            <td style="padding: 30px 35px;">
-              <h2 style="margin: 0 0 20px; font-size: 24px; color: #fff; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">Merci pour votre commande !</h2>
-              
-              <p style="margin: 0 0 25px 0; font-size: 16px; line-height: 1.6; color: #ddd;">
-                Votre commande a bien été reçue et est en cours de traitement. Voici un récapitulatif :
-              </p>
-              
-              <!-- ORDER SUMMARY - SIMPLIFIED -->
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin: 0 0 30px 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
-                <tr>
-                  <td colspan="2" style="background-color: #141226; padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <h3 style="margin: 0; font-size: 18px; color: #ff8c8c; font-weight: 600;">Détails de la commande</h3>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); width: 40%;">
-                    <p style="margin: 0; font-weight: 600; color: #ccc;">Produit:</p>
-                  </td>
-                  <td style="padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <p style="margin: 0; color: #fff; font-weight: 500;">{{productName}}</p>
-                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #aaa;">{{productDescription}}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); width: 40%;">
-                    <p style="margin: 0; font-weight: 600; color: #ccc;">Prix:</p>
-                  </td>
-                  <td style="padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <p style="margin: 0; color: #ff8c8c; font-weight: 700;">{{productPrice}}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); width: 40%;">
-                    <p style="margin: 0; font-weight: 600; color: #ccc;">Numéro:</p>
-                  </td>
-                  <td style="padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <p style="margin: 0; color: #fff; font-family: monospace; font-size: 15px;">{{orderNumber}}</p>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- NEXT STEPS - SIMPLIFIED -->
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin: 30px 0; background: rgba(39, 174, 96, 0.1); padding: 20px; border-radius: 12px; border: 1px solid rgba(39, 174, 96, 0.2);">
-                <tr>
-                  <td>
-                    <h3 style="margin: 0 0 15px 0; font-size: 18px; color: #2ecc71;">Prochaines étapes</h3>
-                    <ul style="margin: 0 0 0 20px; padding: 0; font-size: 15px; line-height: 1.6; color: #ddd;">
-                      <li style="margin-bottom: 10px;"><strong style="color: #fff;">Vos identifiants</strong> seront envoyés dans les 10 minutes dans un email séparé.</li>
-                      <li style="margin-bottom: 10px;"><strong style="color: #fff;">Consultez nos tutoriels</strong> pour installer facilement votre service IPTV.</li>
-                      <li><strong style="color: #fff;">Notre support technique</strong> est disponible 24/7 pour vous aider.</li>
-                    </ul>
-                  </td>
-                </tr>
-              </table>
-              
-              <!-- ACTION BUTTONS -->
-              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0; margin: 30px 0; text-align: center;">
-                <tr>
-                  <td width="50%" style="padding: 5px;">
-                    <a href="https://iptvsmarterpros.com/tutoriel.html" style="display: block; text-align: center; background: linear-gradient(90deg, #E74C3C, #ff3e2f); color: white; padding: 15px; border-radius: 25px; text-decoration: none; margin: 15px 0; font-weight: bold;">
-                      Guide d'installation
-                    </a>
-                  </td>
-                  <td width="50%" style="padding: 5px;">
-                    <a href="https://iptvsmarterpros.com/contact.html" style="display: block; text-align: center; background: linear-gradient(90deg, #271e3d, #141226); color: white; padding: 15px; border-radius: 25px; text-decoration: none; margin: 15px 0; font-weight: bold;">
-                      Nous contacter
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+    <!-- Content -->
+    <div class="content">
+      <h1 class="title">Merci pour votre commande !</h1>
+      <p class="subtitle">Votre paiement a été traité avec succès</p>
+      
+      <!-- Order Details -->
+      <div class="order-card">
+        <div class="card-title">Détails de votre commande</div>
+        
+        <div class="order-row">
+          <div class="order-label">Produit :</div>
+          <div class="order-value">
+            <strong>{{productName}}</strong>
+            <div style="font-size: 14px; color: #64748b; margin-top: 4px;">
+              {{productDescription}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">Prix :</div>
+          <div class="order-value">
+            <span class="price">{{productPrice}}</span>
+          </div>
+        </div>
+        
+        <div class="order-row">
+          <div class="order-label">N° commande :</div>
+          <div class="order-value">
+            <span class="order-number">{{orderNumber}}</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Next Steps -->
+      <div class="next-steps">
+        <div class="steps-title">Prochaines étapes</div>
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="highlight">Vos identifiants d'accès</span> seront envoyés dans les 10 minutes dans un email séparé
+          </li>
+          <li class="step-item">
+            <span class="highlight">Consultez notre guide</span> pour installer votre service IPTV facilement
+          </li>
+          <li class="step-item">
+            <span class="highlight">Notre support technique</span> est disponible 24h/24 pour vous accompagner
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="buttons-container">
+        <a href="https://iptvsmarterpros.com/tutoriel.html" class="button button-primary">
+          📱 Guide d'installation
+        </a>
+        <a href="https://iptvsmarterpros.com/contact.html" class="button button-secondary">
+          💬 Nous contacter
+        </a>
+      </div>
+    </div>
     
-    <!-- FOOTER -->
-    <tr>
-      <td style="padding: 0;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing: 0;">
-          <tr>
-            <td height="5" style="padding: 0; background: linear-gradient(90deg, #E74C3C, #ff8c8c); line-height: 5px; font-size: 0;">&nbsp;</td>
-          </tr>
-          <tr>
-            <td bgcolor="#141226" style="padding: 20px; text-align: center; background: linear-gradient(90deg, #141226, #271e3d);">
-              <p style="margin: 0 0 10px 0; font-size: 14px; color: #aaa;">
-                &copy; 2025 IPTV Smarter Pros - Tous droits réservés
-              </p>
-              <p style="margin: 0; font-size: 12px; color: #777;">
-                Pour toute question, contactez notre <a href="https://iptvsmarterpros.com/contact.html" style="color: #ff8c8c; text-decoration: none;">support 24/7</a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+    <!-- Footer -->
+    <div class="footer">
+      <p class="footer-text">
+        © 2025 IPTV Smarter Pros • Tous droits réservés
+      </p>
+      <p class="footer-text">
+        Besoin d'aide ? Contactez notre <a href="https://iptvsmarterpros.com/contact.html" class="support-link">support 24h/24</a>
+      </p>
+    </div>
+  </div>
 </body>
-</html> 
+</html>

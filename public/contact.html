@@ -435,23 +435,37 @@
         /* Notification de statut */
         .status-message {
             margin-top: 20px;
-            padding: 12px 16px;
+            padding: 15px;
             border-radius: 8px;
-            display: none;
             font-weight: 500;
-            font-size: 0.95rem;
         }
         
-        .status-success {
-            background-color: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
+        .status-message.success {
+            background: rgba(46, 204, 113, 0.1);
             border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
         }
         
-        .status-error {
-            background-color: rgba(231, 76, 60, 0.15);
-            color: #e74c3c;
+        .status-message.error {
+            background: rgba(231, 76, 60, 0.1);
             border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+        
+        .status-message.loading {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            color: #3498db;
+        }
+        
+        .status-message i {
+            margin-right: 8px;
+        }
+        
+        .btn-send:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
         }
         
         /* Footer élégant et cohérent */
@@ -734,6 +748,63 @@
 
     <!-- Scripts -->
     <script src="./js/navbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            const statusMessage = document.getElementById('status-message');
+            const submitButton = contactForm.querySelector('.btn-send');
+            
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Afficher le message de chargement
+                statusMessage.innerHTML = '<div class="loading-message"><i class="fas fa-spinner fa-spin"></i> Envoi en cours...</div>';
+                statusMessage.className = 'status-message loading';
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+                
+                try {
+                    // Récupérer les données du formulaire
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value
+                    };
+                    
+                    // Envoyer la requête
+                    const response = await fetch('/.netlify/functions/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        // Succès
+                        statusMessage.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i> Message envoyé avec succès ! Nous vous répondrons rapidement.</div>';
+                        statusMessage.className = 'status-message success';
+                        contactForm.reset();
+                    } else {
+                        // Erreur
+                        statusMessage.innerHTML = `<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Erreur: ${result.error || 'Une erreur est survenue'}</div>`;
+                        statusMessage.className = 'status-message error';
+                    }
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi:', error);
+                    statusMessage.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Erreur de connexion. Veuillez réessayer.</div>';
+                    statusMessage.className = 'status-message error';
+                } finally {
+                    // Réactiver le bouton
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 
