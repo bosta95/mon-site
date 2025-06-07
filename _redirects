@@ -20,5 +20,22 @@ https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 /flyer.html / 301!
 /maintenance.html / 301!
 
+# Corrections SEO - Redirections pour éviter les 404
+/inscription /contact.html 301!
+/espace-client /contact.html 301!
+/concours.html /contact.html 301!
+/concours /contact.html 301!
+/offer /offer-details.html 301!
+/payment /offer-details.html 301!
+/blog.html /blog/ 301!
+/privacy /conditions.html 301!
+/politique-confidentialite /conditions.html 301!
+/conditions-generales /conditions.html 301!
+
+# Redirections anciennes URLs produits
+/offer-details?product=* /offer-details.html 301!
+/payment.html?plan=* /offer-details.html 301!
+/offer?product=* /offer-details.html 301!
+
 # Page 404 personnalisée
 /*  /404.html  404 
