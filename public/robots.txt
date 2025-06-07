@@ -1,7 +1,6 @@
-# Configuration optimisee pour l'indexation Google
-# Mots-cles principaux: IPTV Smarters Pro, codes Xtream IPTV, IPTV sans buffering, 
-# chaines sport IPTV, guide EPG IPTV, IPTV Samsung Smart TV, IPTV Android Box, 
-# IPTV M3U, abonnement IPTV stable, VOD 4K HD, test IPTV gratuit
+# Configuration optimisee pour l'indexation des moteurs de recherche
+# Site: IPTV Smarters Pro - Service de television numerique premium
+# Compatible: Smart TV Samsung, Android Box, iOS, tous appareils
 
 User-agent: *
 Allow: /
@@ -36,6 +35,8 @@ Allow: /about.html
 Allow: /contact.html
 Allow: /conditions-generales.html
 Allow: /politique-confidentialite.html
+Allow: /offer.html
+Allow: /conditions.html
 
 # Autoriser l'indexation du dossier blog
 Allow: /blog/*.html
@@ -111,5 +112,5 @@ Disallow: /
 User-agent: YandexBot
 Disallow: /
 
-# Lien vers le sitemap
+# Lien vers le sitemap optimise
 Sitemap: https://iptvsmarterpros.com/sitemap.xml

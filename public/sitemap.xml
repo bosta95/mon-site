@@ -1,99 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Page d'accueil - Priorité maximale -->
     <url>
         <loc>https://iptvsmarterpros.com/</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
+    
+    <!-- Pages principales - Haute priorité -->
     <url>
         <loc>https://iptvsmarterpros.com/offer-details.html</loc>
-        <lastmod>2025-01-24</lastmod>
+        <lastmod>2025-01-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/offres/premium-3-mois/</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/offres/premium-6-mois/</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/offres/premium-12-mois/</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
+    
     <url>
         <loc>https://iptvsmarterpros.com/tutoriel.html</loc>
-        <lastmod>2025-01-24</lastmod>
+        <lastmod>2025-01-07</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/blog.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/blog/tendances-streaming-2025.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/blog/eliminer-buffering-iptv.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/blog/guide-epg-iptv.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/faq.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/about.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/contact.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/conditions-generales.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/politique-confidentialite.html</loc>
-        <lastmod>2025-01-24</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
+    
     <url>
         <loc>https://iptvsmarterpros.com/reviews.html</loc>
-        <lastmod>2025-01-24</lastmod>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/faq.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Nouvelles pages importantes -->
+    <url>
+        <loc>https://iptvsmarterpros.com/offer.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/conditions.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+      <!-- Section blog -->
+  <url>
+    <loc>https://iptvsmarterpros.com/blog.html</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://iptvsmarterpros.com/blog/</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Articles de blog -->
+  <url>
+    <loc>https://iptvsmarterpros.com/blog/tendances-streaming-2025.html</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iptvsmarterpros.com/blog/eliminer-buffering-iptv.html</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://iptvsmarterpros.com/blog/guide-epg-iptv.html</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+    
+    <!-- URLs de produits spécifiques avec paramètres -->
+    <url>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_mois&amp;price=9.99&amp;type=essentiel</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_6_mois&amp;price=19.99&amp;type=standard</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_12_mois&amp;price=29.99&amp;type=premium</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_12_mois_3_ecrans&amp;price=79.99&amp;type=premium</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Dossier offres avec URLs propres -->
+    <url>
+        <loc>https://iptvsmarterpros.com/offres/premium-3-mois/</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/offres/premium-6-mois/</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/offres/premium-12-mois/</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Pages légales et contact -->
+    <url>
+        <loc>https://iptvsmarterpros.com/contact.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/about.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/conditions-generales.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/politique-confidentialite.html</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    
+    <!-- Pages d'ancrage importantes pour les fonctionnalités -->
+    <url>
+        <loc>https://iptvsmarterpros.com/index.html#offers-section</loc>
+        <lastmod>2025-01-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://iptvsmarterpros.com/index.html#xtream-codes</loc>
+        <lastmod>2025-01-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
 </urlset> 
