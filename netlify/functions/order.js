@@ -61,7 +61,8 @@ function generateOrderNumber() {
 // Charger et compiler les templates
 function getTemplate(templateName) {
   try {
-    const templatePath = path.join(__dirname, `../../templates/${templateName}.html`);
+    // CORRECTION: Chemin correct pour les fonctions Netlify
+    const templatePath = path.join(__dirname, '../..', 'templates', `${templateName}.html`);
     console.log(`📂 Chemin template ${templateName}:`, templatePath);
     
     const templateSource = fs.readFileSync(templatePath, 'utf-8');
@@ -72,20 +73,30 @@ function getTemplate(templateName) {
     // Templates de fallback
     if (templateName === 'order-confirmation') {
       return handlebars.compile(`
-        <h2>Confirmation de commande</h2>
-        <p><strong>Produit:</strong> {{productName}}</p>
-        <p><strong>Description:</strong> {{productDescription}}</p>
-        <p><strong>Prix:</strong> {{productPrice}}</p>
-        <p><strong>Numéro de commande:</strong> {{orderNumber}}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">Confirmation de commande - IPTV Smarter Pros</h2>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+            <p><strong>Produit:</strong> {{productName}}</p>
+            <p><strong>Description:</strong> {{productDescription}}</p>
+            <p><strong>Prix:</strong> {{productPrice}}</p>
+            <p><strong>Numéro de commande:</strong> {{orderNumber}}</p>
+            <p><strong>Date:</strong> {{orderDate}}</p>
+          </div>
+        </div>
       `);
     } else if (templateName === 'admin-notification') {
       return handlebars.compile(`
-        <h2>Nouvelle commande</h2>
-        <p><strong>Email client:</strong> {{clientEmail}}</p>
-        <p><strong>Produit:</strong> {{productName}}</p>
-        <p><strong>Prix:</strong> {{productPrice}}</p>
-        <p><strong>Numéro:</strong> {{orderNumber}}</p>
-        <p><strong>Date:</strong> {{orderDate}} à {{orderTime}}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">🚨 Nouvelle commande - IPTV Smarter Pros</h2>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+            <p><strong>Email client:</strong> {{clientEmail}}</p>
+            <p><strong>Produit:</strong> {{productName}}</p>
+            <p><strong>Prix:</strong> {{productPrice}}</p>
+            <p><strong>Numéro:</strong> {{orderNumber}}</p>
+            <p><strong>Date:</strong> {{orderDate}} à {{orderTime}}</p>
+            <p><strong>Méthode de paiement:</strong> {{paymentMethod}}</p>
+          </div>
+        </div>
       `);
     }
   }
@@ -156,7 +167,8 @@ exports.handler = async function(event, context) {
     }
 
     console.log('📧 Création du transporteur SMTP...');
-    const transporter = nodemailer.createTransporter({
+    // CORRECTION: createTransporter -> createTransport
+    const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT),
       secure: true, // Pour port 465
@@ -175,7 +187,8 @@ exports.handler = async function(event, context) {
       productName: productInfo.name,
       productDescription: productInfo.description,
       productPrice: productInfo.price,
-      orderNumber: finalOrderNumber
+      orderNumber: finalOrderNumber,
+      orderDate: new Date().toLocaleString('fr-FR')
     };
 
     const confirmationHtml = confirmationTemplate(confirmationData);
