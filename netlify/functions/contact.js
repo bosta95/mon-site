@@ -72,30 +72,84 @@ exports.handler = async function(event, context) {
     console.log('🚛 TEST CREATION TRANSPORTEUR:');
     try {
       const nodemailer = require('nodemailer');
-      const transporter = nodemailer.createTransporter({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT),
-        secure: true,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS
-        }
-      });
-      console.log('✅ Transporteur créé');
       
-      // Test de vérification de connexion
-      console.log('🔍 TEST CONNEXION SMTP...');
-      await transporter.verify();
-      console.log('✅ Connexion SMTP réussie !');
+      // Test avec différentes configurations
+      console.log('🔧 Test configuration 1: Port 465 SSL');
+      try {
+        const transporter1 = nodemailer.createTransporter({
+          host: process.env.SMTP_HOST,
+          port: 465,
+          secure: true,
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS
+          }
+        });
+        await transporter1.verify();
+        console.log('✅ Port 465 SSL: OK');
+      } catch (err465) {
+        console.log('❌ Port 465 SSL:', err465.message);
+        
+        // Test port 587 avec STARTTLS
+        console.log('🔧 Test configuration 2: Port 587 STARTTLS');
+        try {
+          const transporter2 = nodemailer.createTransporter({
+            host: process.env.SMTP_HOST,
+            port: 587,
+            secure: false,
+            requireTLS: true,
+            auth: {
+              user: process.env.SMTP_USER,
+              pass: process.env.SMTP_PASS
+            }
+          });
+          await transporter2.verify();
+          console.log('✅ Port 587 STARTTLS: OK');
+        } catch (err587) {
+          console.log('❌ Port 587 STARTTLS:', err587.message);
+          
+          // Test port 25
+          console.log('🔧 Test configuration 3: Port 25');
+          try {
+            const transporter3 = nodemailer.createTransporter({
+              host: process.env.SMTP_HOST,
+              port: 25,
+              secure: false,
+              auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS
+              }
+            });
+            await transporter3.verify();
+            console.log('✅ Port 25: OK');
+          } catch (err25) {
+            console.log('❌ Port 25:', err25.message);
+            
+            // Échec de toutes les configurations
+            throw new Error(`Tous les ports échouent - 465: ${err465.code}, 587: ${err587.code}, 25: ${err25.code}`);
+          }
+        }
+      }
+      
+      console.log('✅ Au moins une configuration fonctionne');
       
     } catch (err) {
       console.error('❌ Erreur transporteur/connexion:', err.message);
+      console.error('📍 Code erreur:', err.code);
+      console.error('📍 Errno:', err.errno);
+      
       return {
         statusCode: 500,
         body: JSON.stringify({ 
           error: 'Erreur connexion SMTP',
           details: err.message,
-          code: err.code || 'UNKNOWN'
+          code: err.code || 'UNKNOWN',
+          host: process.env.SMTP_HOST,
+          suggestions: [
+            'Vérifiez que SMTP_HOST = mail.privateemail.com',
+            'Vérifiez SMTP_USER et SMTP_PASS',
+            'Contactez Namecheap pour les restrictions IP'
+          ]
         }),
         headers: { 'Content-Type': 'application/json' }
       };
