@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 exports.handler = async function(event, context) {
-  console.log('=== DIAGNOSTIC NAMECHEAP ULTRA-DÉTAILLÉ ===');
+  console.log('=== TEST PORT 587 NAMECHEAP ===');
   
   if (event.httpMethod !== 'POST') {
     return {
@@ -12,131 +12,65 @@ exports.handler = async function(event, context) {
   }
 
   try {
-    console.log('📋 VÉRIFICATION COMPLÈTE...');
+    console.log('📧 Test spécifique port 587 + STARTTLS...');
     
-    // Variables d'environnement
-    const smtpHost = process.env.SMTP_HOST;
-    const smtpPort = process.env.SMTP_PORT;
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
-    
-    console.log('🔧 Variables:');
-    console.log('- SMTP_HOST:', smtpHost || 'MANQUANT');
-    console.log('- SMTP_PORT:', smtpPort || 'MANQUANT'); 
-    console.log('- SMTP_USER:', smtpUser || 'MANQUANT');
-    console.log('- SMTP_PASS:', smtpPass ? 'CONFIGURÉ' : 'MANQUANT');
-
-    if (!smtpHost || !smtpUser || !smtpPass) {
-      const missing = [];
-      if (!smtpHost) missing.push('SMTP_HOST');
-      if (!smtpUser) missing.push('SMTP_USER');
-      if (!smtpPass) missing.push('SMTP_PASS');
-      
-      console.log('❌ Variables manquantes:', missing);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ 
-          error: `Variables Netlify manquantes: ${missing.join(', ')}`,
-          details: 'Allez dans Netlify > Site settings > Environment variables'
-        }),
-        headers: { 'Content-Type': 'application/json' }
-      };
-    }
-
-    console.log('📧 Test de connexion Namecheap...');
-    
+    // Configuration spéciale port 587 (souvent moins bloqué)
     const transporter = nodemailer.createTransporter({
-      host: smtpHost,
-      port: parseInt(smtpPort) || 465,
-      secure: true,
+      host: 'mail.privateemail.com',
+      port: 587, // Port 587 au lieu de 465
+      secure: false, // false pour port 587
+      requireTLS: true, // Force STARTTLS
       auth: {
-        user: smtpUser,
-        pass: smtpPass
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+      },
+      tls: {
+        ciphers: 'SSLv3',
+        rejectUnauthorized: false
       }
     });
 
-    console.log('🔍 Test verify()...');
+    console.log('🔍 Test connexion port 587...');
     await transporter.verify();
-    console.log('✅ Verify réussi !');
+    console.log('✅ Port 587 fonctionne !');
 
-    console.log('📮 Test envoi email...');
+    // Test envoi
     const result = await transporter.sendMail({
-      from: `"Test IPTV" <${smtpUser}>`,
-      to: smtpUser,
-      subject: 'Test depuis Netlify',
-      text: 'Si vous recevez ceci, Namecheap fonctionne !'
+      from: `"IPTV Smarter Pro" <${process.env.SMTP_USER}>`,
+      to: process.env.SMTP_USER,
+      subject: 'Test port 587 depuis Netlify',
+      text: 'Si tu reçois ceci, le port 587 passe les restrictions Netlify !',
+      html: `
+        <h2>🎉 Port 587 réussi !</h2>
+        <p>Ta messagerie Namecheap (40€/an) fonctionne avec Netlify via le port 587 !</p>
+        <p>Date: ${new Date().toLocaleString('fr-FR')}</p>
+      `
     });
 
-    console.log('✅ EMAIL ENVOYÉ !');
-    console.log('Message ID:', result.messageId);
+    console.log('✅ EMAIL ENVOYÉ via port 587 !');
 
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        message: '🎉 SUCCÈS TOTAL ! Namecheap fonctionne parfaitement avec Netlify !',
+        message: '🎉 SUCCÈS ! Port 587 contourne les restrictions Netlify !',
         messageId: result.messageId,
-        config: `${smtpHost}:${smtpPort}`,
-        user: smtpUser
+        solution: 'Utiliser port 587 au lieu de 465'
       }),
       headers: { 'Content-Type': 'application/json' }
     };
 
   } catch (error) {
-    console.error('❌ ERREUR COMPLÈTE:', error);
-    console.error('Type:', typeof error);
-    console.error('Name:', error.name);
-    console.error('Message:', error.message);
-    console.error('Code:', error.code);
-    console.error('Command:', error.command);
-    console.error('Response:', error.response);
-    console.error('Stack:', error.stack);
-
-    // Analyse de l'erreur avec tous les détails
-    let errorMessage = 'Erreur inconnue';
-    let solution = '';
+    console.error('❌ Port 587 échoue aussi:', error.message);
     
-    if (error.code) {
-      switch(error.code) {
-        case 'EAUTH':
-          errorMessage = '🔐 ERREUR AUTHENTIFICATION: Email ou mot de passe incorrect';
-          solution = 'Vérifiez vos identifiants Namecheap';
-          break;
-        case 'ECONNREFUSED':
-          errorMessage = '🚫 CONNEXION REFUSÉE: Netlify bloque probablement SMTP';
-          solution = 'Netlify a peut-être bloqué SMTP récemment';
-          break;
-        case 'ETIMEDOUT':
-          errorMessage = '⏰ TIMEOUT: Problème de réseau ou firewall';
-          solution = 'Connexion trop lente ou bloquée';
-          break;
-        case 'ENOTFOUND':
-          errorMessage = '🔍 SERVEUR INTROUVABLE: Problème DNS';
-          solution = 'Vérifiez SMTP_HOST = mail.privateemail.com';
-          break;
-        default:
-          errorMessage = `❓ ERREUR CODE ${error.code}: ${error.message}`;
-          solution = 'Erreur technique spécifique';
-      }
-    } else {
-      errorMessage = `💥 ERREUR SYSTÈME: ${error.message}`;
-      solution = 'Problème interne NodeJS/Netlify';
-    }
-
     return {
       statusCode: 500,
       body: JSON.stringify({ 
-        error: errorMessage,
-        solution: solution,
-        technical: {
-          code: error.code,
-          message: error.message,
-          command: error.command,
-          response: error.response
-        },
-        config: {
-          host: process.env.SMTP_HOST,
-          port: process.env.SMTP_PORT,
-          user: process.env.SMTP_USER
+        error: 'Port 587 bloqué aussi - Netlify bloque vraiment SMTP',
+        solution: 'Utiliser Zapier webhook vers ta messagerie Namecheap',
+        webhook_info: {
+          principe: 'Formulaire → Zapier → Email via Namecheap',
+          cout: 'Gratuit (100 emails/mois)',
+          resultat: 'Tu reçois dans contact@iptvsmarterpros.com'
         }
       }),
       headers: { 'Content-Type': 'application/json' }
