@@ -750,90 +750,120 @@
     <!-- Scripts -->
     <script src="./js/navbar.js"></script>
     
-    <!-- Script du formulaire de contact -->
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const contactForm = document.getElementById('contactForm');
-        const statusMessage = document.getElementById('status-message');
+        // Initialiser EmailJS (service gratuit, plus fiable que SMTP sur Netlify)
+        emailjs.init("YOUR_PUBLIC_KEY"); // On configurera ça ensemble
         
-        if (contactForm) {
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                // Récupérer les données du formulaire
+        const contactForm = document.getElementById('contactForm');
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const errorDiv = document.getElementById('error-message');
+        const successDiv = document.getElementById('success-message');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Désactiver le bouton pendant l'envoi
+            submitButton.disabled = true;
+            submitButton.textContent = 'Envoi en cours...';
+            
+            // Masquer les messages précédents
+            if (errorDiv) errorDiv.style.display = 'none';
+            if (successDiv) successDiv.style.display = 'none';
+
+            try {
                 const formData = new FormData(contactForm);
-                const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'), 
-                    subject: formData.get('subject'),
-                    message: formData.get('message')
-                };
                 
                 // Validation côté client
-                if (!data.name || !data.email || !data.subject || !data.message) {
-                    showMessage('Veuillez remplir tous les champs obligatoires.', 'error');
-                    return;
+                const name = formData.get('name')?.trim();
+                const email = formData.get('email')?.trim();
+                const subject = formData.get('subject')?.trim();
+                const message = formData.get('message')?.trim();
+
+                if (!name || !email || !subject || !message) {
+                    throw new Error('Tous les champs sont requis');
+                }
+
+                if (!email.includes('@') || !email.includes('.')) {
+                    throw new Error('Format d\'email invalide');
+                }
+
+                console.log('📧 Envoi via EmailJS...');
+                
+                // Option 1: EmailJS (recommandé)
+                const templateParams = {
+                    from_name: name,
+                    from_email: email,
+                    subject: subject,
+                    message: message,
+                    to_email: 'contact@iptvsmarterpros.com'
+                };
+
+                await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+                console.log('✅ Email envoyé via EmailJS');
+                
+                // Succès
+                if (successDiv) {
+                    successDiv.textContent = 'Message envoyé avec succès !';
+                    successDiv.style.display = 'block';
+                } else {
+                    alert('Message envoyé avec succès !');
                 }
                 
-                // Validation de l'email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(data.email)) {
-                    showMessage('Veuillez entrer une adresse email valide.', 'error');
-                    return;
-                }
+                contactForm.reset();
+
+            } catch (error) {
+                console.error('❌ Erreur:', error);
                 
-                // Désactiver le bouton et afficher un message de chargement
-                const submitBtn = contactForm.querySelector('button[type="submit"]');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-                submitBtn.disabled = true;
-                
+                // Fallback: Essayer l'API Netlify comme backup
+                console.log('🔄 Fallback vers API Netlify...');
                 try {
-                    console.log('Envoi des données:', data);
-                    
                     const response = await fetch('/api/contact', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
+                        body: JSON.stringify({
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            subject: formData.get('subject'),
+                            message: formData.get('message')
+                        })
                     });
-                    
-                    console.log('Réponse reçue:', response.status);
-                    
+
                     const result = await response.json();
-                    console.log('Données de réponse:', result);
-                    
+
                     if (response.ok) {
-                        showMessage('Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.', 'success');
+                        console.log('✅ Envoi réussi via API fallback');
+                        if (successDiv) {
+                            successDiv.textContent = 'Message envoyé avec succès !';
+                            successDiv.style.display = 'block';
+                        } else {
+                            alert('Message envoyé avec succès !');
+                        }
                         contactForm.reset();
                     } else {
-                        throw new Error(result.error || 'Erreur lors de l\'envoi du message');
+                        throw new Error(result.error || 'Erreur lors de l\'envoi');
                     }
+                } catch (fallbackError) {
+                    console.error('❌ Fallback aussi échoué:', fallbackError);
                     
-                } catch (error) {
-                    console.error('Erreur:', error);
-                    showMessage('Erreur lors de l\'envoi du message: ' + error.message, 'error');
-                } finally {
-                    // Réactiver le bouton
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
+                    if (errorDiv) {
+                        errorDiv.textContent = `Erreur lors de l'envoi du message: ${error.message}`;
+                        errorDiv.style.display = 'block';
+                    } else {
+                        alert(`Erreur lors de l'envoi du message: ${error.message}`);
+                    }
                 }
-            });
-        }
-        
-        function showMessage(message, type) {
-            statusMessage.textContent = message;
-            statusMessage.className = `status-message ${type}`;
-            statusMessage.style.display = 'block';
-            
-            // Masquer le message après 5 secondes si c'est un succès
-            if (type === 'success') {
-                setTimeout(() => {
-                    statusMessage.style.display = 'none';
-                }, 5000);
+            } finally {
+                // Réactiver le bouton
+                submitButton.disabled = false;
+                submitButton.textContent = 'Envoyer';
             }
-        }
+        });
     });
     </script>
     
