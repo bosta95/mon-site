@@ -6,6 +6,7 @@
   <title>Avis Clients | IPTV Smarters Pro</title>
   <meta name="description" content="Consultez les avis de nos clients sur notre service IPTV. Partagez votre expérience avec notre service d'IPTV pas cher à +22 000 chaînes et +50 000 films et séries en HD/4K.">
   <meta name="keywords" content="avis IPTV, témoignages clients IPTV, IPTV Smarters Pro avis, commentaires IPTV">
+  <meta name="robots" content="index, follow"/>
   
   <link rel="canonical" href="https://iptvsmarterpros.com/reviews.html">
   <link rel="stylesheet" href="styles.css?v=5">
@@ -342,87 +343,90 @@
     </div>
   </header>
 
-  <div class="reviews-container">
-    <div class="reviews-header">
-      <h1>Avis de nos clients</h1>
-      <p>Découvrez ce que nos clients pensent de notre service IPTV. Des milliers d'utilisateurs satisfaits profitent chaque jour de nos +22 000 chaînes et +50 000 films et séries en qualité HD/4K.</p>
-      <div id="admin-link" style="display: none; margin-top: 15px;">
-        <a href="admin-reviews.html" style="display: inline-block; background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #e74c3c; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9rem;">
-          <i class="fas fa-lock"></i> Administration des avis
-        </a>
-      </div>
-    </div>
-    
-    <!-- Conteneur des avis (rempli par JavaScript) -->
-    <div class="reviews-grid" id="reviews-grid">
-      <!-- Le contenu sera ajouté dynamiquement -->
-      <div class="loading" id="reviews-loading">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-    
-    <!-- Formulaire de soumission d'avis -->
-    <div class="submit-review-container">
-      <h2 class="submit-review-heading">Partagez votre expérience</h2>
-      
-      <div class="success-message" id="success-message">
-        Merci pour votre avis ! Il sera affiché après modération.
+  <main id="main-content" role="main">
+    <h1 style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Avis clients IPTV Premium</h1>
+    <div class="reviews-container">
+      <div class="reviews-header">
+        <h1>Avis de nos clients</h1>
+        <p>Découvrez ce que nos clients pensent de notre service IPTV. Des milliers d'utilisateurs satisfaits profitent chaque jour de nos +22 000 chaînes et +50 000 films et séries en qualité HD/4K.</p>
+        <div id="admin-link" style="display: none; margin-top: 15px;">
+          <a href="admin-reviews.html" style="display: inline-block; background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #e74c3c; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9rem;">
+            <i class="fas fa-lock"></i> Administration des avis
+          </a>
+        </div>
       </div>
       
-      <div class="error-message" id="error-message">
-        Une erreur s'est produite. Veuillez réessayer.
+      <!-- Conteneur des avis (rempli par JavaScript) -->
+      <div class="reviews-grid" id="reviews-grid">
+        <!-- Le contenu sera ajouté dynamiquement -->
+        <div class="loading" id="reviews-loading">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
       
-      <form class="review-form" id="review-form">
-        <div class="form-group">
-          <label for="name">Votre nom</label>
-          <input type="text" id="name" name="name" required placeholder="Prénom N." maxlength="50">
+      <!-- Formulaire de soumission d'avis -->
+      <div class="submit-review-container">
+        <h2 class="submit-review-heading">Partagez votre expérience</h2>
+        
+        <div class="success-message" id="success-message">
+          Merci pour votre avis ! Il sera affiché après modération.
         </div>
         
-        <div class="form-group">
-          <label>Votre évaluation</label>
-          <div class="rating-select" id="rating-stars">
-            <input type="radio" name="rating" id="star5" value="5" checked>
-            <label for="star5" class="fas fa-star"></label>
-            
-            <input type="radio" name="rating" id="star4" value="4">
-            <label for="star4" class="fas fa-star"></label>
-            
-            <input type="radio" name="rating" id="star3" value="3">
-            <label for="star3" class="fas fa-star"></label>
-            
-            <input type="radio" name="rating" id="star2" value="2">
-            <label for="star2" class="fas fa-star"></label>
-            
-            <input type="radio" name="rating" id="star1" value="1">
-            <label for="star1" class="fas fa-star"></label>
+        <div class="error-message" id="error-message">
+          Une erreur s'est produite. Veuillez réessayer.
+        </div>
+        
+        <form class="review-form" id="review-form">
+          <div class="form-group">
+            <label for="name">Votre nom</label>
+            <input type="text" id="name" name="name" required placeholder="Prénom N." maxlength="50">
           </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="product">Votre abonnement</label>
-          <select id="product" name="product" required>
-            <option value="">Sélectionnez votre abonnement</option>
-            <option value="Premium_IPTV_3_mois">Abonnement 3 mois</option>
-            <option value="Premium_IPTV_6_mois">Abonnement 6 mois</option>
-            <option value="Premium_IPTV_12_mois">Abonnement 12 mois</option>
-            <option value="Premium_IPTV_2_ecrans">Abonnement 2 écrans</option>
-            <option value="Premium_IPTV_3_ecrans">Abonnement 3 écrans</option>
-            <option value="Premium_IPTV_4_ecrans">Abonnement 4 écrans</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="comment">Votre commentaire</label>
-          <textarea id="comment" name="comment" required placeholder="Partagez votre expérience avec notre service..." maxlength="500"></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">Soumettre mon avis</button>
-      </form>
+          
+          <div class="form-group">
+            <label>Votre évaluation</label>
+            <div class="rating-select" id="rating-stars">
+              <input type="radio" name="rating" id="star5" value="5" checked>
+              <label for="star5" class="fas fa-star"></label>
+              
+              <input type="radio" name="rating" id="star4" value="4">
+              <label for="star4" class="fas fa-star"></label>
+              
+              <input type="radio" name="rating" id="star3" value="3">
+              <label for="star3" class="fas fa-star"></label>
+              
+              <input type="radio" name="rating" id="star2" value="2">
+              <label for="star2" class="fas fa-star"></label>
+              
+              <input type="radio" name="rating" id="star1" value="1">
+              <label for="star1" class="fas fa-star"></label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="product">Votre abonnement</label>
+            <select id="product" name="product" required>
+              <option value="">Sélectionnez votre abonnement</option>
+              <option value="Premium_IPTV_3_mois">Abonnement 3 mois</option>
+              <option value="Premium_IPTV_6_mois">Abonnement 6 mois</option>
+              <option value="Premium_IPTV_12_mois">Abonnement 12 mois</option>
+              <option value="Premium_IPTV_2_ecrans">Abonnement 2 écrans</option>
+              <option value="Premium_IPTV_3_ecrans">Abonnement 3 écrans</option>
+              <option value="Premium_IPTV_4_ecrans">Abonnement 4 écrans</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="comment">Votre commentaire</label>
+            <textarea id="comment" name="comment" required placeholder="Partagez votre expérience avec notre service..." maxlength="500"></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Soumettre mon avis</button>
+        </form>
+      </div>
     </div>
-  </div>
+  </main>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
