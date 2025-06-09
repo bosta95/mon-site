@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss');
-const emailUtils = require('./email-utils');
+// const emailUtils = require('./email-utils'); // SUPPRIMÉ - Utilisation des fonctions Netlify
 const fs = require('fs');
 const reviewsRouter = require('./reviews-api');
 require('dotenv').config();
@@ -45,14 +45,14 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/', apiLimiter);
 
-// Rate limiting pour les emails
-const emailLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 20,
-  message: { error: 'Trop de tentatives d\'envoi d\'email, veuillez réessayer plus tard.' }
-});
-app.use('/api/contact', emailLimiter);
-app.use('/api/order', emailLimiter);
+// Rate limiting pour les emails - SUPPRIMÉ - Géré par Netlify Functions
+// const emailLimiter = rateLimit({
+//   windowMs: 60 * 60 * 1000,
+//   max: 20,
+//   message: { error: 'Trop de tentatives d\'envoi d\'email, veuillez réessayer plus tard.' }
+// });
+// app.use('/api/contact', emailLimiter);
+// app.use('/api/order', emailLimiter);
 
 // Configuration de la compression
 app.use(compression());
@@ -193,123 +193,9 @@ function isValidProduct(product) {
   return validProducts.includes(product);
 }
 
-// Route pour les contacts
-app.post('/api/contact', async (req, res) => {
-  try {
-    // Validation et sanitization des entrées
-    const name = sanitizeInput(req.body.name);
-    const email = sanitizeInput(req.body.email);
-    const subject = sanitizeInput(req.body.subject);
-    const message = sanitizeInput(req.body.message);
-    
-    // Validation des données
-    if (!name || !email || !subject || !message) {
-      return res.status(400).json({ error: 'Tous les champs sont requis' });
-    }
-    
-    if (!isValidEmail(email)) {
-      return res.status(400).json({ error: 'Email invalide' });
-    }
-    
-    // Envoi de l'email à l'administrateur
-    await emailUtils.sendTemplateEmail({
-      to: process.env.ADMIN_EMAIL,
-      subject: `[Contact] ${subject}`,
-      templateName: 'contact-message',
-      data: {
-        name,
-        email,
-        subject,
-        message,
-        date: new Date().toLocaleString('fr-FR')
-      }
-    });
-    
-    // Envoi de l'email de confirmation au client
-    await emailUtils.sendTemplateEmail({
-      to: email,
-      subject: 'Votre message a bien été reçu',
-      templateName: 'contact-message',
-      data: {
-        name,
-        subject
-      }
-    });
-    
-    res.status(200).json({ success: 'Votre message a bien été envoyé' });
-  } catch (error) {
-    console.error('Erreur lors de l\'envoi du message:', error);
-    res.status(500).json({ error: 'Une erreur est survenue lors de l\'envoi du message' });
-  }
-});
-
-// Route pour les commandes
-app.post('/api/order', async (req, res) => {
-  try {
-    // Validation et sanitization des entrées
-    const email = sanitizeInput(req.body.email);
-    const product = sanitizeInput(req.body.product);
-    const orderNumber = sanitizeInput(req.body.orderNumber);
-    
-    // Validation des données
-    if (!email || !product || !orderNumber) {
-      return res.status(400).json({ error: 'Tous les champs sont requis' });
-    }
-    
-    if (!isValidEmail(email)) {
-      return res.status(400).json({ error: 'Email invalide' });
-    }
-    
-    if (!isValidOrderNumber(orderNumber)) {
-      return res.status(400).json({ error: 'Numéro de commande invalide' });
-    }
-    
-    if (!isValidProduct(product)) {
-      return res.status(400).json({ error: 'Produit invalide' });
-    }
-    
-    // Envoi de l'email de confirmation au client
-    await emailUtils.sendTemplateEmail({
-      to: email,
-      subject: 'Confirmation de votre commande',
-      templateName: 'order-confirmation',
-      data: {
-        product: getProductName(product),
-        orderNumber,
-        description: getProductDescription(product),
-        price: getProductPrice(product)
-      }
-    });
-    
-    // Envoi de l'email de notification à l'administrateur - Modifié pour éviter le spam
-    await emailUtils.sendTemplateEmail({
-      to: process.env.MERCHANT_EMAIL,
-      subject: `IPTV - Commande #${orderNumber} - ${getProductName(product)}`,
-      templateName: 'admin-notification',
-      data: {
-        email,
-        product: getProductName(product),
-        orderNumber,
-        description: getProductDescription(product),
-        price: getProductPrice(product),
-        date: new Date().toLocaleString('fr-FR'),
-        orderDate: new Date().toLocaleDateString('fr-FR'),
-        orderTime: new Date().toLocaleTimeString('fr-FR'),
-        clientEmail: email,
-        clientPhone: req.body.phone || 'Non fourni',
-        clientIP: req.ip || 'Inconnu',
-        clientCountry: req.body.country || 'Inconnu',
-        clientDevice: req.headers['user-agent'] || 'Inconnu',
-        paymentMethod: req.body.paymentMethod || 'PayPal'
-      }
-    });
-    
-    res.status(200).json({ success: 'Commande confirmée' });
-  } catch (error) {
-    console.error('Erreur lors de la confirmation de commande:', error);
-    res.status(500).json({ error: 'Une erreur est survenue lors de la confirmation de commande' });
-  }
-});
+// Routes email SUPPRIMÉES - Gérées par Netlify Functions
+// Les routes /api/contact et /api/order sont maintenant dans netlify/functions/
+// Voir public/_redirects pour les redirections vers les fonctions Netlify
 
 // Fonctions pour obtenir les informations des produits
 function getProductName(productCode) {

@@ -1,6 +1,7 @@
 [build]
   publish = "public"
   command = "echo 'Static site ready'"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
@@ -20,6 +21,15 @@
     Content-Type = "text/plain; charset=UTF-8"
     Cache-Control = "public, max-age=3600"
     X-Robots-Tag = "all"
+
+# Headers pour les fonctions API
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
 
 # Configuration générale des headers de sécurité
 [[headers]]

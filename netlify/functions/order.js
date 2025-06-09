@@ -1,4 +1,7 @@
-const emailUtils = require('../../email-utils');
+const fs = require('fs');
+const path = require('path');
+const handlebars = require('handlebars');
+const nodemailer = require('nodemailer');
 
 // Configuration des produits - CODES RÉELS DU SITE
 const PRODUCTS = {
@@ -23,7 +26,7 @@ const PRODUCTS = {
     description: 'Accès complet pendant 3 mois pour 3 écrans - Plus de 22 000 chaînes et 50 000 VOD',
     price: '29.99€'
   },
-  // Codes compatibilité pour PayPal (si nécessaire)
+  // Codes compatibilité pour PayPal
   '1month': {
     name: 'Abonnement IPTV 1 Mois',
     description: 'Accès complet pendant 1 mois',
@@ -55,8 +58,56 @@ function generateOrderNumber() {
   return 'IPTV-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
 }
 
+// Charger et compiler les templates
+function getTemplate(templateName) {
+  try {
+    // CORRECTION: Chemin correct pour les fonctions Netlify
+    const templatePath = path.join(__dirname, '../..', 'templates', `${templateName}.html`);
+    console.log(`📂 Chemin template ${templateName}:`, templatePath);
+    
+    const templateSource = fs.readFileSync(templatePath, 'utf-8');
+    return handlebars.compile(templateSource);
+  } catch (error) {
+    console.error(`❌ Erreur chargement template ${templateName}:`, error);
+    
+    // Templates de fallback
+    if (templateName === 'order-confirmation') {
+      return handlebars.compile(`
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">Confirmation de commande - IPTV Smarter Pros</h2>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+            <p><strong>Produit:</strong> {{productName}}</p>
+            <p><strong>Description:</strong> {{productDescription}}</p>
+            <p><strong>Prix:</strong> {{productPrice}}</p>
+            <p><strong>Numéro de commande:</strong> {{orderNumber}}</p>
+            <p><strong>Date:</strong> {{orderDate}}</p>
+          </div>
+        </div>
+      `);
+    } else if (templateName === 'admin-notification') {
+      return handlebars.compile(`
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #333;">🚨 Nouvelle commande - IPTV Smarter Pros</h2>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+            <p><strong>Email client:</strong> {{clientEmail}}</p>
+            <p><strong>Produit:</strong> {{productName}}</p>
+            <p><strong>Prix:</strong> {{productPrice}}</p>
+            <p><strong>Numéro:</strong> {{orderNumber}}</p>
+            <p><strong>Date:</strong> {{orderDate}} à {{orderTime}}</p>
+            <p><strong>Méthode de paiement:</strong> {{paymentMethod}}</p>
+          </div>
+        </div>
+      `);
+    }
+  }
+}
+
 exports.handler = async function(event, context) {
+  console.log('=== FONCTION COMMANDE AVEC TEMPLATES ===');
+  console.log('Méthode HTTP:', event.httpMethod);
+  
   if (event.httpMethod !== 'POST') {
+    console.log('❌ Méthode non autorisée:', event.httpMethod);
     return {
       statusCode: 405,
       body: JSON.stringify({ error: 'Method Not Allowed' }),
@@ -65,10 +116,13 @@ exports.handler = async function(event, context) {
   }
 
   try {
+    console.log('📥 Parsing du body...');
     const { email, product, orderNumber, paymentDetails } = JSON.parse(event.body);
+    console.log('✅ Données reçues:', { email, product, orderNumber });
 
     // Validation des entrées
     if (!email || !product) {
+      console.log('❌ Champs manquants');
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Email et produit requis' }),
@@ -77,6 +131,7 @@ exports.handler = async function(event, context) {
     }
 
     if (!isValidEmail(email)) {
+      console.log('❌ Email invalide:', email);
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Format d\'email invalide' }),
@@ -91,42 +146,96 @@ exports.handler = async function(event, context) {
       price: 'N/A' 
     };
     const finalOrderNumber = orderNumber || generateOrderNumber();
+    
+    console.log('📦 Produit:', productInfo.name);
+    console.log('🔢 Numéro de commande:', finalOrderNumber);
 
-    // Email de confirmation au client
-    await emailUtils.sendTemplateEmail({
+    // Vérification des variables SMTP
+    console.log('🔧 Variables SMTP:');
+    console.log('SMTP_HOST:', process.env.SMTP_HOST);
+    console.log('SMTP_PORT:', process.env.SMTP_PORT);
+    console.log('SMTP_USER:', process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '***' : 'MANQUANT');
+    console.log('SMTP_PASS:', process.env.SMTP_PASS ? 'CONFIGURÉ' : 'MANQUANT');
+
+    if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.log('❌ Variables SMTP manquantes');
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Configuration SMTP manquante' }),
+        headers: { 'Content-Type': 'application/json' }
+      };
+    }
+
+    console.log('📧 Création du transporteur SMTP...');
+    // CORRECTION: createTransporter -> createTransport
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
+      secure: true, // Pour port 465
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+      }
+    });
+
+    // 1. Email de confirmation au client
+    console.log('📧 Envoi confirmation client à:', email);
+    console.log('📝 Chargement template order-confirmation...');
+    const confirmationTemplate = getTemplate('order-confirmation');
+    
+    const confirmationData = {
+      productName: productInfo.name,
+      productDescription: productInfo.description,
+      productPrice: productInfo.price,
+      orderNumber: finalOrderNumber,
+      orderDate: new Date().toLocaleString('fr-FR')
+    };
+
+    const confirmationHtml = confirmationTemplate(confirmationData);
+
+    await transporter.sendMail({
+      from: `"IPTV Smarter Pro" <${process.env.SMTP_USER}>`,
       to: email,
       subject: 'Confirmation de votre commande IPTV Smarter Pros',
-      templateName: 'order-confirmation',
-      data: {
-        productName: productInfo.name,
-        productDescription: productInfo.description,
-        productPrice: productInfo.price,
-        orderNumber: finalOrderNumber
-      }
+      html: confirmationHtml
     });
 
-    // Email de notification à l'administrateur
-    await emailUtils.sendTemplateEmail({
-      to: process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || 'contact@iptvsmarterpros.com',
+    console.log('✅ Email confirmation client envoyé');
+
+    // 2. Email de notification à l'admin
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || 'contact@iptvsmarterpros.com';
+    console.log('📧 Envoi notification admin à:', adminEmail);
+    console.log('📝 Chargement template admin-notification...');
+    const adminTemplate = getTemplate('admin-notification');
+
+    const adminData = {
+      email: email,
+      productName: productInfo.name,
+      orderNumber: finalOrderNumber,
+      productDescription: productInfo.description,
+      productPrice: productInfo.price,
+      date: new Date().toLocaleString('fr-FR'),
+      orderDate: new Date().toLocaleDateString('fr-FR'),
+      orderTime: new Date().toLocaleTimeString('fr-FR'),
+      clientEmail: email,
+      clientPhone: paymentDetails?.phone || 'Non fourni',
+      clientIP: event.headers['x-forwarded-for'] || 'Inconnu',
+      clientCountry: paymentDetails?.country || 'Inconnu',
+      clientDevice: event.headers['user-agent'] || 'Inconnu',
+      paymentMethod: paymentDetails?.method || 'PayPal'
+    };
+
+    const adminHtml = adminTemplate(adminData);
+
+    await transporter.sendMail({
+      from: `"IPTV Smarter Pro" <${process.env.SMTP_USER}>`,
+      to: adminEmail,
       subject: `🚨 Nouvelle commande #${finalOrderNumber} - ${productInfo.name}`,
-      templateName: 'admin-notification',
-      data: {
-        email: email,
-        productName: productInfo.name,
-        orderNumber: finalOrderNumber,
-        productDescription: productInfo.description,
-        productPrice: productInfo.price,
-        date: new Date().toLocaleString('fr-FR'),
-        orderDate: new Date().toLocaleDateString('fr-FR'),
-        orderTime: new Date().toLocaleTimeString('fr-FR'),
-        clientEmail: email,
-        clientPhone: paymentDetails?.phone || 'Non fourni',
-        clientIP: event.headers['x-forwarded-for'] || 'Inconnu',
-        clientCountry: paymentDetails?.country || 'Inconnu',
-        clientDevice: event.headers['user-agent'] || 'Inconnu',
-        paymentMethod: paymentDetails?.method || 'PayPal'
-      }
+      html: adminHtml
     });
+
+    console.log('✅ Email notification admin envoyé');
+    console.log('🎉 Commande traitée avec succès');
 
     return {
       statusCode: 200,
@@ -138,10 +247,24 @@ exports.handler = async function(event, context) {
     };
 
   } catch (error) {
-    console.error('Erreur lors du traitement de la commande:', error);
+    console.error('❌ ERREUR lors du traitement de la commande:', error);
+    console.error('📍 Stack:', error.stack);
+    
+    // Diagnostics spécifiques
+    if (error.message.includes('EAUTH')) {
+      console.error('🔧 Problème d\'authentification SMTP - Vérifiez SMTP_USER et SMTP_PASS');
+    } else if (error.message.includes('ECONNREFUSED')) {
+      console.error('🔧 Problème de connexion SMTP - Vérifiez SMTP_HOST et SMTP_PORT');
+    } else if (error.message.includes('ENOTFOUND')) {
+      console.error('🔧 Problème DNS - Vérifiez SMTP_HOST');
+    }
+    
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erreur lors du traitement de la commande' }),
+      body: JSON.stringify({ 
+        error: 'Erreur lors du traitement de la commande',
+        details: error.message
+      }),
       headers: { 'Content-Type': 'application/json' }
     };
   }

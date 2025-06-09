@@ -1,42 +1,61 @@
+const nodemailer = require('nodemailer');
+const fs = require('fs');
 const path = require('path');
-
-// Chemin vers email-utils depuis le dossier netlify/functions
-const emailUtils = require('../../email-utils');
+const handlebars = require('handlebars');
 
 function isValidEmail(email) {
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  return emailRegex.test(email) && email.length <= 254;
+  return emailRegex.test(email);
 }
 
-function sanitizeInput(input) {
-  if (!input) return '';
-  return input.toString().trim().slice(0, 1000); // Limiter la longueur
+// Fonction pour charger et compiler les templates
+function getTemplate(templateName) {
+  try {
+    // Chemin corrigé pour les fonctions Netlify
+    const templatePath = path.join(__dirname, '../..', 'templates', `${templateName}.html`);
+    console.log(`📂 Chargement template ${templateName} depuis:`, templatePath);
+    
+    const templateSource = fs.readFileSync(templatePath, 'utf-8');
+    return handlebars.compile(templateSource);
+  } catch (error) {
+    console.error(`❌ Erreur chargement template ${templateName}:`, error);
+    
+    // Template de fallback pour contact
+    return handlebars.compile(`
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #333;">Message de Contact - IPTV Smarter Pros</h2>
+        <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+          <p><strong>Nom:</strong> {{name}}</p>
+          <p><strong>Email:</strong> {{email}}</p>
+          <p><strong>Sujet:</strong> {{subject}}</p>
+          <p><strong>Message:</strong></p>
+          <div style="background: white; padding: 15px; border-radius: 4px; margin: 10px 0;">
+            {{message}}
+          </div>
+          <p><strong>Date:</strong> {{date}}</p>
+        </div>
+      </div>
+    `);
+  }
 }
 
 exports.handler = async function(event, context) {
-  // Vérification de la méthode HTTP
+  console.log('=== FONCTION CONTACT NETLIFY ===');
+  console.log('Méthode HTTP:', event.httpMethod);
+  
   if (event.httpMethod !== 'POST') {
-    return { 
-      statusCode: 405, 
+    return {
+      statusCode: 405,
       body: JSON.stringify({ error: 'Method Not Allowed' }),
       headers: { 'Content-Type': 'application/json' }
     };
   }
 
   try {
-    // Validation du Content-Type
-    const contentType = event.headers['content-type'] || '';
-    if (!contentType.includes('application/json')) {
-      return {
-        statusCode: 415,
-        body: JSON.stringify({ error: 'Content-Type doit être application/json' }),
-        headers: { 'Content-Type': 'application/json' }
-      };
-    }
-
     const { name, email, subject, message } = JSON.parse(event.body);
+    console.log('📧 Contact reçu de:', email);
 
-    // Validation des entrées
+    // Validation
     if (!name || !email || !subject || !message) {
       return {
         statusCode: 400,
@@ -53,38 +72,60 @@ exports.handler = async function(event, context) {
       };
     }
 
-    // Assainissement des entrées
-    const sanitizedName = sanitizeInput(name);
-    const sanitizedSubject = sanitizeInput(subject);
-    const sanitizedMessage = sanitizeInput(message);
+    // Vérification des variables SMTP
+    console.log('🔧 Variables SMTP:');
+    console.log('SMTP_HOST:', process.env.SMTP_HOST);
+    console.log('SMTP_PORT:', process.env.SMTP_PORT);
+    console.log('SMTP_USER:', process.env.SMTP_USER ? process.env.SMTP_USER.substring(0, 5) + '***' : 'MANQUANT');
+    console.log('SMTP_PASS:', process.env.SMTP_PASS ? 'CONFIGURÉ' : 'MANQUANT');
 
-    // Utiliser email-utils pour envoyer l'email de contact à l'admin
-    await emailUtils.sendTemplateEmail({
-      to: process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || 'contact@iptvsmarterpros.com',
-      subject: `[Contact] ${sanitizedSubject}`,
-      templateName: 'contact-message',
-      data: {
-        name: sanitizedName,
-        email: email,
-        subject: sanitizedSubject,
-        message: sanitizedMessage,
-        date: new Date().toLocaleString('fr-FR')
+    if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.log('❌ Variables SMTP manquantes');
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Configuration SMTP incomplète' }),
+        headers: { 'Content-Type': 'application/json' }
+      };
+    }
+
+    // Configuration SMTP Namecheap - CORRECTION de createTransporter -> createTransport
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
+      secure: process.env.SMTP_PORT == '465', // true pour port 465, false pour autres ports
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
       }
     });
 
-    // Optionnel : Envoyer un email de confirmation au client
-    // (Vous pouvez décommenter si vous voulez une confirmation automatique)
-    /*
-    await emailUtils.sendTemplateEmail({
-      to: email,
-      subject: 'Confirmation de réception - IPTV Smarter Pros',
-      templateName: 'contact-confirmation',
-      data: {
-        name: sanitizedName,
-        subject: sanitizedSubject
-      }
+    // Préparer les données du template
+    const templateData = {
+      name,
+      email,
+      subject,
+      message: message.replace(/\n/g, '<br>'),
+      date: new Date().toLocaleString('fr-FR')
+    };
+
+    // Charger le template
+    const template = getTemplate('contact-message');
+    const emailHtml = template(templateData);
+
+    // Email de destination admin
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.MERCHANT_EMAIL || process.env.SMTP_USER;
+    console.log('📧 Envoi vers admin:', adminEmail);
+
+    // Envoi de l'email à l'admin
+    await transporter.sendMail({
+      from: `"IPTV Smarter Pro" <${process.env.SMTP_USER}>`,
+      to: adminEmail,
+      subject: `[Contact] ${subject}`,
+      html: emailHtml,
+      replyTo: email
     });
-    */
+
+    console.log('✅ Email de contact envoyé avec succès');
 
     return {
       statusCode: 200,
@@ -93,10 +134,24 @@ exports.handler = async function(event, context) {
     };
 
   } catch (error) {
-    console.error('Erreur lors de l\'envoi du message de contact:', error);
+    console.error('❌ Erreur envoi email contact:', error);
+    console.error('📍 Stack:', error.stack);
+    
+    // Diagnostics spécifiques
+    if (error.message.includes('EAUTH')) {
+      console.error('🔧 Problème d\'authentification SMTP - Vérifiez SMTP_USER et SMTP_PASS');
+    } else if (error.message.includes('ECONNREFUSED')) {
+      console.error('🔧 Problème de connexion SMTP - Vérifiez SMTP_HOST et SMTP_PORT');
+    } else if (error.message.includes('ENOTFOUND')) {
+      console.error('🔧 Problème DNS - Vérifiez SMTP_HOST');
+    }
+    
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Erreur lors de l\'envoi du message' }),
+      body: JSON.stringify({ 
+        error: 'Erreur lors de l\'envoi du message',
+        details: error.message
+      }),
       headers: { 'Content-Type': 'application/json' }
     };
   }
