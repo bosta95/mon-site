@@ -6,9 +6,9 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
 <!-- Titre SEO -->
-<title>FAQ - Questions Fréquentes sur IPTV Smarters Pros</title>
+<title>FAQ IPTV Smarters Pro | Toutes les Réponses à Vos Questions</title>
 <!-- Description SEO -->
-<meta content="Trouvez des réponses aux questions les plus fréquentes sur IPTV Smarters Pros et nos abonnements." name="description"/>
+<meta name="description" content="Retrouvez toutes les réponses aux questions fréquentes sur IPTV Smarters Pro : installation, compatibilité, offres, support, sécurité, paiement. Un service client à votre écoute 7j/7.">
 <!-- Mots-clés SEO -->
 <meta content="IPTV, FAQ, abonnement IPTV, streaming premium, films, séries, chaînes TV, télévision en ligne, streaming HD, 4K, IPTV Pro, divertissement, code IPTV" name="keywords"/>
 <!-- Balise Canonical -->
@@ -24,20 +24,21 @@
 <meta content="FAQ - IPTV Pro | Tout savoir sur le streaming premium" name="twitter:title"/>
 <meta content="Découvrez l'univers magique d'IPTV Pro, votre solution premium pour le streaming avec plus de 22 000 chaînes, films et séries. Toutes les réponses à vos questions ici." name="twitter:description"/>
 <meta content="/images/logo.svg" name="twitter:image"/>
-<link href="styles.css?v=10" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="./css/styles.css?v=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="./css/navbar.css" rel="stylesheet">
-<link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
+<script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous"></script>
 <meta name="robots" content="index, follow"/>
+<meta http-equiv="content-language" content="fr">
 
 <style>
   body {
-    background-color: #0a0a0a;
+    background: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
     color: #fff;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
   }
   
   .container {
@@ -53,41 +54,87 @@
   
   .faq-header h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    background-image: linear-gradient(90deg, #E74C3C, #6c5498);
-    background-clip: text;
+    margin-bottom: 22px;
+    background: linear-gradient(90deg, #E74C3C, #6c5498);
     -webkit-background-clip: text;
-    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 18px;
+  }
+  
+  .faq-header h1::before {
+    content: '\f059';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #E74C3C;
+    margin-right: 12px;
+    font-size: 2rem;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+  }
+  
+  .faq-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 3px;
+    background: linear-gradient(90deg, #E74C3C, #6c5498);
+    border-radius: 3px;
   }
   
   .faq-content {
     max-width: 800px;
     margin: 0 auto;
+    margin-bottom: 40px;
   }
   
   details {
-    background: rgba(30, 30, 50, 0.7);
-    margin-bottom: 15px;
-    border-radius: 8px;
+    background: linear-gradient(120deg, rgba(30,30,50,0.95) 60%, rgba(108,84,152,0.12) 100%);
+    margin-bottom: 18px;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    border: 1.5px solid rgba(255,255,255,0.09);
+    transition: all 0.3s;
+    box-shadow: 0 4px 18px rgba(108,84,152,0.08);
   }
   
-  details:hover {
-    border-color: rgba(231, 76, 60, 0.3);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  details[open] {
+    box-shadow: 0 8px 28px rgba(231,76,60,0.10);
+    border-color: #E74C3C;
   }
   
   summary {
-    padding: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
+    padding: 22px 24px;
+    font-weight: 700;
+    font-size: 1.15rem;
     cursor: pointer;
     position: relative;
     list-style: none;
     outline: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  summary::before {
+    content: '\f128';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #6c5498;
+    font-size: 1.2rem;
+    margin-right: 8px;
+    transition: color 0.3s;
+  }
+  
+  details[open] summary::before {
+    color: #E74C3C;
   }
   
   summary::-webkit-details-marker {
@@ -97,23 +144,27 @@
   summary::after {
     content: '\f107';
     font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
     position: absolute;
-    right: 20px;
+    right: 24px;
     top: 50%;
-    transform: translateY(-50%);
-    transition: transform 0.3s ease;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s, color 0.3s;
     color: #E74C3C;
+    font-size: 1.2rem;
   }
   
   details[open] summary::after {
     transform: translateY(-50%) rotate(180deg);
+    color: #6c5498;
   }
   
   details p {
-    padding: 0 20px 20px;
+    padding: 0 24px 22px 56px;
     margin: 0;
-    line-height: 1.6;
-    color: #ddd;
+    line-height: 1.7;
+    color: #e0e0e0;
+    font-size: 1.05rem;
   }
   
   .return {
@@ -123,19 +174,24 @@
   
   .btn {
     display: inline-block;
-    padding: 12px 25px;
-    background: linear-gradient(135deg, #E74C3C, #6c5498);
+    padding: 13px 30px;
+    background: linear-gradient(90deg, #E74C3C, #6c5498);
     color: #fff;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     border-radius: 30px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.18);
+    border: none;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
   }
   
   .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.28);
+    background: linear-gradient(90deg, #6c5498, #E74C3C);
   }
   
   /* Animations */
@@ -158,30 +214,34 @@
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  
+  @media (max-width: 700px) {
+    .faq-header h1 { font-size: 1.5rem; }
+    .faq-content { padding: 0 5px; }
+    details p { padding: 0 10px 18px 36px; }
+    summary { padding: 16px 10px; font-size: 1rem; }
+  }
 </style>
 </head>
 <body>
-  <!-- HEADER -->
   <header class="header-container">
     <div class="header-content">
       <div class="logo">
         <a href="index.html">
-          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg"/>
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg" width="150" height="40"/>
         </a>
       </div>
-      <!-- Menu hamburger pour mobile -->
       <div class="mobile-menu-toggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
-      <!-- Navigation Desktop -->
       <nav class="header-nav">
         <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="index.html#offers-section">OFFRES</a></li>
           <li><a href="tutoriel.html">Installation</a></li>
-          <li><a href="index.html#xtream-codes">Codes Xtream</a></li>
+          <li><a href="about.html">À propos</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="contact.html">Contact</a></li>
@@ -195,6 +255,7 @@
 <div class="faq-header animate-fade-in">
 <h1>FAQ - Réponses à Vos Questions sur IPTV Smarters Pros</h1>
 </div>
+<h1 style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">FAQ IPTV Smarters Pro – Questions Fréquentes et Réponses Claires</h1>
 <div class="faq-content animate-on-scroll">
 <details>
 <summary>Qu'est-ce que IPTV Pro ?</summary>
