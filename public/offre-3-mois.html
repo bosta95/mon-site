@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  
+  <!-- Font Awesome pour icônes - optimisé -->
+  <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
+  
+  <!-- SEO : Titre, Description, Mots-clés, Canonical -->
+  <title>Finaliser la commande - Abonnement 3 Mois</title>
+  <meta name="description" content="Idéal pour démarrer, notre abonnement IPTV 3 mois vous donne un accès complet à notre service pour une courte durée. Activation immédiate.">
+  <meta name="keywords" content="abonnement iptv 3 mois, offre iptv trois mois, iptv découverte, iptv smarters pro, test iptv">
+  <link rel="canonical" href="https://iptvsmarterpros.com/offre-3-mois.html">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Finaliser la commande - Abonnement 3 Mois">
+  <meta property="og:description" content="Idéal pour démarrer, notre abonnement IPTV 3 mois vous donne un accès complet à notre service pour une courte durée. Activation immédiate.">
+  <meta property="og:image" content="/images/IPTV_glpgxi.svg">
+  <meta property="og:url" content="https://iptvsmarterpros.com/offre-3-mois.html">
+  <meta property="og:type" content="website">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Finaliser la commande - Abonnement 3 Mois">
+  <meta name="twitter:description" content="Idéal pour démarrer, notre abonnement IPTV 3 mois vous donne un accès complet à notre service pour une courte durée. Activation immédiate.">
+  <meta property="twitter:image" content="/images/IPTV_glpgxi.svg">
+  
+  <!-- Le reste du head est similaire... -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="./css/styles.css?v=1" rel="stylesheet">
+  <link href="./css/navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/logo.css" fetchpriority="high">
+  <link rel="stylesheet" href="./css/mobile-fix.css" fetchpriority="high">
+  <!-- Styles identiques à offer-details.html -->
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .payment-summary-card {
+      background: linear-gradient(145deg, #4b376e, #a74d7a);
+      border-radius: 12px;
+      padding: 30px;
+      color: #fff;
+      flex: 0 0 350px;
+    }
+
+    .payment-summary-card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .recap-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .recap-box h2 {
+      font-size: 1.1rem;
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .recap-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .recap-line span:first-child {
+      color: #e0e0e0;
+    }
+
+    .recap-line.total {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .payment-info, .legal-info {
+      font-size: 0.8rem;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .payment-info {
+      margin-bottom: 20px;
+    }
+    
+    .legal-info {
+      margin-top: 20px;
+    }
+
+    .legal-info a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    #paypal-button-container {
+      margin: 20px 0;
+    }
+
+    .offer-details-card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      padding: 30px;
+      flex: 1;
+    }
+
+    .offer-details-card h1 {
+      color: #e65252;
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+
+    .offer-details-card p {
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    
+    .feature-item i {
+      color: #888;
+      margin-right: 10px;
+    }
+    
+    .other-options {
+      margin-top: 30px;
+      border-top: 1px solid #333;
+      padding-top: 20px;
+    }
+
+    .other-options h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .view-offers-btn {
+      display: inline-block;
+      border: 1px solid #888;
+      color: #e0e0e0;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .view-offers-btn:hover {
+      background-color: #333;
+      border-color: #fff;
+      color: #fff;
+    }
+    
+    /* --- STYLES POUR NOUVEAUX CONTENUS --- */
+
+    .offer-image-container {
+      text-align: center;
+      margin: 20px 0 30px;
+      min-height: 150px; /* Espace réservé pour l'image */
+    }
+
+    .offer-image-container img {
+      max-width: 250px;
+      height: auto;
+    }
+
+    .offer-audience {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-left: 3px solid #e65252; /* Couleur du titre h1 */
+      padding: 15px 20px;
+      margin: 30px 0;
+      border-radius: 4px;
+    }
+
+    .offer-audience h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #e0e0e0;
+    }
+    
+    .mini-faq {
+      margin: 40px 0;
+      padding-top: 30px;
+      border-top: 1px solid #333;
+    }
+
+    .mini-faq h3 {
+      text-align: center;
+      font-size: 1.3rem;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+    }
+
+    .faq-item h4 {
+      margin: 0 0 8px 0;
+      font-weight: 500;
+      color: #e0e0e0;
+    }
+
+    .faq-item p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #aaa;
+      line-height: 1.5;
+    }
+
+    .testimonial {
+      margin: 40px 0;
+      padding: 25px;
+      background-color: #1a1a1a;
+      border-radius: 5px;
+      border-left: 4px solid #4CAF50; /* Vert pour la positivité */
+      text-align: center;
+    }
+
+    .testimonial blockquote {
+      margin: 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .testimonial blockquote::before,
+    .testimonial blockquote::after {
+      content: '"';
+    }
+
+    .testimonial cite {
+      display: block;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #999;
+      font-weight: 500;
+    }
+    /* --- FIN STYLES --- */
+    
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .payment-summary-card {
+        flex: 1;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+
+  <!-- Schema.org / JSON-LD pour les données structurées -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Abonnement IPTV Essentiel - 3 Mois",
+    "description": "Notre forfait de base pour découvrir notre service IPTV. Idéal pour les utilisateurs occasionnels qui souhaitent profiter d'un maximum de chaînes à petit prix.",
+    "image": "https://iptvsmarterpros.com/images/logo.svg",
+    "brand": {
+      "@type": "Brand",
+      "name": "IPTV Smarters Pro"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://iptvsmarterpros.com/offre-3-mois.html",
+      "priceCurrency": "EUR",
+      "price": "9.99",
+      "priceValidUntil": "2025-12-31",
+      "availability": "https://schema.org/InStock"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="payment-summary-card">
+      <h2>Finaliser votre commande</h2>
+
+      <div class="recap-box">
+        <h2>Récapitulatif de votre commande</h2>
+        <div class="recap-line">
+          <span>Produit:</span>
+          <strong id="product-name">Abonnement Essentiel - 3 mois</strong>
+        </div>
+        <div class="recap-line">
+          <span>Prix:</span>
+          <strong id="product-price">9,99€</strong>
+        </div>
+        <div class="recap-line total">
+          <span>Total:</span>
+          <strong id="total-price">9,99€</strong>
+        </div>
+      </div>
+
+      <p class="payment-info">Paiement 100% sécurisé via PayPal</p>
+      
+      <div id="paypal-button-container"></div>
+
+      <p class="legal-info">
+        En effectuant ce paiement, vous acceptez nos <a href="/conditions-generales.html">Conditions Générales</a> et notre <a href="/politique-confidentialite.html">Politique de Confidentialité</a>.
+      </p>
+    </aside>
+
+    <main class="offer-details-card">
+      <h1>Essentiel - 3 mois</h1>
+      
+      <div class="offer-image-container">
+        <img src="images/produits/3_mois_-removebg-preview.png" alt="Boîte de l'offre 3 mois">
+      </div>
+
+      <div class="offer-audience">
+        <h3>Pour qui est cette offre ?</h3>
+        <p>Idéal pour les curieux ou pour un besoin ponctuel (vacances, événement sportif...). C'est la meilleure façon de tester la puissance de notre service sans engagement.</p>
+      </div>
+
+      <p>Notre service IPTV premium vous offre une expérience de visionnage exceptionnelle avec une stabilité optimale et des mises à jour régulières.</p>
+      
+      <div class="features-grid">
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Plus de 18 000 chaînes TV internationales en HD</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Plus de 30 000 films et séries à la demande</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Qualité d'image HD adaptative</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Chaînes françaises et internationales</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Section +18 (basique)</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Compatible avec tous vos appareils</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Mises à jour mensuelles</div>
+        <div class="feature-item"><i class="fas fa-question-circle"></i> Support technique par email</div>
+      </div>
+
+      <div class="mini-faq">
+        <h3>Questions fréquentes</h3>
+        <div class="faq-item">
+          <h4>Comment vais-je recevoir mes accès ?</h4>
+          <p>Immédiatement par email après la validation de votre paiement. Pensez à vérifier votre dossier de courrier indésirable.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Ce paiement est-il un abonnement récurrent ?</h4>
+          <p>Non, il s'agit d'un paiement unique. Votre service s'arrêtera automatiquement à la fin de la période, sans aucun prélèvement.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Puis-je changer d'offre plus tard ?</h4>
+          <p>Bien sûr. Vous pourrez à tout moment passer à une offre supérieure de 6 ou 12 mois en contactant simplement notre support client.</p>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <blockquote>
+          J'ai pris l'offre 3 mois pour tester pendant les vacances. Service impeccable, aucune coupure. Je vais passer sur l'offre 12 mois sans hésiter. Très satisfait !
+        </blockquote>
+        <cite>– Marc L.</cite>
+      </div>
+
+      <div class="other-options">
+        <h3>Autres options</h3>
+        <a href="/index.html#offers-section" class="view-offers-btn">Voir toutes les offres</a>
+      </div>
+    </main>
+  </div>
+  
+  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // --- Default Offer Details ---
+      const basePrice = 9.99;
+      const planName = "Abonnement Essentiel 3 Mois";
+
+      let finalPrice = basePrice;
+      let finalDescription = planName;
+
+      // --- Check for URL parameters ---
+      const urlParams = new URLSearchParams(window.location.search);
+      const screens = parseInt(urlParams.get('ecrans')) || 1;
+      const priceFromUrl = parseFloat(urlParams.get('prix'));
+
+      if (priceFromUrl && !isNaN(priceFromUrl)) {
+        finalPrice = priceFromUrl;
+      }
+      if (screens > 1) {
+        finalDescription = `${planName} (${screens} écrans)`;
+      }
+
+      // --- Update Page Content ---
+      document.getElementById('product-name').textContent = finalDescription;
+      document.getElementById('product-price').textContent = `${finalPrice.toFixed(2)}€`;
+      document.getElementById('total-price').textContent = `${finalPrice.toFixed(2)}€`;
+
+      // --- Initialize PayPal Buttons ---
+      paypal.Buttons({
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              description: finalDescription,
+              amount: {
+                value: finalPrice.toFixed(2)
+              }
+            }]
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            window.location.href = "/merci.html";
+          });
+        },
+        onError: function (err) {
+          console.error("Erreur PayPal:", err);
+          const paypalContainer = document.getElementById('paypal-button-container');
+          paypalContainer.innerHTML = '<p style="color:red; text-align:center;">Une erreur est survenue durant le paiement. Veuillez réessayer.</p>';
+        }
+      }).render('#paypal-button-container');
+    });
+  </script>
+</body>
+</html>
+ 

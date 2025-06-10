@@ -31,26 +31,26 @@
     </url>
     
     <!-- Section Blog -->
-    <url>
-        <loc>https://iptvsmarterpros.com/blog.html</loc>
+  <url>
+    <loc>https://iptvsmarterpros.com/blog.html</loc>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <!-- Note : Les URLs de chaque article de blog devraient être ajoutées ici au fur et à mesure -->
     
-    <!-- Pages d'offres dynamiques basées sur offer-details.html -->
+    <!-- Nouvelles pages d'offres dédiées -->
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_3_mois</loc>
+        <loc>https://iptvsmarterpros.com/offre-12-mois.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://iptvsmarterpros.com/offre-6-mois.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_6_mois</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://iptvsmarterpros.com/offer-details.html?product=Premium_IPTV_12_mois</loc>
+        <loc>https://iptvsmarterpros.com/offre-3-mois.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -71,5 +71,5 @@
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
-
+    
 </urlset> 

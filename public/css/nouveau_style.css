@@ -1,0 +1,398 @@
+/* Consolidation de tous les styles CSS et styles inline */
+
+/* === Début : styles.css === */
+/*
+ * Fichier CSS unifié et optimisé pour IPTV Smarters Pro
+ * Version 1.0 - Fusion de tous les styles
+ * Comprend: styles.css, navbar.css, logo.css, mobile-fix.css, mobile-optimized.css, mobile-menu-fix.css et styles inline.
+ */
+
+/*------------------------------------------------------------------
+[TABLE DES MATIÈRES]
+
+1.  GLOBAL STYLES
+    - Polices & @font-face
+    - Reset & Base
+    - Variables CSS
+    - Animations & Keyframes
+    - Styles Utilitaires (dividers, etc.)
+
+2.  HEADER & NAVIGATION
+    - Conteneur principal
+    - Logo
+    - Navigation Desktop
+    - Bouton Contact
+    - Menu Mobile (Toggle)
+
+3.  SECTIONS PRINCIPALES
+    - Hero Section (Vidéo & Overlay)
+    - Bannières (Images & Films)
+    - Section Offres (Grille, Cartes)
+    - Section Avantages
+    - Section Caractéristiques Clés (Key Features)
+
+4.  FOOTER
+    - Footer principal
+    - Footer fixe (CTA)
+
+5.  COMPOSANTS
+    - Boutons & Liens
+    - Badges & Tags
+    - Formulaires (Inputs, Select)
+    - Notifications
+    - Squelettes de chargement
+
+6.  PAGES SPÉCIFIQUES
+    - Blog
+    - Détails de l'offre
+
+7.  MEDIA QUERIES (Responsive)
+    - 1800px+
+    - 1400px+
+    - 768px (Tablette / Mobile large)
+    - 600px (Mobile moyen)
+    - 480px (Petit mobile)
+    - Préférences utilisateur (reduced motion, etc.)
+------------------------------------------------------------------*/
+
+
+/*== 1. GLOBAL STYLES ==*/
+
+/* Polices & @font-face */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Reset & Base */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+  scroll-padding-top: 70px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Variables CSS */
+:root {
+  --primary-gradient: linear-gradient(135deg, #6c5498, #ff6b6b);
+  --secondary-gradient: linear-gradient(135deg, #ff6b6b, #6c5498);
+  --shadow-light: 0 4px 15px rgba(108, 84, 152, 0.15);
+  --shadow-medium: 0 8px 25px rgba(108, 84, 152, 0.25);
+  --shadow-heavy: 0 15px 35px rgba(108, 84, 152, 0.3);
+  --border-radius-small: 8px;
+  --border-radius-medium: 12px;
+  --border-radius-large: 20px;
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-slow: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+/* Animations & Keyframes */
+@keyframes scrollBanner {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-35px * 15)); }
+}
+
+@keyframes scrollFilms {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-200px * 10)); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.95) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes borderGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideInFromLeft {
+  0% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Styles Utilitaires */
+.section-divider {
+  height: 1px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, #E74C3C, #6c5498, #E74C3C, transparent);
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shine 3s infinite;
+}
+.section-divider.style1,
+.section-divider.style2,
+.section-divider.style3,
+.section-divider.style4 {
+  background: linear-gradient(90deg, transparent, #E74C3C, #6c5498, #E74C3C, transparent);
+}
+
+.lazy {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lazy.loaded {
+  opacity: 1;
+}
+
+.premium-gradient {
+    background: linear-gradient(45deg, #E74C3C, #6c5498);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+
+/*== 2. HEADER & NAVIGATION ==*/
+
+.header-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(15, 15, 25, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+  padding: 10px 0;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: visible;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 0 0; 
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ... (le reste du contenu de styles.css doit être collé ici, jusqu'à la fin du fichier) ... */
+
+/* === Fin : styles.css === */ 
+
+/* === Début : navbar.css === */
+/* Styles de la barre de navigation */
+.header-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 15, 25, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    padding: 10px 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: visible;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px 0 0; /* Padding seulement à droite */
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* ... (le reste du contenu de navbar.css doit être collé ici, jusqu'à la fin du fichier) ... */
+
+/* === Fin : navbar.css === */ 
+
+/* === Début : logo.css === */
+/* Styles spécifiques pour le logo - à inclure sur toutes les pages */
+.logo {
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 45px !important;
+    z-index: 1001 !important;
+}
+
+.logo a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    height: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.logo img {
+    height: 70px !important;
+    width: auto !important;
+    max-height: none !important;
+    max-width: none !important;
+    transition: filter 0.3s ease !important;
+    filter: brightness(1.1) drop-shadow(0 0 3px rgba(255, 255, 255, 0.2)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateY(3px) !important;
+}
+
+/* ... (le reste du contenu de logo.css doit être collé ici, jusqu'à la fin du fichier) ... */
+
+/* === Fin : logo.css === */ 
+
+/* === Début : mobile-fix.css === */
+/* Correctifs spécifiques pour mobile - IPTV */
+
+@media (max-width: 768px) {
+  /* Carte d'offre globale */
+  .offer-card {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: 400px !important;
+    padding: 12px !important;
+    margin: 0 0 15px 0 !important;
+    display: block !important;
+    width: auto !important;
+    box-sizing: border-box !important;
+  }
+  /* ... (le reste du contenu de mobile-fix.css doit être collé ici, jusqu'à la fin du fichier) ... */
+}
+
+/* === Fin : mobile-fix.css === */ 
+
+/* === Début : mobile-optimized.css === */
+/* 
+ * CSS Mobile Optimized - IPTV Smarters Pro
+ * Optimisations spécifiques pour les performances mobiles
+ */
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #6c5498, #ff6b6b);
+  --secondary-gradient: linear-gradient(135deg, #ff6b6b, #6c5498);
+  --shadow-light: 0 4px 15px rgba(108, 84, 152, 0.15);
+  --shadow-medium: 0 8px 25px rgba(108, 84, 152, 0.25);
+  --shadow-heavy: 0 15px 35px rgba(108, 84, 152, 0.3);
+  --border-radius-small: 8px;
+  --border-radius-medium: 12px;
+  --border-radius-large: 20px;
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-slow: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ... (le reste du contenu de mobile-optimized.css doit être collé ici, jusqu'à la fin du fichier) ... */
+
+/* === Fin : mobile-optimized.css === */ 
+
+/* === Début : mobile-menu-fix.css === */
+/* Menu mobile - Rendu visible sur mobile uniquement */
+@media (max-width: 768px) {
+    /* Bouton hamburger visible */
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 25px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 1000;
+    }
+    /* ... (le reste du contenu de mobile-menu-fix.css doit être collé ici, jusqu'à la fin du fichier) ... */
+}
+
+/* === Fin : mobile-menu-fix.css === */ 
+
+/* === Début : styles inline extraits de index.html === */
+/* (Collez ici tout le CSS extrait des balises <style> de public/index.html) */
+
+/* === Fin : styles inline extraits de index.html === */
