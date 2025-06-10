@@ -5,28 +5,39 @@ const nodemailer = require('nodemailer');
 
 // Configuration des produits - CODES RÉELS DU SITE
 const PRODUCTS = {
-  // Codes trouvés sur votre site
+  // Codes pour les abonnements de base
+  'Premium_IPTV_3_mois': {
+    name: 'Abonnement IPTV Premium 3 Mois',
+    description: 'Accès complet pendant 3 mois - Plus de 22 000 chaînes et 50 000 VOD',
+    price: '9.99€'
+  },
+  'Premium_IPTV_6_mois': {
+    name: 'Abonnement IPTV Premium 6 Mois',
+    description: 'Accès complet pendant 6 mois - Plus de 22 000 chaînes et 50 000 VOD',
+    price: '19.99€'
+  },
   'Premium_IPTV_12_mois': {
     name: 'Abonnement IPTV Premium 12 Mois',
     description: 'Accès complet pendant 12 mois - Plus de 22 000 chaînes et 50 000 VOD',
     price: '29.99€'
   },
-  'Premium_IPTV_12_mois_3_ecrans': {
+  // Codes pour les abonnements multi-écrans (exemple, à adapter)
+  'Premium_IPTV_2_ecrans': {
+    name: 'Abonnement IPTV Premium 12 Mois - 2 Écrans',
+    description: 'Accès complet pour 2 écrans en simultané',
+    price: '59.99€'
+  },
+  'Premium_IPTV_3_ecrans': {
     name: 'Abonnement IPTV Premium 12 Mois - 3 Écrans',
-    description: 'Accès complet pendant 12 mois pour 3 écrans - Plus de 22 000 chaînes et 50 000 VOD',
+    description: 'Accès complet pour 3 écrans en simultané',
     price: '79.99€'
   },
-  'Premium_IPTV_6_mois_4_ecrans': {
-    name: 'Abonnement IPTV Premium 6 Mois - 4 Écrans',
-    description: 'Accès complet pendant 6 mois pour 4 écrans - Plus de 22 000 chaînes et 50 000 VOD',
-    price: '79.99€'
+  'Premium_IPTV_4_ecrans': {
+    name: 'Abonnement IPTV Premium 12 Mois - 4 Écrans',
+    description: 'Accès complet pour 4 écrans en simultané',
+    price: '99.99€'
   },
-  'Premium_IPTV_3_mois_3_ecrans': {
-    name: 'Abonnement IPTV Premium 3 Mois - 3 Écrans',
-    description: 'Accès complet pendant 3 mois pour 3 écrans - Plus de 22 000 chaînes et 50 000 VOD',
-    price: '29.99€'
-  },
-  // Codes compatibilité pour PayPal
+  // Codes de compatibilité (si utilisés par PayPal ou autre)
   '1month': {
     name: 'Abonnement IPTV 1 Mois',
     description: 'Accès complet pendant 1 mois',

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci pour votre commande ! - IPTV Smarters Pro</title>
+    
+    <!-- Empêcher l'indexation de cette page -->
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Polices et icônes -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script>
+    
+    <style>
+        :root {
+            --primary-color: #6c5498;
+            --secondary-color: #ff6b6b;
+            --success-color: #28a745;
+            --dark-bg: #0c0c18;
+            --light-text: #ffffff;
+            --muted-text: #b0b0b0;
+            --card-bg: rgba(26, 26, 46, 0.7);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .confirmation-container {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary-color);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirmation-icon {
+            font-size: 3rem;
+            color: var(--success-color);
+            margin-bottom: 20px;
+            animation: popIn 0.5s ease-out 0.5s backwards;
+        }
+        
+        @keyframes popIn {
+            from {
+                transform: scale(0.5);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: var(--muted-text);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .next-steps {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+            border: 1px dashed var(--primary-color);
+        }
+
+        .next-steps h2 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .next-steps li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .next-steps i {
+            margin-right: 15px;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+<body>
+    <main id="main-content" role="main">
+        <div class="confirmation-container">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Merci pour votre commande !</h1>
+            <p>
+                Votre paiement a été traité avec succès. Vous êtes maintenant prêt à profiter du meilleur du streaming IPTV.
+            </p>
+            
+            <div class="next-steps">
+                <h2>Prochaines étapes :</h2>
+                <ul>
+                    <li>
+                        <i class="fas fa-envelope-open-text"></i>
+                        <div>
+                            <strong>Consultez vos e-mails :</strong> Un message de confirmation contenant vos identifiants et le guide d'installation vous a été envoyé.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Vérifiez vos spams :</strong> Si vous ne trouvez pas l'e-mail, pensez à vérifier votre dossier de courriers indésirables.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <strong>Contactez le support :</strong> Si vous avez la moindre question, notre support client est disponible 24/7 pour vous aider.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="index.html" class="cta-button">Retour à l'accueil</a>
+        </div>
+    </main>
+</body>
+</html> 
