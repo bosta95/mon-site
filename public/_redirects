@@ -43,3 +43,6 @@ https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 
 # Page 404 personnalisée
 /*  /404.html  404 
+
+# Redirection pour que toute visite sur /conditions.html soit automatiquement redirigée vers /conditions-generales.html
+/conditions.html   /conditions-generales.html   301 
