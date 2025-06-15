@@ -4,45 +4,71 @@
 /api/contact /.netlify/functions/contact 200
 /api/order /.netlify/functions/order 200
 
+# Forcer HTTPS sur toutes les URLs
+http://* https://:splat 301!
+
 # Redirection www vers non-www (force)
 https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 
-# Redirections des anciennes URLs d'offres vers les nouvelles
-/offer-details.html?product=Premium_IPTV_3_mois /offres/premium-3-mois/ 301!
-/offer-details.html?product=Premium_IPTV_6_mois /offres/premium-6-mois/ 301!
-/offer-details.html?product=Premium_IPTV_12_mois /offres/premium-12-mois/ 301!
+# Redirections des pages avec .html vers version sans .html
+/index.html / 301!
+/about.html /about 301!
+/contact.html /contact 301!
+/faq.html /faq 301!
+/tutoriel.html /tutoriel 301!
+/blog.html /blog 301!
+/conditions-generales.html /conditions-generales 301!
+/politique-confidentialite.html /politique-confidentialite 301!
+
+# Redirections des pages de blog avec .html vers version sans .html
+/blog/tendances-streaming-2025.html /blog/tendances-streaming-2025 301!
+/blog/eliminer-buffering-iptv.html /blog/eliminer-buffering-iptv 301!
+/blog/guide-epg-iptv.html /blog/guide-epg-iptv 301!
+
+# Redirections des offres avec .html vers version sans .html
+/offre-3-mois.html /offre-3-mois 301!
+/offre-6-mois.html /offre-6-mois 301!
+/offre-12-mois.html /offre-12-mois 301!
+
+# Redirections des anciennes URLs d'offres
+/offer-details.html?product=Premium_IPTV_3_mois /offre-3-mois 301!
+/offer-details.html?product=Premium_IPTV_6_mois /offre-6-mois 301!
+/offer-details.html?product=Premium_IPTV_12_mois /offre-12-mois 301!
 
 # Redirections des anciennes URLs d'abonnements
-/abonnement3mois /offres/premium-3-mois/ 301!
-/abonnement6mois /offres/premium-6-mois/ 301!  
-/abonnement12mois /offres/premium-12-mois/ 301!
-
-# Redirection index.html vers racine
-/index.html / 301!
+/abonnement3mois /offre-3-mois 301!
+/abonnement6mois /offre-6-mois 301!  
+/abonnement12mois /offre-12-mois 301!
 
 # Redirections des pages supprimées vers l'accueil
 /flyer.html / 301!
 /maintenance.html / 301!
 
 # Corrections SEO - Redirections pour éviter les 404
-/inscription /contact.html 301!
-/espace-client /contact.html 301!
-/concours.html /contact.html 301!
-/concours /contact.html 301!
-/offer /offer-details.html 301!
-/payment /offer-details.html 301!
-/blog.html /blog/ 301!
-/privacy /conditions.html 301!
-/politique-confidentialite /conditions.html 301!
-/conditions-generales /conditions.html 301!
+/inscription /contact 301!
+/espace-client /contact 301!
+/concours.html /contact 301!
+/concours /contact 301!
+/offer /offre-3-mois 301!
+/payment /offre-3-mois 301!
+/privacy /politique-confidentialite 301!
 
 # Redirections anciennes URLs produits
-/offer-details?product=* /offer-details.html 301!
-/payment.html?plan=* /offer-details.html 301!
-/offer?product=* /offer-details.html 301!
+/offer-details?product=* /offre-3-mois 301!
+/payment.html?plan=* /offre-3-mois 301!
+/offer?product=* /offre-3-mois 301!
 
 # Page 404 personnalisée
 /*  /404.html  404 
 
-# Redirection pour que toute visite sur /conditions.html soit automatiquement redirigée vers /conditions-generales.html
-/conditions.html   /conditions-generales.html   301 
+# Redirections supplémentaires
+/about /about.html 301!
+/faq /faq.html 301!
+/tutoriel /tutoriel.html 301!
+/offre-12-mois /offre-12-mois.html 301!
+/offre-3-mois /offre-3-mois.html 301!
+/offre-6-mois /offre-6-mois.html 301!
+/blog/tendances-streaming-2025 /blog/tendances-streaming-2025.html 301!
+/blog/eliminer-buffering-iptv /blog/eliminer-buffering-iptv.html 301!
+/blog/guide-epg-iptv /blog/guide-epg-iptv.html 301!
+/reviews / 301! 
