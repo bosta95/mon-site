@@ -4,11 +4,20 @@
 /api/contact /.netlify/functions/contact 200
 /api/order /.netlify/functions/order 200
 
-# Forcer HTTPS sur toutes les URLs
-http://* https://:splat 301!
+# --- RÈGLES DE REDIRECTION CANONIQUE ---
+# Objectif : Toujours rediriger vers https://iptvsmarterpros.com en un seul saut pour
+# éviter les chaînes de redirection et optimiser le SEO.
 
-# Redirection www vers non-www (force)
+# 1. Redirection de http://www. vers https://non-www
+http://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
+
+# 2. Redirection de https://www. vers https://non-www
 https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
+
+# 3. Redirection de http://non-www vers https://non-www
+http://iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
+
+# --- FIN DES RÈGLES CANONIQUES ---
 
 # Redirections des pages avec .html vers version sans .html
 /index.html / 301!
@@ -57,6 +66,7 @@ https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 /offer-details?product=* /offre-3-mois 301!
 /payment.html?plan=* /offre-3-mois 301!
 /offer?product=* /offre-3-mois 301!
+/product/subscription-12-months-iptv-smarters-pro-iptv-smarters-lite-12-months/ /offre-12-mois 301!
 
 # Redirections supplémentaires
 /reviews / 301!

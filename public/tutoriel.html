@@ -2,8 +2,8 @@
 
 <html lang="fr">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- SEO : Titre, Description, Keywords, Canonical -->
 <title>Tuto IPTV : Guide d'Installation Facile pour Smart TV, Android &amp; iOS</title>
@@ -12,8 +12,22 @@
 <link rel="canonical" href="https://iptvsmarterpros.com/tutoriel">
 <meta name="robots" content="index, follow"/>
 
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Tuto IPTV : Guide d'Installation Facile pour Smart TV, Android & plus">
+<meta property="og:description" content="Suivez notre guide d'installation IPTV pas à pas pour configurer votre abonnement sur tous vos appareils : Smart TV, Android, PC, et plus encore.">
+<meta property="og:image" content="https://iptvsmarterpros.com/images/site.PNG">
+<meta property="og:url" content="https://iptvsmarterpros.com/tutoriel">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tuto IPTV : Guide d'Installation Facile pour Smart TV, Android & plus">
+<meta name="twitter:description" content="Suivez notre guide d'installation IPTV pas à pas pour configurer votre abonnement sur tous vos appareils : Smart TV, Android, PC, et plus encore.">
+<meta property="twitter:image" content="https://iptvsmarterpros.com/images/site.PNG">
+
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <!-- Font Awesome optimisé -->
 <!-- <script src="https://kit.fontawesome.com/81814aca04.js" crossorigin="anonymous" defer></script> -->
@@ -1300,34 +1314,56 @@
   
   <!-- CTA Section -->
   <section class="cta-section">
-    <h2>Prêt à profiter de l'expérience IPTV premium ?</h2>
-    <p>Accédez à plus de 22 000 chaînes et 50 000 films en HD</p>
-    <div class="cta-buttons">
-      <a href="/#offers-section" class="btn-slim primary">Nos offres</a>
-      <a href="/contact" class="btn-slim secondary">Support</a>
+    <h2>Prêt à vous lancer ?</h2>
+    <p>Vous n'êtes pas encore client ? C'est le moment idéal pour découvrir nos offres ! Choisissez l'abonnement qui vous convient le mieux et profitez d'une expérience de streaming inégalée.</p>
+
+    <div class="tutorial-offers">
+      <a href="offre-3-mois.html" class="cta-button-offer">
+        <strong>Offre 3 Mois</strong>
+        <span>Idéal pour tester</span>
+      </a>
+      <a href="offre-6-mois.html" class="cta-button-offer">
+        <strong>Offre 6 Mois</strong>
+        <span>Le meilleur équilibre</span>
+      </a>
+      <a href="offre-12-mois.html" class="cta-button-offer">
+        <strong>Offre 12 Mois</strong>
+        <span>Le meilleur prix</span>
+      </a>
     </div>
   </section>
-  
-  <!-- Script pour les onglets -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const deviceTabs = document.querySelectorAll('.device-tab');
-      const deviceContents = document.querySelectorAll('.device-content');
-      deviceTabs.forEach(tab => {
-        tab.addEventListener('click', function() {
-          deviceTabs.forEach(t => t.classList.remove('active'));
-          deviceContents.forEach(c => c.classList.remove('active'));
-          this.classList.add('active');
-          const target = this.getAttribute('data-target');
-          document.getElementById(target).classList.add('active');
-        });
-      });
-    });
-  </script>
-  <!-- Script pour la barre de navigation -->
-  <script src="/js/navbar.js"></script>
+
+  <!-- Section Support -->
+  <section class="support-section">
+    <h2>Besoin d'aide ?</h2>
+    <p>Notre équipe de support est disponible 7j/7 pour répondre à toutes vos questions. N'hésitez pas à nous contacter.</p>
+    <a href="contact.html" class="contact-button">Contacter le support</a>
+  </section>
 </div>
 </main>
+
+<footer>
+  <!-- ... Contenu du footer ... -->
+</footer>
+
+<!-- Script pour les onglets -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const deviceTabs = document.querySelectorAll('.device-tab');
+    const deviceContents = document.querySelectorAll('.device-content');
+    deviceTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        deviceTabs.forEach(t => t.classList.remove('active'));
+        deviceContents.forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        const target = this.getAttribute('data-target');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  });
+</script>
+<!-- Script pour la barre de navigation -->
+<script src="/js/navbar.js"></script>
 </body>
 </html>
 
