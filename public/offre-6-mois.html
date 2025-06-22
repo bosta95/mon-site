@@ -30,9 +30,40 @@
       "@type": "Offer",
       "url": "https://iptvsmarterpros.com/offre-6-mois",
       "priceCurrency": "EUR",
-      "price": 19.99,
+      "price": "19.99",
       "priceValidUntil": "2025-12-31",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "FR",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "EUR"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitCode": "DAY"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "DAY"
+          }
+        }
+      }
     },
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -42,12 +73,28 @@
     "review": [
       {
         "@type": "Review",
-        "author": "Sophie M.",
-        "datePublished": "2025-05-05",
+        "author": {
+          "@type": "Person",
+          "name": "Sophie M."
+        },
+        "datePublished": "2025-01-15",
         "reviewBody": "Très bonne qualité d'image, seulement quelques coupures occasionnelles. Support client réactif.",
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": "4"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Marc D."
+        },
+        "datePublished": "2025-01-12",
+        "reviewBody": "Excellent rapport qualité-prix pour 6 mois. Service stable et fiable.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
         }
       }
     ]

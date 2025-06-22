@@ -58,17 +58,8 @@ https://www.iptvsmarterpros.com/* https://iptvsmarterpros.com/:splat 301!
 /payment.html?plan=* /offre-3-mois 301!
 /offer?product=* /offre-3-mois 301!
 
+# Redirections supplémentaires
+/reviews / 301!
+
 # Page 404 personnalisée
 /*  /404.html  404 
-
-# Redirections supplémentaires
-/about /about.html 301!
-/faq /faq.html 301!
-/tutoriel /tutoriel.html 301!
-/offre-12-mois /offre-12-mois.html 301!
-/offre-3-mois /offre-3-mois.html 301!
-/offre-6-mois /offre-6-mois.html 301!
-/blog/tendances-streaming-2025 /blog/tendances-streaming-2025.html 301!
-/blog/eliminer-buffering-iptv /blog/eliminer-buffering-iptv.html 301!
-/blog/guide-epg-iptv /blog/guide-epg-iptv.html 301!
-/reviews / 301! 
