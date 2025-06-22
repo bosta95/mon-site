@@ -18,3 +18,8 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin 
+*/
+
+# Désactive les range requests pour l'image Open Graph (Facebook)
+/images/site.PNG
+  Accept-Ranges: none 
