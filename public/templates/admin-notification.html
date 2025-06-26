@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nouvelle Commande - IPTV Smarter Pros</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+      color: #ffffff;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .email-container {
+      max-width: 500px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+    
+    .email-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #dc2626 0%, #ef4444 50%, #dc2626 100%);
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: #ffffff;
+      border-radius: 1px;
+    }
+    
+    .logo {
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    
+    .tagline {
+      color: #fecaca;
+      font-size: 14px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .alert-icon {
+      width: 60px;
+      height: 60px;
+      background: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 24px auto 16px;
+      font-size: 24px;
+      color: #dc2626;
+    }
+    
+    .alert-badge {
+      background: #ffffff;
+      color: #dc2626;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+      margin: 12px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .content {
+      padding: 40px 32px;
+      color: #1a1a1a;
+    }
+    
+    .title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 12px;
+      text-align: center;
+      letter-spacing: -0.5px;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+      color: #666666;
+      margin-bottom: 40px;
+      text-align: center;
+      font-weight: 400;
+    }
+    
+    .order-card {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    
+    .order-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+      border-radius: 16px 16px 0 0;
+    }
+    
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .card-title::before {
+      content: "🚨";
+      font-size: 24px;
+    }
+    
+    .order-row {
+      display: flex;
+      margin-bottom: 16px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .order-row:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .order-label {
+      font-weight: 500;
+      color: #666666;
+      min-width: 120px;
+      margin-right: 16px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .order-value {
+      color: #000000;
+      flex: 1;
+      font-weight: 500;
+    }
+    
+    .price {
+      color: #10b981;
+      font-weight: 700;
+      font-size: 24px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .order-number {
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+      background: #dc2626;
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    
+    .email-link {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .email-link:hover {
+      text-decoration: underline;
+    }
+    
+    .status-badge {
+      background: #fef3c7;
+      color: #92400e;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .actions-card {
+      background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+      border: 1px solid #fecaca;
+      border-radius: 16px;
+      padding: 32px;
+      margin: 32px 0;
+      position: relative;
+    }
+    
+    .actions-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+      border-radius: 16px 16px 0 0;
+    }
+    
+    .actions-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #991b1b;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .actions-title::before {
+      content: "⚡";
+      font-size: 24px;
+    }
+    
+    .action-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .action-item {
+      margin-bottom: 16px;
+      padding: 16px;
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #fecaca;
+      position: relative;
+      color: #7f1d1d;
+      font-weight: 500;
+    }
+    
+    .action-item::before {
+      content: "✓";
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #dc2626;
+      color: #ffffff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .action-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .highlight {
+      font-weight: 600;
+      color: #991b1b;
+    }
+    
+    .footer {
+      background: #f8f9fa;
+      padding: 32px;
+      text-align: center;
+      border-top: 1px solid #e9ecef;
+    }
+    
+    .footer-text {
+      color: #666666;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    
+    .contact-info {
+      color: #3b82f6;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    
+    .contact-info:hover {
+      text-decoration: underline;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 640px) {
+      body {
+        padding: 10px;
+      }
+      
+      .email-container {
+        border-radius: 16px;
+      }
+      
+      .header, .content, .footer {
+        padding: 24px 20px;
+      }
+      
+      .title {
+        font-size: 24px;
+      }
+      
+      .order-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+      
+      .order-label {
+        margin-right: 0;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">IPTV Smarter Pros</div>
+      <div class="tagline">Admin Dashboard</div>
+      <div class="alert-icon">🚨</div>
+      <div class="alert-badge">Nouvelle Commande</div>
+    </div>
+    
+    <!-- Content -->
+    <div class="content">
+      <h1 class="title">Nouvelle Commande</h1>
+      <p class="subtitle">Un client vient de passer une commande</p>
+      
+      <!-- Order Details -->
+      <div class="order-card">
+        <h2 class="card-title">Détails de la commande</h2>
+        
+        <div class="order-row">
+          <span class="order-label">Client</span>
+          <span class="order-value">
+            <a href="mailto:{{clientEmail}}" class="email-link">{{clientEmail}}</a>
+          </span>
+        </div>
+        
+        <div class="order-row">
+          <span class="order-label">Produit</span>
+          <span class="order-value">{{productName}}</span>
+        </div>
+        
+        <div class="order-row">
+          <span class="order-label">Description</span>
+          <span class="order-value">{{productDescription}}</span>
+        </div>
+        
+        <div class="order-row">
+          <span class="order-label">Prix</span>
+          <span class="order-value price">{{productPrice}}</span>
+        </div>
+        
+        <div class="order-row">
+          <span class="order-label">Numéro</span>
+          <span class="order-value order-number">{{orderNumber}}</span>
+        </div>
+        
+        <div class="order-row">
+          <span class="order-label">Date</span>
+          <span class="order-value">{{orderDate}} à {{orderTime}}</span>
+        </div>
+        
+        <div class="order-row">
+          <span class="order-label">Paiement</span>
+          <span class="order-value status-badge">{{paymentMethod}}</span>
+        </div>
+      </div>
+      
+      <!-- Actions Required -->
+      <div class="actions-card">
+        <h3 class="actions-title">Actions requises</h3>
+        <ul class="action-list">
+          <li class="action-item">
+            <span class="highlight">Vérifiez le paiement</span> - Confirmez que le paiement a été reçu
+          </li>
+          <li class="action-item">
+            <span class="highlight">Générez les identifiants</span> - Créez un compte pour le client
+          </li>
+          <li class="action-item">
+            <span class="highlight">Envoyez les accès</span> - Transmettez les identifiants par email
+          </li>
+          <li class="action-item">
+            <span class="highlight">Suivi client</span> - Assurez-vous que tout fonctionne correctement
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p class="footer-text">
+        Connectez-vous à votre 
+        <a href="https://iptvsmarterpros.com/admin" class="contact-info">dashboard admin</a> 
+        pour gérer cette commande
+      </p>
+      <p class="footer-text" style="font-size: 12px; color: #999;">
+        © 2024 IPTV Smarter Pros. Tous droits réservés.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

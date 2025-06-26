@@ -1,16 +1,46 @@
-# robots.txt généré le 08/06/2025 – Stratégie SEO optimisée
+# robots.txt pour IPTV Smarters Pro - Optimisé SEO
+# Généré le 27/01/2025
 
-# Autoriser entièrement l'exploration sauf exceptions
+# Autoriser l'exploration par tous les robots
 User-agent: *
-Disallow: /payment.html
-Disallow: /admin-reviews.html
+Allow: /
+
+# Pages à exclure de l'indexation
 Disallow: /404.html
+Disallow: /merci.html
 Disallow: /api/
+Disallow: /netlify/
+Disallow: /*.json$
 Disallow: /*?*
 
-# Autoriser les ressources nécessaires
+# Exclure les fichiers techniques et temporaires
+Disallow: /_headers
+Disallow: /_redirects
+Disallow: /netlify.toml
+Disallow: /package.json
+Disallow: /server.js
+Disallow: /reviews-api.js
+Disallow: /reviews-data.json
+
+# Autoriser explicitement les ressources importantes
 Allow: /*.css$
 Allow: /*.js$
 Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /site.webmanifest
 
+# Sitemap principal
 Sitemap: https://iptvsmarterpros.com/sitemap.xml
+
+# Règles spécifiques pour Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Règles spécifiques pour Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1

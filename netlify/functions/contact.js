@@ -11,8 +11,8 @@ function isValidEmail(email) {
 // Fonction pour charger et compiler les templates
 function getTemplate(templateName) {
   try {
-    // Chemin corrigé pour les fonctions Netlify
-    const templatePath = path.join(__dirname, '../..', 'templates', `${templateName}.html`);
+    // Chemin corrigé pour les fonctions Netlify - pointe vers public/templates
+    const templatePath = path.join(__dirname, '../..', 'public', 'templates', `${templateName}.html`);
     console.log(`📂 Chargement template ${templateName} depuis:`, templatePath);
     
     const templateSource = fs.readFileSync(templatePath, 'utf-8');
@@ -137,13 +137,20 @@ exports.handler = async function(event, context) {
     console.error('❌ Erreur envoi email contact:', error);
     console.error('📍 Stack:', error.stack);
     
-    // Diagnostics spécifiques
+    // Diagnostics spécifiques pour Namecheap
     if (error.message.includes('EAUTH')) {
       console.error('🔧 Problème d\'authentification SMTP - Vérifiez SMTP_USER et SMTP_PASS');
+      console.error('💡 Pour Namecheap : Utilisez un mot de passe d\'application, pas votre mot de passe principal');
     } else if (error.message.includes('ECONNREFUSED')) {
       console.error('🔧 Problème de connexion SMTP - Vérifiez SMTP_HOST et SMTP_PORT');
+      console.error('💡 Pour Namecheap : SMTP_HOST=mail.privateemail.com, SMTP_PORT=465');
     } else if (error.message.includes('ENOTFOUND')) {
       console.error('🔧 Problème DNS - Vérifiez SMTP_HOST');
+      console.error('💡 Pour Namecheap : Vérifiez l\'orthographe de mail.privateemail.com');
+    } else if (error.message.includes('ETIMEDOUT')) {
+      console.error('🔧 Timeout de connexion - Vérifiez votre connexion internet');
+    } else if (error.message.includes('SELF_SIGNED_CERT')) {
+      console.error('🔧 Problème de certificat SSL - Vérifiez la configuration secure');
     }
     
     return {

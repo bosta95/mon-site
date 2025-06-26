@@ -1047,42 +1047,32 @@
 </head>
 <body>
 <!-- HEADER -->
-    <header class="header-container">
-    <div class="header-content">
+<header class="header-container">
+   <div class="header-content">
       <div class="logo">
-        <a href="/">
-          <img alt="IPTV Smarter Pro Logo" src="/images/logo.svg" width="150" height="40"/>
-        </a>
+         <a href="index.html">
+         <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg"/>
+         </a>
       </div>
       <!-- Menu hamburger pour mobile -->
       <div class="mobile-menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+         <span></span>
+         <span></span>
+         <span></span>
       </div>
       <!-- Navigation Desktop -->
       <nav class="header-nav">
-        <ul>
-          <li><a href="/">Accueil</a></li>
-          <li><a href="/#offers-section">OFFRES</a></li>
-          <li><a href="/tutoriel">Tutoriel</a></li>
-          <li><a href="/about">À propos</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
+         <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#offers-section">OFFRES</a></li>
+            <li><a href="tutoriel.html">Installation</a></li>
+            <li><a href="index.html#xtream-codes">Codes Xtream</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="contact.html">Contact</a></li>
+         </ul>
       </nav>
-    </div>
-  </header>
-
-<!-- En-tête du tutoriel -->
-<header class="tutorial-header">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="/images/hero-video.mp4" type="video/mp4">
-  </video>
-  <div class="tutorial-header-content">
-    <h1>Guide d'Installation IPTV 2025</h1>
-    <p>Configurez facilement votre IPTV sur tous vos appareils en quelques minutes</p>
-  </div>
+   </div>
 </header>
 
 <main id="main-content" role="main">
@@ -1317,10 +1307,10 @@
     <h2>Prêt à profiter de l'expérience IPTV premium ?</h2>
     <p>Accédez à plus de 22 000 chaînes et 50 000 films en HD. Choisissez l'offre qui vous convient :</p>
     <div class="cta-buttons">
-      <a href="/offre-3-mois" class="btn-slim primary">Offre 3 Mois</a>
-      <a href="/offre-6-mois" class="btn-slim primary">Offre 6 Mois</a>
-      <a href="/offre-12-mois" class="btn-slim primary">Offre 12 Mois</a>
-      <a href="/contact" class="btn-slim secondary">Support</a>
+      <a href="offre-3-mois.html" class="btn-slim primary">Offre 3 Mois</a>
+      <a href="offre-6-mois.html" class="btn-slim primary">Offre 6 Mois</a>
+      <a href="offre-12-mois.html" class="btn-slim primary">Offre 12 Mois</a>
+      <a href="contact.html" class="btn-slim secondary">Support</a>
     </div>
   </section>
 
@@ -1333,28 +1323,59 @@
 </div>
 </main>
 
+<!-- FOOTER -->
 <footer>
-  <!-- ... Contenu du footer ... -->
+   <div class="footer-modern">
+      <div class="footer-main">
+         <div class="footer-logo-section">
+            <img src="./images/logo.svg" alt="IPTV Smarters Pro Logo">
+            <p>Service premium d'IPTV avec +22 000 chaînes TV et +50 000 films & séries en HD/4K sur tous vos appareils.</p>
+         </div>
+         <div class="footer-nav">
+            <div class="footer-nav-col">
+               <h4>Navigation</h4>
+               <ul>
+                  <li><a href="index.html">Accueil</a></li>
+                  <li><a href="index.html#offers-section">Offres</a></li>
+                  <li><a href="tutoriel.html">Tutoriel</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="faq.html">FAQ</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+               </ul>
+            </div>
+            <div class="footer-nav-col">
+               <h4>Offres & Guides</h4>
+               <ul>
+                  <li><a href="offre-12-mois.html">Offre 12 Mois</a></li>
+                  <li><a href="offre-6-mois.html">Offre 6 Mois</a></li>
+                  <li><a href="offre-3-mois.html">Offre 3 Mois</a></li>
+                  <li><a href="blog/guide-epg-iptv.html">Guide EPG IPTV</a></li>
+                  <li><a href="blog/tendances-streaming-2025.html">Tendances Streaming 2025</a></li>
+                  <li><a href="blog/eliminer-buffering-iptv.html">Éliminer le Buffering</a></li>
+               </ul>
+            </div>
+            <div class="footer-nav-col">
+               <h4>Informations</h4>
+               <ul>
+                  <li><a href="about.html">À propos</a></li>
+                  <li><a href="conditions-generales.html">Conditions Générales</a></li>
+                  <li><a href="politique-confidentialite.html">Confidentialité</a></li>
+                  <li><a href="contact.html">Support</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="footer-bottom">
+         <div class="footer-copyright">
+            &copy; 2025 IPTV Smarters Pro. Tous droits réservés.
+         </div>
+      </div>
+   </div>
 </footer>
 
-<!-- Script pour les onglets -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const deviceTabs = document.querySelectorAll('.device-tab');
-    const deviceContents = document.querySelectorAll('.device-content');
-    deviceTabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        deviceTabs.forEach(t => t.classList.remove('active'));
-        deviceContents.forEach(c => c.classList.remove('active'));
-        this.classList.add('active');
-        const target = this.getAttribute('data-target');
-        document.getElementById(target).classList.add('active');
-      });
-    });
-  });
-</script>
-<!-- Script pour la barre de navigation -->
-<script src="/js/navbar.js"></script>
+<!-- Scripts centralisés pour une meilleure performance -->
+<script src="./js/navbar.js" async defer></script>
+<script src="./js/main.js" defer></script>
 </body>
 </html>
 

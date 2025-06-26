@@ -17,42 +17,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Gestion du menu mobile optimisée
+  // Gestion du menu mobile - Version simplifiée et fiable
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const headerNav = document.querySelector('.header-nav');
   const body = document.body;
   
   if (mobileMenuToggle && headerNav) {
-    // Variables pour les gestes tactiles
-    let startY = 0;
-    let currentY = 0;
     let isMenuOpen = false;
     
-    // Fonction pour ouvrir/fermer le menu avec animations optimisées
+    // Fonction pour ouvrir/fermer le menu
     function toggleMenu() {
       isMenuOpen = !isMenuOpen;
       
       if (isMenuOpen) {
-        // Ouvrir le menu avec optimisations GPU
+        // Ouvrir le menu
         mobileMenuToggle.classList.add('active');
         headerNav.classList.add('active');
         body.classList.add('menu-open');
-        
-        // Accessibility
-        headerNav.setAttribute('aria-hidden', 'false');
-        mobileMenuToggle.setAttribute('aria-expanded', 'true');
-        
-        // Focus trap
-        const firstFocusable = headerNav.querySelector('a');
-        if (firstFocusable) {
-          setTimeout(() => firstFocusable.focus(), 300);
-        }
       } else {
-        closeMenu();
+        // Fermer le menu
+        mobileMenuToggle.classList.remove('active');
+        headerNav.classList.remove('active');
+        body.classList.remove('menu-open');
       }
     }
     
-    // Fonction pour fermer le menu optimisée
+    // Fonction pour fermer le menu
     function closeMenu() {
       if (!isMenuOpen) return;
       
@@ -60,71 +50,47 @@ document.addEventListener('DOMContentLoaded', function() {
       mobileMenuToggle.classList.remove('active');
       headerNav.classList.remove('active');
       body.classList.remove('menu-open');
-      
-      // Accessibility
-      headerNav.setAttribute('aria-hidden', 'true');
-      mobileMenuToggle.setAttribute('aria-expanded', 'false');
     }
     
-    // Event listener optimisé pour le bouton hamburger
+    // Event listener pour le bouton hamburger
     mobileMenuToggle.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
       toggleMenu();
-    }, { passive: false });
+    });
     
-    // Gestion tactile améliorée pour fermeture du menu
-    let touchStartY = 0;
-    let touchEndY = 0;
-    
-    headerNav.addEventListener('touchstart', function(e) {
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-    
-    headerNav.addEventListener('touchend', function(e) {
-      touchEndY = e.changedTouches[0].screenY;
-      
-      // Swipe vers la droite pour fermer le menu
-      if (touchStartY - touchEndY > 50 && isMenuOpen) {
-        closeMenu();
-      }
-    }, { passive: true });
-    
-    // Fermer le menu quand on clique sur l'overlay (optimisé)
+    // Fermer le menu quand on clique sur l'overlay
     body.addEventListener('click', function(e) {
       if (isMenuOpen && 
           !headerNav.contains(e.target) && 
           !mobileMenuToggle.contains(e.target)) {
         closeMenu();
       }
-    }, { passive: true });
+    });
     
-    // Fermer le menu quand on clique sur un lien (optimisé)
+    // Fermer le menu quand on clique sur un lien
     const navLinks = document.querySelectorAll('.header-nav a');
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
         if (isMenuOpen) {
           closeMenu();
         }
-      }, { passive: true });
+      });
     });
     
     // Fermer le menu avec la touche Escape
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && isMenuOpen) {
         closeMenu();
-        mobileMenuToggle.focus();
       }
-    }, { passive: false });
+    });
     
-    // Gérer le redimensionnement de la fenêtre (throttled)
-    const handleResize = throttle(function() {
+    // Fermer le menu quand on redimensionne la fenêtre
+    window.addEventListener('resize', function() {
       if (window.innerWidth > 768 && isMenuOpen) {
         closeMenu();
       }
-    }, 250);
-    
-    window.addEventListener('resize', handleResize, { passive: true });
+    });
   }
   
   // Optimisation du scroll - Header compact

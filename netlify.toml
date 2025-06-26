@@ -6,6 +6,21 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Variables d'environnement pour l'email - NAMECHEAP PRIVATE EMAIL
+[context.production.environment]
+  SMTP_HOST = "mail.privateemail.com"
+  SMTP_PORT = "465"
+  SMTP_USER = "votre-email@votre-domaine.com"
+  SMTP_PASS = "votre-mot-de-passe-app-namecheap"
+  ADMIN_EMAIL = "votre-email@votre-domaine.com"
+
+[context.deploy-preview.environment]
+  SMTP_HOST = "mail.privateemail.com"
+  SMTP_PORT = "465"
+  SMTP_USER = "votre-email@votre-domaine.com"
+  SMTP_PASS = "votre-mot-de-passe-app-namecheap"
+  ADMIN_EMAIL = "votre-email@votre-domaine.com"
+
 # Headers spécifiques pour sitemap.xml
 [[headers]]
   for = "/sitemap.xml"

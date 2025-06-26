@@ -337,7 +337,7 @@
     .testimonial blockquote {
       margin: 0;
       font-style: italic;
-      font-size: 1.05rem;
+       font-size: 1.05rem;
       color: #ccc;
       line-height: 1.6;
     }
@@ -372,142 +372,226 @@
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="o6pLirhhsQyxnN1JF1zVrw" async></script>
 </head>
 <body>
-  <div class="container">
-    <aside class="payment-summary-card">
-      <h2>Finaliser votre commande</h2>
+  <!-- HEADER -->
+  <header class="header-container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="IPTV Smarter Pro Logo" src="./images/logo.svg"/>
+        </a>
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <!-- Navigation Desktop -->
+      <nav class="header-nav">
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#offers-section">OFFRES</a></li>
+          <li><a href="tutoriel.html">Installation</a></li>
+          <li><a href="index.html#xtream-codes">Codes Xtream</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" role="main">
+    <div class="container">
+      <aside class="payment-summary-card">
+        <h2>Finaliser votre commande</h2>
 
-      <div class="recap-box">
-        <h2>Récapitulatif de votre commande</h2>
-        <div class="recap-line">
-          <span>Produit:</span>
-          <strong id="product-name">Abonnement Essentiel - 3 mois</strong>
+        <div class="recap-box">
+          <h2>Récapitulatif de votre commande</h2>
+          <div class="recap-line">
+            <span>Produit:</span>
+            <strong id="product-name">Abonnement Essentiel - 3 mois</strong>
+          </div>
+          <div class="recap-line">
+            <span>Prix:</span>
+            <strong id="product-price">9,99€</strong>
+          </div>
+          <div class="recap-line total">
+            <span>Total:</span>
+            <strong id="total-price">9,99€</strong>
+          </div>
         </div>
-        <div class="recap-line">
-          <span>Prix:</span>
-          <strong id="product-price">9,99€</strong>
+
+        <p class="payment-info">Paiement 100% sécurisé via PayPal</p>
+        
+        <div id="paypal-button-container"></div>
+
+        <p class="legal-info">
+          En effectuant ce paiement, vous acceptez nos <a href="conditions-generales.html">Conditions Générales</a> et notre <a href="politique-confidentialite.html">Politique de Confidentialité</a>.
+        </p>
+      </aside>
+
+      <main class="offer-details-card">
+        <h1>Abonnement IPTV 3 Mois | Offre Découverte, Streaming HD & Test</h1>
+        
+        <div class="offer-image-container">
+          <img src="images/produits/3_mois_-removebg-preview.png" alt="Boîte de l'offre 3 mois">
         </div>
-        <div class="recap-line total">
-          <span>Total:</span>
-          <strong id="total-price">9,99€</strong>
+
+        <div class="offer-audience">
+          <h3>Pour qui est cette offre ?</h3>
+          <p>Idéal pour les curieux ou pour un besoin ponctuel (vacances, événement sportif...). C'est la meilleure façon de tester la puissance de notre service sans engagement.</p>
         </div>
-      </div>
 
-      <p class="payment-info">Paiement 100% sécurisé via PayPal</p>
-      
-      <div id="paypal-button-container"></div>
-
-      <p class="legal-info">
-        En effectuant ce paiement, vous acceptez nos <a href="/conditions-generales.html">Conditions Générales</a> et notre <a href="/politique-confidentialite.html">Politique de Confidentialité</a>.
-      </p>
-    </aside>
-
-    <main class="offer-details-card">
-      <h1>Abonnement IPTV 3 Mois | Offre Découverte, Streaming HD & Test</h1>
-      
-      <div class="offer-image-container">
-        <img src="images/produits/3_mois_-removebg-preview.png" alt="Boîte de l'offre 3 mois">
-      </div>
-
-      <div class="offer-audience">
-        <h3>Pour qui est cette offre ?</h3>
-        <p>Idéal pour les curieux ou pour un besoin ponctuel (vacances, événement sportif...). C'est la meilleure façon de tester la puissance de notre service sans engagement.</p>
-      </div>
-
-      <p>Notre service IPTV premium vous offre une expérience de visionnage exceptionnelle avec une stabilité optimale et des mises à jour régulières.</p>
-      
-      <div class="features-grid">
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Plus de 18 000 chaînes TV internationales en HD</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Plus de 30 000 films et séries à la demande</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Qualité d'image HD adaptative</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Chaînes françaises et internationales</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Section +18 (basique)</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Compatible avec tous vos appareils</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Mises à jour mensuelles</div>
-        <div class="feature-item"><i class="fas fa-question-circle"></i> Support technique par email</div>
-      </div>
-
-      <div class="mini-faq">
-        <h3>Questions fréquentes</h3>
-        <div class="faq-item">
-          <h4>Comment vais-je recevoir mes accès ?</h4>
-          <p>Immédiatement par email après la validation de votre paiement. Pensez à vérifier votre dossier de courrier indésirable.</p>
+        <p>Notre service IPTV premium vous offre une expérience de visionnage exceptionnelle avec une stabilité optimale et des mises à jour régulières.</p>
+        
+        <div class="features-grid">
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Plus de 18 000 chaînes TV internationales en HD</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Plus de 30 000 films et séries à la demande</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Qualité d'image HD adaptative</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Chaînes françaises et internationales</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Section +18 (basique)</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Compatible avec tous vos appareils</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Mises à jour mensuelles</div>
+          <div class="feature-item"><i class="fas fa-question-circle"></i> Support technique par email</div>
         </div>
-        <div class="faq-item">
-          <h4>Ce paiement est-il un abonnement récurrent ?</h4>
-          <p>Non, il s'agit d'un paiement unique. Votre service s'arrêtera automatiquement à la fin de la période, sans aucun prélèvement.</p>
+
+        <div class="mini-faq">
+          <h3>Questions fréquentes</h3>
+          <div class="faq-item">
+            <h4>Comment vais-je recevoir mes accès ?</h4>
+            <p>Immédiatement par email après la validation de votre paiement. Pensez à vérifier votre dossier de courrier indésirable.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Ce paiement est-il un abonnement récurrent ?</h4>
+            <p>Non, il s'agit d'un paiement unique. Votre service s'arrêtera automatiquement à la fin de la période, sans aucun prélèvement.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Puis-je changer d'offre plus tard ?</h4>
+            <p>Bien sûr. Vous pourrez à tout moment passer à une offre supérieure de 6 ou 12 mois en contactant simplement notre support client.</p>
+          </div>
         </div>
-        <div class="faq-item">
-          <h4>Puis-je changer d'offre plus tard ?</h4>
-          <p>Bien sûr. Vous pourrez à tout moment passer à une offre supérieure de 6 ou 12 mois en contactant simplement notre support client.</p>
+
+        <div class="testimonial">
+          <blockquote>
+            J'ai pris l'offre 3 mois pour tester pendant les vacances. Service impeccable, aucune coupure. Je vais passer sur l'offre 12 mois sans hésiter. Très satisfait !
+          </blockquote>
+          <cite>– Marc L.</cite>
         </div>
-      </div>
 
-      <div class="testimonial">
-        <blockquote>
-          J'ai pris l'offre 3 mois pour tester pendant les vacances. Service impeccable, aucune coupure. Je vais passer sur l'offre 12 mois sans hésiter. Très satisfait !
-        </blockquote>
-        <cite>– Marc L.</cite>
-      </div>
+        <div class="other-options">
+          <h3>Autres options</h3>
+          <a href="index.html#offers-section" class="view-offers-btn">Voir toutes les offres</a>
+        </div>
+      </main>
+    </div>
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // --- Default Offer Details ---
+        const basePrice = 9.99;
+        const planName = "Abonnement Essentiel 3 Mois";
 
-      <div class="other-options">
-        <h3>Autres options</h3>
-        <a href="/index.html#offers-section" class="view-offers-btn">Voir toutes les offres</a>
-      </div>
-    </main>
-  </div>
-  
-  <script src="https://www.paypal.com/sdk/js?client-id=AZ0rxkBj0Veiw3XE13geLJ7nWIpVBYk-v3ZtsdXwnJJTCDSA70lRJN6TukbUOZUSQMh1sIb1RCgUT0JC&currency=EUR"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // --- Default Offer Details ---
-      const basePrice = 9.99;
-      const planName = "Abonnement Essentiel 3 Mois";
+        let finalPrice = basePrice;
+        let finalDescription = planName;
 
-      let finalPrice = basePrice;
-      let finalDescription = planName;
+        // --- Check for URL parameters ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const screens = parseInt(urlParams.get('ecrans')) || 1;
+        const priceFromUrl = parseFloat(urlParams.get('prix'));
 
-      // --- Check for URL parameters ---
-      const urlParams = new URLSearchParams(window.location.search);
-      const screens = parseInt(urlParams.get('ecrans')) || 1;
-      const priceFromUrl = parseFloat(urlParams.get('prix'));
-
-      if (priceFromUrl && !isNaN(priceFromUrl)) {
-        finalPrice = priceFromUrl;
-      }
-      if (screens > 1) {
-        finalDescription = `${planName} (${screens} écrans)`;
-      }
-
-      // --- Update Page Content ---
-      document.getElementById('product-name').textContent = finalDescription;
-      document.getElementById('product-price').textContent = `${finalPrice.toFixed(2)}€`;
-      document.getElementById('total-price').textContent = `${finalPrice.toFixed(2)}€`;
-
-      // --- Initialize PayPal Buttons ---
-      paypal.Buttons({
-        createOrder: function (data, actions) {
-          return actions.order.create({
-            purchase_units: [{
-              description: finalDescription,
-              amount: {
-                value: finalPrice.toFixed(2)
-              }
-            }]
-          });
-        },
-        onApprove: function (data, actions) {
-          return actions.order.capture().then(function (details) {
-            window.location.href = "/merci.html";
-          });
-        },
-        onError: function (err) {
-          console.error("Erreur PayPal:", err);
-          const paypalContainer = document.getElementById('paypal-button-container');
-          paypalContainer.innerHTML = '<p style="color:red; text-align:center;">Une erreur est survenue durant le paiement. Veuillez réessayer.</p>';
+        if (priceFromUrl && !isNaN(priceFromUrl)) {
+          finalPrice = priceFromUrl;
         }
-      }).render('#paypal-button-container');
-    });
-  </script>
+        if (screens > 1) {
+          finalDescription = `${planName} (${screens} écrans)`;
+        }
+
+        // --- Update Page Content ---
+        document.getElementById('product-name').textContent = finalDescription;
+        document.getElementById('product-price').textContent = `${finalPrice.toFixed(2)}€`;
+        document.getElementById('total-price').textContent = `${finalPrice.toFixed(2)}€`;
+
+        // --- Initialize PayPal Buttons ---
+        paypal.Buttons({
+          createOrder: function (data, actions) {
+            return actions.order.create({
+              purchase_units: [{
+                description: finalDescription,
+                amount: {
+                  value: finalPrice.toFixed(2)
+                }
+              }]
+            });
+          },
+          onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+              window.location.href = "/merci.html";
+            });
+          },
+          onError: function (err) {
+            console.error("Erreur PayPal:", err);
+            const paypalContainer = document.getElementById('paypal-button-container');
+            paypalContainer.innerHTML = '<p style="color:red; text-align:center;">Une erreur est survenue durant le paiement. Veuillez réessayer.</p>';
+          }
+        }).render('#paypal-button-container');
+      });
+    </script>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+     <div class="footer-modern">
+        <div class="footer-main">
+           <div class="footer-logo-section">
+              <img src="./images/logo.svg" alt="IPTV Smarters Pro Logo">
+              <p>Service premium d'IPTV avec +22 000 chaînes TV et +50 000 films & séries en HD/4K sur tous vos appareils.</p>
+           </div>
+           <div class="footer-nav">
+              <div class="footer-nav-col">
+                 <h4>Navigation</h4>
+                 <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="index.html#offers-section">Offres</a></li>
+                    <li><a href="tutoriel.html">Tutoriel</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                 </ul>
+              </div>
+              <div class="footer-nav-col">
+                 <h4>Offres & Guides</h4>
+                 <ul>
+                    <li><a href="offre-12-mois.html">Offre 12 Mois</a></li>
+                    <li><a href="offre-6-mois.html">Offre 6 Mois</a></li>
+                    <li><a href="offre-3-mois.html">Offre 3 Mois</a></li>
+                    <li><a href="blog/guide-epg-iptv.html">Guide EPG IPTV</a></li>
+                    <li><a href="blog/tendances-streaming-2025.html">Tendances Streaming 2025</a></li>
+                    <li><a href="blog/eliminer-buffering-iptv.html">Éliminer le Buffering</a></li>
+                 </ul>
+              </div>
+              <div class="footer-nav-col">
+                 <h4>Informations</h4>
+                 <ul>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="conditions-generales.html">Conditions Générales</a></li>
+                    <li><a href="politique-confidentialite.html">Confidentialité</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                 </ul>
+              </div>
+           </div>
+        </div>
+        <div class="footer-bottom">
+           <div class="footer-copyright">
+              &copy; 2025 IPTV Smarters Pro. Tous droits réservés.
+           </div>
+        </div>
+     </div>
+  </footer>
+
+  <!-- Scripts centralisés pour une meilleure performance -->
+  <script src="./js/navbar.js" async defer></script>
+  <script src="./js/main.js" defer></script>
 </body>
 </html>
  

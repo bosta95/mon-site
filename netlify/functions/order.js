@@ -72,8 +72,8 @@ function generateOrderNumber() {
 // Charger et compiler les templates
 function getTemplate(templateName) {
   try {
-    // CORRECTION: Chemin correct pour les fonctions Netlify
-    const templatePath = path.join(__dirname, '../..', 'templates', `${templateName}.html`);
+    // CORRECTION: Chemin correct pour les fonctions Netlify - pointe vers public/templates
+    const templatePath = path.join(__dirname, '../..', 'public', 'templates', `${templateName}.html`);
     console.log(`📂 Chemin template ${templateName}:`, templatePath);
     
     const templateSource = fs.readFileSync(templatePath, 'utf-8');
@@ -150,15 +150,40 @@ exports.handler = async function(event, context) {
       };
     }
 
-    // Récupérer les détails du produit
+    // Récupérer les détails du produit avec détection automatique du nombre d'écrans
     const productInfo = PRODUCTS[product] || { 
       name: product, 
       description: 'Abonnement IPTV', 
       price: 'N/A' 
     };
+    
+    // Détection automatique du nombre d'écrans
+    let screenCount = 1; // Par défaut
+    let screenInfo = '';
+    
+    if (product.includes('2_ecrans') || product.includes('2ecrans')) {
+      screenCount = 2;
+      screenInfo = '2 écrans simultanés';
+    } else if (product.includes('3_ecrans') || product.includes('3ecrans')) {
+      screenCount = 3;
+      screenInfo = '3 écrans simultanés';
+    } else if (product.includes('4_ecrans') || product.includes('4ecrans')) {
+      screenCount = 4;
+      screenInfo = '4 écrans simultanés';
+    } else {
+      screenInfo = '1 écran';
+    }
+    
+    // Amélioration de la description avec le nombre d'écrans
+    const enhancedDescription = productInfo.description.includes('écrans') 
+      ? productInfo.description 
+      : `${productInfo.description} - ${screenInfo}`;
+    
     const finalOrderNumber = orderNumber || generateOrderNumber();
     
     console.log('📦 Produit:', productInfo.name);
+    console.log('📺 Nombre d\'écrans:', screenCount);
+    console.log('💰 Prix:', productInfo.price);
     console.log('🔢 Numéro de commande:', finalOrderNumber);
 
     // Vérification des variables SMTP
@@ -178,11 +203,11 @@ exports.handler = async function(event, context) {
     }
 
     console.log('📧 Création du transporteur SMTP...');
-    // CORRECTION: createTransporter -> createTransport
+    // CORRECTION: Configuration SMTP cohérente avec contact.js
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: parseInt(process.env.SMTP_PORT),
-      secure: true, // Pour port 465
+      secure: process.env.SMTP_PORT == '465', // true pour port 465, false pour autres ports
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
@@ -196,7 +221,7 @@ exports.handler = async function(event, context) {
     
     const confirmationData = {
       productName: productInfo.name,
-      productDescription: productInfo.description,
+      productDescription: enhancedDescription,
       productPrice: productInfo.price,
       orderNumber: finalOrderNumber,
       orderDate: new Date().toLocaleString('fr-FR')
@@ -223,7 +248,7 @@ exports.handler = async function(event, context) {
       email: email,
       productName: productInfo.name,
       orderNumber: finalOrderNumber,
-      productDescription: productInfo.description,
+      productDescription: enhancedDescription,
       productPrice: productInfo.price,
       date: new Date().toLocaleString('fr-FR'),
       orderDate: new Date().toLocaleDateString('fr-FR'),
@@ -258,22 +283,29 @@ exports.handler = async function(event, context) {
     };
 
   } catch (error) {
-    console.error('❌ ERREUR lors du traitement de la commande:', error);
+    console.error('❌ Erreur envoi email commande:', error);
     console.error('📍 Stack:', error.stack);
     
-    // Diagnostics spécifiques
+    // Diagnostics spécifiques pour Namecheap
     if (error.message.includes('EAUTH')) {
       console.error('🔧 Problème d\'authentification SMTP - Vérifiez SMTP_USER et SMTP_PASS');
+      console.error('💡 Pour Namecheap : Utilisez un mot de passe d\'application, pas votre mot de passe principal');
     } else if (error.message.includes('ECONNREFUSED')) {
       console.error('🔧 Problème de connexion SMTP - Vérifiez SMTP_HOST et SMTP_PORT');
+      console.error('💡 Pour Namecheap : SMTP_HOST=mail.privateemail.com, SMTP_PORT=465');
     } else if (error.message.includes('ENOTFOUND')) {
       console.error('🔧 Problème DNS - Vérifiez SMTP_HOST');
+      console.error('💡 Pour Namecheap : Vérifiez l\'orthographe de mail.privateemail.com');
+    } else if (error.message.includes('ETIMEDOUT')) {
+      console.error('🔧 Timeout de connexion - Vérifiez votre connexion internet');
+    } else if (error.message.includes('SELF_SIGNED_CERT')) {
+      console.error('🔧 Problème de certificat SSL - Vérifiez la configuration secure');
     }
     
     return {
       statusCode: 500,
       body: JSON.stringify({ 
-        error: 'Erreur lors du traitement de la commande',
+        error: 'Erreur lors de l\'envoi de la confirmation',
         details: error.message
       }),
       headers: { 'Content-Type': 'application/json' }
