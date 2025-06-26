@@ -1,0 +1,6 @@
+<!-- Image provisoire pour logo.webp -->
+<svg width="400" height="100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="100" fill="#1e1e32"/>
+  <text x="200" y="50" font-family="Arial" font-size="24" fill="#E74C3C" text-anchor="middle" font-weight="bold">IPTV SMARTERS PRO</text>
+  <text x="200" y="80" font-family="Arial" font-size="16" fill="#ffffff" text-anchor="middle">Image provisoire logo.webp</text>
+</svg> 
