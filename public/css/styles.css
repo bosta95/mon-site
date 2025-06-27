@@ -727,10 +727,9 @@ img {
 
 .images-banner .slide-track {
   display: flex !important;
-  animation: scroll-banner 10s linear infinite !important;
+  animation: scroll-banner 50s linear infinite !important;
   will-change: transform;
   flex-wrap: nowrap !important;
-  width: max-content !important;
 }
 
 @keyframes scroll-banner {
