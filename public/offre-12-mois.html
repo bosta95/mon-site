@@ -523,7 +523,33 @@
           },
           onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
-              window.location.href = "/merci";
+              // Appeler la fonction order.js pour envoyer les emails
+              fetch('/.netlify/functions/order', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  email: details.payer.email_address,
+                  product: 'Premium_IPTV_12_mois',
+                  orderNumber: details.id,
+                  paymentDetails: {
+                    method: 'PayPal',
+                    transactionId: details.id,
+                    payerId: details.payer.payer_id
+                  }
+                })
+              }).then(response => response.json())
+              .then(data => {
+                console.log('Commande traitée:', data);
+                // Rediriger vers la page de remerciement
+                window.location.href = "/merci";
+              })
+              .catch(error => {
+                console.error('Erreur traitement commande:', error);
+                // Rediriger quand même
+                window.location.href = "/merci";
+              });
             });
           },
           onError: function (err) {
